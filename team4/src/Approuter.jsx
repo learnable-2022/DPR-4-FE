@@ -3,6 +3,11 @@ import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import Landing from './landing/landing';
 import Login from './login/login';
 import Signup from './signup/signup';
+import SideBar from './utilities/SideBar';
+import Dashboard from './dashboard/dashboard';
+import Billings from './billings/billings';
+import Draft from './draffts/draft';
+import Records from './Record/Records';
 
 
 // note!!!
@@ -20,8 +25,11 @@ import Signup from './signup/signup';
                     <Route path='login' element={<Login/>}/>
                     <Route path='signup' element={<Signup/>}/>
 
-                    <Route>
-
+                    <Route path='sideBar' element={<SideBar/>}>
+                    <Route path='Dashboard' element={<Dashboard/>}/>
+                    <Route path='Billing' element={<Billings/>}/>
+                    <Route path='Records' element={<Records/>}/>
+                    <Route path='Draft' element={<Draft/>}/>
                     </Route>
 
                 </Routes>
