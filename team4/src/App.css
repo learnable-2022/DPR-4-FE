@@ -1,45 +1,62 @@
+.App {
+  display: flex;
+}
 
 .sideBar{
-  position: absolute;
-  width: 223px;
-  height:100%;
+  width: 15%;
+  height:100vh;
   background: #D6EBFF;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075), 10px 10px 20px rgba(0, 0, 0, 0.04);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075), 
+  10px 10px 20px rgba(0, 0, 0, 0.04);
   left: 0%;
   top: 0%;
-  bottom: 0px;
+  bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  align-content: center;
-  justify-content: center;
+  /* align-content: center;
+  justify-content: center; */
   transition: all 2s;
 }
-.sideBar.action{
-  left:-17%;
-  transition: all 2s;
+.sideBar div img{
+  padding:10px 5px;
 }
-
-.sidebar-list{
-  margin-right: 50px;
-  display: flex;
-  flex-direction: column;
-
+.mid-section{
+    padding:20px 10px;
+    text-align: center;
+    margin-top: 0px;
 }
-.sidebar-list li{
-
-  display: flex;
-  flex-direction: column;
-  text-decoration:none;
-  list-style:none;
-  text-align: center;
-}
-.link{
+.mid-section .link{
   text-decoration: none;
   list-style: none;
-  color:rgba(10, 31, 51, 1);
-  font-size:15px;
- 
+  color: #0A1F33;
 }
+.mid-section p{
+  padding: 10px;
+  font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 19px;
+}
+.lower-section{
+  margin-top: 20px;
+  text-align: center;
+}
+.lower-section .link{
+  text-decoration: none;
+  list-style: none;
+  color: #0A1F33;
+}
+.lower-section p{
+  padding: 15px 0px;
+  font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 19px;
+}
+
+
 
 
