@@ -3,7 +3,7 @@ import {IoIosNotificationsOutline} from "react-icons/io";
 import {BsArrowLeft} from "react-icons/bs";
 import logo2 from "../images/Rectangle 20.png";
 import pic1 from "../images/Rectangle 10.png";
-import './record.css';
+import './Record.css';
 import { Link, Outlet } from 'react-router-dom';
 
 export default function PatientsRecord() {
