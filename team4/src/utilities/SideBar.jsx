@@ -7,6 +7,7 @@ import {FcMoneyTransfer} from "react-icons/fc";
 import {TfiWrite} from "react-icons/tfi";
 import {AiOutlineSetting} from "react-icons/ai";
 import {FiLogOut} from "react-icons/fi";
+// import logo1 from "../assets/logo-03.png";
 import logo1 from "../assets/logo-03.png";
 
 import '../App.css';

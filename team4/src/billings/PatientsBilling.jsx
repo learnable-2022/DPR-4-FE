@@ -14,7 +14,7 @@ export default function PatientsBilling() {
       <div className="Right">
       
         <div className="billingBoardDashboard">
-        <SideBar className="sideBar" />
+        {/* <SideBar className="sideBar" /> */}
           <div className="billingNav">
             <div className="patientName">
               <h2>
