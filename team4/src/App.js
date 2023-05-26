@@ -1,13 +1,12 @@
 
 import './App.css';
-import Approuter from './Approuter';
 
-function App() {
+import Billings from './billings/Billings';
+
+import React from 'react'
+
+export default function App() {
   return (
-    <>
-    <Approuter/>
-    </>
-  );
+    <div> <Billings/></div>
+  )
 }
-
-export default App;
