@@ -4,7 +4,7 @@ import Landing from "./landing/landing";
 import Login from "./login/login";
 import Signup from "./signup/signup";
 import SideBar from "./utilities/SideBar";
-import Dashboard from "./dashboard/Dashboard";
+import Dashboard from "./dashboard/dashboard";
 import Billing from "./billings/Billing";
 
 import Drafts from "./draffts/Drafts";
