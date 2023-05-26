@@ -1,0 +1,46 @@
+html, body{
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* nav section */
+#logo{
+    width: 13rem;
+}
+
+.nav-section{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 5rem 3rem 5rem;
+}
+
+.nav2 {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.link{
+    list-style: none;
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+}
+
+/* hero-section */
+#female-img{
+    width: 500px;
+}
+
+.hero-section{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 5rem;
+}
+
+h1{
+    font-size: 4rem;
+    width: 80%;
+}
