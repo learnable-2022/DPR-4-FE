@@ -1,11 +1,12 @@
 import React from "react";
+import PatientDashboard from './PatientDashboard';
+import DoctorsDashboard from './DoctorsDashboard';
+export default function Dashboard({user}) {
 
-export default function Dashboard() {
+
   return (
-    <>
-      <div>
-        Dashboard
-      </div>
-    </>
-  );
+    <div>
+     {user === 'doctor' ?  <DoctorsDashboard/>  : <PatientDashboard/>}
+    </div>
+  )
 }

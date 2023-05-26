@@ -1,12 +1,14 @@
 
-import './App.css';
-
-import Billings from './billings/Billings';
-
 import React from 'react'
+import './App.css';
+import Approuter from './PatientsApprouter';
+;
+
 
 export default function App() {
   return (
-    <div> <Billings/></div>
-  )
+    <div className='App'>
+    <Approuter/>
+    </div>
+  );
 }

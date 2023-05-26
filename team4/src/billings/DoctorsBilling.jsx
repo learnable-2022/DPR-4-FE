@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Draft() {
+export default function DoctorsBilling() {
   return (
     <div>
-      Draft
+      DoctorBilling
     </div>
   )
 }
