@@ -1,9 +1,9 @@
 .App {
   display: flex;
 }
-
+/* this is where i did the styling for the two sidebars. the doctors and the patients */
 .sideBar{
-  width: 15%;
+  width: 223px;
   height:100vh;
   background: #D6EBFF;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075), 
@@ -14,9 +14,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* align-content: center;
-  justify-content: center; */
   transition: all 2s;
+
 }
 .sideBar div img{
   padding:10px 5px;
@@ -34,10 +33,10 @@
 .mid-section p{
   padding: 10px;
   font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 14px;
-line-height: 19px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
 }
 .lower-section{
   margin-top: 20px;
@@ -51,12 +50,32 @@ line-height: 19px;
 .lower-section p{
   padding: 15px 0px;
   font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 14px;
-line-height: 19px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
 }
+.middle-section{
+  padding:20px 10px;
+  text-align: center;
+  margin-top: 0px;
+}
+.middle-section p{
 
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  
+}
+.links{
+  text-decoration: none;
+  list-style: none;
+  color: #0A1F33;
+}
+.Layout{
+  display: flex;
+}
 
 
 
