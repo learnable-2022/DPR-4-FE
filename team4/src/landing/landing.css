@@ -16,7 +16,7 @@ html, body{
 }
 
 .nav2 {
-    width: 40%;
+    width: 53%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -27,6 +27,17 @@ html, body{
     text-decoration: none;
     color: #000;
     font-weight: 500;
+    font-size: 20px;
+}
+
+.btn{
+    padding: 10px 25px;
+    color: #4da5ff;
+    font-size: 16px;
+    border: 1px solid #4da5ff;
+    background-color: #fff;
+    border-radius: 4px;
+    font-weight: 530;
 }
 
 /* hero-section */
@@ -42,5 +53,33 @@ html, body{
 
 h1{
     font-size: 4rem;
-    width: 80%;
+    width: 70%;
+    color: #113355;
+    font-weight: 600;
+    padding: 50px 0 0 0;
 }
+
+span{
+    color: #113355;
+    font-weight: 700;
+}
+
+.hero-text{
+    color: #9f9f9f;
+    font-size: 16px;
+    font-weight: 500;
+    width: 48%;
+    padding: 12px 0;
+    line-height: 20px;
+    margin: 10px 0 15px 0;
+}
+
+.hero-btn{
+    padding: 7px 30px;
+    border-radius: 10px;
+    background-color:#3399ff ;
+    color: #fff;
+    border: 1px solid #3399ff;
+    font-size: 20px;
+}
+

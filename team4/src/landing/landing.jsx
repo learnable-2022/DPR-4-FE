@@ -24,7 +24,7 @@ export default function Landing() {
         <Link className='link'  to=""><li>Features</li></Link>
         <Link className='link'  to=""><li>Pricing</li></Link>
         <Link className='link'  to=""><li>Support</li></Link>
-        <Link className='link'  to=""><button>Get Started</button></Link>
+        <Link className='link'  to=""><button className="btn">Get Started</button></Link>
       </div>
 
       </div>
@@ -36,8 +36,8 @@ export default function Landing() {
 
         <div className="hero-1">
           <h1>Simplify Medical Record Keeping with <span>Medbloc</span></h1>
-          <p>Keep all your patient data organized & secure in one easy-to-use desktop application.</p>
-          <Link className='link'  to=""><button>join Now</button></Link>
+          <p className='hero-text'>Keep all your patient data organized & secure in one easy-to-use desktop application.</p>
+          <Link className='link'  to=""><button className="hero-btn">Join now</button></Link>
         </div>
 
         <div className="hero-2">
