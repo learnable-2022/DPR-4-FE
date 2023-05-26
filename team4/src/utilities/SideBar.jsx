@@ -31,10 +31,10 @@ export default function SideBar() {
                 </div>
                 
                    <div className='mid-section'>
-                      <Link  to="Dashboard" className='link'><RxDashboard /><p>Dashboard</p></Link>
-                    <Link to="Records"className='link'><BsReverseLayoutTextSidebarReverse/><p>Records</p></Link>
-                    <Link to="Billing" className='link'><FcMoneyTransfer/><p>Billings</p></Link>
-                    <Link to="Draft"className='link'><TfiWrite/><p>Draft</p></Link>
+                      <Link  to="/Dashboard" className='link'><RxDashboard /><p>Dashboard</p></Link>
+                    <Link to="/Records"className='link'><BsReverseLayoutTextSidebarReverse/><p>Records</p></Link>
+                    <Link to="/Billing" className='link'><FcMoneyTransfer/><p>Billings</p></Link>
+                    <Link to="/Draft"className='link'><TfiWrite/><p>Draft</p></Link>
                    </div>
                  <div className='lower-section'>
                  <Link to="*"className='link'><AiOutlineSetting/><p>settings</p></Link>
