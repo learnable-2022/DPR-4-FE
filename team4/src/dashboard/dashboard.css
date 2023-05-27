@@ -28,6 +28,10 @@
   font-weight: 300;
   font-size: 1.5rem;
 }
+.doctorsdashboard .header_div .title {
+  font-weight: 200;
+  color: #444444;
+}
 .doctorsdashboard .search_div {
   display: flex;
   align-items: center;
