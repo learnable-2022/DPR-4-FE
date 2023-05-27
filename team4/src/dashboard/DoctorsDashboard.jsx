@@ -3,7 +3,7 @@ import { GrNotification } from "react-icons/gr";
 import { RiAccountCircleFill } from "react-icons/ri";
 import { CiSearch } from "react-icons/ci";
 import "./dashboard.css";
-
+//rescue kenneth
 export default function DoctorsDashboard() {
   return (
     <div className="doctorsdashboard">
@@ -35,3 +35,4 @@ export default function DoctorsDashboard() {
     </div>
   );
 }
+// rescue kenneth
