@@ -1,37 +1,43 @@
-import React from "react";
-import { IoIosNotificationsOutline } from "react-icons/io";
-import { BsArrowLeft } from "react-icons/bs";
+import React from 'react';
+import {IoIosNotificationsOutline} from "react-icons/io";
+import {BsArrowLeft} from "react-icons/bs";
 import logo2 from "../assets/Rectangle 20.png";
 import pic1 from "../assets/Rectangle 10.png";
-import "./Record.css";
-import { Link, Outlet } from "react-router-dom";
+import './Record.css';
+import { Link, Outlet } from 'react-router-dom';
 
 export default function PatientsRecord() {
   return (
-    <div className="container">
-      <nav className="nav-container">
-        <div className="nav-container-left">
-          <BsArrowLeft />
-          <h2>Medical Record</h2>
-        </div>
-        <div className="nav-container-right">
-          <div>
-            <button>share report</button>
+    <div className='container'>
+        <nav className='nav-container'>
+          <div className='nav-container-left'>
+            <BsArrowLeft/>
+            <h2>
+            Medical Record
+            </h2>
           </div>
-          <div>
-            <IoIosNotificationsOutline />
+          <div className='nav-container-right'>
+            <div>
+            <button>
+            share report
+            </button>
+            </div>
+            <div>
+              <IoIosNotificationsOutline/>
+            </div>
+            <div className='nav-short'>
+              <img src={logo2}alt="frame"/>
+              <p>
+              Mr John Doe
+              </p>
+            </div>
           </div>
-          <div className="nav-short">
-            <img src={logo2} alt="frame" />
-            <p>Mr John Doe</p>
-          </div>
+        </nav>
+      <div className='second-section'>
+        <div className='second-section-image'>
+        <img src={pic1} alt= "profile-pic"/>
         </div>
-      </nav>
-      <div className="second-section">
-        <div className="second-section-image">
-          <img src={pic1} alt="profile-pic" />
-        </div>
-        <div className="second-section-text">
+        <div className='second-section-text'>
           <div>
             <h2>Name</h2>
             <p>John</p>
@@ -62,26 +68,16 @@ export default function PatientsRecord() {
           </div>
         </div>
       </div>
-      <div className="third-section-link">
-        <Link className="navi-link" to="overview">
-          Overview
-        </Link>
-        <Link className="navi-link" to="visit">
-          Visits
-        </Link>
-        <Link className="navi-link" to="lab">
-          Labs
-        </Link>
-        <Link className="navi-link" to="vaccine">
-          Vaccines
-        </Link>
-        <Link className="navi-link" to="prescription">
-          Prescription
-        </Link>
+      <div className='third-section-link'>
+        <Link  className='navi-link'  to="overview"><p>Overview</p></Link>
+        <Link  className='navi-link' to="visit"><p>Visits</p></Link>
+        <Link  className='navi-link' to="lab"><p>Labs</p></Link>
+        <Link className='navi-link'  to="vaccine"><p>Vaccines</p></Link>
+        <Link  className='navi-link' to="prescription"><p>Prescription</p></Link>
       </div>
       <div>
-        <Outlet />
+      <Outlet/>
       </div>
     </div>
-  );
+  )
 }
