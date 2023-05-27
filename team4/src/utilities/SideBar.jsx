@@ -1,6 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import {AiOutlineHome} from "react-icons/ai";
 import {RxDashboard} from "react-icons/rx";
 import {BsReverseLayoutTextSidebarReverse} from "react-icons/bs";
@@ -8,20 +7,13 @@ import {FcMoneyTransfer} from "react-icons/fc";
 import {TfiWrite} from "react-icons/tfi";
 import {AiOutlineSetting} from "react-icons/ai";
 import {FiLogOut} from "react-icons/fi";
-import logo1 from "../images/logo-03.png";
+// import logo1 from "../assets/logo-03.png";
+import logo1 from "../assets/logo-03.png";
 
 import '../App.css';
 
 export default function SideBar() {
-  
-        const [sidebar, setSideBar ]= useState(true);
         
-        const action =()=>{
-        
-            setSideBar(!sidebar);
-            console.log(sidebar)
-        }
-
 
   return ( 
         <>
