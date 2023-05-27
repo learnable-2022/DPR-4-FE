@@ -69,11 +69,11 @@ export default function PatientsRecord() {
         </div>
       </div>
       <div className='third-section-link'>
-        <Link  className='navi-link'  to="overview">Overview</Link>
-        <Link  className='navi-link' to="visit">Visits</Link>
-        <Link  className='navi-link' to="lab">Labs</Link>
-        <Link className='navi-link'  to="vaccine">Vaccines</Link>
-        <Link  className='navi-link' to="prescription">Prescription</Link>
+        <Link  className='navi-link'  to="overview"><p>Overview</p></Link>
+        <Link  className='navi-link' to="visit"><p>Visits</p></Link>
+        <Link  className='navi-link' to="lab"><p>Labs</p></Link>
+        <Link className='navi-link'  to="vaccine"><p>Vaccines</p></Link>
+        <Link  className='navi-link' to="prescription"><p>Prescription</p></Link>
       </div>
       <div>
       <Outlet/>
