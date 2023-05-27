@@ -25,26 +25,10 @@ import DoctorsDrafts from "./draffts/DoctorsDrafts";
 // subsequent route path would follow suite.
 
 function Approuter() {
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-  const [user, setUser] = useState("");
-
-  const doctorHandler = () => {
-    setUser("doctor");
-  };
-
-  const doctorHandler = () => {
-    setUser("doctor");
-  };
-
-  const patientHandler = () => {
-    setUser("patient");
-  };
-  const LoginUser = () => {
-    setIsUserLoggedIn(true);
-  };
+  
   return (
     <Router>
-      {isUserLoggedIn && <SideBar />}
+    
 
       <Routes>
         <Route path="/" element={<Landing />} />
