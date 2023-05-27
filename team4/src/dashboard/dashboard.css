@@ -28,3 +28,19 @@
   font-weight: 300;
   font-size: 1.5rem;
 }
+.doctorsdashboard .search_div {
+  display: flex;
+  align-items: center;
+  border: solid black 1px;
+  border-radius: 2rem;
+  width: fit-content;
+  padding: 0.5rem;
+}
+.doctorsdashboard .search_div input {
+  border: none;
+  margin-right: 4rem;
+}
+.doctorsdashboard .search_icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}

@@ -1,6 +1,7 @@
 import React from "react";
 import { GrNotification } from "react-icons/gr";
 import { RiAccountCircleFill } from "react-icons/ri";
+import { CiSearch } from "react-icons/ci";
 import "./dashboard.css";
 
 export default function DoctorsDashboard() {
@@ -18,6 +19,19 @@ export default function DoctorsDashboard() {
           <RiAccountCircleFill className="header_icon" />
         </div>
       </div>
+
+      <main>
+        <div className="left-side">
+          <div className="header_div">
+            <h2 className="title">Patient List</h2>
+            <div className="search_div">
+              <input type="text" placeholder="Search" />
+              <CiSearch className="search_icon" />
+            </div>
+          </div>
+        </div>
+        <div className="right-side"></div>
+      </main>
     </div>
   );
 }
