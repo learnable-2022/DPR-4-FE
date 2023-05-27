@@ -16,7 +16,7 @@ export default function Landing() {
       <div className="nav-section">
 
         <div className="nav1">
-          <img src={logo} alt="perfume2" id="logo"/>
+          <img src={logo} alt="medbloc-logo" id="logo"/>
         </div>
 
       <div className="nav2">
@@ -41,14 +41,25 @@ export default function Landing() {
         </div>
 
         <div className="hero-2">
-          <img src={femaleDoc} alt="perfume2" id="female-img"/>
+          <img src={femaleDoc} alt="female-doctor" id="female-img"/>
         </div>
 
       </div>
 
       {/* section-one */}
       <div className="section-one">
-
+        <div>
+          <img src={pill} alt="pill" id="pill-img"/>
+        </div>
+        <div className="section-one-b">
+          <h2>Enhanced Collaboration</h2>
+          <p className="section-one-text">
+            Our system makes it easy for healthcare professionals to share information and collaborate on patient care.
+          </p>
+        </div>
+        <div className="section-one-c">
+        <Link className='link'  to=""><button className="section-one-btn">Try now</button></Link>
+        </div>
       </div>
 
        {/* section-two*/}

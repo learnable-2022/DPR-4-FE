@@ -1,0 +1,74 @@
+.billingBoardDashboard {
+    display: flex;
+    /* width: 100%; */
+}
+
+.Right {
+    display: block;
+}
+
+.billingNav {
+    width: 1100px;
+    height: 100px;
+    background-color: #D6EBFF;
+    margin-left: 20px;
+    margin-top: 40px;
+    /* border: 2px solid red; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+}
+
+.patientName {
+    margin-left: 20px;
+    color: #000000;
+    font-size: 15px;
+}
+
+.sideBar{
+    /* width: 15% !important; */
+}
+
+.searchParent {
+    width: 600px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #FFFFFF;
+    /* border: 2px solid black; */
+    margin-right: 20px;
+    border-radius: 10px;
+
+}
+
+.searchBox {
+    width: 480px;
+    display: flex;
+    align-items: center;
+    border:1px solid #3399FF;
+    margin-left: 20px;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.searchBox input {
+    border: none;
+    border-style: none;
+    /* border-color: #db334f; */
+    color: black;
+    margin-left: 10px;
+    outline: none;
+    font-size: 15px;
+}
+
+.searchIcons  {
+    display: flex;
+    /* justify-content: space-around; */
+    /* margin-right: 10px; */
+}
+
+.searchIcons img {
+    margin-right: 20px;
+}

@@ -1,8 +1,13 @@
 import React from 'react';
 import {IoIosNotificationsOutline} from "react-icons/io";
 import {BsArrowLeft} from "react-icons/bs";
+<<<<<<< HEAD
 import logo2 from "../images/Rectangle 20.png";
 import pic1 from "../images/Rectangle 10.png";
+=======
+import logo2 from "../assets/Rectangle 20.png";
+import pic1 from "../assets/Rectangle 10.png";
+>>>>>>> 9570247e689880d173c744e45156af3d5d3763b7
 import './Record.css';
 import { Link, Outlet } from 'react-router-dom';
 
@@ -69,11 +74,11 @@ export default function PatientsRecord() {
         </div>
       </div>
       <div className='third-section-link'>
-        <Link  className='navi-link'  to="overview">Overview</Link>
-        <Link  className='navi-link' to="visit">Visits</Link>
-        <Link  className='navi-link' to="lab">Labs</Link>
-        <Link className='navi-link'  to="vaccine">Vaccines</Link>
-        <Link  className='navi-link' to="prescription">Prescription</Link>
+        <Link  className='navi-link'  to="overview"><p>Overview</p></Link>
+        <Link  className='navi-link' to="visit"><p>Visits</p></Link>
+        <Link  className='navi-link' to="lab"><p>Labs</p></Link>
+        <Link className='navi-link'  to="vaccine"><p>Vaccines</p></Link>
+        <Link  className='navi-link' to="prescription"><p>Prescription</p></Link>
       </div>
       <div>
       <Outlet/>
