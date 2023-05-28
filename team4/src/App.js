@@ -1,14 +1,14 @@
 
+import React from 'react'
 import './App.css';
-import Approuter from './Approuter';
+import Approuter from './PatientsApprouter';
+;
 
 
-function App() {
+export default function App() {
   return (
-    <>
+    <div className='App'>
     <Approuter/>
-    </>
+    </div>
   );
 }
-
-export default App;
