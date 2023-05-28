@@ -57,8 +57,13 @@ export default function Landing() {
             Our system makes it easy for healthcare professionals to share information and collaborate on patient care.
           </p>
         </div>
+
+        <div className="hr">
+
+        </div>
+
         <div className="section-one-c">
-        <Link className='link'  to=""><button className="section-one-btn">Try now</button></Link>
+          <Link className='link'  to=""><button className="section-one-btn">Try now</button></Link>
         </div>
       </div>
 
@@ -150,15 +155,3 @@ export default function Landing() {
   )
 }
 
-// texts 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// Have a safe and decentralized medical record with us and access expert medical opinion from one of our world renowned specialist so you can have the answer and confidence to make informed decisions about your health
-// Information
