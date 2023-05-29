@@ -1,0 +1,16 @@
+.schedulepage {
+  width: 100%;
+  padding: 2rem;
+  padding-bottom: 0;
+}
+.schedulepage main {
+  position: absolute;
+  bottom: 0;
+  top: 4rem;
+  left: 160px;
+  right: 2rem;
+  overflow-y: scroll;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+  box-shadow: 1px 2px 8px rgb(91, 91, 91);
+}

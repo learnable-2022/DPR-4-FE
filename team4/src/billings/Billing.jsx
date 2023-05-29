@@ -1,11 +1,9 @@
-import React from 'react';
-import PatientsBilling from './PatientsBilling';
-import DoctorsBilling from './DoctorsBilling';
+import React from "react";
+import PatientsBilling from "./PatientsBilling";
+import DoctorsBilling from "./DoctorsBilling";
 
-export default function Billing({user}) {
+export default function Billing({ user }) {
   return (
-    <div>
-      {user ==='doctor' ? <DoctorsBilling/> :<PatientsBilling/>}
-    </div>
-  )
+    <div>{user === "doctor" ? <DoctorsBilling /> : <PatientsBilling />}</div>
+  );
 }

@@ -1,133 +1,130 @@
-*{
-    padding: 0px;
-    margin: 0px;
-    box-sizing: border-box;
-}
-.container{
-  /* padding: 10px 20px; */
-  width: 139%;
-  padding-left:2px;
-  border: 1px solid cadetblue;
-}
-.nav-container{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    background-color:#fff;
-    border-bottom: 2px solid  #D6EBFF;
-    padding: 10px 40px ;
-   
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
 }
 
-  .nav-container-left{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 20px;
-  }
-  .nav-container-left h2{
-    color: #2B80D5;
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 36px;
-  }
-  .nav-container-right{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 20px;
-  }
-  .nav-container-right button{
-    background: #3399FF;
-    border-radius: 10px;
-    outline: none;
-    border: none;
-    padding: 10px;
-    color: #fff;
-  }
-  .nav-short{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
+.container {
+  /* padding: 10px 20px; */
+  width: 139%;
+  padding-left: 2px;
+  border: 1px solid cadetblue;
 }
-.nav-short p{
-    font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 19px;
-color: #000000;
+.nav-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border-bottom: 2px solid #d6ebff;
+  padding: 10px 40px;
 }
-.second-section{
-  padding: 20px 40px ;
+
+.nav-container-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+.nav-container-left h2 {
+  color: #2b80d5;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 36px;
+}
+.nav-container-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+.nav-container-right button {
+  background: #3399ff;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  padding: 10px;
+  color: #fff;
+}
+.nav-short {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.nav-short p {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+}
+.second-section {
+  padding: 20px 40px;
   display: flex;
   gap: 40px;
   align-items: center;
   border: 1px solid cadetblue;
 }
-.second-section-text{
+.second-section-text {
   display: flex;
-  background: #D6EBFF;
+  background: #d6ebff;
   border-radius: 10px;
-  flex-direction:row;
+  flex-direction: row;
   padding: 25px 10px;
   width: 100%;
   justify-content: space-evenly;
   border: 1px solid violet;
 }
-.second-section-text div{
+.second-section-text div {
   padding-right: 0px;
   /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
 }
-.second-section-text h2{
-  font-family: 'Inter';
-font-style: normal;
-font-weight: 500;
-font-size: 14px;
-line-height: 32px;
-color: #0A1F33;
+.second-section-text h2 {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 32px;
+  color: #0a1f33;
 }
-.second-section-text p{
-  font-family: 'Inter';
-font-style: normal;
-font-weight: 500;
-font-size: 12px;
-line-height: 32px;
-color: #666666;
+.second-section-text p {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 32px;
+  color: #666666;
 }
-.second-section-image img{
+.second-section-image img {
   width: 250px;
   height: 245px;
 }
-.third-section-link{
+.third-section-link {
   display: flex;
   flex-direction: row;
-  padding: 10px 40px ;
+  padding: 10px 40px;
   /* gap:20px; */
   justify-content: space-evenly;
-  border-bottom: 2px solid #D6EBFF;
-  font-family: 'Open Sans';
+  border-bottom: 2px solid #d6ebff;
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 28px;
-  
 }
-.navi-link{
+.navi-link {
   color: #141414;
   text-decoration: none;
   list-style: none;
-  
 }
 .navi-link p {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
-  
 }

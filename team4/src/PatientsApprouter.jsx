@@ -6,7 +6,7 @@ import Signup from "./signup/signup";
 import SideBar from "./utilities/SideBar";
 import Dashboard from "./dashboard/dashboard";
 import Billing from "./billings/Billing";
-import './App.css';
+import "./App.css";
 import Drafts from "./draffts/Drafts";
 
 import SideBarDoc from "./utilities/SideBarDoc";
@@ -20,14 +20,13 @@ import DoctorsBilling from "./billings/DoctorsBilling";
 import DoctorsDashboard from "./dashboard/DoctorsDashboard";
 import DoctorsRecord from "./Record/DoctorsRecord";
 import DoctorsDrafts from "./draffts/DoctorsDrafts";
+import SchedulePage from "./dashboard/SchedulePage";
 
 // note!!!
 // i have only created the router part for the signup , login and Landing page.
 // subsequent route path would follow suite.
 
 function Approuter() {
-
-
   const paths = [
     // {name: "DocDashboard", route: "/Dashboard", icon: <RxDashboard />},
     // {name:"DocRecords", route: "/DocRecords", icon: <BsReverseLayoutTextSidebarReverse/>},
@@ -35,57 +34,113 @@ function Approuter() {
     // {name: "DocDraft", route:"/DocDraft", icon:<TfiWrite/>},
     // {name: "Docsettings", route:"/Docsettings" , icon:<AiOutlineSetting/>},
     // {name: "DocLogout", route:"/DocLogout", icon:<FiLogOut/>}
-  ]
-      
+  ];
+
   return (
     <Router>
-      
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="login" element={<Login/>} />
+        <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
 
-        <Route path="Dashboard" element={<AuthUserLayout><Dashboard  /></AuthUserLayout>} />
-        <Route path="Billing" element={<AuthUserLayout><Billing /></AuthUserLayout>} />
-        <Route path="Records" element={<AuthUserLayout><Records /></AuthUserLayout>}>
+        <Route
+          path="Dashboard"
+          element={
+            <AuthUserLayout>
+              <Dashboard />
+            </AuthUserLayout>
+          }
+        />
+        <Route
+          path="Billing"
+          element={
+            <AuthUserLayout>
+              <Billing />
+            </AuthUserLayout>
+          }
+        />
+        <Route
+          path="Records"
+          element={
+            <AuthUserLayout>
+              <Records />
+            </AuthUserLayout>
+          }
+        >
           <Route path="overview" element={<Overview />} />
           <Route path="lab" element={<Lab />} />
           <Route path="vaccine" element={<Vaccine />} />
           <Route path="visit" element={<Visit />} />
           <Route path="prescription" element={<Prescription />} />
         </Route>
-        <Route path="Draft" element={<AuthUserLayout><Drafts /></AuthUserLayout>} />
-  
+        <Route
+          path="Draft"
+          element={
+            <AuthUserLayout>
+              <Drafts />
+            </AuthUserLayout>
+          }
+        />
 
-
-
-      <Route path="/DocDashboard" element={<AuthDocLayout><DoctorsDashboard/></AuthDocLayout>}/>
-      <Route path="/DocRecords"element={<AuthDocLayout><DoctorsRecord/></AuthDocLayout>}/>
-      <Route path="/DocBillings" element={<AuthDocLayout><DoctorsBilling/></AuthDocLayout>}/>
-      <Route path="/DocDraft" element={<AuthDocLayout><DoctorsDrafts/></AuthDocLayout>}/>
-     
-
-
+        <Route
+          path="/DocDashboard"
+          element={
+            <AuthDocLayout>
+              <DoctorsDashboard />
+            </AuthDocLayout>
+          }
+        />
+        <Route
+          path="/DocRecords"
+          element={
+            <AuthDocLayout>
+              <DoctorsRecord />
+            </AuthDocLayout>
+          }
+        />
+        <Route
+          path="/DocBillings"
+          element={
+            <AuthDocLayout>
+              <DoctorsBilling />
+            </AuthDocLayout>
+          }
+        />
+        <Route
+          path="/DocDraft"
+          element={
+            <AuthDocLayout>
+              <DoctorsDrafts />
+            </AuthDocLayout>
+          }
+        />
+        <Route
+          path="/DocSchedule"
+          element={
+            <AuthDocLayout>
+              <SchedulePage />
+            </AuthDocLayout>
+          }
+        />
       </Routes>
-    </Router> 
+    </Router>
   );
 }
-const AuthUserLayout = ({children})=> {
-  return(
+const AuthUserLayout = ({ children }) => {
+  return (
     <div className="Layout">
-      <SideBar/>
+      <SideBar />
       {children}
     </div>
-  )
-}
-const AuthDocLayout=({children})=>{
-
-  return(
+  );
+};
+const AuthDocLayout = ({ children }) => {
+  return (
     <div className="Layout">
-      <SideBarDoc/>
+      <SideBarDoc />
       {children}
     </div>
-  )
-}
+  );
+};
 
 export default Approuter;
