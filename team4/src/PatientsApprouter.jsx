@@ -28,14 +28,14 @@ import DoctorsDrafts from "./draffts/DoctorsDrafts";
 function Approuter() {
 
 
-  const paths = [
+  // const paths = [
     // {name: "DocDashboard", route: "/Dashboard", icon: <RxDashboard />},
     // {name:"DocRecords", route: "/DocRecords", icon: <BsReverseLayoutTextSidebarReverse/>},
     // {name: "DocBillings", route: "/DocBillings", icon:<FcMoneyTransfer/>},
     // {name: "DocDraft", route:"/DocDraft", icon:<TfiWrite/>},
     // {name: "Docsettings", route:"/Docsettings" , icon:<AiOutlineSetting/>},
     // {name: "DocLogout", route:"/DocLogout", icon:<FiLogOut/>}
-  ]
+  // ]
       
   return (
     <Router>
@@ -48,7 +48,7 @@ function Approuter() {
         <Route path="Dashboard" element={<AuthUserLayout><Dashboard  /></AuthUserLayout>} />
         <Route path="Billing" element={<AuthUserLayout><Billing /></AuthUserLayout>} />
         <Route path="Records" element={<AuthUserLayout><Records /></AuthUserLayout>}>
-          <Route path="overview" element={<Overview />} />
+          <Route index ="overview" element={<Overview />} />
           <Route path="lab" element={<Lab />} />
           <Route path="vaccine" element={<Vaccine />} />
           <Route path="visit" element={<Visit />} />
