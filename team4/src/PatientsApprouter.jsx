@@ -44,7 +44,7 @@ function Approuter() {
         <Route path="/" element={<Landing />} />
         <Route path="login" element={<Login/>} />
         <Route path="signup" element={<Signup />} />
-
+        {/* {Routes to patients app and the sub components} */}
         <Route path="Dashboard" element={<AuthUserLayout><Dashboard  /></AuthUserLayout>} />
         <Route path="Billing" element={<AuthUserLayout><Billing /></AuthUserLayout>} />
         <Route path="Records" element={<AuthUserLayout><Records /></AuthUserLayout>}>
@@ -57,7 +57,7 @@ function Approuter() {
         <Route path="Draft" element={<AuthUserLayout><Drafts /></AuthUserLayout>} />
   
 
-
+      {/* {routes to doctors app and the sub components} */}
 
       <Route path="/DocDashboard" element={<AuthDocLayout><DoctorsDashboard/></AuthDocLayout>}/>
       <Route path="/DocRecords"element={<AuthDocLayout><DoctorsRecord/></AuthDocLayout>}/>
