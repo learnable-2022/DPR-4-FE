@@ -8,6 +8,8 @@
   width: 139%;
   padding-left:2px;
   border: 1px solid cadetblue;
+  overflow:scroll !important;
+  height: 100vh;
 }
 .nav-container{
     display: flex;
@@ -110,7 +112,7 @@ color: #666666;
   flex-direction: row;
   padding: 10px 40px ;
   /* gap:20px; */
-  justify-content: space-evenly;
+  gap:15%;
   border-bottom: 2px solid #D6EBFF;
   font-family: 'Open Sans';
   font-style: normal;

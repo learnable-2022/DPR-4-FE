@@ -2,6 +2,8 @@ import React from 'react';
 import drugpic1 from  "../../assets/Frame 185 (4).png"
 
 export default function Prescription() {
+
+  
   return (
     <div className='overview-container'>
      <h2 className='single-h2'>Active Medication</h2>
