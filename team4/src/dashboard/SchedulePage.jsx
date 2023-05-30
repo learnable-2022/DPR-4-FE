@@ -11,14 +11,16 @@ import {
   Agenda,
   ScheduleComponent,
 } from "@syncfusion/ej2-react-schedule";
+import CalendarComponent from "./CalendarComponent";
 function SchedulePage() {
   return (
     <div className="schedulepage">
       <NavComponent />
       <main>
-        <ScheduleComponent>
+        <CalendarComponent />
+        {/* <ScheduleComponent>
           <Inject services={[Day, Week, WorkWeek, Month]} />
-        </ScheduleComponent>
+        </ScheduleComponent> */}
       </main>
     </div>
   );
