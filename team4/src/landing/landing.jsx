@@ -1,9 +1,9 @@
 import React from "react";
-import femaleDoc from '../landing/images/femaleDoc.png';
-import logo from '../landing/images/logo.png';
-import male from '../landing/images/maleDoc.png';
-import heart from '../landing/images/heart.png';
-import pill from '../landing/images/pill.png';
+import femaleDoc from '../landing/Images/femaleDoc.png';
+import logo from '../landing/Images/logo.png';
+import male from '../landing/Images/maleDoc.png';
+import heart from '../landing/Images/heart.png';
+import pill from '../landing/Images/pill.png';
 import '../landing/landing.css'
 import { Link } from 'react-router-dom';
 
