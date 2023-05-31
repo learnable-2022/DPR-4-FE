@@ -1,5 +1,5 @@
 import React from 'react';
-import "../Record/sub-records/sub-records.css";
+import "../Record/Record.css";
 import bigpic from "../assets/big.png";
 
 export default function Labvisitreport() {
