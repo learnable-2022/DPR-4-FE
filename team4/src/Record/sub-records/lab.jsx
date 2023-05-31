@@ -1,23 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {BiFilter} from "react-icons/bi";
 import {CiSearch} from "react-icons/ci";
 import {IoIosArrowForward} from "react-icons/io";
+import{FcCheckmark} from "react-icons/fc";
+import {MdOutlineCancel} from "react-icons/md";
 
 export default function Lab() {
     const dummyData= [
-        {hosiptalName:"general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report"},
-        {hosiptalName:"general",OwnerName:"miss -ada", testResult:"hiv/aid",Time:"13:00" ,Remark:"complete",Report:"view-report"},
-        {hosiptalName:"times-square",OwnerName:"miss -ada", testResult:" Malaria Paracite Test",Time:"13:00" ,Remark:"complete",Report:"view-report"},
-        {hosiptalName:"general",OwnerName:"miss -ada", testResult:" Malaria Paracite Test",Time:"13:00" ,Remark:"complete",Report:"view-report"},
+        {hosiptalName:"general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report" , status:"Approve",complaint:"malariaX2"},
+        {hosiptalName:"general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
+        {hosiptalName:"general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
+        {hosiptalName:"general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
+        {hosiptalName:"general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
+        {hosiptalName:"general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
+        {hosiptalName:"general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
+        {hosiptalName:"general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
+        {hosiptalName:"general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
+        {hosiptalName:"general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
       ]
+
+
+      const [ serchResult, setSearchResult] = useState([]);
 
   return (
     <div className='overview-container'>
       <div className='visit-navigation'>
-        <div>
-          <h2>Medical Record <IoIosArrowForward/>  Vaccines</h2>
-          <p>This Month</p>
+        <div className= "visit-header">
+          <h2>Medical Record <IoIosArrowForward/> Lab</h2>
+          <p>This Month <MdOutlineCancel/></p>
         </div>
+        {/* /search component would be here  */}
         <div className='search'>
           <CiSearch/>
           <input  type="text" placeholder='search'/>
@@ -27,16 +39,17 @@ export default function Lab() {
       <div className='table'>
         <div className='table-4'>
           <h4>Hospital/ Laboratory</h4>
-          <h4>Vaccines</h4>
-          <h4>Date/Time </h4>
-          <h4>Remark</h4>
+          <h4>Test-type</h4>
+          <h4>Complaint</h4>
+          <h4>Status</h4>
         </div>
+          {/* this would layout component to return the data based on filter request */}
                 { dummyData.map((items)=>{
                     return(
                         <>        
             <div className='table-3'>
             <div>
-            <p>{items.hosiptalName}
+            <p>{items.hosiptalName}<br/>
                  {items.OwnerName}
                     </p>
             </div>
@@ -45,10 +58,11 @@ export default function Lab() {
                 </p>
             </div>
             <div>
-                <p>{items.Time}</p>
+                <p>{items.complaint}</p>
             </div>
-            <div>
-                <p>{items.Remark}</p>
+            <div className='center'>
+                <p><FcCheckmark/></p>
+                <p>{items.status}</p>
             </div>
             <div>
                 <button>

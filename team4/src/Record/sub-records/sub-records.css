@@ -1,24 +1,87 @@
+*{
+    text-transform: capitalize;
+    box-sizing: border-box;
+}
 .overview-container{
-    padding: 20px 20px 20px;
-    border: 1px solid chartreuse;
-    max-width:97%
+    padding: 20px 40px 20px 20px ;
+    /* border: 1px solid firebrick; */
+  width: 100%;
 }
 .overview-sub-container{
     display: flex;
-    /* border: 1px solid khaki; */
+    /* border: 1px solid rgb(10, 222, 127); */
     justify-content: space-between;
 }
 
 /* this is where i styled the overview component .please kindly note */
 .over-1{
-    border: 1px solid chocolate;
-    /* width: 300px; */
+    /* border: 1px solid chocolate; */
+    background: #FFFFFF;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075), 10px 10px 20px 
+    rgba(0, 0, 0, 0.04);
+    border-radius: 10px;
+    width: 373px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.p-tag{
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0.001em;
+    color: #999999;
+}
+.sp-p{
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 28px;
+}
+
+.over-1-first{
+    display: flex;
+    gap:20px;
+}
+.over-1-first-son{
+    display: flex;
+}
+.over-1-first-son p{
+    font-size: 12px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+        color: #444444;
+}
+.img-love{
+    width:30px;
+    height: 30px;
+}
+.over-1-second-son{
+    display: flex;
+    gap: 20px;
+}
+.over-1-second-son div img{
+    width: 100px;
+    height: 50px;
+    
+}
+.over-1-1{
+    margin-top: 25px;
+}
+.over-1-2{
+    margin-top: 25px;
 }
 .over-2{
     /* border: 1px solid aqua; */
     padding: 0px 20px 0px 10px;
     background: #FFFFFF;
-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075), 10px 10px 20px rgba(0, 0, 0, 0.04);
+box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075), 10px 10px 20px
+ rgba(0, 0, 0, 0.04);
 border-radius: 10px;
 /* width: 340px; */
 }
@@ -40,7 +103,7 @@ border-radius: 10px;
     display: flex;
    justify-content: space-between;
    align-items: center;
-   border-bottom: 1px solid  #E7E6E6;
+   /* border-bottom: 1px solid  #E7E6E6; */
     border-radius: 10px;
     /* transform: matrix(-1, 0, 0, 1, 0, 0); */
 }
@@ -105,6 +168,15 @@ border-radius: 10px;
     align-items: center;
     
 }
+/* used this visit-header class for visit , lab and vaccine */
+.visit-header h2 {
+    display: flex;
+    align-items: center;
+}
+.visit-header p{
+    display: flex;
+    align-items: center;
+}
 .visit-navigation h2{
     font-family: 'Open Sans';
     font-style: normal;
@@ -141,11 +213,9 @@ border-radius: 10px;
     border-left: 1px solid #0A1F33 ;
     padding: 2px;
 }
-.table{
-    border: 1px solid khaki;
-}
+
 .table-1{
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     display: flex;
     gap: 20%;
     background: #D6EBFF;
@@ -158,17 +228,32 @@ border-radius: 10px;
     font-size: 18px;
     line-height: 32px;
 }
+.table-1-vaccine{
+    /* border: 1px solid blue; */
+    display: flex;
+    gap: 15.5%;
+    background: #D6EBFF;
+    padding: 5px 5px;
+}
+.table-1-vaccine h4{
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 32px;
+}
 .table-2{
     display: flex;
-    border: 1px solid blue;
-    gap: 20%;
+    border-bottom:  2px solid #D6EBFF;
+    gap: 18%;
     align-items: center;
 }
 .table-2 p{
     font-family: 'Open Sans';
     font-style: normal;
-    font-weight: 200;
-    font-size: 15px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
 }
 .table-2 button{
     background: #80D580;
@@ -178,18 +263,44 @@ border-radius: 10px;
     border: none;
     padding: 5px 15px;
 }
-.table-4{
-    border: 1px solid blue;
+.table-2-vaccine{
     display: flex;
-    gap: 12%;
+    /* border: 1px solid blue; */
+    gap: 11%;
+    align-items: center;
+    border-bottom:  2px solid #D6EBFF;
+}
+.table-2-vaccine div{
+    /* border: 1px solid navy; */
+    padding: 5px 0px;
+    
+}
+.table-2-vaccine P{
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    color: #555555;
+}
+.table-2-vaccine-Stext {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+}
+
+.table-4{
+    /* border: 1px solid blue; */
+    display: flex;
+    gap: 10%;
     background: #D6EBFF;
     padding: 5px 5px;
 }
 
 .table-3{
     display: flex;
-    border: 1px solid blue;
-    gap: 13%;
+    border-bottom:  2px solid #D6EBFF;
+    gap: 12%;
     align-items: center;
     /* flex-direction: column;
     border: 1px solid darkblue; */
@@ -199,6 +310,9 @@ border-radius: 10px;
     font-style: normal;
     font-weight: 200;
     font-size: 15px;
+}
+.center{
+    text-align: center;
 }
 .table-3 button{
     
@@ -219,7 +333,7 @@ border-radius: 10px;
 /* below is where i styled the prescription component */
 .pres-component{
     display: flex;
-    border: 1px solid hotpink;
+    /* border: 1px solid hotpink; */
     justify-content: space-between;
     align-items: center;
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075),
@@ -261,4 +375,115 @@ color: #808080
     display: flex;
     justify-content: center;
     align-items: center;
+}
+/* there below is where i styled the patients lab report */
+.Nav-labreport{
+    color: #2B80D5;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+    display: flex;
+    align-items: center;
+}
+.third-lab-report{
+    display: flex;
+    padding: 20px 10px;
+    /* border: 1px solid cornflowerblue; */
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075), 10px 10px 20px rgba(0, 0, 0, 0.04);
+    margin-bottom: 20px;
+}
+
+.third-lab-report div p{
+    padding: 8px 8px 8px;
+    gap: 10px;
+    background: #F8F8F8;
+    margin-bottom: 15px;
+    margin-left: 10px;
+    border-radius: 10px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-size: 16px;
+    line-height: 22px;
+    color: #666666;
+}
+.third-container{
+    display: flex;
+    justify-content: center;
+    /* border: 1px solid darkred; */
+}
+
+.bold{
+    
+    font-weight: 600;
+
+}
+.bolder{
+    font-weight: 600;
+    margin-top: 68px;
+}
+/* there below is where i styled the patients visit report */
+.first-visit-container{
+    display: flex;
+    align-items: center;
+   gap: 150px;
+    /* border: 1px solid violet; */
+    padding: 0px 20px ;
+}
+.first-visit-container p{
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 22px;
+    background: #F8F8F8;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.none p{
+    background: none;
+    /* margin-right: 140px !important; */
+    /* display: flex;
+    justify-content: flex-end; */
+}
+.all p{
+    color:#666666;;
+}
+.visit-table{
+    /* border: 1px solid rgb(105, 255, 163); */
+    width: 95%;
+    margin-top: 30px;
+    padding: 10px;
+    background: #D6EBFF;
+    margin-left: 5px;
+}
+.visit-table ul{
+    display: flex;
+   gap: 21%;
+   /* justify-content: space-between; */
+    align-items: center;
+    text-decoration: none;
+    list-style: none;
+    padding: 0px 20px ;
+    /* margin-top: 20px; */
+}
+.visit-table-2{
+    /* border: 1px solid rgb(105, 255, 163); */
+    width: 95%;
+    margin-top: 30px;
+    padding: 10px;
+    border: 1px solid #BBDDFF;
+    border-radius: 5px;
+}
+.visit-table-2 ul{
+    display: flex;
+   gap: 19%;
+   /* justify-content: space-between; */
+    align-items: center;
+    text-decoration: none;
+    list-style: none;
+    font-size: 14px;
+    padding: 0px 20px ;
 }

@@ -15,11 +15,13 @@ import Lab from "./Record/sub-records/lab";
 import Vaccine from "./Record/sub-records/vaccine";
 import Visit from "./Record/sub-records/visit";
 import Prescription from "./Record/sub-records/prescription";
-import Records from "./Record/Records";
+import PatientsRecord from "./Record/PatientsRecord";
 import DoctorsBilling from "./billings/DoctorsBilling";
 import DoctorsDashboard from "./dashboard/DoctorsDashboard";
 import DoctorsRecord from "./Record/DoctorsRecord";
 import DoctorsDrafts from "./draffts/DoctorsDrafts";
+import VisitReport from "./Record/sub-records/VisitReport";
+import LabReport from "./Record/LabReport";
 
 // note!!!
 // i have only created the router part for the signup , login and Landing page.
@@ -43,17 +45,34 @@ function Approuter() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="login" element={<Login/>} />
-        <Route path="signup" element={<Signup />} />
+        <Route path="signup" element={<Signup />} />  
         {/* {Routes to patients app and the sub components} */}
         <Route path="Dashboard" element={<AuthUserLayout><Dashboard  /></AuthUserLayout>} />
         <Route path="Billing" element={<AuthUserLayout><Billing /></AuthUserLayout>} />
-        <Route path="Records" element={<AuthUserLayout><Records /></AuthUserLayout>}>
+
+
+
+
+        <Route path="Records" element={<AuthUserLayout><PatientsRecord/></AuthUserLayout>}>
           <Route index ="overview" element={<Overview />} />
           <Route path="lab" element={<Lab />} />
+         
+          
           <Route path="vaccine" element={<Vaccine />} />
           <Route path="visit" element={<Visit />} />
+           
+         
           <Route path="prescription" element={<Prescription />} />
         </Route>
+        <Route path="Lab-report" element={<AuthUserLayout><LabReport/></AuthUserLayout>}/>
+        <Route path="visit-report" element={<AuthUserLayout><VisitReport/></AuthUserLayout>}/>
+
+
+
+
+
+
+
         <Route path="Draft" element={<AuthUserLayout><Drafts /></AuthUserLayout>} />
   
 
