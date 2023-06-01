@@ -1,9 +1,9 @@
 import React from 'react';
-import NavBar from '../utilities/NavBar';
-import Labvisitreport from '../utilities/lab-visitreport';
-// import './sub-records.css';
+import NavBar from '../../utilities/NavBar';
+import Labvisitreport from '../../utilities/lab-visitreport';
+import "./sub-records.css";
 
-export default function LabReport() {
+export default function VisiterReport() {
   return (
     <div  className='container'>
         <NavBar/>
@@ -36,6 +36,8 @@ export default function LabReport() {
               </div>
             </div>
           </div>
+
+          
     </div>
   )
 }

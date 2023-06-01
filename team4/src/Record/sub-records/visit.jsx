@@ -50,24 +50,12 @@ export default function Visit() {
         {dummyData.map((items)=>{
           return(
         <div className='table-2'>
-        <div>
-          <p>{items.hosiptalName}</p>
-          <p>{items.name}</p>
-        </div>
-          <div>
-              <p>{items.date}</p>
-            <p>{items.Time}
-              </p>
-          </div>
-          <div>
-            <p>{items.Remark}</p>
-          </div>
-          <div>
-           <Link to="visit-report">
-            <button>
-            {items.Report}
-            </button></Link>
-          </div>
+          <ul>
+            <li>{items.hosiptalName}<br/>{items.date}</li>
+            <li>{items.Time}</li>
+            <li>{items.Remark}</li>
+            <li><button>{items.Report}</button></li>
+          </ul>
         </div>
         )
       })}

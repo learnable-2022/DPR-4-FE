@@ -40,22 +40,14 @@ export default function Vaccine() {
         {dummyData.map((items)=>{
             return(
         <div className='table-2-vaccine'>
-        <div>
-          <p className='table-2-vaccine-Stext'>{items.hosiptalName}</p>
-          <p> {items.name}</p>
+              <ul>
+                <li>{items.hosiptalName} <br/>{items.name}</li>
+                <li>{items.vaccine}</li>
+                <li>{items.Date}<br/>{items.Time}</li>
+                <li>{items.Remark}</li>
+              </ul>
         </div>
-          <div>
-            <p>{items.vaccine}
-              </p>
-          </div>
-          <div>
-            <p >{items.Date}</p>
-            <p>{items.Time}</p>
-          </div>
-          <div>
-            <p>{items.Remark}</p>
-          </div>
-        </div>
+
 
             )
         })}

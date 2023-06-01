@@ -2,7 +2,10 @@ import React from 'react';
 import NavBar from '../../utilities/NavBar';
 import Labvisitreport from '../../utilities/lab-visitreport';
 
-export default function VisitReport() {
+
+
+export default function LabReport() {
+  
   return (
     <div   className='container'>
         <NavBar/>

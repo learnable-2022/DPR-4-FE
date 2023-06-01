@@ -20,8 +20,9 @@ import DoctorsBilling from "./billings/DoctorsBilling";
 import DoctorsDashboard from "./dashboard/DoctorsDashboard";
 import DoctorsRecord from "./Record/DoctorsRecord";
 import DoctorsDrafts from "./draffts/DoctorsDrafts";
-import VisitReport from "./Record/sub-records/VisitReport";
-import LabReport from "./Record/LabReport";
+import LabReport from "./Record/sub-records/LabReport";
+import VisiterReport from "./Record/sub-records/visiterReport";
+
 
 // note!!!
 // i have only created the router part for the signup , login and Landing page.
@@ -65,7 +66,7 @@ function Approuter() {
           <Route path="prescription" element={<Prescription />} />
         </Route>
         <Route path="Lab-report" element={<AuthUserLayout><LabReport/></AuthUserLayout>}/>
-        <Route path="visit-report" element={<AuthUserLayout><VisitReport/></AuthUserLayout>}/>
+        <Route path="visiterReport" element={<AuthUserLayout><VisiterReport/></AuthUserLayout>}/>
 
 
 
