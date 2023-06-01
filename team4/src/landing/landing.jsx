@@ -51,7 +51,7 @@ export default function Landing() {
       {/* hero section */}
       <div className="hero-section">
         <div className="hero-1">
-          <h1>
+          <h1 className="hero-bg-text">
             Simplify Medical Record Keeping with <span>Medbloc</span>
           </h1>
           <p className="hero-text">
@@ -85,9 +85,31 @@ export default function Landing() {
 
         <div className="section-one-c">
           <Link className="link" to="">
-            <button className="section-one-btn">Try now</button>
+            <button className="section-one-btn" id="section-one-btn">Try now</button>
           </Link>
         </div>
+      </div>
+
+{/* section-1-part-b */}
+      <div className="section-one-part-b">
+        <div>
+          <img src={pill} alt="pill" id="pill-part-img" />
+        </div>
+        <div className="section-one-part-c">
+          <div className="section-one-part-B">
+            <h2 className="sec-one-part-text">Enhanced Collaboration</h2>
+            <p className="section-one-part-text">
+            Our system makes it easy for healthcare professionals to share
+            information and collaborate on patient care.
+            </p>
+          </div>
+
+        <div className="section-one-part-c">
+          <Link className="link" to="">
+            <button className="section-one-part-btn" id="section-one-part-btn">Try now</button>
+          </Link>
+        </div>
+      </div>
       </div>
 
       {/* section-two*/}
@@ -176,48 +198,52 @@ export default function Landing() {
             about your health
           </p>
         </div>
-        <div className="footer-section-b">
-          <h5>Information</h5>
-          <Link className="footer-link" to="">
-            <p>Sign Up</p>
-          </Link>
-          <Link className="footer-link" to="">
+
+        <div className="footer-section-2">
+          <div className="footer-section-b">
+            <h5>Information</h5>
+            <Link className="footer-link" to="">
+              <p>Sign Up</p>
+            </Link>
+            <Link className="footer-link" to="">
             <p>Join Community</p>
-          </Link>
-          <Link className="footer-link" to="">
+            </Link>
+            <Link className="footer-link" to="">
             <p>Learning</p>
-          </Link>
-          <Link className="footer-link" to="">
+            </Link>
+            <Link className="footer-link" to="">
             <p>Newsletter</p>
-          </Link>
-        </div>
-        <div className="footer-section-c">
-          <h5>Platform</h5>
-          <Link className="footer-link" to="">
+            </Link>
+          </div>
+          <div className="footer-section-c">
+            <h5>Platform</h5>
+            <Link className="footer-link" to="">
             <p>Terms of Use</p>
-          </Link>
-          <Link className="footer-link" to="">
+            </Link>
+            <Link className="footer-link" to="">
             <p>About</p>
-          </Link>
-          <Link className="footer-link" to="">
+            </Link>
+            <Link className="footer-link" to="">
             <p>Contact</p>
-          </Link>
-          <Link className="footer-link" to="">
+            </Link>
+            <Link className="footer-link" to="">
             <p>Partnership</p>
-          </Link>
-        </div>
-        <div className="footer-section-d">
-          <h5>Support</h5>
-          <Link className="footer-link" to="">
+            </Link>
+          </div>
+          <div className="footer-section-d">
+            <h5>Support</h5>
+            <Link className="footer-link" to="">
             <p>Help Centre</p>
-          </Link>
-          <Link className="footer-link" to="">
+            </Link>
+            <Link className="footer-link" to="">
             <p>Video Tutorial</p>
-          </Link>
-          <Link className="footer-link" to="">
+            </Link>
+            <Link className="footer-link" to="">
             <p>Cookie Settings</p>
-          </Link>
+            </Link>
+          </div>
         </div>
+        
       </div>
     </div>
   );

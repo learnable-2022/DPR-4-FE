@@ -89,7 +89,7 @@ html, body{
     padding: 1.5rem 6rem 10px 5rem;
 }
 
-h1{
+.hero-bg-text{
     font-size: 4rem;
     width: 75%;
     color: #113355;
@@ -331,6 +331,12 @@ span{
     margin: 0;
 }
 
+.footer-section-2{
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+}
+
 .footer-link{
     text-decoration: none;
     color: #666;
@@ -366,9 +372,14 @@ span{
     margin: 0 0 20px 0;
 }
 
+/* display-none */
+.section-one-part-b{
+    display: none;
+}
+
 /* *****************MEDIA QUERY */
 @media screen and (max-width:1317px){
-h1{
+.hero-bg-text{
     font-size: 3rem;
 }
 
@@ -379,7 +390,7 @@ h1{
 }
 
 @media screen and (max-width:1152px){
-    h1{
+    .hero-bg-text{
         margin: 70px 0 0 0;
         font-size: 2rem;
         line-height: 50px;
@@ -394,7 +405,7 @@ h1{
 }
 
 @media screen and (max-width:1127px){
-    h1{
+    .hero-bg-text{
         font-size: 1.8rem;
         line-height: 40px;
     }
@@ -461,14 +472,14 @@ h1{
     #female-img{
         width: 400px;
     }
-    h1{
+    .hero-bg-text{
         font-size: 2rem;
         line-height: 40px;
     }
 } 
 
 @media screen and (max-width:1037px){
-    h1{
+    .hero-bg-text{
         width: 380px;
     }
     #female-img{
@@ -681,10 +692,400 @@ h1{
     }
 }
 
-/* @media screen and (max-width:1317px){
+@media screen and (max-width:817px){
+    .nav-section{
+        padding: 20px 4rem 1.5rem 2rem;
+    }
+    .hero-section{
+        padding: 1.5rem 4rem 10px 2rem
+    }
+    .section-one{
+        margin: 3rem 1.5rem 3rem 2rem;
+    }
+    #pill-img{
+        width: 80px;
+    }
+    .section-two{
+        margin:  3rem 2rem 3rem 2rem;
+    }
+    .section-three{
+        margin:  3rem 1rem 3rem 2rem;
+    }
+    .section-four{
+        margin: 4rem 2rem -7rem 2rem;
+        padding: 20px 2rem;
+    }
+    .footer-section{
+        flex-direction: column;
+        padding: 10rem 5rem 3rem 2rem;
+    }
+    .footer-section-a{
+        align-self: flex-start;
+    }
+    .footer-section-a p{
+        width: 100%;
+        font-size: 18px;
+    }
+    .section-one-text{
+        font-size: 18px;
+        width: 430px;
+    }
+    .section-2-list{
+        font-size: 18px;
+    }
+    .ri-checkbox-line{
+        line-height: 65px;
+        font-size: 25px;
+    }
+    .section-three-text-b{
+        font-size: 18px;
+        width: 370px;
+    }
+    .section-four-a p{
+        font-size: 18px;
+    }
+    .footer-section-2{
+        width: 84%;
+    }
+} 
 
+@media screen and (max-width:762px){
+    #female-img{
+        width: 330px;
+    }
+    .section-one-text{
+        width: 430px;
+    }
+    #section-one-btn{
+        padding: 7px 25px;
+    }
+    .section-one{
+        margin: 3rem 1rem 3rem 2rem;
+    }
+    #male-img{
+        width: 340px;
+    }
+    .section-two-text{
+        width: 330px;
+        font-size: 1.5rem;
+    }
+    .section-four-btn{
+        margin:  0 0 0 -75px;
+    }
+    .section-four-a p{
+        width: 450px;
+    }
+    .section-four-a h4{
+        width: 540px;
+    }
+} 
+
+@media screen and (max-width:747px){
+    .list{
+        padding: 0;
+    }
+    #section-one-btn{
+        font-size: 15px;
+    }
+    .section-one-text{
+        width: 320px;
+        font-size: 16px;
+    }
+    .section-two-text{
+        width: 300px;
+    }
+    #section-one-btn{
+        padding: 10px 30px;
+    }
 }
 
-@media screen and (max-width:1317px){
+@media screen and (max-width:717px){
+    .section-one-text{
+        width: 300px;
+    }
+} 
 
+@media screen and (max-width:702px){
+    .hero-bg-text{
+        font-size: 1.8rem;
+    }
+    .section-two-text{
+        padding: 12px 0 -14px 0;
+    }
+    .section-2-list{
+        margin: 0;
+    }
+    #male-img{
+        width: 330px;
+    }
+    #heart-img{
+        width: 240px;
+    }
+    .section-four-a h4{
+        width: 500px;
+    }
+    .section-four-a p{
+        width: 415px;
+    }
+    .hero-bg-text{
+        width: 350px;
+    }
+    #female-img{
+        width: 300px;
+    }
+    .hero-bg-text{
+        margin: 40px  0 0 0;
+    }
+} 
+
+@media screen and (max-width:677px){
+    .hero-section{
+        display: flex;
+        flex-direction: column;
+    }
+    .hero-bg-text{
+        font-size: 4rem;
+        width: 100%;
+        line-height: 65px;
+        letter-spacing: 4px;
+    }
+    .hero-text{
+        width: 100%;
+        font-size: 30px;
+        line-height: 40px;
+    }
+    .hero-btn{
+        padding: 15px 35px;
+        font-size: 30px;
+        margin:  0 0 2.5rem 0;
+    }
+    .nav-section{
+        padding: 20px 3rem 1.5rem 4rem;
+    }
+    .hero-section{
+        padding: 1.5rem 3rem 10px 4rem
+    }
+    .section-one{
+        margin: 3rem 3rem 3rem 4rem;
+    }
+    #female-img{
+        width: 560px;
+    }
+    .hr{
+        display: none;
+    }
+    #pill-img{
+        width: 80px;
+    }
+    .section-two{
+        margin:  3rem 4rem;
+        flex-direction: column;
+    }
+    #male-img{
+        width: 570px;
+    }
+    .section-two-text{
+        width: 100%;
+        font-size: 35px;
+        margin: 1.2rem 0 0 0;
+    }
+    .section-2-list p{
+        font-size: 30px;
+    }
+    .ri-checkbox-line{
+        font-size: 30px;
+        line-height: 100px;
+    }
+    .section-three{
+        margin:  3rem 4rem;
+        flex-direction: column;
+    }
+    .section-three-text{
+        width: 100%;
+        font-size: 35px;
+        margin: -4rem 0 1rem 0;
+    }
+    .section-three-text-b{
+        width: 100%;
+        font-size: 23px;
+        line-height: 30px;
+        margin: 0rem 0 1rem 0;
+    }
+    #heart-img{
+        width: 500px;
+    }
+    .section-four{
+        margin: 4rem 1rem -7rem 1rem;
+        padding: 30px 1rem;
+        flex-direction: column;
+        border-radius: 10px;
+    }
+    .section-four-a h4{
+        width: 100%;
+    }
+    .section-four-a p{
+        width: 100%;
+    }
+    .section-four-btn{
+        margin: 0 26rem 0 0;
+        font-size: 16px;
+        width: 170px;
+    }
+    .footer-section{
+        flex-direction: column;
+        padding: 10rem 4rem 3rem 2rem;
+    }
+} 
+
+@media screen and (max-width:652px){
+    .hero-bg-text{
+        font-size: 3rem;
+    }
+} 
+
+@media screen and (max-width:611px){
+    .nav-section{
+        padding: 20px 1.5rem 1.5rem 1.5rem;
+    }
+    .hero-section{
+        padding: 1.5rem 1.5rem 10px 1.5rem;
+        font-size: 2rem;
+    }
+    .hero-bg-text{
+        width: 90%;
+        font-size: 3.6rem;
+    }
+    .section-one{
+        display: none;
+    }
+    .section-one-part-b{
+        display: flex;     
+        background-color: #e0f5e0;
+        border-radius: 20px;
+        padding: 20px ;
+        margin: 1.5rem 1.5rem 10px 1.5rem;
+    }
+    .section-one-part-c{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #pill-part-img{
+        width: 140px;
+    }
+    
+    .sec-one-part-text{
+        color: #4da5ff;
+        margin: 0 0 15px 0;
+    }
+    
+    .section-one-part-text{
+        color: #000;
+        font-size: 16px;
+        font-weight: 400;
+    }
+    
+    .section-one-part-btn{
+        padding: 7px 30px;
+        border-radius: 10px;
+        background-color:#3399ff ;
+        color: #fff;
+        border: 1px solid #3399ff;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    
+    .section-one-part-btn:hover{
+        transition: 0.3s;
+        background-color:#2266aa;
+        color: white;
+    }
+    
+    .section-one-part-btn:active{
+         background-color: #3399ff;
+         color: white;
+         transition: 0.3s;
+    }
+    .section-two-text{
+        margin: 1.5rem 10px 10px 10px;
+    }
+    .section-three{
+        padding: 3rem 2rem;
+    }
+    #heart-img{
+        width: 400px;
+    }
+    .section-two{
+        margin: 20px 1rem 1.5rem 1rem;
+    }
+    .section-three{
+        padding: 20px 1rem 1.5rem 1rem;
+        margin: 20px 1rem 1.5rem 1rem;
+    }
+}
+
+@media screen and (max-width:575px){
+    .hero-bg-text{
+        width: 100%;
+    } 
+    #male-img{
+        width: 500px;
+    }
+    #female-img{
+        width: 530px;
+    }
+    .section-four-btn{
+        margin: 0 20rem 0 0;
+    }
+}
+
+@media screen and (max-width:534px){
+    .hero-bg-text{
+        font-size: 3rem;
+    }
+    .section-four-btn{
+        margin: 0 18rem 0 0;
+    }
+}
+
+@media screen and (max-width:472px){
+    .hero-bg-text{
+        font-size: 2.5rem;
+        line-height: 48px;
+    }
+    .section-four-btn{
+        margin: 0 15rem 0 0;
+    }
+}
+@media screen and (max-width:451px){
+    #female-img{
+        width: 400px;
+    }
+}
+@media screen and (max-width:403px){
+    .hero-bg-text{
+        font-size: 2rem;
+    }
+    #female-img{
+        width: 350px;
+    }
+    #male-img{
+        width: 350px;
+    }
+    #heart-img{
+        width: 300px;
+        margin: 0 0 0 82px;
+    }
+    .section-four-btn{
+        margin: 0 10rem 0 0;
+    }
+    .footer-section{
+        padding: 10rem 1rem 3rem 1rem;
+    }
+    .footer-section h5{
+        font-size: 18px;
+    }
+}
+/* @media screen and (max-width:1317px){
+    .nav-section
 } */
