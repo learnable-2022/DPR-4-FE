@@ -1,0 +1,416 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    scroll-behavior: smooth;
+}
+
+html {
+    font-family: 'open Sans', sans-serif;
+    font-size: 30px;
+    color: #141414;
+}
+
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: linear-gradient(180deg,
+     #3399FF 0%, #86AE81 93.23%);
+     position: relative;
+width: 1440px;
+height: 1024px;
+border-radius: 20px;
+}
+
+.section {
+    position: absolute;
+width: 640px;
+height: 903px;
+left: 70px;
+top: 68px;
+background: #FFFFFF;
+border-radius: 20px;
+align-items: centre;
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+    padding: 1rem;
+/* width: 100%;
+    max-width: 420px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1rem;
+    background-color: rgba(0,0,0,0.4); */
+}
+
+.frame1 {
+position: absolute;
+width: 410px;
+height: 842px;
+left: 173px;
+top: 94px;
+
+}
+
+a, a:visited {
+    color: #3399FF;
+}
+
+input[type="text"],
+input[type="password"],
+button,
+textarea {
+  font-family: 'open Sans', sans-serif;
+  font-size: 16px;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+}
+
+.signup__logo {
+    position: center;
+width: 226.03px;
+height: 45.21px;
+left: calc(50% - 226.03px/2 - 330.67px);
+top: 119px;
+
+}
+
+.signup__image {
+    position: absolute;
+width: 761px;
+height: 761px;
+left: 689px;
+top: 121px;
+
+/* background: url(7118240_3343994-removebg-preview.png); */
+}
+
+.signup {
+position: absolute;
+width: 131px;
+height: 44px;
+margin-left: -70px;
+
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 36px;
+line-height: 44px;
+
+display: flex;
+align-items: center;
+
+color: #141414;
+
+}
+
+.signup2 {
+    position: absolute;
+    width: 151px;
+    height: 24px;
+    left: -70px;
+    top: 95px;
+    
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+    
+    text-align: center;
+    
+    /* Neutral colour/Main */
+    
+    color: #666666;
+
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-grow: 1;
+    padding-bottom: 1rem;
+    margin-top: 50px;
+    margin-left: -70px;
+    margin-right: 60px;
+}
+
+/*input[type="text"],
+input[type="password"],
+button,
+textarea {
+  font-family: 'open Sans', sans-serif;
+  font-size: 22px;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+}*/
+
+.password-toggle {
+    position: absolute;
+    right: 70px; /* Adjust the positioning as needed */
+    top: 31%;
+    transform: translateY(-50%);
+  }
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Styles for the checkbox */
+  .checkbox-input {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  /* Styles for the checkbox when checked */
+  .checkbox-input:checked {
+    background-color: rgba(51, 153, 255, 1);
+
+  }
+  
+  /* Styles for the checkbox label */
+  .checkbox-label {
+    font-family: 'Open Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 20px;
+letter-spacing: 0.0025em;
+color: #141414;
+  }
+  
+  /* Styles for the checkbox label when clicked */
+  .checkbox-label:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+
+.passwordinput {
+    font-family: 'Open Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 16px;
+padding-bottom: 5px;
+letter-spacing: 0.004em;
+color: #444444;
+}
+
+.usernameinput {
+    font-family: 'Open Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 16px;
+padding-bottom: 5px;
+letter-spacing: 0.004em;
+color: #444444;
+}
+
+.confirmpasswordinput {
+    font-family: 'Open Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 16px;
+padding-bottom: 5px;
+letter-spacing: 0.004em;
+color: #444444;
+}
+
+.username-input::placeholder {
+    /*width: 93px;
+    height: 21px;*/
+    
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150.25%;
+    /* identical to box height, or 21px */
+    
+    /*text-align: center;*/
+    letter-spacing: 0.004em;
+    
+    /* Foundation /White/Dark :hover */
+    
+    color: #999999;
+    
+    
+    /* Inside auto layout */
+    
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.password-input::placeholder {
+    font-family: 'Open Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 150.25%;
+/* identical to box height, or 21px */
+
+letter-spacing: 0.004em;
+
+/* Foundation /White/Dark :hover */
+
+color: #999999;
+
+opacity: 0.6;
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+}
+
+.confirmpassword-input::placeholder {
+    font-family: 'Open Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 150.25%;
+/* identical to box height, or 21px */
+
+letter-spacing: 0.004em;
+
+/* Foundation /White/Dark :hover */
+
+color: #999999;
+
+opacity: 0.6;
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+}
+
+label,
+button {
+  margin-top: 1rem;
+}
+
+button {
+  padding: 0.5rem;
+}
+
+button {
+    display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 7.53439px 15.0688px;
+color: #FFFFFF;
+
+
+background: #3399FF;
+border-radius: 20px;
+}
+
+.instructions {
+    font-size: 0.4rem;
+    border-radius: 0.5rem;
+    background: #999999;
+    color: #fff;
+    padding: 0.25rem;
+    position: relative;
+    bottom: -10px;
+}
+
+.instructions > svg {
+    margin-right: 0.25rem;
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.hide {
+    display: none;
+}
+
+.valid {
+    color: limegreen;
+    margin-left: 0.25rem;
+}
+
+.invalid {
+    color: red;
+    margin-left: 0.25rem;
+}
+
+.errmsg {
+    background-color: lightpink;
+    color: firebrick;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.line {
+    display: inline-block;
+}
+
+.line1 {
+    position: absolute;
+width: 222px;
+height: 10px;
+
+
+
+/* Open Sans/Body medium/Body medium regular */
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 400px;
+font-size: 15px;
+line-height: 15px;
+/* or 143% */
+
+display: flex;
+align-items: center;
+
+
+/* Neutral colour/Neutral 100 */
+
+color: #141414;
+}
+
+@media screen and (max-wdth: 700px) {
+    .section__padding {
+        padding: 4rem;
+    }
+    .section__margin {
+        margin: 4rem;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .section__padding {
+        padding: 4rem 2rem;
+    }
+}
