@@ -56,6 +56,7 @@ export default function PatientsRecord() {
           </div>
         </div>
         <div className='second-section-second'>
+          <span className='patient'>patient</span>
           <p>Cancer type: <span> Adenocarcinoma</span></p>
           <p> Primary site: <span> Lungs</span></p>
           <p>Stage:<span> Stage III</span></p>

@@ -3,10 +3,10 @@
 
 
 * {
-    box-sizing: border-box;
+    /* box-sizing: border-box;
     padding: 0;
-    margin: 0;
-    scroll-behavior: smooth;
+    margin: 0; */
+    /* scroll-behavior: smooth; */
 }
 
 /* html {
@@ -64,7 +64,7 @@ a, a:visited {
 
 input[type="text"],
 input[type="password"],
-button,
+
 textarea {
   font-family: 'open Sans', sans-serif;
   font-size: 16px;
@@ -83,8 +83,8 @@ top: 119px;
 
 .signup__image {
     position: absolute;
-width: 761px;
-height: 761px;
+width: 400px;
+height: 400px;
 left: 689px;
 top: 121px;
 
@@ -308,15 +308,15 @@ order: 0;
 flex-grow: 0;
 }
 
-label,
-button {
+label
+ {
   margin-top: 1rem;
 }
 
-button {
+/* button {
   padding: 0.5rem;
-}
-
+} */
+/* 
 button {
     display: flex;
 flex-direction: row;
@@ -328,7 +328,7 @@ color: #FFFFFF;
 
 background: #3399FF;
 border-radius: 20px;
-}
+} */
 
 .instructions {
     font-size: 0.4rem;

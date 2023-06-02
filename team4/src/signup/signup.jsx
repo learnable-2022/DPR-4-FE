@@ -221,6 +221,7 @@ const Signup = () => {
                   Must match the first password input field.
                 </p>
                 <Checkbox isChecked={isChecked} handleCheckboxChange={handleCheckboxChange} />
+                
                 <button disabled={!validName || !validPwd || !validMatch} type="submit">
                   Create an account
                 </button>

@@ -22,6 +22,8 @@ import DoctorsRecord from "./Record/DoctorsRecord";
 import DoctorsDrafts from "./draffts/DoctorsDrafts";
 import LabReport from "./Record/sub-records/LabReport";
 import VisiterReport from "./Record/sub-records/visiterReport";
+import Authpage from "./login/authpage";
+import Signingup from "./login/signingup";
 
 
 // note!!!
@@ -46,7 +48,9 @@ function Approuter() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="login" element={<Login/>} />
-        <Route path="signup" element={<Signup />} />  
+        <Route path="signup" element={<Signingup/>} /> 
+        <Route path="auth-page" element={<Authpage/>}/> 
+        <Route path="barnabas"  element={<Signup/>}/>
         {/* {Routes to patients app and the sub components} */}
         <Route path="Dashboard" element={<AuthUserLayout><Dashboard  /></AuthUserLayout>} />
         <Route path="Billing" element={<AuthUserLayout><Billing /></AuthUserLayout>} />

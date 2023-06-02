@@ -46,7 +46,7 @@
   .nav-container-right{
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: center !important;
     gap: 20px;
   }
   .nav-container-right button{
@@ -111,9 +111,7 @@ color: #000000;
   gap: 20px;
   
  }
- .second-section-second{
-  border: 1px solid rgb(75, 5, 180);
- }
+
  .second-section-second p{
     font-family: 'Open Sans';
   font-style: normal;
@@ -123,6 +121,20 @@ color: #000000;
  }
  .second-section-second span{
   font-weight: 800;
+ }
+ .patient{
+  margin-left: 190px;
+   font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: 0.005em;
+  color: #F9F9F9;
+  padding: 1.5px 5px;
+  background: #66CC66;
+  border-radius: 2px;
+  width: 49px;
  }
 .third-section-link{
   width: 100%;
