@@ -15,11 +15,16 @@ import Lab from "./Record/sub-records/lab";
 import Vaccine from "./Record/sub-records/vaccine";
 import Visit from "./Record/sub-records/visit";
 import Prescription from "./Record/sub-records/prescription";
-import Records from "./Record/Records";
+import PatientsRecord from "./Record/PatientsRecord";
 import DoctorsBilling from "./billings/DoctorsBilling";
 import DoctorsDashboard from "./dashboard/DoctorsDashboard";
 import DoctorsRecord from "./Record/DoctorsRecord";
 import DoctorsDrafts from "./draffts/DoctorsDrafts";
+import LabReport from "./Record/sub-records/LabReport";
+import VisiterReport from "./Record/sub-records/visiterReport";
+import Authpage from "./login/authpage";
+import Signingup from "./login/signingup";
+
 
 // note!!!
 // i have only created the router part for the signup , login and Landing page.
@@ -28,14 +33,14 @@ import DoctorsDrafts from "./draffts/DoctorsDrafts";
 function Approuter() {
 
 
-  const paths = [
+  // const paths = [
     // {name: "DocDashboard", route: "/Dashboard", icon: <RxDashboard />},
     // {name:"DocRecords", route: "/DocRecords", icon: <BsReverseLayoutTextSidebarReverse/>},
     // {name: "DocBillings", route: "/DocBillings", icon:<FcMoneyTransfer/>},
     // {name: "DocDraft", route:"/DocDraft", icon:<TfiWrite/>},
     // {name: "Docsettings", route:"/Docsettings" , icon:<AiOutlineSetting/>},
     // {name: "DocLogout", route:"/DocLogout", icon:<FiLogOut/>}
-  ]
+  // ]
       
   return (
     <Router>
@@ -43,21 +48,40 @@ function Approuter() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="login" element={<Login/>} />
-        <Route path="signup" element={<Signup />} />
-
+        <Route path="signup" element={<Signingup/>} /> 
+        <Route path="auth-page" element={<Authpage/>}/> 
+        <Route path="barnabas"  element={<Signup/>}/>
+        {/* {Routes to patients app and the sub components} */}
         <Route path="Dashboard" element={<AuthUserLayout><Dashboard  /></AuthUserLayout>} />
         <Route path="Billing" element={<AuthUserLayout><Billing /></AuthUserLayout>} />
-        <Route path="Records" element={<AuthUserLayout><Records /></AuthUserLayout>}>
-          <Route path="overview" element={<Overview />} />
+
+
+
+
+        <Route path="Records" element={<AuthUserLayout><PatientsRecord/></AuthUserLayout>}>
+          <Route index ="overview" element={<Overview />} />
           <Route path="lab" element={<Lab />} />
+         
+          
           <Route path="vaccine" element={<Vaccine />} />
           <Route path="visit" element={<Visit />} />
+           
+         
           <Route path="prescription" element={<Prescription />} />
         </Route>
+        <Route path="Lab-report" element={<AuthUserLayout><LabReport/></AuthUserLayout>}/>
+        <Route path="visiterReport" element={<AuthUserLayout><VisiterReport/></AuthUserLayout>}/>
+
+
+
+
+
+
+
         <Route path="Draft" element={<AuthUserLayout><Drafts /></AuthUserLayout>} />
   
 
-
+      {/* {routes to doctors app and the sub components} */}
 
       <Route path="/DocDashboard" element={<AuthDocLayout><DoctorsDashboard/></AuthDocLayout>}/>
       <Route path="/DocRecords"element={<AuthDocLayout><DoctorsRecord/></AuthDocLayout>}/>

@@ -2,12 +2,17 @@
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
+    text-transform: capitalize;
 }
 .container{
   /* padding: 10px 20px; */
-  width: 139%;
+  /* width: 136%; */
+  width:100% ;
   padding-left:2px;
-  border: 1px solid cadetblue;
+  /* border: 1px solid rgb(138, 10, 224); */
+  overflow:scroll ;
+  height: 100vh;
+  /* position: relative; */
 }
 .nav-container{
     display: flex;
@@ -17,13 +22,17 @@
     background-color:#fff;
     border-bottom: 2px solid  #D6EBFF;
     padding: 10px 40px ;
-   
+   position: fixed;
+   top:0 ;
+   left:143px;
+   right: 0;
+   z-index: 1;
 }
 
   .nav-container-left{
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: center !important;
     gap: 20px;
   }
   .nav-container-left h2{
@@ -37,15 +46,15 @@
   .nav-container-right{
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: center !important;
     gap: 20px;
   }
   .nav-container-right button{
     background: #3399FF;
-    border-radius: 10px;
+    border-radius: 5px;
     outline: none;
     border: none;
-    padding: 10px;
+    padding: 5px 10px;
     color: #fff;
   }
   .nav-short{
@@ -62,64 +71,108 @@ font-size: 16px;
 line-height: 19px;
 color: #000000;
 }
-.second-section{
-  padding: 20px 40px ;
+/* there is below i where second section would styled
+ */
+ .second-section{
   display: flex;
-  gap: 40px;
+  justify-content: space-between;
   align-items: center;
-  border: 1px solid cadetblue;
-}
-.second-section-text{
-  display: flex;
-  background: #D6EBFF;
-  border-radius: 10px;
-  flex-direction:row;
-  padding: 25px 10px;
+  /* border: 1px solid chartreuse; */
   width: 100%;
-  justify-content: space-evenly;
-  border: 1px solid violet;
-}
-.second-section-text div{
-  padding-right: 0px;
-  /* border: 1px solid red; */
+  padding: 20px 60px 20px 20px;
+  margin-top: 80px;
+  margin-bottom: 60px;
+ }
+ .second-image{
   display: flex;
-  flex-direction: column;
-}
-.second-section-text h2{
-  font-family: 'Inter';
-font-style: normal;
-font-weight: 500;
-font-size: 14px;
-line-height: 32px;
-color: #0A1F33;
-}
-.second-section-text p{
-  font-family: 'Inter';
-font-style: normal;
-font-weight: 500;
-font-size: 12px;
-line-height: 32px;
-color: #666666;
-}
-.second-section-image img{
-  width: 250px;
-  height: 245px;
-}
+  align-items: center;
+ }
+ .second-image img {
+    width: 120px;
+ }
+ .second-section-text{
+  display: flex;
+ align-content: center;
+ gap: 20px;
+ }
+ .second-section-text p{
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+ }
+ .second-section-text span{
+  font-weight: 800;
+ }
+ .second-section-first{
+  display:flex;
+  align-items: center;
+  gap: 20px;
+  
+ }
+
+ .second-section-second p{
+    font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+ }
+ .second-section-second span{
+  font-weight: 800;
+ }
+ .patient{
+  margin-left: 190px;
+   font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: 0.005em;
+  color: #F9F9F9;
+  padding: 1.5px 5px;
+  background: #66CC66;
+  border-radius: 2px;
+  width: 49px;
+ }
 .third-section-link{
+  width: 100%;
   display: flex;
   flex-direction: row;
   padding: 10px 40px ;
   /* gap:20px; */
-  justify-content: space-evenly;
+  gap:15%;
   border-bottom: 2px solid #D6EBFF;
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 28px;
-  
+  /* border: 1px solid firebrick; */
+  /* margin-right: 60px; */
+position: relative;
+}
+.third-section-link li{
+ text-decoration:none;
+ list-style: none;
+ color: #000000;
+}
+.third-section-link li::after{
+  content: '';
+  position: absolute;
+  background: #3399FF;
+  height: 3px;
+  width: 0px;
+  /* left:0; */
+  bottom: -2px;
+  transition: 0.2s all;
+}
+.third-section-link li:active::after{
+  width: 75px;
 }
 .navi-link{
+
   color: #141414;
   text-decoration: none;
   list-style: none;
