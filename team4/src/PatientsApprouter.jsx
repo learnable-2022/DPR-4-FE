@@ -20,6 +20,10 @@ import DoctorsBilling from "./billings/DoctorsBilling";
 import DoctorsDashboard from "./dashboard/DoctorsDashboard";
 import DoctorsRecord from "./Record/DoctorsRecord";
 import DoctorsDrafts from "./draffts/DoctorsDrafts";
+import Forgotpassword from "./Password/Forgotpassword";
+import ChangedPassword from "./Password/ChangedPassword";
+import Otp from "./Password/Otp";
+import NewPassword from "./Password/NewPassword";
 
 // note!!!
 // i have only created the router part for the signup , login and Landing page.
@@ -44,6 +48,10 @@ function Approuter() {
         <Route path="/" element={<Landing />} />
         <Route path="login" element={<Login/>} />
         <Route path="signup" element={<Signup />} />
+        <Route path="forgotPassword" element={<Forgotpassword/>} />
+        <Route path="changedPassword" element={<ChangedPassword />} />
+        <Route path="otp" element={<Otp/>} />
+        <Route path="newPassword" element={<NewPassword/>} />
 
         <Route path="Dashboard" element={<AuthUserLayout><Dashboard  /></AuthUserLayout>} />
         <Route path="Billing" element={<AuthUserLayout><Billing /></AuthUserLayout>} />
