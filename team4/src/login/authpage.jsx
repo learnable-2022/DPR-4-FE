@@ -3,6 +3,7 @@ import "./login.css";
 import medblog from "../assets/logo-02.png";
 import bigImage from "../assets/signup-second.png";
 import {BsArrowLeft} from "react-icons/bs";
+import { Link } from 'react-router-dom';
 
 
 export default function Authpage() {
@@ -17,15 +18,15 @@ export default function Authpage() {
            <form className="form">
                        <div class="input">
                        <label >Medical Licence I.d</label>
-                       <input type="text" placeholder="Surname first"/>
+                       <input type="text" placeholder="Medical ID"/>
                        </div>
                          <div class="input">
                        <label>Hospital name</label>
-                       <input type="text"  className='placeholder' placeholder="eg. janedoe@gmail.com"/>
+                       <input type="text"  className='placeholder' placeholder="the name of your hospital"/>
                        </div>
                        <div class="input">
                        <label>Wallet I.d</label>
-                       <input type="text"  placeholder="6+ characters, 1 capital letter"/>
+                       <input type="text"  placeholder="your wallet ID"/>
                        </div>
                        <div className='terms'>
                         <input type="checkbox"/>
@@ -36,7 +37,7 @@ export default function Authpage() {
                        </button>
                       
            </form>
-           <p className="create-account">Don’t have a wallet I.D?<span> Get wallet I.D</span></p>
+           <p className="create-account">Don’t have a wallet I.D?<Link><span> Get wallet I.D</span></Link></p>
        </div>
        <div className="image-placeholder">
          <img src={bigImage} alt="big-image"/>

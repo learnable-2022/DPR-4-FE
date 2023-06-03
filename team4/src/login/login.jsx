@@ -26,7 +26,7 @@ export default function Login() {
                         </div>
                           <div class="input">
                         <label>Password</label>
-                        <input type="text"  placeholder="............"/>
+                        <input type="password"  placeholder="password"/>
                         </div>
                           <div className="diverge">
                            <div>
@@ -34,7 +34,7 @@ export default function Login() {
                              <span>Keep me logged in</span>
                             </div>
                             <div>
-                            <Link to=""><span>Forgot password?</span></Link>
+                            <Link to="" className="linky"><span>Forgot password?</span></Link>
                             </div>
                           </div>
                         <button className="btn"  type="submit">
@@ -42,7 +42,7 @@ export default function Login() {
                         </button>
                        
             </form>
-            <p className="create-account">Don’t have an account?<span> Log in</span></p>
+            <p className="create-account">Don’t have an account?<Link><span>sign up</span></Link></p>
         </div>
         <div className="image-placeholder">
           <img src={bigImage} alt="big-image"/>
