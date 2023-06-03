@@ -1,6 +1,5 @@
 import React from 'react';
 import {RxDashboard} from "react-icons/rx";
-import {BsReverseLayoutTextSidebarReverse} from "react-icons/bs";
 import {FcMoneyTransfer} from "react-icons/fc";
 import {TfiWrite} from "react-icons/tfi";
 import {AiOutlineSetting} from "react-icons/ai";
@@ -12,7 +11,6 @@ export default function SideBarDoc() {
 
     const paths = [
         {name: "DocDashboard", route: "/DocDashboard", icon: <RxDashboard />},
-        {name:"DocRecords", route: "/DocRecords", icon: <BsReverseLayoutTextSidebarReverse/>},
         {name: "DocBillings", route: "/DocBillings", icon:<FcMoneyTransfer/>},
         {name: "DocDraft", route:"/DocDraft", icon:<TfiWrite/>},
         {name: "Docsettings", route:"/Docsettings" , icon:<AiOutlineSetting/>},

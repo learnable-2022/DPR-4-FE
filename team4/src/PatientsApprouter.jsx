@@ -2,13 +2,11 @@ import React from "react";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import Landing from "./landing/landing";
 import Login from "./login/login";
-import Signup from "./signup/signup";
 import SideBar from "./utilities/SideBar";
 import Dashboard from "./dashboard/dashboard";
 import Billing from "./billings/Billing";
 import './App.css';
 import Drafts from "./draffts/Drafts";
-
 import SideBarDoc from "./utilities/SideBarDoc";
 import Overview from "./Record/sub-records/overview";
 import Lab from "./Record/sub-records/lab";
@@ -18,7 +16,6 @@ import Prescription from "./Record/sub-records/prescription";
 import PatientsRecord from "./Record/PatientsRecord";
 import DoctorsBilling from "./billings/DoctorsBilling";
 import DoctorsDashboard from "./dashboard/DoctorsDashboard";
-import DoctorsRecord from "./Record/DoctorsRecord";
 import DoctorsDrafts from "./draffts/DoctorsDrafts";
 import LabReport from "./Record/sub-records/LabReport";
 import VisiterReport from "./Record/sub-records/visiterReport";
@@ -46,11 +43,14 @@ function Approuter() {
     <Router>
       
       <Routes>
+        {/* public routes  */}
         <Route path="/" element={<Landing />} />
+
+        {/* routes to the doctors signin and login in */}
         <Route path="login" element={<Login/>} />
         <Route path="signup" element={<Signingup/>} /> 
         <Route path="auth-page" element={<Authpage/>}/> 
-        <Route path="barnabas"  element={<Signup/>}/>
+
         {/* {Routes to patients app and the sub components} */}
         <Route path="Dashboard" element={<AuthUserLayout><Dashboard  /></AuthUserLayout>} />
         <Route path="Billing" element={<AuthUserLayout><Billing /></AuthUserLayout>} />
@@ -84,7 +84,6 @@ function Approuter() {
       {/* {routes to doctors app and the sub components} */}
 
       <Route path="/DocDashboard" element={<AuthDocLayout><DoctorsDashboard/></AuthDocLayout>}/>
-      <Route path="/DocRecords"element={<AuthDocLayout><DoctorsRecord/></AuthDocLayout>}/>
       <Route path="/DocBillings" element={<AuthDocLayout><DoctorsBilling/></AuthDocLayout>}/>
       <Route path="/DocDraft" element={<AuthDocLayout><DoctorsDrafts/></AuthDocLayout>}/>
      
