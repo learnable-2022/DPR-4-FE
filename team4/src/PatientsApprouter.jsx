@@ -21,6 +21,9 @@ import LabReport from "./Record/sub-records/LabReport";
 import VisiterReport from "./Record/sub-records/visiterReport";
 import Authpage from "./login/authpage";
 import Signingup from "./login/signingup";
+import Patientauthpage from "./login/patientauthpage";
+import Patientsignup from "./login/patientsignup";
+import Patientlogin from "./login/patientlogin";
 
 
 // note!!!
@@ -45,12 +48,16 @@ function Approuter() {
       <Routes>
         {/* public routes  */}
         <Route path="/" element={<Landing />} />
-
+       
         {/* routes to the doctors signin and login in */}
-        <Route path="login" element={<Login/>} />
         <Route path="signup" element={<Signingup/>} /> 
         <Route path="auth-page" element={<Authpage/>}/> 
-
+        <Route path="login" element={<Login/>} />
+          {/* routes to the patients signin and login in */}
+        <Route path="patient-auth-page" element={<Patientauthpage/>}/>
+        <Route path = "patient-sign-up" element={<Patientsignup/>}/>
+        <Route path="patient-login"   element={<Patientlogin/>}/>
+        
         {/* {Routes to patients app and the sub components} */}
         <Route path="Dashboard" element={<AuthUserLayout><Dashboard  /></AuthUserLayout>} />
         <Route path="Billing" element={<AuthUserLayout><Billing /></AuthUserLayout>} />
@@ -61,12 +68,8 @@ function Approuter() {
         <Route path="Records" element={<AuthUserLayout><PatientsRecord/></AuthUserLayout>}>
           <Route index ="overview" element={<Overview />} />
           <Route path="lab" element={<Lab />} />
-         
-          
           <Route path="vaccine" element={<Vaccine />} />
           <Route path="visit" element={<Visit />} />
-           
-         
           <Route path="prescription" element={<Prescription />} />
         </Route>
         <Route path="Lab-report" element={<AuthUserLayout><LabReport/></AuthUserLayout>}/>

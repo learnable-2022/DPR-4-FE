@@ -5,13 +5,18 @@ import smallLogo from "../assets/small.png";
 import bigpic from "../assets/big.png"
 import './Record.css';
 import { Link, Outlet } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function PatientsRecord() {
+  const navigate =useNavigate();
+  const handle=()=>{
+    navigate(-1)
+  }
   return (
     <div className='container'>
         <nav className='nav-container'>
           <div className='nav-container-left'>
-            <BsArrowLeft/>
+            <BsArrowLeft onClick={handle}/>
             <h2>
             Medical Record
             </h2>

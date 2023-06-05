@@ -14,7 +14,7 @@ export default function Authpage() {
            <div>
              <img src={medblog} alt="medblog-image" />
            </div>
-           <h2 > <BsArrowLeft className='auth-text'/>Complete your authentication</h2>
+           <h2 ><Link to="/signup" Link className='wallet-link'><BsArrowLeft className='auth-text'/></Link>Complete your authentication</h2>
            <form className="form">
                        <div class="input">
                        <label >Medical Licence I.d</label>
@@ -26,7 +26,7 @@ export default function Authpage() {
                        </div>
                        <div class="input">
                        <label>Wallet I.d</label>
-                       <input type="text"  placeholder="your wallet ID"/>
+                       <input type="text"  placeholder="enter your metamask wallet"/>
                        </div>
                        <div className='terms'>
                         <input type="checkbox"/>
@@ -34,10 +34,9 @@ export default function Authpage() {
                        </div>
                        <button type="submit">
                        Sign up
-                       </button>
-                      
+                       </button>  
            </form>
-           <p className="create-account">Don’t have a wallet I.D?<Link><span> Get wallet I.D</span></Link></p>
+           <p className="create-account">Don’t have a wallet I.D?<Link className='wallet-link2'><span> Get wallet I.D</span></Link></p>
        </div>
        <div className="image-placeholder">
          <img src={bigImage} alt="big-image"/>

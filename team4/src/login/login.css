@@ -108,6 +108,11 @@
 .length{
     padding-bottom: 200px;
 }
+.terms{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
 .terms span{
     font-family: 'Open Sans';
     font-style: normal;
@@ -138,6 +143,14 @@
 .linky{
     text-decoration: none;
     color: blue;
+}
+.wallet-link{
+    color: #000;
+}
+.wallet-link2{
+    text-decoration: none;
+    font-weight: 600;
+    color: #3399FF;
 }
 /* where i worked on the styles for the validation of the forms */
 .valid{

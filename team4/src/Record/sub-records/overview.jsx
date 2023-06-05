@@ -23,7 +23,7 @@ export default function Overview() {
         <div className='over-1'>
           <div className='contain-container'>
           <p className='sp-p'> My Heart Condition</p>
-          <div>
+          <div className='new-class'>
           <div className='over-1-1'>
             <div className='over-1-first'>
               <div className='over-1-first-son'>

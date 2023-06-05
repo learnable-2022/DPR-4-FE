@@ -5,8 +5,6 @@ import bigImage from "../assets/signup-second.png";
 import { Link } from "react-router-dom";
 
 
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 export default function Login() {
   
@@ -42,7 +40,7 @@ export default function Login() {
                         </button>
                        
             </form>
-            <p className="create-account">Don’t have an account?<Link><span>sign up</span></Link></p>
+            <p className="create-account">Don’t have an account?<Link to ="/signup" className='wallet-link2'><span>sign up</span></Link></p>
         </div>
         <div className="image-placeholder">
           <img src={bigImage} alt="big-image"/>
