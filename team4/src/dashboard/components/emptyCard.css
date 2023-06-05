@@ -1,0 +1,16 @@
+.emptycard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 3rem 1rem 2.5rem;
+}
+.emptycard .empty_img {
+  margin-bottom: 1rem;
+}
+.emptycard .empty_text {
+  text-align: center;
+  line-height: 30px;
+  font-size: 20px;
+  font-weight: 400;
+}
