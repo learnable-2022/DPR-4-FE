@@ -110,7 +110,7 @@ export default function Signingup() {
                        </button>
                       
            </form>
-           <p className="create-account">Already  have an account?<Link><span>Log in</span></Link></p>
+           <p className="create-account">Already  have an account?<Link to= "/login" className='wallet-link2'><span>Log in</span></Link></p>
        </div>
        <div className="image-placeholder">
          <img src={bigImage} alt="big-image"/>
