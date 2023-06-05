@@ -5,10 +5,10 @@ import Login from "./login/login";
 import Signup from "./signup/signup";
 import SideBar from "./utilities/SideBar";
 import Dashboard from "./dashboard/dashboard";
-import Billing from "./billings/Billing";
+// import Billing from "./billings/Billing";
 import './App.css';
 import Drafts from "./draffts/Drafts";
-
+import PatientsBilling from "../src/billings/PatientsBilling";
 import SideBarDoc from "./utilities/SideBarDoc";
 import Overview from "./Record/sub-records/overview";
 import Lab from "./Record/sub-records/lab";
@@ -20,7 +20,10 @@ import DoctorsBilling from "./billings/DoctorsBilling";
 import DoctorsDashboard from "./dashboard/DoctorsDashboard";
 import DoctorsRecord from "./Record/DoctorsRecord";
 import DoctorsDrafts from "./draffts/DoctorsDrafts";
-
+import PatientPaymentHistory from "../src/billings/PatientPaymentHistory";
+import PatientInvoice from "../src/billings/PatientInvoice";
+import ConsultationBilling from "../src/billings/ConsultationBilling";
+import DoctorPaymentHistory from "../src/billings/DoctorPaymentHistory";
 // note!!!
 // i have only created the router part for the signup , login and Landing page.
 // subsequent route path would follow suite.
@@ -46,7 +49,10 @@ function Approuter() {
         <Route path="signup" element={<Signup />} />
 
         <Route path="Dashboard" element={<AuthUserLayout><Dashboard  /></AuthUserLayout>} />
-        <Route path="Billing" element={<AuthUserLayout><Billing /></AuthUserLayout>} />
+        <Route path="PatientsBilling" element={<AuthUserLayout><PatientsBilling/></AuthUserLayout>} />
+         <Route path="PatientPaymentHistory" element={<AuthUserLayout><PatientPaymentHistory/></AuthUserLayout>} />
+         <Route path="PatientInvoice" element={<AuthUserLayout><PatientInvoice/></AuthUserLayout>} />
+         {/* <Route path="DoctorsBilling" element={<AuthUserLayout><DoctorsBilling/></AuthUserLayout>} /> */}
         <Route path="Records" element={<AuthUserLayout><Records /></AuthUserLayout>}>
           <Route path="overview" element={<Overview />} />
           <Route path="lab" element={<Lab />} />
@@ -62,7 +68,11 @@ function Approuter() {
       <Route path="/DocDashboard" element={<AuthDocLayout><DoctorsDashboard/></AuthDocLayout>}/>
       <Route path="/DocRecords"element={<AuthDocLayout><DoctorsRecord/></AuthDocLayout>}/>
       <Route path="/DocBillings" element={<AuthDocLayout><DoctorsBilling/></AuthDocLayout>}/>
+      <Route path="/DocPatientPaymentHistory" element={<AuthDocLayout><DoctorsBilling/></AuthDocLayout>}/>
+      <Route path="/DoctorPaymentHistory" element={<AuthDocLayout><DoctorPaymentHistory/></AuthDocLayout>}/>
       <Route path="/DocDraft" element={<AuthDocLayout><DoctorsDrafts/></AuthDocLayout>}/>
+      <Route path="DoctorsBilling" element={<AuthDocLayout><DoctorsBilling/></AuthDocLayout>}/>
+      <Route path="/ConsultationBilling" element={<AuthDocLayout><ConsultationBilling/></AuthDocLayout>}/>
      
 
 

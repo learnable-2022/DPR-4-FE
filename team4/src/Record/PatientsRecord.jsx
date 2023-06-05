@@ -1,8 +1,8 @@
 import React from 'react';
 import {IoIosNotificationsOutline} from "react-icons/io";
 import {BsArrowLeft} from "react-icons/bs";
-import logo2 from "../assets/Rectangle 20.png";
-import pic1 from "../assets/Rectangle 10.png";
+import logo2 from "../assets/images/Rectangle 20.png";
+import pic1 from "../assets/images/Rectangle 10.png";
 import './Record.css';
 import { Link, Outlet } from 'react-router-dom';
 

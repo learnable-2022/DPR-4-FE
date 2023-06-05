@@ -5,9 +5,8 @@ import {FcMoneyTransfer} from "react-icons/fc";
 import {TfiWrite} from "react-icons/tfi";
 import {AiOutlineSetting} from "react-icons/ai";
 import {FiLogOut} from "react-icons/fi";
-import logo1 from "../assets/logo-03.png";
+import logo1 from "../assets/images/logo-03.png";
 import { Link } from 'react-router-dom';
-
 export default function SideBarDoc() {
 
     const paths = [
