@@ -20,7 +20,11 @@ import DoctorsBilling from "./billings/DoctorsBilling";
 import DoctorsDashboard from "./dashboard/DoctorsDashboard";
 import DoctorsRecord from "./Record/DoctorsRecord";
 import DoctorsDrafts from "./draffts/DoctorsDrafts";
-import SchedulePage from "./dashboard/SchedulePage";
+import SchedulePage from "./dashboard/schedulepages/SchedulePage";
+import DoctorsProfile from "./dashboard/profilepages/DoctorsProfile";
+import PatientsProfile from "./dashboard/profilepages/PatientsProfile";
+import PatientsEditProfile from "./dashboard/profilepages/PatientsEditProfile";
+import DoctorsEditProfile from "./dashboard/profilepages/DoctorsEditProfile";
 
 // note!!!
 // i have only created the router part for the signup , login and Landing page.
@@ -81,6 +85,22 @@ function Approuter() {
             </AuthUserLayout>
           }
         />
+        <Route
+          path="Profile"
+          element={
+            <AuthUserLayout>
+              <PatientsProfile />
+            </AuthUserLayout>
+          }
+        />
+        <Route
+          path="EditProfile"
+          element={
+            <AuthUserLayout>
+              <PatientsEditProfile />
+            </AuthUserLayout>
+          }
+        />
 
         <Route
           path="/DocDashboard"
@@ -119,6 +139,22 @@ function Approuter() {
           element={
             <AuthDocLayout>
               <SchedulePage />
+            </AuthDocLayout>
+          }
+        />
+        <Route
+          path="/DocProfile"
+          element={
+            <AuthDocLayout>
+              <DoctorsProfile />
+            </AuthDocLayout>
+          }
+        />
+        <Route
+          path="/DocEditProfile"
+          element={
+            <AuthDocLayout>
+              <DoctorsEditProfile />
             </AuthDocLayout>
           }
         />

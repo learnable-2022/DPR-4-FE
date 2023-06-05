@@ -6,7 +6,8 @@ import { AiOutlineLeft } from "react-icons/ai";
 import { AiOutlineRight } from "react-icons/ai";
 import "./dashboard.css";
 import Calendar from "react-calendar";
-import NavComponent from "./navComponent";
+import NavComponent from "./components/navComponent";
+import { Link } from "react-router-dom";
 
 //rescue kenneth
 export default function DoctorsDashboard() {
@@ -52,7 +53,7 @@ export default function DoctorsDashboard() {
                 <div class="dropdown">
                   <ul>
                     <li>Patients Profile</li>
-                    <li>Request Access</li>
+                    <li>Patients medical record</li>
                   </ul>
                 </div>
               )}
@@ -71,6 +72,84 @@ export default function DoctorsDashboard() {
             <div className="patients_info">
               <p>#2451</p>
               <p>Omengbeoji Ifeanyichukwu</p>
+              <CiCircleMore className="circle_more" />
+              {/* <div class="dropdown">
+                <ul>
+                  <li>Patients Profile</li>
+                  <li>Request Access</li>
+                </ul>
+              </div> */}
+            </div>
+            <div className="patients_info">
+              <p>#2451</p>
+              <p>Omengbeoji Ifeanyichukwu</p>
+              <CiCircleMore className="circle_more" />
+              {/* <div class="dropdown">
+                <ul>
+                  <li>Patients Profile</li>
+                  <li>Request Access</li>
+                </ul>
+              </div> */}
+            </div>
+            <div className="patients_info">
+              <p>#2451</p>
+              <p>Omengbeoji Ifeanyichukwu</p>
+              <CiCircleMore className="circle_more" />
+              {/* <div class="dropdown">
+                <ul>
+                  <li>Patients Profile</li>
+                  <li>Request Access</li>
+                </ul>
+              </div> */}
+            </div>
+            <div className="patients_info">
+              <p>#2451</p>
+              <p>Omengbeoji Ifeanyichukwu</p>
+              <CiCircleMore className="circle_more" />
+              {/* <div class="dropdown">
+                <ul>
+                  <li>Patients Profile</li>
+                  <li>Request Access</li>
+                </ul>
+              </div> */}
+            </div>
+            <div className="patients_info">
+              <p>#2451</p>
+              <p>Omengbeoji Ifeanyichukwu</p>
+              <CiCircleMore className="circle_more" />
+              {/* <div class="dropdown">
+                <ul>
+                  <li>Patients Profile</li>
+                  <li>Request Access</li>
+                </ul>
+              </div> */}
+            </div>
+            <div className="patients_info">
+              <p>#2451</p>
+              <p>Omengbeoji Ifeanyichukwu</p>
+              <CiCircleMore className="circle_more" />
+              {/* <div class="dropdown">
+                <ul>
+                  <li>Patients Profile</li>
+                  <li>Request Access</li>
+                </ul>
+              </div> */}
+            </div>
+            <div className="patients_info">
+              <p>#2451</p>
+              <p>Omengbeoji Ifeanyichukwu</p>
+              <CiCircleMore className="circle_more" />
+              {/* <div class="dropdown">
+                <ul>
+                  <li>Patients Profile</li>
+                  <li>Request Access</li>
+                </ul>
+              </div> */}
+            </div>
+
+            <div className="patients_info">
+              <p>#2451</p>
+              <p>Omengbeoji Ifeanyichukwu</p>
               <CiCircleMore
                 className="circle_more"
                 onClick={handleButtonClick2}
@@ -79,7 +158,7 @@ export default function DoctorsDashboard() {
                 <div class="dropdown">
                   <ul>
                     <li>Patients Profile</li>
-                    <li>Request Access</li>
+                    <li>Patients medical record</li>
                   </ul>
                 </div>
               )}
@@ -93,7 +172,10 @@ export default function DoctorsDashboard() {
           <div className="schedule_div">
             <div className="schedule_wrapper">
               <div className="top">
-                <button>Schedule</button>
+                <Link to="/DocSchedule" className="link">
+                  <button>Schedule</button>
+                </Link>
+
                 <p>{date.toLocaleDateString("en-us", options)}</p>
               </div>
               <div className="middle">
