@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 // import {AiOutlineHome} from "react-icons/ai";
 import {RxDashboard} from "react-icons/rx";
 import {BsReverseLayoutTextSidebarReverse} from "react-icons/bs";
-import {FcMoneyTransfer} from "react-icons/fc";
 import {TfiWrite} from "react-icons/tfi";
 import {AiOutlineSetting} from "react-icons/ai";
 import {FiLogOut} from "react-icons/fi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCoins } from '@fortawesome/free-solid-svg-icons';
 // import logo1 from "../assets/logo-03.png";
 import logo1 from "../assets/logo-03.png";
 
@@ -25,7 +26,7 @@ export default function SideBar() {
                    <div className='mid-section'>
                       <Link  to="/Dashboard" className='link'><RxDashboard /><p>Dashboard</p></Link>
                     <Link to="/Records"className='link'><BsReverseLayoutTextSidebarReverse/><p>Records</p></Link>
-                    <Link to="/Billing" className='link'><FcMoneyTransfer/><p>Billings</p></Link>
+                    <Link to="/Billing" className='link'><FontAwesomeIcon icon={faCoins} /><p>Billings</p></Link>
                     <Link to="/Draft"className='link'><TfiWrite/><p>Draft</p></Link>
                    </div>
                  <div className='lower-section'>
