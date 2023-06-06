@@ -8,7 +8,6 @@ import Dashboard from "./dashboard/dashboard";
 import './App.css';
 import Drafts from "./draffts/Drafts";
 import PatientsBilling from "../src/billings/PatientsBilling";
-import Billing from "./billings/Billing";
 import "./App.css";
 import SideBarDoc from "./utilities/SideBarDoc";
 import Overview from "./Record/sub-records/overview";
@@ -38,6 +37,10 @@ import Patientsignup from "./login/patientsignup";
 import Patientlogin from "./login/patientlogin";
 import Confirmation from "./login/confirmation";
 
+import Forgotpassword from "./Password/Forgotpassword";
+import ChangedPassword from "./Password/ChangedPassword";
+import Otp from "./Password/Otp";
+import NewPassword from "./Password/NewPassword";
 
 // note!!!
 // i have only created the router part for the signup , login and Landing page.
@@ -65,11 +68,16 @@ function Approuter() {
         <Route path="/" element={<Landing />} />
        
  {/* routes to the doctors signin and login in */}
- <Route path="signup" element={<Signingup/>} /> 
+        <Route path="signup" element={<Signingup/>} /> 
         <Route path="auth-page" element={<Authpage/>}/> 
         <Route path="/confirmation" element={<Confirmation/>}/> 
         <Route path="login" element={<Login/>} />
-        <Route path="PatientsBilling" element={<AuthUserLayout><PatientsBilling/></AuthUserLayout>} />
+        <Route path="forgotPassword" element={<Forgotpassword/>} />
+        <Route path="changedPassword" element={<ChangedPassword />} />
+        <Route path="otp" element={<Otp/>} />
+        <Route path="newPassword" element={<NewPassword/>} />
+
+        
          <Route path="PatientPaymentHistory" element={<AuthUserLayout><PatientPaymentHistory/></AuthUserLayout>} />
          <Route path="PatientInvoice" element={<AuthUserLayout><PatientInvoice/></AuthUserLayout>} />
          {/* routes to the patients signin and login in */}
@@ -77,8 +85,11 @@ function Approuter() {
         <Route path = "patient-sign-up" element={<Patientsignup/>}/>
         <Route path="patient-login"   element={<Patientlogin/>}/>
          {/* {Routes to patients app and the sub components} */}
-         <Route path="Dashboard" element={<AuthUserLayout><Dashboard  /></AuthUserLayout>} />
-        <Route path="Billing" element={<AuthUserLayout><Billing /></AuthUserLayout>} />
+
+       
+
+        <Route path="Dashboard" element={<AuthUserLayout><Dashboard  /></AuthUserLayout>} />
+        <Route path="Billing" element={<AuthUserLayout><PatientsBilling/></AuthUserLayout>} />
         <Route path="Records" element={<AuthUserLayout><PatientsRecord/></AuthUserLayout>}>
           <Route index ="overview" element={<Overview />} />
           <Route path="lab" element={<Lab />} />
@@ -90,11 +101,13 @@ function Approuter() {
         <Route path="/visit/visiterReport" element={<AuthUserLayout><VisiterReport/></AuthUserLayout>}/>
 
         <Route path="Draft" element={<AuthUserLayout><Drafts /></AuthUserLayout>} />
-{/* {routes to doctors app and the sub components} */}
+      {/* {routes to doctors app and the sub components} */}
 
-<Route path="/DocDashboard" element={<AuthDocLayout><DoctorsDashboard/></AuthDocLayout>}/>
+    <Route path="/DocDashboard" element={<AuthDocLayout><DoctorsDashboard/></AuthDocLayout>}/>
       <Route path="/DocBillings" element={<AuthDocLayout><DoctorsBilling/></AuthDocLayout>}/>
+   
       {/* <Route path="/DocPatientPaymentHistory" element={<AuthDocLayout><DoctorsBilling/></AuthDocLayout>}/> */}
+      
       <Route path="/DoctorPaymentHistory" element={<AuthDocLayout><DoctorPaymentHistory/></AuthDocLayout>}/>
       <Route path="/DocDraft" element={<AuthDocLayout><DoctorsDrafts/></AuthDocLayout>}/>
       <Route path="DoctorsBilling" element={<AuthDocLayout><DoctorsBilling/></AuthDocLayout>}/>
