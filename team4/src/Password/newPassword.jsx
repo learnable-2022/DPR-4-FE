@@ -8,7 +8,7 @@ const NewPassword = () => {
     <div>
         <div className="container">
                 <div className="container-4">
-                    <img src={logo} alt="medbloc-logo" id="logo" />
+                    <img src={logo} alt="medbloc-logo" className="logo" />
                     <h2 className="new-text1">New Password</h2>
                     <p className="new-text2">
                         Please enter your new password
