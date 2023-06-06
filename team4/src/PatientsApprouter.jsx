@@ -4,9 +4,12 @@ import Landing from "./landing/landing";
 import Login from "./login/login";
 import SideBar from "./utilities/SideBar";
 import Dashboard from "./dashboard/dashboard";
-import Billing from "./billings/Billing";
+// import Billing from "./billings/Billing";
 import './App.css';
 import Drafts from "./draffts/Drafts";
+import PatientsBilling from "../src/billings/PatientsBilling";
+import Billing from "./billings/Billing";
+import "./App.css";
 import SideBarDoc from "./utilities/SideBarDoc";
 import Overview from "./Record/sub-records/overview";
 import Lab from "./Record/sub-records/lab";
@@ -17,6 +20,15 @@ import PatientsRecord from "./Record/PatientsRecord";
 import DoctorsBilling from "./billings/DoctorsBilling";
 import DoctorsDashboard from "./dashboard/DoctorsDashboard";
 import DoctorsDrafts from "./draffts/DoctorsDrafts";
+import PatientPaymentHistory from "../src/billings/PatientPaymentHistory";
+import PatientInvoice from "../src/billings/PatientInvoice";
+import ConsultationBilling from "../src/billings/ConsultationBilling";
+import DoctorPaymentHistory from "../src/billings/DoctorPaymentHistory";
+import SchedulePage from "./dashboard/schedulepages/SchedulePage";
+import DoctorsProfile from "./dashboard/profilepages/DoctorsProfile";
+import PatientsProfile from "./dashboard/profilepages/PatientsProfile";
+import PatientsEditProfile from "./dashboard/profilepages/PatientsEditProfile";
+import DoctorsEditProfile from "./dashboard/profilepages/DoctorsEditProfile";
 import LabReport from "./Record/sub-records/LabReport";
 import VisiterReport from "./Record/sub-records/visiterReport";
 import Authpage from "./login/authpage";
@@ -32,6 +44,7 @@ import Confirmation from "./login/confirmation";
 // subsequent route path would follow suite.
 
 function Approuter() {
+  const paths = [
 
 
   // const paths = [
@@ -41,32 +54,31 @@ function Approuter() {
     // {name: "DocDraft", route:"/DocDraft", icon:<TfiWrite/>},
     // {name: "Docsettings", route:"/Docsettings" , icon:<AiOutlineSetting/>},
     // {name: "DocLogout", route:"/DocLogout", icon:<FiLogOut/>}
+  ];
+
   // ]
       
   return (
     <Router>
-      
       <Routes>
         {/* public routes  */}
         <Route path="/" element={<Landing />} />
        
-        {/* routes to the doctors signin and login in */}
-        <Route path="signup" element={<Signingup/>} /> 
+ {/* routes to the doctors signin and login in */}
+ <Route path="signup" element={<Signingup/>} /> 
         <Route path="auth-page" element={<Authpage/>}/> 
         <Route path="/confirmation" element={<Confirmation/>}/> 
         <Route path="login" element={<Login/>} />
-          {/* routes to the patients signin and login in */}
-        <Route path="patient-auth-page" element={<Patientauthpage/>}/>
+        <Route path="PatientsBilling" element={<AuthUserLayout><PatientsBilling/></AuthUserLayout>} />
+         <Route path="PatientPaymentHistory" element={<AuthUserLayout><PatientPaymentHistory/></AuthUserLayout>} />
+         <Route path="PatientInvoice" element={<AuthUserLayout><PatientInvoice/></AuthUserLayout>} />
+         {/* routes to the patients signin and login in */}
+         <Route path="patient-auth-page" element={<Patientauthpage/>}/>
         <Route path = "patient-sign-up" element={<Patientsignup/>}/>
         <Route path="patient-login"   element={<Patientlogin/>}/>
-        
-        {/* {Routes to patients app and the sub components} */}
-        <Route path="Dashboard" element={<AuthUserLayout><Dashboard  /></AuthUserLayout>} />
+         {/* {Routes to patients app and the sub components} */}
+         <Route path="Dashboard" element={<AuthUserLayout><Dashboard  /></AuthUserLayout>} />
         <Route path="Billing" element={<AuthUserLayout><Billing /></AuthUserLayout>} />
-
-
-
-
         <Route path="Records" element={<AuthUserLayout><PatientsRecord/></AuthUserLayout>}>
           <Route index ="overview" element={<Overview />} />
           <Route path="lab" element={<Lab />} />
@@ -77,43 +89,92 @@ function Approuter() {
         <Route path="/lab/view-report" element={<AuthUserLayout><LabReport/></AuthUserLayout>}/>
         <Route path="/visit/visiterReport" element={<AuthUserLayout><VisiterReport/></AuthUserLayout>}/>
 
-
-
-
-
-
-
         <Route path="Draft" element={<AuthUserLayout><Drafts /></AuthUserLayout>} />
-  
+{/* {routes to doctors app and the sub components} */}
 
-      {/* {routes to doctors app and the sub components} */}
-
-      <Route path="/DocDashboard" element={<AuthDocLayout><DoctorsDashboard/></AuthDocLayout>}/>
+<Route path="/DocDashboard" element={<AuthDocLayout><DoctorsDashboard/></AuthDocLayout>}/>
       <Route path="/DocBillings" element={<AuthDocLayout><DoctorsBilling/></AuthDocLayout>}/>
+      {/* <Route path="/DocPatientPaymentHistory" element={<AuthDocLayout><DoctorsBilling/></AuthDocLayout>}/> */}
+      <Route path="/DoctorPaymentHistory" element={<AuthDocLayout><DoctorPaymentHistory/></AuthDocLayout>}/>
       <Route path="/DocDraft" element={<AuthDocLayout><DoctorsDrafts/></AuthDocLayout>}/>
+      <Route path="DoctorsBilling" element={<AuthDocLayout><DoctorsBilling/></AuthDocLayout>}/>
+      <Route path="/ConsultationBilling" element={<AuthDocLayout><ConsultationBilling/></AuthDocLayout>}/>
      
 
 
+
+
+       
+       
+         
+        
+       
+
+
+
+
+       
+       
+        <Route
+          path="Profile"
+          element={
+            <AuthUserLayout>
+              <PatientsProfile />
+            </AuthUserLayout>
+          }
+        />
+        <Route
+          path="EditProfile"
+          element={
+            <AuthUserLayout>
+              <PatientsEditProfile />
+            </AuthUserLayout>
+          }
+        />
+
+        <Route
+          path="/DocSchedule"
+          element={
+            <AuthDocLayout>
+              <SchedulePage />
+            </AuthDocLayout>
+          }
+        />
+        <Route
+          path="/DocProfile"
+          element={
+            <AuthDocLayout>
+              <DoctorsProfile />
+            </AuthDocLayout>
+          }
+        />
+        <Route
+          path="/DocEditProfile"
+          element={
+            <AuthDocLayout>
+              <DoctorsEditProfile />
+            </AuthDocLayout>
+          }
+        />
       </Routes>
-    </Router> 
+    </Router>
   );
 }
-const AuthUserLayout = ({children})=> {
-  return(
+const AuthUserLayout = ({ children }) => {
+  return (
     <div className="Layout">
-      <SideBar/>
+      <SideBar />
       {children}
     </div>
-  )
-}
-const AuthDocLayout=({children})=>{
-
-  return(
+  );
+};
+const AuthDocLayout = ({ children }) => {
+  return (
     <div className="Layout">
-      <SideBarDoc/>
+      <SideBarDoc />
       {children}
     </div>
-  )
-}
+  );
+};
 
 export default Approuter;

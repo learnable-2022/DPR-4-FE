@@ -63,13 +63,14 @@
     align-items: center;
     gap: 10px;
 }
-.nav-short p{
-    font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 19px;
-color: #000000;
+.nav-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border-bottom: 2px solid #d6ebff;
+  padding: 10px 40px;
 }
 /* there is below i where second section would styled
  */
@@ -141,7 +142,7 @@ color: #000000;
   width: 100%;
   display: flex;
   flex-direction: row;
-  padding: 10px 40px ;
+  padding: 10px 40px;
   /* gap:20px; */
   gap:15%;
   border-bottom: 2px solid #D6EBFF;
@@ -177,11 +178,9 @@ position: relative;
   color: #141414;
   text-decoration: none;
   list-style: none;
-  
 }
 .navi-link p {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
-  
 }
