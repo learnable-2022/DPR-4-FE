@@ -24,6 +24,10 @@ export default function Lab() {
         // }
 
       const navigate = useNavigate();
+      const handleclick=()=>{
+        navigate("/lab/view-report");
+        console.log("its working!")
+      }
 
   return (
     <div className='overview-container'>
@@ -58,7 +62,7 @@ export default function Lab() {
               <li>{items.testResult}</li>
               <li>{items.complaint}</li>
               <li>< FcCheckmark className='center'/><br/>{items.status}</li>
-              <li><button onClick={navigate("Lab-report")}>{items.Report}</button></li>                      
+              <li><button onClick={handleclick}>{items.Report}</button></li>                      
             </ul>
         </div>
             </>

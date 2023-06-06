@@ -4,7 +4,10 @@ import medblog from "../assets/logo-02.png";
 import bigImage from "../assets/signup-second.png";
 import { faCheck, faTimes, faInfoCircle, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { useRequestProcessor } from '../api/requestProcessor';
+import axios from 'axios';
+
 
 const USER_REGEX =  /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/;
 const PWD_REGEX = new RegExp('^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$');
@@ -12,6 +15,7 @@ const validEmailRex = new RegExp( '^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$
 
 export default function Signingup() {
     const [userName , setUserName] = useState('');
+    const { state } = useLocation();
     const[validUserName , setValidUserName]= useState(false);
 
     const [Email, setEmail]= useState('');
@@ -21,14 +25,34 @@ export default function Signingup() {
     const [validPassword, setValidPassword]= useState(false);
     const [matchingPassoword , setMatchingPassword]= useState(false);
     const [confirmPassword , setConfirmPassword] = useState('');
-    const[passwordVisible, setPasswordVisible]= useState(false)
+    const[passwordVisible, setPasswordVisible]= useState(false);
 
+
+
+    const[medicalId ,setMedicalId]=useState('');
+
+    const [hospital , setHospital]=useState('');
+
+    const [walletId , setWalletId]= useState('');
+
+const { makeRequest } = useRequestProcessor();
 
     const toggle =()=>{
         setPasswordVisible(!passwordVisible);
     }
     const handleSumbit=(e)=>{
             e.preventDefault();
+            const data = {
+              name:userName,
+              email:Email,
+              password:password,
+              license:medicalId,
+              hospital:hospital,
+              walletId: walletId,
+            };
+            const { response, error } = makeRequest({url:"/doctor/signup", method: "post", data})
+            console.log("response:", response, "error:",error);
+
     }
     useEffect(()=>{
         setValidUserName(USER_REGEX.test(userName));
@@ -104,6 +128,37 @@ export default function Signingup() {
                         onChange={(e)=> setConfirmPassword(e.target.value)}
                         value={confirmPassword}
                         />
+                       </div>
+                       <div class="input">
+                       <label >Medical Licence I.d</label>
+                       <input
+                        type="text"
+                         placeholder="Medical ID"
+                         onChange={(e)=>setMedicalId(e.target.value)}
+                         value={medicalId}
+                         required
+                         />
+                       </div>
+                         <div class="input">
+                       <label>Hospital name</label>
+                       <input
+                        type="text"
+                         className='placeholder' 
+                         placeholder="the name of your hospital"
+                         onChange={(e)=> setHospital(e.target.value)}
+                         value={hospital}
+                         required
+                         />
+                       </div>
+                       <div class="input">
+                       <label>Wallet I.d</label>
+                       <input 
+                       type="text"  
+                       placeholder="enter your metamask wallet"
+                       onChange={(e)=> setWalletId(e.target.value)}
+                       value={walletId}
+                       required
+                       />
                        </div>
                        <button disabled={!validUserName || !validPassword || !matchingPassoword} type="submit">
                         Continue

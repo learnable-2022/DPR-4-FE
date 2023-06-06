@@ -24,7 +24,7 @@ export default function Landing() {
         <Link className='link'  to=""><li>Features</li></Link>
         <Link className='link'  to=""><li>Pricing</li></Link>
         <Link className='link'  to=""><li>Support</li></Link>
-        <Link className='link'  to=""><button className="btn">Get Started</button></Link>
+        <Link className='link'  to="/confirmation"><button className="btn">Get Started</button></Link>
       </div>
 
       </div>

@@ -24,6 +24,7 @@ import Signingup from "./login/signingup";
 import Patientauthpage from "./login/patientauthpage";
 import Patientsignup from "./login/patientsignup";
 import Patientlogin from "./login/patientlogin";
+import Confirmation from "./login/confirmation";
 
 
 // note!!!
@@ -52,6 +53,7 @@ function Approuter() {
         {/* routes to the doctors signin and login in */}
         <Route path="signup" element={<Signingup/>} /> 
         <Route path="auth-page" element={<Authpage/>}/> 
+        <Route path="/confirmation" element={<Confirmation/>}/> 
         <Route path="login" element={<Login/>} />
           {/* routes to the patients signin and login in */}
         <Route path="patient-auth-page" element={<Patientauthpage/>}/>
@@ -72,8 +74,8 @@ function Approuter() {
           <Route path="visit" element={<Visit />} />
           <Route path="prescription" element={<Prescription />} />
         </Route>
-        <Route path="Lab-report" element={<AuthUserLayout><LabReport/></AuthUserLayout>}/>
-        <Route path="visiterReport" element={<AuthUserLayout><VisiterReport/></AuthUserLayout>}/>
+        <Route path="/lab/view-report" element={<AuthUserLayout><LabReport/></AuthUserLayout>}/>
+        <Route path="/visit/visiterReport" element={<AuthUserLayout><VisiterReport/></AuthUserLayout>}/>
 
 
 
