@@ -1,17 +1,22 @@
 import React from 'react';
 import {IoIosNotificationsOutline} from "react-icons/io";
 import {BsArrowLeft} from "react-icons/bs";
-import logo2 from "../assets/images/Rectangle 20.png";
-import pic1 from "../assets/images/Rectangle 10.png";
+import smallLogo from "../assets/small.png";
+import bigpic from "../assets/big.png"
 import './Record.css';
 import { Link, Outlet } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function PatientsRecord() {
+  const navigate =useNavigate();
+  const handle=()=>{
+    navigate(-1)
+  }
   return (
     <div className='container'>
         <nav className='nav-container'>
           <div className='nav-container-left'>
-            <BsArrowLeft/>
+            <BsArrowLeft onClick={handle}/>
             <h2>
             Medical Record
             </h2>
@@ -26,54 +31,49 @@ export default function PatientsRecord() {
               <IoIosNotificationsOutline/>
             </div>
             <div className='nav-short'>
-              <img src={logo2}alt="frame"/>
+              <img src={smallLogo}alt="frame"/>
               <p>
-              Mr John Doe
+              Mrs Rosaline Doe
               </p>
             </div>
           </div>
         </nav>
       <div className='second-section'>
-        <div className='second-section-image'>
-        <img src={pic1} alt= "profile-pic"/>
-        </div>
-        <div className='second-section-text'>
-          <div>
-            <h2>Name</h2>
-            <p>John</p>
-            <h2>Gender</h2>
-            <p>M</p>
-            <h2>Height</h2>
-            <p>5ft 8inc</p>
+        <div className='second-section-first'>
+          <div className='second-image'>
+            <img src={bigpic} alt='bigpics' />
           </div>
           <div>
-            <h2>Middle Name</h2>
-            <p>-</p>
-            <h2>Genotype</h2>
-            <p>AA</p>
-            <h2>Weight</h2>
-            <p>62kg</p>
-          </div>
-          <div>
-            <h2>Surname</h2>
-            <p>Doe</p>
-            <h2>Blood Group</h2>
-            <p>O+</p>
-            <h2>Allergies</h2>
-            <p>Peanut, Aspirin, Penicillin</p>
-          </div>
-          <div>
-            <h2>Medical Condition</h2>
-            <p>Asthma</p>
+             <h2>Miss Roseline</h2>
+              <div className='second-section-text'>
+                <div>
+                  <p>Sex: <span>Female</span></p>
+                  <p>Age: <span>28</span></p>
+                  <p>Blood Group:<span> O+</span></p>
+                  <p>Genotype:<span> AA</span></p>
+                </div>
+                <div>
+                <p>Height: <span>5ft 8 inc</span></p>
+                <p>Weight:<span> 62kg</span></p>
+                <p>Allergies: <span>Peanut, Aspirin, Penicillin</span></p>
+                </div>
+              </div>
           </div>
         </div>
-      </div>
+        <div className='second-section-second'>
+          <span className='patient'>patient</span>
+          <p>Cancer type: <span> Adenocarcinoma</span></p>
+          <p> Primary site: <span> Lungs</span></p>
+          <p>Stage:<span> Stage III</span></p>
+          <p>Medical Condition:<span> Asthma</span></p>
+        </div>
+      </div> 
       <div className='third-section-link'>
-        <Link  className='navi-link'  to="overview">Overview</Link>
-        <Link  className='navi-link' to="visit">Visits</Link>
-        <Link  className='navi-link' to="lab">Labs</Link>
-        <Link className='navi-link'  to="vaccine">Vaccines</Link>
-        <Link  className='navi-link' to="prescription">Prescription</Link>
+        <li><Link  className='navi-link'  to="overview"><p>Overview</p></Link></li>
+       <li> <Link  className='navi-link' to="visit"><p>Visits</p></Link></li>
+       <li> <Link  className='navi-link' to="lab"><p>Labs</p></Link></li>
+       <li> <Link className='navi-link'  to="vaccine"><p>Vaccines</p></Link></li>
+      <li>  <Link  className='navi-link' to="prescription"><p>Prescription</p></Link></li>
       </div>
       <div>
       <Outlet/>

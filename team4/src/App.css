@@ -1,13 +1,14 @@
 .App {
   display: flex;
+  height: 100vh;
 }
 /* this is where i did the styling for the two sidebars. the doctors and the patients */
-.sideBar{
+.sideBar {
   width: 160px;
-  height:100vh;
-  background: #D6EBFF;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075), 
-  10px 10px 20px rgba(0, 0, 0, 0.04);
+  height: 100vh;
+  background: #d6ebff;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075),
+    10px 10px 20px rgba(0, 0, 0, 0.04);
   left: 0%;
   top: 0%;
   bottom: 0;
@@ -15,68 +16,62 @@
   flex-direction: column;
   align-items: center;
   transition: all 2s;
-
 }
-.sideBar div img{
-  padding:10px 5px;
+.sideBar div img {
+  padding: 10px 5px;
 }
-.mid-section{
-    padding:20px 10px;
-    text-align: center;
-    margin-top: 0px;
+.mid-section {
+  padding: 20px 10px;
+  text-align: center;
+  margin-top: 0px;
 }
-.mid-section .link{
+.mid-section .link {
   text-decoration: none;
   list-style: none;
-  color: #0A1F33;
+  color: #0a1f33;
 }
-.mid-section p{
+.mid-section p {
   padding: 10px;
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 19px;
 }
 .lower-section{
-  margin-top: 20px;
+  margin-top: 35px;
   text-align: center;
 }
-.lower-section .link{
+.lower-section .link {
   text-decoration: none;
   list-style: none;
-  color: #0A1F33;
+  color: #0a1f33;
 }
-.lower-section p{
+.lower-section p {
   padding: 15px 0px;
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 19px;
 }
-.middle-section{
-  padding:20px 10px;
+.middle-section {
+  padding: 20px 10px;
   text-align: center;
   margin-top: 0px;
 }
-.middle-section p{
-
-  font-family: 'Inter';
+.middle-section p {
+  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
-  
 }
-.links{
+.links {
   text-decoration: none;
   list-style: none;
-  color: #0A1F33;
+  color: #0a1f33;
 }
-.Layout{
+.Layout {
   display: flex;
   flex-grow: 1;
 }
-
-
-
