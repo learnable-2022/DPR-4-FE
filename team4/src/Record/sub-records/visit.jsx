@@ -2,7 +2,7 @@ import React from 'react';
 import {BiFilter} from "react-icons/bi";
 import {CiSearch} from "react-icons/ci";
 import {IoIosArrowForward} from "react-icons/io";
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import{MdOutlineCancel} from "react-icons/md";
 
 

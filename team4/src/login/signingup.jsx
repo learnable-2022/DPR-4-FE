@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import "./login.css";
 import medblog from "../assets/logo-02.png";
 import bigImage from "../assets/signup-second.png";
-import { faCheck, faTimes, faInfoCircle, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faTimes, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useLocation } from 'react-router-dom';
 import { useRequestProcessor } from '../api/requestProcessor';
-import axios from 'axios';
+
 
 
 const USER_REGEX =  /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/;
@@ -64,7 +64,7 @@ const { makeRequest } = useRequestProcessor();
     },[password,confirmPassword])
     useEffect(()=>{
         setValidEmail(validEmailRex.test(Email))
-    })
+    },[Email])
 
   return (
     <div className="first-container">

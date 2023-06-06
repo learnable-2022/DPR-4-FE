@@ -12,7 +12,7 @@ export default function Authpage() {
     <div className="sign-up-container">
        <div className="signup-form length">
            <div>
-             <img src={medblog} alt="medblog-image" />
+             <img src={medblog} alt="medblog" />
            </div>
            <h2 ><Link to="/signup" Link className='wallet-link'><BsArrowLeft className='auth-text'/></Link>Complete your authentication</h2>
            <form className="form">

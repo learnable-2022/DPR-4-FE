@@ -10,13 +10,13 @@ import { faCoins } from '@fortawesome/free-solid-svg-icons';
 
 export default function SideBarDoc() {
 
-    const paths = [
-        {name: "DocDashboard", route: "/DocDashboard", icon: <RxDashboard />},
-        {name: "DocBillings", route: "/DocBillings", icon:<FontAwesomeIcon icon={faCoins} />},
-        {name: "DocDraft", route:"/DocDraft", icon:<TfiWrite/>},
-        {name: "Docsettings", route:"/Docsettings" , icon:<AiOutlineSetting/>},
-        {name: "DocLogout", route:"/DocLogout", icon:<FiLogOut/>}
-      ]
+    // const paths = [
+    //     {name: "DocDashboard", route: "/DocDashboard", icon: <RxDashboard />},
+    //     {name: "DocBillings", route: "/DocBillings", icon:<FontAwesomeIcon icon={faCoins} />},
+    //     {name: "DocDraft", route:"/DocDraft", icon:<TfiWrite/>},
+    //     {name: "Docsettings", route:"/Docsettings" , icon:<AiOutlineSetting/>},
+    //     {name: "DocLogout", route:"/DocLogout", icon:<FiLogOut/>}
+    //   ]
   return (
     <div className="sideBar">
         <div><img src={logo1} alt="pics"/></div>
