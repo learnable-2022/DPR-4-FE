@@ -71,23 +71,23 @@ export default function PatientsBilling() {
                 </div>
               </div>
             </div>
-            <div className="cards">
-              <div className="card">
-                <div className="cardContent1">
+            <div className="BillingCards">
+              <div className="BillingCard">
+                <div className="BillingCardContent1">
                   <img src={ArrowDown} />
                   <p>Deposit</p>
                 </div>
               </div>
 
-              <div className="card">
-                <div className="cardContent1">
+              <div className="BillingCard">
+                <div className="BillingCardContent1">
                   <img src={ArrowUp} />
                   <p>Withdraw</p>
                 </div>
               </div>
 
-              <div className="card">
-                <div className="cardContent1">
+              <div className="BillingCard">
+                <div className="BillingCardContent1">
                   <img src={ArrowSlant} />
                   <p>Send</p>
                 </div>
@@ -118,25 +118,25 @@ export default function PatientsBilling() {
               <ul >
                 <li>Dr. Ada</li>
                 <li className="Successful">Successful</li>
-                <li>NGN 10,000 </li>
+                <li>USD 22,000 </li>
               </ul>
               <hr className="PatientUnderline"></hr>
               <ul >
                 <li>Dr. Charl</li>
                 <li className="Declined">Declined</li>
-                <li>NGN 5,000  </li>
+                <li>USD 22,000  </li>
               </ul>
               <hr className="PatientUnderline"></hr>
               <ul >
                 <li>Dr. Chris</li>
                 <li className="Successful">Successful</li>
-                <li>NGN 50,000  </li>
+                <li>USD 22,000  </li>
               </ul>
               <hr className="PatientUnderline"></hr>
               <ul >
                 <li>Dr. Kemisola</li>
                 <li className="Successful">Successful</li>
-                <li>NGN 150,000  </li>
+                <li>USD 22,000  </li>
               </ul>
             </div>
           </div>
@@ -160,25 +160,25 @@ export default function PatientsBilling() {
               <ul >
                 <li>Dr. Ada</li>
                 <li className="Successful">Paid</li>
-                <li>NGN 10,000 </li>
+                <li>USD 22,000 </li>
               </ul>
               <hr className="PatientUnderline"></hr>
               <ul >
                 <li>Dr. Charl</li>
                 <li className="Declined">Declined</li>
-                <li>NGN 5,000  </li>
+                <li>USD 22,000  </li>
               </ul>
               <hr className="PatientUnderline"></hr>
               <ul >
                 <li>Dr. Chris</li>
                 <li className="Successful">Paid</li>
-                <li>NGN 50,000  </li>
+                <li>USD 22,000  </li>
               </ul>
               <hr className="PatientUnderline"></hr>
               <ul >
                 <li>Dr. Kemisola</li>
                 <li className="Successful">Paid</li>
-                <li>NGN 150,000  </li>
+                <li>USD 22,000  </li>
               </ul>
             </div>
           </div>
