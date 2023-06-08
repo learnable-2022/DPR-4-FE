@@ -12,6 +12,8 @@
 .header_icon_part {
   display: flex;
   gap: 2rem;
+  justify-content: center;
+  align-items: center;
 }
 .header_icon {
   width: 2.5rem;
@@ -43,6 +45,76 @@
   right: 0;
   top: 80px;
   width: 40%;
+}
+.appointment_div {
+  position: absolute;
+  width: 40%;
+  right: 0;
+  top: 50px;
+  z-index: 50;
+  background-color: white;
+
+  padding: 1rem;
+
+  border-radius: 10px;
+  box-shadow: 1px 2px 8px rgb(91, 91, 91);
+}
+.appointment_main {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+}
+.appointment_main .d_input:focus {
+  outline: none;
+}
+.d_input::placeholder {
+}
+.create_appoint {
+  cursor: pointer;
+}
+.appointment_div .appointment_header {
+  display: flex;
+  justify-content: space-between;
+}
+.appointment_div .close_div {
+  border: solid 0.5px black;
+  border-radius: 3px;
+  padding: 1px;
+}
+.appointment_div .close_div:hover {
+  cursor: pointer;
+}
+.appointment_div .left_header {
+}
+.appointment_div .middle_header {
+  flex: 0.7;
+}
+.appointment_div .middle_header p {
+  font-weight: bold;
+}
+.appointment_btn {
+  outline: none;
+  border: none;
+  padding: 0.6rem 0.4rem;
+  background-color: #e0f5e0;
+  border-radius: 4px;
+  color: black;
+  font-weight: bold;
+}
+.appointment_btn:hover {
+  cursor: pointer;
+  color: #9d9d9d;
+}
+.show_on_hover {
+  bottom: 0;
+  padding: 0.2rem 0.5rem;
+  right: 7%;
+  border-radius: 5px;
+
+  background-color: rgb(227, 227, 227);
 }
 .notification_drop header {
   display: flex;
