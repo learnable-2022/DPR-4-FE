@@ -92,6 +92,9 @@ export default function Signingup() {
         setHospital("");
         setWalletId("");
         navigate("/login", { replace: true, state: { state } });
+
+        dispatch({ type: "SET_USER_DETAILS", user_details: response.data._id });
+        localStorage.setItem("user_id", response.data._id);
         console.log(response);
       } catch (err) {
         if (!err?.response) {

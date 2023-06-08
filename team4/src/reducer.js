@@ -17,6 +17,7 @@ export const initialState = {
   dosage: [],
   duration: [],
   medication: [],
+  user_details: null,
 };
 const reducer = (state, action) => {
   switch (action.type) {
@@ -24,6 +25,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         token: action.token,
+      };
+    case "SET_USER_DETAILS":
+      return {
+        ...state,
+        user_details: action.user_details,
       };
     case "SET_USER":
       return {
