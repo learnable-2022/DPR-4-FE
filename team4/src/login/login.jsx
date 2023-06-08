@@ -66,6 +66,7 @@ export default function Login() {
           token: response?.data.token,
           email: response?.data.doctor,
         };
+        console.log("doc" + response?.data);
         // const userStringify = JSON.stringify(userdetails);
         localStorage.setItem("doctorToken", response?.data.token);
 
@@ -127,6 +128,7 @@ export default function Login() {
           token: response?.data.token,
           email: response?.data.email,
         };
+        console.log(response?.data);
         const userStringify = JSON.stringify(userdetails);
         localStorage.setItem("patientToken", response?.data.token);
 
