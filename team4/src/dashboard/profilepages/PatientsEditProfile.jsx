@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./PatientsEditProfile.css";
-import emptyProfile from "../../assets/empty_profile.png";
+import emptyProfile from "../../assets/ava3.png";
 import States from "../data/states";
 import Months from "../data/months";
 import Cities from "../data/cities";
@@ -9,6 +9,7 @@ import Select from "react-select";
 import countryList from "react-select-country-list";
 import { BsCameraFill } from "react-icons/bs";
 import { BiArrowBack } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 function PatientsEditProfile() {
   const [value, setValue] = useState("");
@@ -35,12 +36,14 @@ function PatientsEditProfile() {
   const availableCities = Cities?.find((s) => s.name === selectedState);
   // handler to set the data of the selected image to "data" state
   const handleChange = (e) => {
-    console.log(e.target.files);
     const data = new FileReader();
+
     data.addEventListener("load", () => {
-      setData(data.result);
+      setData(data?.result);
     });
-    data.readAsDataURL(e.target.files[0]);
+    if (e.target.files[0]) {
+      data.readAsDataURL(e.target.files[0]);
+    }
   };
   //function to handle year change selection
   const handleYearChange = (e) => {
@@ -64,7 +67,9 @@ function PatientsEditProfile() {
     <div className="patientseditprofile">
       <div className="left_side-">
         <div className="topleft-">
-          <BiArrowBack className="back_arrow" />
+          <Link to="/Profile" className="link">
+            <BiArrowBack className="back_arrow" />
+          </Link>
           <div className="select_image_div-">
             <label for="inputTag">
               <BsCameraFill className="camera_icon-" />
@@ -76,9 +81,17 @@ function PatientsEditProfile() {
               />
               <br />
               {data ? (
-                <img src={data} alt="profileImage" />
+                <img
+                  style={{ objectFit: "fill" }}
+                  src={data}
+                  alt="profileImage"
+                />
               ) : (
-                <img src={emptyProfile} alt="profileImage" />
+                <img
+                  style={{ objectFit: "cover" }}
+                  src={emptyProfile}
+                  alt="profileImage"
+                />
               )}
             </label>
           </div>

@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import Landing from "./landing/landing";
 import Login from "./login/login";
 import SideBar from "./utilities/SideBar";
 import Dashboard from "./dashboard/dashboard";
 // import Billing from "./billings/Billing";
-import './App.css';
+import "./App.css";
 import Drafts from "./draffts/Drafts";
 import PatientsBilling from "../src/billings/PatientsBilling";
 import "./App.css";
@@ -35,110 +35,329 @@ import PatientInvoiceConfirmation from "./billings/PatientInvoiceConfirmation";
 import ApprovedPage from "./billings/ApprovedPage";
 import DoctorInvoiceSent from "./billings/DoctorInvoiceSent";
 
+import Vitals from "./draffts/Components/Vitals";
+import Finish from "./draffts/Components/Finish";
+import Report from "./draffts/Components/Report";
+import Confirmation from "./login/confirmation";
 
+import Forgotpassword from "./Password/forgotpassword";
+import ChangedPassword from "./Password/changedPassword";
+import Otp from "./Password/otp";
+import NewPassword from "./Password/newPassword";
+import StateContext from "./stateProvider/stateprovider";
 
 // note!!!
 // i have only created the router part for the signup , login and Landing page.
 // subsequent route path would follow suite.
 
 function Approuter() {
-      
+  const { auth } = useContext(StateContext);
+  console.log(auth.patientToken);
+  const patientToken = localStorage.getItem("patientToken");
+  const doctorToken = localStorage.getItem("doctorToken");
   return (
     <Router>
       <Routes>
-        {/* public routes  */}
-        <Route path="/" element={<Landing />} />
        
- {/* routes to the doctors signin and login in */}
- <Route path="signup" element={<Signingup/>} /> 
-        <Route path="login" element={<Login/>} />
 
    
-         <Route path="PatientPaymentHistory" element={<AuthUserLayout><PatientPaymentHistory/></AuthUserLayout>} />
-         <Route path="PatientInvoice" element={<AuthUserLayout><PatientInvoice/></AuthUserLayout>} /> 
-         <Route path="ApprovedPage" element={<AuthUserLayout><ApprovedPage/></AuthUserLayout>} />
-         <Route path="PatientInvoiceConfirmation" element={<AuthUserLayout><PatientInvoiceConfirmation/></AuthUserLayout>} />
-         <Route path="DoctorInvoiceSent" element={<AuthUserLayout><DoctorInvoiceSent/></AuthUserLayout>} />
-  
-         {/* {Routes to patients app and the sub components} */}
-         <Route path="Dashboard" element={<AuthUserLayout><Dashboard  /></AuthUserLayout>} />
-         <Route path="Billing" element={<AuthUserLayout><PatientsBilling/></AuthUserLayout>} />
-        <Route path="Records" element={<AuthUserLayout><PatientsRecord/></AuthUserLayout>}>
-          <Route index ="overview" element={<Overview />} />
-          <Route path="lab" element={<Lab />} />
-          <Route path="vaccine" element={<Vaccine />} />
-          <Route path="visit" element={<Visit />} />
-          <Route path="prescription" element={<Prescription />} />
-        </Route>
-        <Route path="Lab-report" element={<AuthUserLayout><LabReport/></AuthUserLayout>}/>
-        <Route path="visiterReport" element={<AuthUserLayout><VisiterReport/></AuthUserLayout>}/>
-        <Route path="Draft" element={<AuthUserLayout><Drafts /></AuthUserLayout>} />
-{/* {routes to doctors app and the sub components} */}
+      
+      
+                  <Route path="ApprovedPage" element={<ApprovedPage/>} />
 
-<Route path="/DocDashboard" element={<AuthDocLayout><DoctorsDashboard/></AuthDocLayout>}/>
-      <Route path="/DocBillings" element={<AuthDocLayout><DoctorsBilling/></AuthDocLayout>}/>
-      {/* <Route path="/DocPatientPaymentHistory" element={<AuthDocLayout><DoctorsBilling/></AuthDocLayout>}/> */}
-      <Route path="/DoctorPaymentHistory" element={<AuthDocLayout><DoctorPaymentHistory/></AuthDocLayout>}/>
-      <Route path="/DocDraft" element={<AuthDocLayout><DoctorsDrafts/></AuthDocLayout>}/>
-      <Route path="DoctorsBilling" element={<AuthDocLayout><DoctorsBilling/></AuthDocLayout>}/>
-      <Route path="/ConsultationBilling" element={<AuthDocLayout><ConsultationBilling/></AuthDocLayout>}/>
-     
+    
+        <Route path="/" element={<Landing />} />:
+        {/* routes to the doctors signin and login in */}
+        <Route path="signup" element={<Signingup />} />
+        <Route path="/confirmation" element={<Confirmation />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/forgotPassword" element={<Forgotpassword />} />
+        <Route path="/changedPassword" element={<ChangedPassword />} />
+        <Route path="/otp" element={<Otp />} />
+        <Route path="/newPassword" element={<NewPassword />} />
+        {/* {Routes to patients app and the sub components} */}
+        <>
+          {" "}
+          {patientToken ? (
+            <Route
+              path="Dashboard"
+              element={
+                <AuthUserLayout>
+                  <Dashboard />
+                </AuthUserLayout>
+              }
+            />
+          ) : (
+            <Route path="Dashboard" element={<Landing />} />
+          )}
+          {patientToken ? (
+            <Route
+              path="Profile"
+              element={
+                <AuthUserLayout>
+                  {" "}
+                  <PatientsProfile />{" "}
+                </AuthUserLayout>
+              }
+            />
+          ) : (
+            <Route path="Profile" element={<Landing />} />
+          )}
+          {patientToken ? (
+            <Route
+              path="EditProfile"
+              element={
+                <AuthUserLayout>
+                  {" "}
+                  <PatientsEditProfile />{" "}
+                </AuthUserLayout>
+              }
+            />
+          ) : (
+            <Route path="EditProfile" element={<Landing />} />
+          )}
+          {patientToken ? (
+            <Route
+              path="Billing"
+              element={
+                <AuthUserLayout>
+                  <PatientsBilling />
+                </AuthUserLayout>
+              }
+            />
+          ) : (
+            <Route path="Billing" element={<Landing />} />
+          )}
+          {patientToken ? (
+            <Route
+              path="PatientPaymentHistory"
+              element={
+                <AuthUserLayout>
+                  <PatientPaymentHistory />
+                </AuthUserLayout>
+              }
+            />
+          ) : (
+            <Route path="PatientPaymentHistory" element={<Landing />} />
+          )}
+          {patientToken ? (
+            <Route
+              path="PatientInvoice"
+              element={
+                <AuthUserLayout>
+                  <PatientInvoice />
+                </AuthUserLayout>
+              }
+            />
+          ) : (
+            <Route path="PatientInvoice" element={<Landing />} />
+          )}
+          {patientToken ? (
+            <Route
+              path="Records"
+              element={
+                <AuthUserLayout>
+                  <PatientsRecord />
+                </AuthUserLayout>
+              }
+            >
+              <Route index="overview" element={<Overview />} />
+              <Route path="lab" element={<Lab />} />
+              <Route path="vaccine" element={<Vaccine />} />
+              <Route path="visit" element={<Visit />} />
+              <Route path="prescription" element={<Prescription />} />
+            </Route>
+          ) : (
+            <Route path="Records" element={<Landing />} />
+          )}
+          {patientToken ? (
+            <Route
+              path="Draft"
+              element={
+                <AuthUserLayout>
+                  <Drafts />
+                </AuthUserLayout>
+              }
+            >
+              {/* {routes to doctors app and the sub components} */}
+            </Route>
+          ) : (
+            <Route path="Draft" element={<Landing />} />
+          )}
+          {patientToken ? (
+            <Route
+              path="/lab/view-report"
+              element={
+                <AuthUserLayout>
+                  <LabReport />
+                </AuthUserLayout>
+              }
+            />
+          ) : (
+            <Route path="/lab/view-report" element={<Landing />} />
+          )}
+          {patientToken ? (
+            <Route
+              path="/visit/visiterReport"
+              element={
+                <AuthUserLayout>
+                  <VisiterReport />
+                </AuthUserLayout>
+              }
+            />
+          ) : (
+            <Route path="/visit/visiterReport" element={<Landing />} />
+          )}
+          
 
 
+{patientToken ? (
+            <Route
+              path="/PatientInvoiceConfirmation"
+              element={
+                <AuthUserLayout>
+                <PatientInvoiceConfirmation/>
+                </AuthUserLayout>
+              }
+            />
+          ) : (
+            <Route path="/PatientInvoiceConfirmation" element={<Landing />} />
+          )}
 
+        </>
+        {/* {routes to doctors app and the sub components} */}
+        {/* <Route path="/DocPatientPaymentHistory" element={<AuthDocLayout><DoctorsBilling/></AuthDocLayout>}/> */}
+        {doctorToken ? (
+          <Route
+            path="/DoctorPaymentHistory"
+            element={
+              <AuthDocLayout>
+                <DoctorPaymentHistory />
+              </AuthDocLayout>
+            }
+          />
+        ) : (
+          <Route path="/DoctorPaymentHistory" element={<Landing />} />
+        )}
+        {doctorToken ? (
+          <Route
+            path="DoctorsBilling"
+            element={
+              <AuthDocLayout>
+                <DoctorsBilling />
+              </AuthDocLayout>
+            }
+          />
+        ) : (
+          <Route path="DoctorsBilling" element={<Landing />} />
+        )}
+        {doctorToken ? (
+          <Route
+            path="/ConsultationBilling"
+            element={
+              <AuthDocLayout>
+                <ConsultationBilling />
+              </AuthDocLayout>
+            }
+          />
+        ) : (
+          <Route path="/ConsultationBilling" element={<Landing />} />
+        )}
+        {doctorToken ? (
+          <Route
+            path="/DocDashboard"
+            element={
+              <AuthDocLayout>
+                <DoctorsDashboard />
+              </AuthDocLayout>
+            }
+          />
+        ) : (
+          <Route path="/DocDashboard" element={<Landing />} />
+        )}
 
-       
-       
-         
-        
-       
+        {doctorToken ? (
+          <Route
+            path="/DocBillings"
+            element={
+              <AuthDocLayout>
+                <DoctorsBilling />
+              </AuthDocLayout>
+            }
+          />
+        ) : (
+          <Route path="/DocBillings" element={<Landing />} />
+        )}
+        {doctorToken ? (
+          <Route
+            path="/DocDraft"
+            element={
+              <AuthDocLayout>
+                <DoctorsDrafts />
+              </AuthDocLayout>
+            }
+          >
+            <Route index element={<Vitals />} /> {/*A nested route!*/}
+            <Route path="report" element={<Report />} /> {/*A nested route!*/}
+            <Route path="finish" element={<Finish />} /> {/*A nested route!*/}
+          </Route>
+        ) : (
+          <Route path="/DocDraft" element={<Landing />} />
+        )}
 
+        {doctorToken ? (
+          <Route
+            path="/DocSchedule"
+            element={
+              <AuthDocLayout>
+                {" "}
+                <SchedulePage />
+              </AuthDocLayout>
+            }
+          />
+        ) : (
+          <Route path="/DocSchedule" element={<Landing />} />
+        )}
+        {doctorToken ? (
+          <Route
+            path="/DocProfile"
+            element={
+              <AuthDocLayout>
+                {" "}
+                <DoctorsProfile />{" "}
+              </AuthDocLayout>
+            }
+          />
+        ) : (
+          <Route path="/DocProfile" element={<Landing />} />
+        )}
+        {doctorToken ? (
+          <Route
+            path="/DocEditProfile"
+            element={
+              <AuthDocLayout>
+                {" "}
+                <DoctorsEditProfile />
+              </AuthDocLayout>
+            }
+          />
+        ) : (
+          <Route path="/DocEditProfile" element={<Landing />} />
+        )}
 
-
-
-       
-       
-        <Route
-          path="Profile"
-          element={
-            <AuthUserLayout>
-              <PatientsProfile />
-            </AuthUserLayout>
-          }
-        />
-        <Route
-          path="EditProfile"
-          element={
-            <AuthUserLayout>
-              <PatientsEditProfile />
-            </AuthUserLayout>
-          }
-        />
-
-        <Route
-          path="/DocSchedule"
-          element={
-            <AuthDocLayout>
-              <SchedulePage />
-            </AuthDocLayout>
-          }
-        />
-        <Route
-          path="/DocProfile"
-          element={
-            <AuthDocLayout>
-              <DoctorsProfile />
-            </AuthDocLayout>
-          }
-        />
-        <Route
-          path="/DocEditProfile"
-          element={
-            <AuthDocLayout>
-              <DoctorsEditProfile />
-            </AuthDocLayout>
-          }
-        />
+{doctorToken ? (
+          <Route
+            path="/DoctorInvoiceSent"
+            element={
+              <AuthDocLayout>
+                {" "}
+              <DoctorInvoiceSent/>
+              </AuthDocLayout>
+            }
+          />
+        ) : (
+          <Route path="/DoctorInvoiceSent" element={<Landing />} />
+        )}
       </Routes>
     </Router>
   );

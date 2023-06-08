@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { GrNotification } from "react-icons/gr";
 import "./PatientsDashboard.css";
-import emptyProfile from "../assets/empty_profile.png";
+import emptyProfile from "../assets/ava3.png";
 import bpIcon from "../assets/bp_icon.svg";
 import heartIcon from "../assets/heart.svg";
 import pulseIcon from "../assets/pulse_icon.png";
@@ -20,8 +20,22 @@ import drug1 from "../assets/drug1.svg";
 import drug2 from "../assets/drug2.svg";
 import drug3 from "../assets/drug3.svg";
 import drug4 from "../assets/drug4.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import StateContext from "../stateProvider/stateprovider";
 export default function PatientDashboard() {
+  // const {auth} = useContext(StateContext);
+  // const patientNavigator = useNavigate();
+
+  // console.log(auth.token);
+
+  // if (auth.doctorToken) {
+  //   return  patientNavigator("./docdashboard");
+
+  // }else if(!auth.doctorToken){
+
+  //   return patientNavigator("./landing");
+  // }
+
   const [data, setData] = useState(true);
   const drugs = [drug1, drug2, drug3, drug4];
   const [connectedWallet, setConnectedWallet] = useState(true);
@@ -29,13 +43,13 @@ export default function PatientDashboard() {
   const generateDrugPic = () => {
     let number = Math.floor(Math.random() * 4);
     let val = number;
-    console.log("drug" + val);
+
     return val;
   };
   const generateDiseasePic = () => {
     let number1 = Math.floor(Math.random() * 3);
     let val = number1;
-    console.log("disease" + val);
+
     return val;
   };
   return (
@@ -99,7 +113,7 @@ export default function PatientDashboard() {
             </div>
           </div>
           <div className="right_patient_vitals">
-            <button className="btn">Patient</button>
+            <button className="right_patient_vitals_btn">Patient</button>
             <p className="key">
               Primary site: <strong className="value">Nil</strong>
             </p>
@@ -113,175 +127,185 @@ export default function PatientDashboard() {
         </div>
         {connectedWallet ? (
           <div className="middle_section">
+            <div className="grant_access_div">
+              <input
+                className="grant_access_input"
+                type="text"
+                placeholder="Enter Doctor's Wallet Address to grant access"
+              />
+              <button className="grant_access_btn">Grant Access</button>
+            </div>
             <div className="middle_section_header">
               <p>My Vitals</p>
               <button className="report_btn">View Full Report</button>
             </div>
             <div className="vitals_readings_cards">
-              <div className="card1">
-                <h4 className="card1_header">My Heart Condition</h4>
-                {data ? (
-                  <div>
-                    <div className="top">
-                      <div className="left_div">
-                        <div
-                          className="icon_div"
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                        >
-                          {" "}
-                          <img src={bpIcon} alt="picture" />
+              <div>
+                <div className="card1">
+                  <h4 className="card1_header">My Heart Condition</h4>
+                  {data ? (
+                    <div>
+                      <div className="top">
+                        <div className="left_div">
+                          <div
+                            className="icon_div"
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                            }}
+                          >
+                            {" "}
+                            <img src={bpIcon} alt="picture" />
+                          </div>
+                          <div className="readings_div">
+                            <p className="heading">Blood Status</p>
+                            <p>
+                              <strong className="value">116/70</strong>
+                            </p>
+                          </div>
                         </div>
-                        <div className="readings_div">
-                          <p className="heading">Blood Status</p>
-                          <p>
-                            <strong className="value">116/70</strong>
-                          </p>
-                        </div>
-                      </div>
-                      <div className="right_div">
-                        <div
-                          className="icon_div"
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                        >
-                          {" "}
-                          <img src={heartIcon} alt="picture" />
-                        </div>
-                        <div className="readings_div">
-                          <p className="heading">Heart Rate</p>
-                          <p>
-                            <strong className="value">120bpm</strong>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="middle1">
-                      <div className="middle1_left">
-                        <img className="pulse_icon" src={pulseIcon} />
-                        <div className="left_readings">
-                          <img
-                            className="left_line"
-                            src={leftLine}
-                            alt="line"
-                          />
-                          116
-                          <br />
-                          <span className="value_span">/70</span>
-                          <img
-                            className="bottom_left_line"
-                            src={leftLine}
-                            alt="line"
-                          />
+                        <div className="right_div">
+                          <div
+                            className="icon_div"
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                            }}
+                          >
+                            {" "}
+                            <img src={heartIcon} alt="picture" />
+                          </div>
+                          <div className="readings_div">
+                            <p className="heading">Heart Rate</p>
+                            <p>
+                              <strong className="value">120bpm</strong>
+                            </p>
+                          </div>
                         </div>
                       </div>
-                      <div className="middle1_right">
-                        <img
-                          className="pulse_icon red_pulse_icon"
-                          src={redPulseIcon}
-                        />
-                        <div className="left_readings">
-                          <img
-                            className="left_line"
-                            src={leftLine}
-                            alt="line"
-                          />
-                          120
-                          <br />
-                          <span className="value_span1">bpm</span>
-                          <img
-                            className="bottom_left_line"
-                            src={leftLine}
-                            alt="line"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <hr color="#e7e6e6" />
-                    <div className="middle2">
-                      <div className="middle2_left">
-                        <div
-                          className="icon_div"
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                        >
-                          <img src={vetIcon} alt="icon" />
-                        </div>
-                        <div className="count_val_div">
-                          <p>Blood Count</p>
-                          <p>80/90</p>
-                        </div>
-                      </div>
-                      <div className="middle2_right">
-                        <div
-                          className="icon_div"
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                        >
-                          {" "}
-                          <img src={vetIcon2} alt="picture" />{" "}
-                        </div>
-                        <div className="count_val_div">
-                          <p>Glucose Level</p>
-                          <p>240ml</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="card1_down">
-                      <div className="card1_down_left">
+                      <div className="middle1">
                         <div className="middle1_left">
+                          <img className="pulse_icon" src={pulseIcon} />
+                          <div className="left_readings">
+                            <img
+                              className="left_line"
+                              src={leftLine}
+                              alt="line"
+                            />
+                            116
+                            <br />
+                            <span className="value_span">/70</span>
+                            <img
+                              className="bottom_left_line"
+                              src={leftLine}
+                              alt="line"
+                            />
+                          </div>
+                        </div>
+                        <div className="middle1_right">
+                          <img
+                            className="pulse_icon red_pulse_icon"
+                            src={redPulseIcon}
+                          />
+                          <div className="left_readings">
+                            <img
+                              className="left_line"
+                              src={leftLine}
+                              alt="line"
+                            />
+                            120
+                            <br />
+                            <span className="value_span1">bpm</span>
+                            <img
+                              className="bottom_left_line"
+                              src={leftLine}
+                              alt="line"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <hr color="#e7e6e6" />
+                      <div className="middle2">
+                        <div className="middle2_left">
+                          <div
+                            className="icon_div"
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                            }}
+                          >
+                            <img src={vetIcon} alt="icon" />
+                          </div>
+                          <div className="count_val_div">
+                            <p>Blood Count</p>
+                            <p>80/90</p>
+                          </div>
+                        </div>
+                        <div className="middle2_right">
+                          <div
+                            className="icon_div"
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                            }}
+                          >
+                            {" "}
+                            <img src={vetIcon2} alt="picture" />{" "}
+                          </div>
+                          <div className="count_val_div">
+                            <p>Glucose Level</p>
+                            <p>240ml</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="card1_down">
+                        <div className="card1_down_left">
+                          <div className="middle1_left">
+                            <img
+                              className="pulse_icon red_pulse_icon"
+                              src={waveIcon}
+                            />
+                            <div className="left_readings">
+                              <img className="dot" src={dotIcon} alt="line" />
+                              80
+                              <br />
+                              <span className="value_span">/90</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="down_right">
                           <img
                             className="pulse_icon red_pulse_icon"
                             src={waveIcon}
                           />
                           <div className="left_readings">
-                            <img className="dot" src={dotIcon} alt="line" />
-                            80
+                            240
                             <br />
-                            <span className="value_span">/90</span>
+                            <span className="value_span1">ml</span>
+                            <img
+                              className="centre_line"
+                              src={leftLine}
+                              alt="line"
+                            />
+                            <img
+                              className="dot"
+                              src={dotIcon}
+                              style={{ width: "5px", height: "5px" }}
+                              alt="line"
+                            />
                           </div>
                         </div>
                       </div>
-
-                      <div className="down_right">
-                        <img
-                          className="pulse_icon red_pulse_icon"
-                          src={waveIcon}
-                        />
-                        <div className="left_readings">
-                          240
-                          <br />
-                          <span className="value_span1">ml</span>
-                          <img
-                            className="centre_line"
-                            src={leftLine}
-                            alt="line"
-                          />
-                          <img
-                            className="dot"
-                            src={dotIcon}
-                            style={{ width: "5px", height: "5px" }}
-                            alt="line"
-                          />
-                        </div>
-                      </div>
                     </div>
-                  </div>
-                ) : (
-                  <EmptyCard />
-                )}
+                  ) : (
+                    <EmptyCard />
+                  )}
+                </div>
               </div>
 
               <div className="card2">

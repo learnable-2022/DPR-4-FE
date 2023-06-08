@@ -75,10 +75,10 @@ export default function Overview() {
         <div className='over-3'>
         <h4>Active Medication</h4>
         <div className='three'>
-          <div className='four'>    <div><img src={picture7}/></div><div><h4>Ciprofloxacin</h4><p>1 Tab twice daily</p></div> </div>
-          <div className='four'> <div><img src={picture6}/></div><div><h4>Amatem Forte soft gel</h4><p>1 Tab twice daily</p></div></div>
-          <div className='four'> <div><img src={picture5}/></div><div><h4>Vitamin C</h4><p>1 Tab twice daily</p></div></div>
-          <div className='four'> <div><img src={picture4}/></div><div><h4>Omega 3</h4><p>1 Tab twice daily</p></div></div>
+          <div className='four'>    <div><img src={picture7} alt='images'/></div><div><h4>Ciprofloxacin</h4><p>1 Tab twice daily</p></div> </div>
+          <div className='four'> <div><img src={picture6} alt='images'/></div><div><h4>Amatem Forte soft gel</h4><p>1 Tab twice daily</p></div></div>
+          <div className='four'> <div><img src={picture5} alt='images'/></div><div><h4>Vitamin C</h4><p>1 Tab twice daily</p></div></div>
+          <div className='four'> <div><img src={picture4} alt='images'/></div><div><h4>Omega 3</h4><p>1 Tab twice daily</p></div></div>
         </div>
       </div>
      </div>

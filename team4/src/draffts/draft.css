@@ -1,0 +1,118 @@
+.dashboard {
+  width: 100%;
+}
+.doctorsdraft {
+  width: 100%;
+  height: 100vh;
+  padding: 2rem;
+  overflow-y: scroll;
+}
+.drafts_header_left {
+  color: #3399ff;
+  font-size: 24px;
+  font-weight: 600;
+}
+.drafts_header_right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex: 0.3;
+}
+.drafts_header_right img {
+  height: 30px;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.drafts_header_right img:hover {
+  cursor: pointer;
+}
+.doctorsdraft_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3.5rem;
+}
+.drafts_profile_name {
+}
+.navigation_section {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+}
+.lines {
+  border-bottom: 1px solid black;
+  width: 100%;
+  margin: auto;
+}
+.navigation_section .circle {
+  border-radius: 50%;
+  padding: 0.5rem 0.7rem;
+  background-color: #d6ebff;
+}
+.tick {
+  color: white;
+}
+.blue {
+  border-radius: 50%;
+  padding: 0.5rem 0.7rem;
+  background-color: #3399ff;
+}
+.link:hover {
+  cursor: pointer;
+}
+.blue:hover {
+  cursor: pointer;
+}
+.title_blue {
+  color: #3399ff;
+}
+.nav_title {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  margin-bottom: 4rem;
+}
+.doctorsdraft .vitals_next {
+  padding: 2rem 7rem;
+  border: none;
+  border-radius: 7px;
+  background-color: #3399ff;
+  color: white;
+}
+.doctorsdraft .vitals_next:hover {
+  cursor: pointer;
+}
+.doctorsdraft .action_button {
+  display: flex;
+  justify-content: center;
+  margin-top: 12rem;
+  width: 70%;
+  align-items: center;
+}
+.grant_access_div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 70%;
+  margin-bottom: 2rem;
+}
+.access_input {
+  flex: 0.4 1;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border-color: #d2d2d2;
+  border-width: 0;
+  box-shadow: 1px 1px 4px rgb(142, 142, 142);
+}
+.access_btn {
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background-color: #3399ff;
+  color: white;
+}
+.access_btn:hover {
+  cursor: pointer;
+}
