@@ -215,9 +215,7 @@ function Approuter() {
             <Route
               path="/PatientInvoiceConfirmation"
               element={
-                <AuthUserLayout>
                 <PatientInvoiceConfirmation/>
-                </AuthUserLayout>
               }
             />
           ) : (
