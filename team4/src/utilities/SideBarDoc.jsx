@@ -6,7 +6,8 @@ import { FiLogOut } from "react-icons/fi";
 import logo1 from "../assets/images/logo-03.png";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import { faCoins } from '@fortawesome/free-solid-svg-icons';
+
 
 export default function SideBarDoc() {
   // const paths = [

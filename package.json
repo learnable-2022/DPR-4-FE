@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "react-select-country-list": "^2.2.3",
     "react-verification-input": "^3.3.0"
   }
 }

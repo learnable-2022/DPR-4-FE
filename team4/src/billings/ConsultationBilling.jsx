@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import ArrowRight2 from "../assets/images/ArrowRight2.png";
 import Notification from "../assets/images/Notification.png";
 import PatientPics from "../assets/images/PatientPics.png";
@@ -13,6 +14,13 @@ import Checker from "../assets/images/Checker.png";
 import TickSquare from "../assets/images/TickSquare.png";
 
 function ConsultationBilling() {
+  const navigate = useNavigate();
+
+  function handleClick (e) {
+    navigate("/DoctorInvoiceSent")
+  }
+
+
   return (
     <>
       <div className="Right">
@@ -163,8 +171,8 @@ function ConsultationBilling() {
 
         <div className="sendContainer">
         <div className="sendInvoice"> 
-        <button>Send Invoice</button>
-        </div>
+        <button onClick={handleClick}>Send Invoice</button>
+        </div> 
         </div>
 
 
