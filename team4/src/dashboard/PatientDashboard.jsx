@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { GrNotification } from "react-icons/gr";
 import "./PatientsDashboard.css";
 import emptyProfile from "../assets/empty_profile.png";
@@ -20,8 +20,24 @@ import drug1 from "../assets/drug1.svg";
 import drug2 from "../assets/drug2.svg";
 import drug3 from "../assets/drug3.svg";
 import drug4 from "../assets/drug4.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import StateContext from "../stateProvider/stateprovider";
 export default function PatientDashboard() {
+
+  // const {auth} = useContext(StateContext);
+  // const patientNavigator = useNavigate();
+  
+  // console.log(auth.token);
+  
+  // if (auth.doctorToken) {
+  //   return  patientNavigator("./docdashboard");
+  
+  // }else if(!auth.doctorToken){
+  
+  //   return patientNavigator("./landing");
+  // }
+  
+  
   const [data, setData] = useState(true);
   const drugs = [drug1, drug2, drug3, drug4];
   const [connectedWallet, setConnectedWallet] = useState(true);

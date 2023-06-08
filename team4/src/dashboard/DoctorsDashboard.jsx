@@ -7,10 +7,26 @@ import { AiOutlineRight } from "react-icons/ai";
 import "./dashboard.css";
 import Calendar from "react-calendar";
 import NavComponent from "./components/navComponent";
-import { Link } from "react-router-dom";
+import { Link,useNavigate} from "react-router-dom";
+import { useContext } from "react";
+import StateContext from "../stateProvider/stateprovider";
 
 //rescue kenneth
 export default function DoctorsDashboard() {
+// const {auth} = useContext(StateContext);
+// const navigator = useNavigate();
+
+// console.log(auth.token);
+
+// if (auth.doctorToken) {
+//   return  navigator("./docdashboard");
+
+// }else if(!auth.doctorToken){
+
+//   return navigator("./landing");
+// }
+
+
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
