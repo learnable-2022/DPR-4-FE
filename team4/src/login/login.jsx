@@ -49,8 +49,9 @@ export default function Login() {
       password: userPassword,
     };
     if (user === "doctor") {
+      let response = null;
       try {
-        const response = await axioscall.post(
+        response = await axioscall.post(
           DOCTOR_LOGIN,
           JSON.stringify(DoctorData),
           {
@@ -86,6 +87,13 @@ export default function Login() {
         if (!err?.response) {
           setErrMsg("No Server Response");
           setIsLoading(false);
+          setAuth({userEmail, userPassword,patientToken:response?.data.token})
+          setUserEmail('');
+          setUserPassword(''); 
+          const item = localStorage.getItem("userdetails");
+          // const toParse = JSON.parse(item.token);
+         
+          if(response?.data.token){
           setTimeout(() => {
             // navigate("/");
           }, 2000);
@@ -109,7 +117,8 @@ export default function Login() {
           }, 2000);
         }
       }
-    } else if (user === "patient") {
+    } }
+    else if (user === "patient") {
       try {
         const response = await axioscall.post(
           PATIENT_LOGIN,
