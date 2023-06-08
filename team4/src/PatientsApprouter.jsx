@@ -49,28 +49,25 @@ import StateContext from "./stateProvider/stateprovider";
 function Approuter() {
   const { auth } = useContext(StateContext);
   console.log(auth.patientToken);
-
+  const patientToken = localStorage.getItem("patientToken");
+  const doctorToken = localStorage.getItem("doctorToken");
   return (
     <Router>
       <Routes>
         {/* public routes  */}
-        <Route path="/" element={<Landing />} />
-
+        <Route path="/" element={<Landing />} />:
         {/* routes to the doctors signin and login in */}
         <Route path="signup" element={<Signingup />} />
         <Route path="/confirmation" element={<Confirmation />} />
         <Route path="/login" element={<Login />} />
-
         <Route path="/forgotPassword" element={<Forgotpassword />} />
         <Route path="/changedPassword" element={<ChangedPassword />} />
         <Route path="/otp" element={<Otp />} />
         <Route path="/newPassword" element={<NewPassword />} />
-
         {/* {Routes to patients app and the sub components} */}
-
-        {auth.patientToken ? (
-          <>
-            {" "}
+        <>
+          {" "}
+          {patientToken ? (
             <Route
               path="Dashboard"
               element={
@@ -79,6 +76,10 @@ function Approuter() {
                 </AuthUserLayout>
               }
             />
+          ) : (
+            <Route path="Dashboard" element={<Landing />} />
+          )}
+          {patientToken ? (
             <Route
               path="Profile"
               element={
@@ -88,6 +89,10 @@ function Approuter() {
                 </AuthUserLayout>
               }
             />
+          ) : (
+            <Route path="Profile" element={<Landing />} />
+          )}
+          {patientToken ? (
             <Route
               path="EditProfile"
               element={
@@ -97,6 +102,10 @@ function Approuter() {
                 </AuthUserLayout>
               }
             />
+          ) : (
+            <Route path="EditProfile" element={<Landing />} />
+          )}
+          {patientToken ? (
             <Route
               path="Billing"
               element={
@@ -105,6 +114,10 @@ function Approuter() {
                 </AuthUserLayout>
               }
             />
+          ) : (
+            <Route path="Billing" element={<Landing />} />
+          )}
+          {patientToken ? (
             <Route
               path="PatientPaymentHistory"
               element={
@@ -113,6 +126,10 @@ function Approuter() {
                 </AuthUserLayout>
               }
             />
+          ) : (
+            <Route path="PatientPaymentHistory" element={<Landing />} />
+          )}
+          {patientToken ? (
             <Route
               path="PatientInvoice"
               element={
@@ -121,6 +138,10 @@ function Approuter() {
                 </AuthUserLayout>
               }
             />
+          ) : (
+            <Route path="PatientInvoice" element={<Landing />} />
+          )}
+          {patientToken ? (
             <Route
               path="Records"
               element={
@@ -135,6 +156,10 @@ function Approuter() {
               <Route path="visit" element={<Visit />} />
               <Route path="prescription" element={<Prescription />} />
             </Route>
+          ) : (
+            <Route path="Records" element={<Landing />} />
+          )}
+          {patientToken ? (
             <Route
               path="Draft"
               element={
@@ -144,10 +169,11 @@ function Approuter() {
               }
             >
               {/* {routes to doctors app and the sub components} */}
-              <Route index element={<Vitals />} /> {/*A nested route!*/}
-              <Route path="report" element={<Report />} /> {/*A nested route!*/}
-              <Route path="finish" element={<Finish />} /> {/*A nested route!*/}
             </Route>
+          ) : (
+            <Route path="Draft" element={<Landing />} />
+          )}
+          {patientToken ? (
             <Route
               path="/lab/view-report"
               element={
@@ -156,6 +182,10 @@ function Approuter() {
                 </AuthUserLayout>
               }
             />
+          ) : (
+            <Route path="/lab/view-report" element={<Landing />} />
+          )}
+          {patientToken ? (
             <Route
               path="/visit/visiterReport"
               element={
@@ -164,96 +194,126 @@ function Approuter() {
                 </AuthUserLayout>
               }
             />
-          </>
-        ) : (
-          <Route path="/" element={<Landing />} />
-        )}
-
+          ) : (
+            <Route path="/visit/visiterReport" element={<Landing />} />
+          )}
+        </>
         {/* {routes to doctors app and the sub components} */}
-
         {/* <Route path="/DocPatientPaymentHistory" element={<AuthDocLayout><DoctorsBilling/></AuthDocLayout>}/> */}
-        {auth.doctorToken ? (
-          <>
-            <Route
-              path="/DoctorPaymentHistory"
-              element={
-                <AuthDocLayout>
-                  <DoctorPaymentHistory />
-                </AuthDocLayout>
-              }
-            />
-            <Route
-              path="DoctorsBilling"
-              element={
-                <AuthDocLayout>
-                  <DoctorsBilling />
-                </AuthDocLayout>
-              }
-            />
-            <Route
-              path="/ConsultationBilling"
-              element={
-                <AuthDocLayout>
-                  <ConsultationBilling />
-                </AuthDocLayout>
-              }
-            />
-            <Route
-              path="/DocDashboard"
-              element={
-                <AuthDocLayout>
-                  <DoctorsDashboard />
-                </AuthDocLayout>
-              }
-            />
-            <Route
-              path="/DocBillings"
-              element={
-                <AuthDocLayout>
-                  <DoctorsBilling />
-                </AuthDocLayout>
-              }
-            />
-
-            <Route
-              path="/DocDraft"
-              element={
-                <AuthDocLayout>
-                  <DoctorsDrafts />
-                </AuthDocLayout>
-              }
-            />
-
-            <Route
-              path="/DocSchedule"
-              element={
-                <AuthDocLayout>
-                  {" "}
-                  <SchedulePage />
-                </AuthDocLayout>
-              }
-            />
-            <Route
-              path="/DocProfile"
-              element={
-                <AuthDocLayout>
-                  {" "}
-                  <DoctorsProfile />{" "}
-                </AuthDocLayout>
-              }
-            />
-            <Route
-              path="/DocEditProfile"
-              element={
-                <AuthDocLayout>
-                  {" "}
-                  <DoctorsEditProfile />
-                </AuthDocLayout>
-              }
-            />
-          </>
+        {doctorToken ? (
+          <Route
+            path="/DoctorPaymentHistory"
+            element={
+              <AuthDocLayout>
+                <DoctorPaymentHistory />
+              </AuthDocLayout>
+            }
+          />
         ) : (
-          <Route path="/" element={<Landing />} />
+          <Route path="/DoctorPaymentHistory" element={<Landing />} />
+        )}
+        {doctorToken ? (
+          <Route
+            path="DoctorsBilling"
+            element={
+              <AuthDocLayout>
+                <DoctorsBilling />
+              </AuthDocLayout>
+            }
+          />
+        ) : (
+          <Route path="DoctorsBilling" element={<Landing />} />
+        )}
+        {doctorToken ? (
+          <Route
+            path="/ConsultationBilling"
+            element={
+              <AuthDocLayout>
+                <ConsultationBilling />
+              </AuthDocLayout>
+            }
+          />
+        ) : (
+          <Route path="/ConsultationBilling" element={<Landing />} />
+        )}
+        {doctorToken ? (
+          <Route
+            path="/DocDashboard"
+            element={
+              <AuthDocLayout>
+                <DoctorsDashboard />
+              </AuthDocLayout>
+            }
+          />
+        ) : (
+          <Route path="/DocDashboard" element={<Landing />} />
+        )}
+        {doctorToken ? (
+          <Route
+            path="/DocBillings"
+            element={
+              <AuthDocLayout>
+                <DoctorsBilling />
+              </AuthDocLayout>
+            }
+          />
+        ) : (
+          <Route path="/DocBillings" element={<Landing />} />
+        )}
+        {doctorToken ? (
+          <Route
+            path="/DocDraft"
+            element={
+              <AuthDocLayout>
+                <DoctorsDrafts />
+              </AuthDocLayout>
+            }
+          >
+            <Route index element={<Vitals />} /> {/*A nested route!*/}
+            <Route path="report" element={<Report />} /> {/*A nested route!*/}
+            <Route path="finish" element={<Finish />} /> {/*A nested route!*/}
+          </Route>
+        ) : (
+          <Route path="/DocDraft" element={<Landing />} />
+        )}
+        {doctorToken ? (
+          <Route
+            path="/DocSchedule"
+            element={
+              <AuthDocLayout>
+                {" "}
+                <SchedulePage />
+              </AuthDocLayout>
+            }
+          />
+        ) : (
+          <Route path="/DocSchedule" element={<Landing />} />
+        )}
+        {doctorToken ? (
+          <Route
+            path="/DocProfile"
+            element={
+              <AuthDocLayout>
+                {" "}
+                <DoctorsProfile />{" "}
+              </AuthDocLayout>
+            }
+          />
+        ) : (
+          <Route path="/DocProfile" element={<Landing />} />
+        )}
+        {doctorToken ? (
+          <Route
+            path="/DocEditProfile"
+            element={
+              <AuthDocLayout>
+                {" "}
+                <DoctorsEditProfile />
+              </AuthDocLayout>
+            }
+          />
+        ) : (
+          <Route path="/DocEditProfile" element={<Landing />} />
         )}
       </Routes>
     </Router>

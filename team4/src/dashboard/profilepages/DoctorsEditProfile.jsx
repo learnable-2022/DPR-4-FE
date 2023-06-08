@@ -25,6 +25,7 @@ function DoctorsEditProfile() {
     const data = new FileReader();
     data.addEventListener("load", () => {
       setData(data.result);
+      console.log("data result:" + " " + data.result);
     });
     data.readAsDataURL(e.target.files[0]);
   };
