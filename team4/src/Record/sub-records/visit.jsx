@@ -2,16 +2,17 @@ import React from 'react';
 import {BiFilter} from "react-icons/bi";
 import {CiSearch} from "react-icons/ci";
 import {IoIosArrowForward} from "react-icons/io";
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import{MdOutlineCancel} from "react-icons/md";
+
 
 export default function Visit() {
 
-// const navigate =useNavigate();
+const navigate =useNavigate();
 
-// const takeme =()=>{
-//   return navigate("visit-report")
-// }
+const takeme =()=>{
+  return navigate("/visit/visiterReport")
+}
 
   const dummyData= [
     {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine",date:"02/05/2023",Time:"13:00 PM" ,Remark:"complete",Report:"view-report"},
@@ -54,7 +55,7 @@ export default function Visit() {
             <li>{items.hosiptalName}<br/>{items.date}</li>
             <li>{items.Time}</li>
             <li>{items.Remark}</li>
-            <li><button>{items.Report}</button></li>
+            <li><button onClick={takeme}>{items.Report}</button></li>
           </ul>
         </div>
         )

@@ -1,6 +1,6 @@
 .App {
   display: flex;
-  height: 100vh;
+  /* height: 100vh; */
 }
 /* this is where i did the styling for the two sidebars. the doctors and the patients */
 .sideBar {

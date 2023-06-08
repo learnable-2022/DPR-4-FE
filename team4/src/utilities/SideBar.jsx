@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import {AiOutlineHome} from "react-icons/ai";
 import {RxDashboard} from "react-icons/rx";
 import {BsReverseLayoutTextSidebarReverse} from "react-icons/bs";
 import {TfiWrite} from "react-icons/tfi";
@@ -9,7 +8,7 @@ import {FiLogOut} from "react-icons/fi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from '@fortawesome/free-solid-svg-icons';
 // import logo1 from "../assets/logo-03.png";
-import logo1 from "../assets/logo-03.png";
+import logo1 from "../assets/images/logo-03.png";
 
 import '../App.css';
 
