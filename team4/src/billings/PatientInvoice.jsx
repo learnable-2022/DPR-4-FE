@@ -8,12 +8,20 @@ import printer from "../assets/images/printer.png";
 import Heart from "../assets/images/Heart.png";
 import Syring from "../assets/images/Syring.png";
 import { useNavigate } from "react-router-dom";
+import RadioButton from "../assets/images/RadioButton.png";
+import pay from "../assets/images/pay.png"
+import PayPal from "../assets/images/PayPal.png";
+import VISA from "../assets/images/VISA.png";
 
 function PatientInvoice() {
   const navigate = useNavigate();
 
     function handleClick (e) {
       navigate("/PatientsBilling")
+    }
+
+    function onPress(e) {
+      navigate("/PatientInvoiceConfirmation")
     }
 
   return (
@@ -164,6 +172,50 @@ function PatientInvoice() {
                 </div>
 
         </div>
+        <div className="paymentDetails">
+          <div className="paymentOptionsNav">
+            <p>Payment Options</p>
+          </div>
+
+          <div className="paymentOptions">
+            <div className="paymentImage">
+              <div className="radioText">
+              <img onClick={onPress} className="RadioButton"  src={RadioButton}/>
+              <p>Paystack</p>
+              </div>
+              <img className="Pay" src={pay}/>
+            </div>
+
+            <div className="paymentImage">
+              <div className="radioText">
+                {/* <customRadioButton/> */}
+              <img className="RadioButton" src={RadioButton}/>
+              <p>PayPal</p>
+              </div>
+              <img  className="Paypal" src={PayPal}/>
+            </div>
+
+            <div className="paymentImage">
+              <div className="radioText">
+              <img className="RadioButton" src={RadioButton}/>
+              <p>Credit Card</p>
+              </div>
+              <img className="visa" src={VISA}/>
+            </div>
+
+            <div className="paymentImage">
+              <div className="radioText">
+              <img className="RadioButton" src={RadioButton}/>
+              <p>Debit Card</p>
+              </div>
+              <img className="visa" src={VISA}/>
+            </div>
+
+          </div>
+
+
+        </div>
+
         </div>
         
         

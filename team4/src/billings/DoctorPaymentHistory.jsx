@@ -36,12 +36,13 @@ function DoctorPaymentHistory() {
 
         <div className="coincoin">
           <div className="Details">
+          <div className="Name">
             <div className="DateCal">
               <h4>22nd May 2023</h4>
               <img src={Calendar} alt="" />
             </div>
 
-            <div className="Name">
+           
               <ul className="ulHead">
                 <li>Name</li>
                 <li>Time </li>

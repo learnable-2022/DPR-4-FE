@@ -8,7 +8,6 @@ import Dashboard from "./dashboard/dashboard";
 import './App.css';
 import Drafts from "./draffts/Drafts";
 import PatientsBilling from "../src/billings/PatientsBilling";
-import Billing from "./billings/Billing";
 import "./App.css";
 import SideBarDoc from "./utilities/SideBarDoc";
 import Overview from "./Record/sub-records/overview";
@@ -31,11 +30,11 @@ import PatientsEditProfile from "./dashboard/profilepages/PatientsEditProfile";
 import DoctorsEditProfile from "./dashboard/profilepages/DoctorsEditProfile";
 import LabReport from "./Record/sub-records/LabReport";
 import VisiterReport from "./Record/sub-records/visiterReport";
-import Authpage from "./login/authpage";
 import Signingup from "./login/signingup";
-import Patientauthpage from "./login/patientauthpage";
-import Patientsignup from "./login/patientsignup";
-import Patientlogin from "./login/patientlogin";
+import PatientInvoiceConfirmation from "./billings/PatientInvoiceConfirmation";
+import ApprovedPage from "./billings/ApprovedPage";
+import DoctorInvoiceSent from "./billings/DoctorInvoiceSent";
+
 
 
 // note!!!
@@ -43,19 +42,6 @@ import Patientlogin from "./login/patientlogin";
 // subsequent route path would follow suite.
 
 function Approuter() {
-  const paths = [
-
-
-  // const paths = [
-    // {name: "DocDashboard", route: "/Dashboard", icon: <RxDashboard />},
-    // {name:"DocRecords", route: "/DocRecords", icon: <BsReverseLayoutTextSidebarReverse/>},
-    // {name: "DocBillings", route: "/DocBillings", icon:<FcMoneyTransfer/>},
-    // {name: "DocDraft", route:"/DocDraft", icon:<TfiWrite/>},
-    // {name: "Docsettings", route:"/Docsettings" , icon:<AiOutlineSetting/>},
-    // {name: "DocLogout", route:"/DocLogout", icon:<FiLogOut/>}
-  ];
-
-  // ]
       
   return (
     <Router>
@@ -65,19 +51,18 @@ function Approuter() {
        
  {/* routes to the doctors signin and login in */}
  <Route path="signup" element={<Signingup/>} /> 
-        <Route path="auth-page" element={<Authpage/>}/> 
         <Route path="login" element={<Login/>} />
 
-        <Route path="PatientsBilling" element={<AuthUserLayout><PatientsBilling/></AuthUserLayout>} />
+   
          <Route path="PatientPaymentHistory" element={<AuthUserLayout><PatientPaymentHistory/></AuthUserLayout>} />
-         <Route path="PatientInvoice" element={<AuthUserLayout><PatientInvoice/></AuthUserLayout>} />
-         {/* routes to the patients signin and login in */}
-         <Route path="patient-auth-page" element={<Patientauthpage/>}/>
-        <Route path = "patient-sign-up" element={<Patientsignup/>}/>
-        <Route path="patient-login"   element={<Patientlogin/>}/>
+         <Route path="PatientInvoice" element={<AuthUserLayout><PatientInvoice/></AuthUserLayout>} /> 
+         <Route path="ApprovedPage" element={<AuthUserLayout><ApprovedPage/></AuthUserLayout>} />
+         <Route path="PatientInvoiceConfirmation" element={<AuthUserLayout><PatientInvoiceConfirmation/></AuthUserLayout>} />
+         <Route path="DoctorInvoiceSent" element={<AuthUserLayout><DoctorInvoiceSent/></AuthUserLayout>} />
+  
          {/* {Routes to patients app and the sub components} */}
          <Route path="Dashboard" element={<AuthUserLayout><Dashboard  /></AuthUserLayout>} />
-        <Route path="Billing" element={<AuthUserLayout><Billing /></AuthUserLayout>} />
+         <Route path="Billing" element={<AuthUserLayout><PatientsBilling/></AuthUserLayout>} />
         <Route path="Records" element={<AuthUserLayout><PatientsRecord/></AuthUserLayout>}>
           <Route index ="overview" element={<Overview />} />
           <Route path="lab" element={<Lab />} />
