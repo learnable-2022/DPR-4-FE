@@ -6,7 +6,6 @@ import SideBar from "./utilities/SideBar";
 import Dashboard from "./dashboard/dashboard";
 // import Billing from "./billings/Billing";
 import "./App.css";
-import Drafts from "./draffts/Drafts";
 import PatientsBilling from "../src/billings/PatientsBilling";
 import "./App.css";
 import SideBarDoc from "./utilities/SideBarDoc";
@@ -170,20 +169,7 @@ function Approuter() {
           ) : (
             <Route path="Records" element={<Landing />} />
           )}
-          {patientToken ? (
-            <Route
-              path="Draft"
-              element={
-                <AuthUserLayout>
-                  <Drafts />
-                </AuthUserLayout>
-              }
-            >
-              {/* {routes to doctors app and the sub components} */}
-            </Route>
-          ) : (
-            <Route path="Draft" element={<Landing />} />
-          )}
+          
           {patientToken ? (
             <Route
               path="/lab/view-report"

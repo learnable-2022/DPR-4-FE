@@ -49,8 +49,9 @@ export default function Login() {
       password: userPassword,
     };
     if (user === "doctor") {
+      let response = null;
       try {
-        const response = await axioscall.post(
+        response = await axioscall.post(
           DOCTOR_LOGIN,
           JSON.stringify(DoctorData),
           {

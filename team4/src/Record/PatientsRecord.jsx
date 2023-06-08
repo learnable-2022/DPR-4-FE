@@ -6,8 +6,15 @@ import bigpic from "../assets/big.png"
 import './Record.css';
 import { Link, Outlet } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useRequestProcessor } from '../api/requestProcessor';
+
 
 export default function PatientsRecord() {
+
+const {makeRequest} = useRequestProcessor();
+const{response, error} =makeRequest({url:"/api/v1/patient/",method:"GET"});
+console.log("response:",response, "error:",error);
+
   const navigate =useNavigate();
   const handle=()=>{
     navigate(-1)
