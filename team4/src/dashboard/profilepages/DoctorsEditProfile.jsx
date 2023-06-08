@@ -8,6 +8,7 @@ import countryList from "react-select-country-list";
 import { BsCameraFill } from "react-icons/bs";
 import { BiArrowBack } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
+import { Link } from "react-router-dom";
 
 function DoctorsEditProfile() {
   const [value, setValue] = useState("");
@@ -21,10 +22,10 @@ function DoctorsEditProfile() {
 
   // handler to set the data of the selected image to "data" state
   const handleChange = (e) => {
-    console.log(e.target.files);
     const data = new FileReader();
     data.addEventListener("load", () => {
       setData(data.result);
+      console.log("data result:" + " " + data.result);
     });
     data.readAsDataURL(e.target.files[0]);
   };
@@ -44,7 +45,9 @@ function DoctorsEditProfile() {
       <div className="_left_side">
         {/*  */}
         <div className="topleft">
-          <BiArrowBack className="back_arrow" />
+          <Link to="/DocProfile" className="link">
+            <BiArrowBack className="back_arrow" />
+          </Link>
           <div className="select_image_div">
             <label for="inputTag">
               <BsCameraFill className="camera_icon" />

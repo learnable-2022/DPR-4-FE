@@ -42,8 +42,10 @@
   gap: 10px;
 }
 .patientdashboard .right_side_header .profile_img {
-  width: 30px;
   height: 30px;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 .patientdashboard .right_side_header .profile_img:hover {
   cursor: pointer;
@@ -79,8 +81,10 @@
   justify-content: space-between;
 }
 .patientdashboard .patientsvital .image_div img {
-  width: 120px;
   height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 .patientdashboard .left_patient_vitals {
   display: flex;
@@ -111,7 +115,7 @@
   margin-top: auto;
   position: relative;
 }
-.patientdashboard .right_patient_vitals .btn {
+.patientdashboard .right_patient_vitals .right_patient_vitals_btn {
   border: none;
   padding: 0.2rem 0.5rem;
   background-color: #66cc66;
@@ -122,6 +126,38 @@
 }
 .patientdashboard .middle_section {
   margin-top: 4rem;
+}
+.patientdashboard .grant_access_div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.grant_access_div .grant_access_input {
+  flex: 0.4;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border-color: #d2d2d2;
+  border-width: 0;
+  box-shadow: 1px 1px 4px rgb(142, 142, 142);
+}
+.grant_access_div .grant_access_input:focus {
+  outline-width: 0.4px;
+  outline-color: #a3c7ec;
+}
+.grant_access_div .grant_access_btn {
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background-color: #66cc66;
+  color: white;
+}
+.grant_access_div .grant_access_btn:hover {
+  cursor: pointer;
+}
+.grant_access_input::placeholder {
+  padding-left: 1rem;
 }
 .patientdashboard .middle_section .middle_section_header {
   display: flex;
