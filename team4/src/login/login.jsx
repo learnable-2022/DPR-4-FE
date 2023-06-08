@@ -135,7 +135,7 @@ const handleLogin = async (e) =>{
           setIsLoading(false);
           setAuth({userEmail, userPassword,patientToken:response?.data.token})
           setUserEmail('');
-          setUserPassword('');  
+          setUserPassword('');  ``
           const item = localStorage.getItem("userdetails");
           // const toParse = JSON.parse(item.token);
          
