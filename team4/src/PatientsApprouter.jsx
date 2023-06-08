@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import Landing from "./landing/landing";
 import Login from "./login/login";
@@ -30,36 +30,27 @@ import PatientsEditProfile from "./dashboard/profilepages/PatientsEditProfile";
 import DoctorsEditProfile from "./dashboard/profilepages/DoctorsEditProfile";
 import LabReport from "./Record/sub-records/LabReport";
 import VisiterReport from "./Record/sub-records/visiterReport";
-import Authpage from "./login/authpage";
 import Signingup from "./login/signingup";
-import Patientauthpage from "./login/patientauthpage";
-import Patientsignup from "./login/patientsignup";
-import Patientlogin from "./login/patientlogin";
 import Confirmation from "./login/confirmation";
 
-import Forgotpassword from "./Password/Forgotpassword";
-import ChangedPassword from "./Password/ChangedPassword";
-import Otp from "./Password/Otp";
-import NewPassword from "./Password/NewPassword";
+import Forgotpassword from "./Password/forgotpassword";
+import ChangedPassword from "./Password/changedPassword";
+import Otp from "./Password/otp";
+import NewPassword from "./Password/newPassword";
+import StateContext from "./stateProvider/stateprovider";
 
 // note!!!
 // i have only created the router part for the signup , login and Landing page.
 // subsequent route path would follow suite.
 
 function Approuter() {
-  const paths = [
+  
+const {auth} = useContext(StateContext);
+console.log(auth.patientToken)
 
 
-  // const paths = [
-    // {name: "DocDashboard", route: "/Dashboard", icon: <RxDashboard />},
-    // {name:"DocRecords", route: "/DocRecords", icon: <BsReverseLayoutTextSidebarReverse/>},
-    // {name: "DocBillings", route: "/DocBillings", icon:<FcMoneyTransfer/>},
-    // {name: "DocDraft", route:"/DocDraft", icon:<TfiWrite/>},
-    // {name: "Docsettings", route:"/Docsettings" , icon:<AiOutlineSetting/>},
-    // {name: "DocLogout", route:"/DocLogout", icon:<FiLogOut/>}
-  ];
 
-  // ]
+
       
   return (
     <Router>
@@ -69,27 +60,28 @@ function Approuter() {
        
  {/* routes to the doctors signin and login in */}
         <Route path="signup" element={<Signingup/>} /> 
-        <Route path="auth-page" element={<Authpage/>}/> 
         <Route path="/confirmation" element={<Confirmation/>}/> 
-        <Route path="login" element={<Login/>} />
-        <Route path="forgotPassword" element={<Forgotpassword/>} />
-        <Route path="changedPassword" element={<ChangedPassword />} />
-        <Route path="otp" element={<Otp/>} />
-        <Route path="newPassword" element={<NewPassword/>} />
+        <Route path="/login" element={<Login/>} />
+
+        <Route path="/forgotPassword" element={<Forgotpassword/>} />
+        <Route path="/changedPassword" element={<ChangedPassword />} />
+        <Route path="/otp" element={<Otp/>} />
+        <Route path="/newPassword" element={<NewPassword/>} />
 
         
-         <Route path="PatientPaymentHistory" element={<AuthUserLayout><PatientPaymentHistory/></AuthUserLayout>} />
-         <Route path="PatientInvoice" element={<AuthUserLayout><PatientInvoice/></AuthUserLayout>} />
-         {/* routes to the patients signin and login in */}
-         <Route path="patient-auth-page" element={<Patientauthpage/>}/>
-        <Route path = "patient-sign-up" element={<Patientsignup/>}/>
-        <Route path="patient-login"   element={<Patientlogin/>}/>
+        
          {/* {Routes to patients app and the sub components} */}
 
        
+        {auth.patientToken ? (<> <Route path="Dashboard" element={<AuthUserLayout><Dashboard  /></AuthUserLayout>} />
+        <Route path="Profile" element={ <AuthUserLayout> <PatientsProfile /> </AuthUserLayout>} />
+        <Route path="EditProfile"element={<AuthUserLayout> <PatientsEditProfile /> </AuthUserLayout>  } />
 
-        <Route path="Dashboard" element={<AuthUserLayout><Dashboard  /></AuthUserLayout>} />
+
         <Route path="Billing" element={<AuthUserLayout><PatientsBilling/></AuthUserLayout>} />
+        <Route path="PatientPaymentHistory" element={<AuthUserLayout><PatientPaymentHistory/></AuthUserLayout>} />
+         <Route path="PatientInvoice" element={<AuthUserLayout><PatientInvoice/></AuthUserLayout>} />
+
         <Route path="Records" element={<AuthUserLayout><PatientsRecord/></AuthUserLayout>}>
           <Route index ="overview" element={<Overview />} />
           <Route path="lab" element={<Lab />} />
@@ -100,75 +92,32 @@ function Approuter() {
         <Route path="/lab/view-report" element={<AuthUserLayout><LabReport/></AuthUserLayout>}/>
         <Route path="/visit/visiterReport" element={<AuthUserLayout><VisiterReport/></AuthUserLayout>}/>
 
-        <Route path="Draft" element={<AuthUserLayout><Drafts /></AuthUserLayout>} />
+        <Route path="Draft" element={<AuthUserLayout><Drafts /></AuthUserLayout>} /></> ) :   <Route path="/" element={<Landing />} /> }
+        
       {/* {routes to doctors app and the sub components} */}
 
-    <Route path="/DocDashboard" element={<AuthDocLayout><DoctorsDashboard/></AuthDocLayout>}/>
-      <Route path="/DocBillings" element={<AuthDocLayout><DoctorsBilling/></AuthDocLayout>}/>
+    
    
       {/* <Route path="/DocPatientPaymentHistory" element={<AuthDocLayout><DoctorsBilling/></AuthDocLayout>}/> */}
-      
-      <Route path="/DoctorPaymentHistory" element={<AuthDocLayout><DoctorPaymentHistory/></AuthDocLayout>}/>
-      <Route path="/DocDraft" element={<AuthDocLayout><DoctorsDrafts/></AuthDocLayout>}/>
+      { auth.doctorToken ?(<>
+        <Route path="/DoctorPaymentHistory" element={<AuthDocLayout><DoctorPaymentHistory/></AuthDocLayout>}/>
       <Route path="DoctorsBilling" element={<AuthDocLayout><DoctorsBilling/></AuthDocLayout>}/>
       <Route path="/ConsultationBilling" element={<AuthDocLayout><ConsultationBilling/></AuthDocLayout>}/>
-     
+      <Route path="/DocDashboard" element={<AuthDocLayout><DoctorsDashboard/></AuthDocLayout>}/>
+      <Route path="/DocBillings" element={<AuthDocLayout><DoctorsBilling/></AuthDocLayout>}/>
 
 
+      <Route path="/DocDraft" element={<AuthDocLayout><DoctorsDrafts/></AuthDocLayout>}/>
 
 
-       
-       
-         
         
-       
+        <Route path="/DocSchedule" element={ <AuthDocLayout> <SchedulePage /></AuthDocLayout> }/>
+        <Route path="/DocProfile" element={  <AuthDocLayout> <DoctorsProfile /> </AuthDocLayout>}/>
+        <Route path="/DocEditProfile" element={ <AuthDocLayout> <DoctorsEditProfile /></AuthDocLayout>}/>
 
-
-
-
-       
-       
-        <Route
-          path="Profile"
-          element={
-            <AuthUserLayout>
-              <PatientsProfile />
-            </AuthUserLayout>
-          }
-        />
-        <Route
-          path="EditProfile"
-          element={
-            <AuthUserLayout>
-              <PatientsEditProfile />
-            </AuthUserLayout>
-          }
-        />
-
-        <Route
-          path="/DocSchedule"
-          element={
-            <AuthDocLayout>
-              <SchedulePage />
-            </AuthDocLayout>
-          }
-        />
-        <Route
-          path="/DocProfile"
-          element={
-            <AuthDocLayout>
-              <DoctorsProfile />
-            </AuthDocLayout>
-          }
-        />
-        <Route
-          path="/DocEditProfile"
-          element={
-            <AuthDocLayout>
-              <DoctorsEditProfile />
-            </AuthDocLayout>
-          }
-        />
+      
+      </>):  <Route path="/" element={<Landing />} /> }
+      
       </Routes>
     </Router>
   );
@@ -182,6 +131,7 @@ const AuthUserLayout = ({ children }) => {
   );
 };
 const AuthDocLayout = ({ children }) => {
+
   return (
     <div className="Layout">
       <SideBarDoc />

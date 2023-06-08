@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-import femaleDoc from "../landing/images/femaleDoc.png";
-import logo from "../landing/images/logo.png";
-import male from "../landing/images/maleDoc.png";
-import heart from "../landing/images/heart.png";
-import pill from "../landing/images/pill.png";
+import femaleDoc from "../landing/Images/femaleDoc.png";
+import logo from "../landing/Images/logo.png";
+import male from "../landing/Images/maleDoc.png";
+import heart from "../landing/Images/heart.png";
+import pill from "../landing/Images/pill.png";
 import "../landing/landing.css";
 import { Link } from "react-router-dom";
 
@@ -41,8 +41,9 @@ export default function Landing() {
             <Link className="link" id="nav-link" to="">
               <li>Support</li>
             </Link>
-            <Link className="link" id="get-link" to="/">
-              <button className="btn">Get Started</button>
+            <Link className="link" id="get-link" to="/confirmation">
+              {/* <button className="btn">sign in</button> */}
+              <span>sign in</span>
             </Link>
           </div>
         </div>
@@ -58,7 +59,7 @@ export default function Landing() {
             Keep all your patient data organized & secure in one easy-to-use
             desktop application.
           </p>
-          <Link className="link" to="">
+          <Link className="link" to="/confirmation">
             <button className="hero-btn">Join now</button>
           </Link>
         </div>
@@ -105,7 +106,7 @@ export default function Landing() {
           </div>
 
         <div className="section-one-part-c">
-          <Link className="link" to="">
+          <Link className="link" to="/confirmation">
             <button className="section-one-part-btn" id="section-one-part-btn">Try now</button>
           </Link>
         </div>
@@ -139,7 +140,7 @@ export default function Landing() {
               <i className="ri-checkbox-line"></i>
               <p>Low Gas Fee</p>
             </li>
-            <Link className="link" to="">
+            <Link className="link" to="/confirmation">
               <button className="hero-btn">Join now</button>
             </Link>
           </ul>
@@ -160,7 +161,7 @@ export default function Landing() {
             prevention and ongoing support, we aim to help our patients achieve
             optimal health and wellbeing
           </p>
-          <Link className="link" to="">
+          <Link className="link" to="/confirmation">
             <button className="hero-btn">Join now</button>
           </Link>
         </div>
@@ -181,8 +182,8 @@ export default function Landing() {
           </p>
         </div>
         <div className="section-four-b">
-          <Link className="link" to="">
-            <button className="section-four-btn">Stay connected</button>
+          <Link className="link" to="/confirmation">
+            <button className="section-four-btn back">Stay connected</button>
           </Link>
         </div>
       </div>

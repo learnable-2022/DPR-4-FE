@@ -8,7 +8,10 @@ body {
 #logo {
   width: 13rem;
 }
-
+.back{
+    background: #E0F5E0;
+    color: #000;
+}
 .nav-section {
   border-bottom: 1px solid #3399ff;
   display: flex;
@@ -32,9 +35,27 @@ body {
 .link {
   list-style: none;
   text-decoration: none;
-  color: #000;
   font-weight: 500;
-  font-size: 20px;
+  
+}
+.link button{
+    font-size: 20px;
+  padding: 7px 30px;
+  border-radius: 10px;
+  background-color: #3399ff;
+  color: #fff;
+  border: 1px solid #3399ff;
+  cursor: pointer;
+}
+.link span{
+    padding: 10px 25px;
+    color: #4da5ff;
+    font-size: 16px;
+    border: 1px solid #4da5ff;
+    background-color: #fff;
+    border-radius: 4px;
+    font-weight: 530;
+    cursor: pointer;
 }
 
 #nav-link{
@@ -104,7 +125,7 @@ body {
     font-weight: 700;
 } */
 
-.hero-btn {
+.link .hero-btn {
   padding: 7px 30px;
   border-radius: 10px;
   background-color: #3399ff;
@@ -112,6 +133,7 @@ body {
   border: 1px solid #3399ff;
   font-size: 20px;
   cursor: pointer;
+  border: 1px solid firebrick;
 }
 
 .hero-btn:hover{
@@ -387,7 +409,7 @@ body {
     }
 
     .hero-text{
-        margin: 10px 0 19px 0;
+        margin: 10px 0 23px 0;
         line-height: 23px;
         font-size: 17px;
         width: 58%;

@@ -1,1 +1,1 @@
-export const baseUrl = "https://medbloc-api.onrender.com/api/v1/"
+export  const baseUrl = "https://medbloc-api.onrender.com/api/v1/";

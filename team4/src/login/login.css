@@ -5,12 +5,18 @@
 }
 .first-container{
     width: 100%;
-    /* height: 100vh; */
     background: linear-gradient(180deg, #3399FF 0%, #86AE81 93.23%);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 50px 0px;
+    padding: 20px 0px 80px 0px;
+    height: 100%;
+    /* box-shadow: drop-shadow(0px 6px 15px rgba(0, 0, 0, 0.06)); */
+    /* margin-top: 20px; */
+    
+}
+.confirmation {
+    background: #fff !important;
 }
 .signup-form{
     background-color:#fff ;
@@ -18,6 +24,8 @@
     width:100%;
     background: #FFFFFF;
     border-radius: 10px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075), 10px 10px 20px rgba(0, 0, 0, 0.04);
+    /* border: 1px solid gold; */
 }
 .signup-form h2{
     font-family: 'Open Sans';
@@ -25,6 +33,7 @@
     font-weight: 900;
     font-size: 18px;
     line-height: 44px;
+    margin-bottom: 10px;
 }
 .signup-form p{
     font-family: 'Open Sans';
@@ -43,7 +52,7 @@
     align-items: center;
     justify-content: center;
     padding: 5px;
-    margin-left: 120px;
+    margin-left: 100px;
     margin-bottom: 10px;
 }
 .image-placeholder{
@@ -106,7 +115,7 @@
     
 }
 .length{
-    padding-bottom: 200px;
+    /* padding-bottom: 200px; */
 }
 .terms{
     display: flex;
@@ -168,4 +177,43 @@
     position: absolute;
     margin-top: 35px;
     left: 350px;
+}
+.confirmation-buttons{
+  margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* justify-content: center; */
+    align-items: center
+}
+.confirmation-buttons button{
+    padding: 8px 16px;
+    width: 301px;
+    height: 43px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+}
+.con-button-1{
+    background: #3399FF;
+    color: #fff;
+}
+.con-button-1:hover{
+    background: #fff;
+    color: #000;
+    transition: 2s all;
+}
+.con-button-2{
+    background: #D6EBFF;
+    color: #000;
+    
+}
+.con-button-2:hover{
+    background: #3399FF;
+    color: #FFFFFF;
+    transition: 2s all;
+}
+.lowest-section{
+    display: flex;
+    justify-content: space-between;
 }

@@ -7,8 +7,8 @@ import "./password.css";
 const ChangedPassword = () => {
   return (
     <div>
-        <div className="container">
-                <div className="container-6">
+        <div className="container-favour confirmation">
+                <div className="container-6-favour">
                     <img src={logo} alt="medbloc-logo" className="logo" />
                     <h2 className="container-text-1">Password Reset successful</h2>
                     <p className="container-text-2">
@@ -18,7 +18,7 @@ const ChangedPassword = () => {
                     <input type="submit" id="changed-btn" value="Return to Sign in"></input>
                 </div>
 
-                <div className="container-2">
+                <div className="container-2-favour">
                 <img src={desk} alt="deskimage" id="changed-desk" />
                 </div>
             </div>
