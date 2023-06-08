@@ -1,0 +1,146 @@
+* {
+  box-sizing: border-box;
+}
+.consultation_input_div {
+  display: flex;
+
+  gap: 10px;
+  width: 95%;
+  margin-bottom: 1rem;
+}
+.consultation_div_header {
+  color: #3399ff;
+  margin-bottom: 1rem;
+}
+.report_holder_text {
+  padding: 0.5rem 1rem 0.5rem 0.4rem;
+  background-color: #f2f1f1;
+  border-radius: 3px;
+  color: #999999;
+  flex: 0.2;
+  align-self: baseline;
+}
+.report_value {
+  width: 98%;
+  height: 70%;
+  padding: 0.5rem 1rem 0.5rem 0.4rem;
+  border: none;
+  text-align: center;
+  background-color: transparent;
+}
+.report_value::placeholder {
+  text-align: center;
+}
+.report_value:focus {
+  outline: none;
+}
+.report_value_div {
+  background-color: #f2f1f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  flex: 0.4;
+}
+.big_text {
+  height: 75px;
+}
+.vaccine_header {
+  display: flex;
+  justify-content: space-around;
+  width: 85%;
+
+  margin-bottom: 2rem;
+}
+.vaccine_common {
+  font-weight: 400;
+  font-size: 16px;
+  margin-bottom: 1rem;
+  text-align: left;
+  color: #999999;
+}
+.vaccine_input_div {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin-left: 2.1rem;
+}
+.vaccine_input1 {
+  padding: 0.4rem 0.3rem 0.4rem 0.3rem;
+  box-shadow: 1px 2px 8px rgb(91, 91, 91);
+  width: 12rem;
+  border-radius: 3px;
+  border-width: 0.1rem;
+  border-color: #f2f2f2;
+}
+.vaccine_input2,
+.vaccine_input3 {
+  box-shadow: 1px 2px 8px rgb(91, 91, 91);
+  border-radius: 3px;
+  border-width: 0.1rem;
+  border-color: #f2f2f2;
+}
+.vaccine_input1:focus,
+.vaccine_input2:focus {
+}
+.vi_common:focus {
+  outline: none;
+}
+.prescription_input:focus {
+  outline: none;
+}
+.report .add_more {
+  margin-left: 95%;
+  margin-top: 1rem;
+  color: #2b80d4;
+}
+ion-icon {
+  font-size: 60px;
+  --ionicon-stroke-width: 16px;
+}
+.report .add_icon {
+  width: 60px;
+  height: 60px;
+  font-weight: 100;
+}
+.prescription_div {
+  margin-top: 0.5rem;
+}
+.prescription_header {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+.prescription_input_div {
+  display: flex;
+  justify-content: space-around;
+  box-shadow: 1px 2px 8px rgb(91, 91, 91);
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.prescription_div_header {
+  color: #3399ff;
+  margin-top: 3rem;
+}
+.light {
+  color: #999999;
+}
+.prescription_input {
+  height: 30px;
+  text-align: center;
+  margin: 0.2rem 0.3rem;
+  box-shadow: 1px 2px 6px #b8b5b5;
+  border: none;
+}
+.presc_delete_btn {
+  width: 30px;
+  background-color: #fe5454;
+  color: #ffffff;
+  border: none;
+  border-radius: 2px;
+}
+.presc_delete_btn:hover {
+  cursor: pointer;
+}

@@ -29,7 +29,9 @@ import Signingup from "./login/signingup";
 import Patientauthpage from "./login/patientauthpage";
 import Patientsignup from "./login/patientsignup";
 import Patientlogin from "./login/patientlogin";
-
+import Vitals from "./draffts/Components/Vitals";
+import Finish from "./draffts/Components/Finish";
+import Report from "./draffts/Components/Report";
 
 // note!!!
 // i have only created the router part for the signup , login and Landing page.
@@ -37,9 +39,7 @@ import Patientlogin from "./login/patientlogin";
 
 function Approuter() {
   const paths = [
-
-
-  // const paths = [
+    // const paths = [
     // {name: "DocDashboard", route: "/Dashboard", icon: <RxDashboard />},
     // {name:"DocRecords", route: "/DocRecords", icon: <BsReverseLayoutTextSidebarReverse/>},
     // {name: "DocBillings", route: "/DocBillings", icon:<FcMoneyTransfer/>},
@@ -49,55 +49,107 @@ function Approuter() {
   ];
 
   // ]
-      
+
   return (
     <Router>
       <Routes>
         {/* public routes  */}
         <Route path="/" element={<Landing />} />
-       
- {/* routes to the doctors signin and login in */}
- <Route path="signup" element={<Signingup/>} /> 
-        <Route path="auth-page" element={<Authpage/>}/> 
-        <Route path="login" element={<Login/>} />
-         {/* routes to the patients signin and login in */}
-         <Route path="patient-auth-page" element={<Patientauthpage/>}/>
-        <Route path = "patient-sign-up" element={<Patientsignup/>}/>
-        <Route path="patient-login"   element={<Patientlogin/>}/>
-         {/* {Routes to patients app and the sub components} */}
-         <Route path="Dashboard" element={<AuthUserLayout><Dashboard  /></AuthUserLayout>} />
-        <Route path="Billing" element={<AuthUserLayout><Billing /></AuthUserLayout>} />
-        <Route path="Records" element={<AuthUserLayout><PatientsRecord/></AuthUserLayout>}>
-          <Route index ="overview" element={<Overview />} />
+
+        {/* routes to the doctors signin and login in */}
+        <Route path="signup" element={<Signingup />} />
+        <Route path="auth-page" element={<Authpage />} />
+        <Route path="login" element={<Login />} />
+        {/* routes to the patients signin and login in */}
+        <Route path="patient-auth-page" element={<Patientauthpage />} />
+        <Route path="patient-sign-up" element={<Patientsignup />} />
+        <Route path="patient-login" element={<Patientlogin />} />
+        {/* {Routes to patients app and the sub components} */}
+        <Route
+          path="Dashboard"
+          element={
+            <AuthUserLayout>
+              <Dashboard />
+            </AuthUserLayout>
+          }
+        />
+        <Route
+          path="Billing"
+          element={
+            <AuthUserLayout>
+              <Billing />
+            </AuthUserLayout>
+          }
+        />
+        <Route
+          path="Records"
+          element={
+            <AuthUserLayout>
+              <PatientsRecord />
+            </AuthUserLayout>
+          }
+        >
+          <Route index="overview" element={<Overview />} />
           <Route path="lab" element={<Lab />} />
           <Route path="vaccine" element={<Vaccine />} />
           <Route path="visit" element={<Visit />} />
           <Route path="prescription" element={<Prescription />} />
         </Route>
-        <Route path="Lab-report" element={<AuthUserLayout><LabReport/></AuthUserLayout>}/>
-        <Route path="visiterReport" element={<AuthUserLayout><VisiterReport/></AuthUserLayout>}/>
-        <Route path="Draft" element={<AuthUserLayout><Drafts /></AuthUserLayout>} />
-{/* {routes to doctors app and the sub components} */}
+        <Route
+          path="Lab-report"
+          element={
+            <AuthUserLayout>
+              <LabReport />
+            </AuthUserLayout>
+          }
+        />
+        <Route
+          path="visiterReport"
+          element={
+            <AuthUserLayout>
+              <VisiterReport />
+            </AuthUserLayout>
+          }
+        />
+        <Route
+          path="Draft"
+          element={
+            <AuthUserLayout>
+              <Drafts />
+            </AuthUserLayout>
+          }
+        />
+        {/* {routes to doctors app and the sub components} */}
 
-<Route path="/DocDashboard" element={<AuthDocLayout><DoctorsDashboard/></AuthDocLayout>}/>
-      <Route path="/DocBillings" element={<AuthDocLayout><DoctorsBilling/></AuthDocLayout>}/>
-      <Route path="/DocDraft" element={<AuthDocLayout><DoctorsDrafts/></AuthDocLayout>}/>
-     
+        <Route
+          path="/DocDashboard"
+          element={
+            <AuthDocLayout>
+              <DoctorsDashboard />
+            </AuthDocLayout>
+          }
+        />
+        <Route
+          path="/DocBillings"
+          element={
+            <AuthDocLayout>
+              <DoctorsBilling />
+            </AuthDocLayout>
+          }
+        />
+        <Route
+          path="/DocDraft"
+          element={
+            <AuthDocLayout>
+              <DoctorsDrafts />
+            </AuthDocLayout>
+          }
+        >
+          <Route index element={<Vitals />} /> {/*A nested route!*/}
+          <Route path="report" element={<Report />} /> {/*A nested route!*/}
+          <Route path="finish" element={<Finish />} /> {/*A nested route!*/}
+        </Route>
 
-
-
-
-       
-       
-         
-        
-       
-
-
-
-
-       
-       
         <Route
           path="Profile"
           element={

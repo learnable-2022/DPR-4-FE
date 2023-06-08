@@ -125,7 +125,14 @@
   margin-bottom: 1rem;
   position: relative;
 }
-
+.calendar-container {
+  position: relative;
+}
+.ken_class {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
 .doctorsdashboard .left-side .patients_info > :nth-child(1) {
   flex: 0.3;
 }

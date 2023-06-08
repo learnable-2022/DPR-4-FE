@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { CiCircleMore } from "react-icons/ci";
 import { CiSearch } from "react-icons/ci";
@@ -16,12 +16,31 @@ export default function DoctorsDashboard() {
   const [open2, setOpen2] = useState(false);
   const options = { month: "short", year: "numeric" };
   const options2 = { day: "numeric", weekday: "long" };
+  const mobileMenuRef = useRef();
+  const closeOpenMenus = useCallback(
+    (e) => {
+      if (
+        mobileMenuRef.current &&
+        open &&
+        !mobileMenuRef.current.contains(e.target)
+      ) {
+        setOpen(false);
+      }
+    },
+    [open]
+  );
+  useEffect(() => {
+    document.addEventListener("mousedown", closeOpenMenus);
+  }, [closeOpenMenus]);
+
   const handleButtonClick = () => {
     setOpen(!open);
   };
   const handleButtonClick2 = () => {
     setOpen2(!open2);
   };
+
+  const handleAddCargo = (e) => {};
 
   return (
     <div className="doctorsdashboard">
@@ -50,7 +69,7 @@ export default function DoctorsDashboard() {
                 onClick={handleButtonClick}
               />
               {open && (
-                <div class="dropdown">
+                <div class="dropdown" ref={mobileMenuRef}>
                   <ul>
                     <li>Patients Profile</li>
                     <li>Patients medical record</li>
@@ -80,6 +99,7 @@ export default function DoctorsDashboard() {
                 </ul>
               </div> */}
             </div>
+
             <div className="patients_info">
               <p>#2451</p>
               <p>Omengbeoji Ifeanyichukwu</p>
@@ -167,7 +187,11 @@ export default function DoctorsDashboard() {
         </div>
         <div className="right-side">
           <div className="calendar-container">
-            <Calendar onChange={setDate} value={date} />
+            <Calendar
+              onClickDay={handleAddCargo}
+              onChange={setDate}
+              value={date}
+            />
           </div>
           <div className="schedule_div">
             <div className="schedule_wrapper">
