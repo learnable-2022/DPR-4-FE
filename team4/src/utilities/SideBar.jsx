@@ -33,10 +33,6 @@ export default function SideBar() {
             <FontAwesomeIcon icon={faCoins} />
             <p>Billings</p>
           </Link>
-          <Link to="/Draft" className="link">
-            <TfiWrite />
-            <p>Draft</p>
-          </Link>
         </div>
         <div className="lower-section">
           <Link to="*" className="link">

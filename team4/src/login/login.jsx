@@ -66,7 +66,7 @@ export default function Login() {
           token: response?.data.token,
           email: response?.data.doctor,
         };
-        console.log("doc" + response?.data);
+
         // const userStringify = JSON.stringify(userdetails);
         localStorage.setItem("doctorToken", response?.data.token);
 
@@ -75,7 +75,7 @@ export default function Login() {
         setUserEmail("");
         setUserPassword("");
         const item = localStorage.getItem("doctorToken");
-
+        console.log(response?.data);
         if (item) {
           navigate("/DocDashboard");
         } else if (!item) {
@@ -83,7 +83,6 @@ export default function Login() {
           console.log("to landing");
         }
       } catch (err) {
-        console.log("doctor" + " " + err);
         if (!err?.response) {
           setErrMsg("No Server Response");
           setIsLoading(false);
