@@ -31,6 +31,10 @@ import DoctorsEditProfile from "./dashboard/profilepages/DoctorsEditProfile";
 import LabReport from "./Record/sub-records/LabReport";
 import VisiterReport from "./Record/sub-records/visiterReport";
 import Signingup from "./login/signingup";
+import PatientInvoiceConfirmation from "./billings/PatientInvoiceConfirmation";
+import ApprovedPage from "./billings/ApprovedPage";
+import DoctorInvoiceSent from "./billings/DoctorInvoiceSent";
+
 import Vitals from "./draffts/Components/Vitals";
 import Finish from "./draffts/Components/Finish";
 import Report from "./draffts/Components/Report";
@@ -54,7 +58,14 @@ function Approuter() {
   return (
     <Router>
       <Routes>
-        {/* public routes  */}
+       
+
+   
+      
+      
+                  <Route path="ApprovedPage" element={<ApprovedPage/>} />
+
+    
         <Route path="/" element={<Landing />} />:
         {/* routes to the doctors signin and login in */}
         <Route path="signup" element={<Signingup />} />
@@ -197,6 +208,20 @@ function Approuter() {
           ) : (
             <Route path="/visit/visiterReport" element={<Landing />} />
           )}
+          
+
+
+{patientToken ? (
+            <Route
+              path="/PatientInvoiceConfirmation"
+              element={
+                <PatientInvoiceConfirmation/>
+              }
+            />
+          ) : (
+            <Route path="/PatientInvoiceConfirmation" element={<Landing />} />
+          )}
+
         </>
         {/* {routes to doctors app and the sub components} */}
         {/* <Route path="/DocPatientPaymentHistory" element={<AuthDocLayout><DoctorsBilling/></AuthDocLayout>}/> */}
@@ -248,6 +273,7 @@ function Approuter() {
         ) : (
           <Route path="/DocDashboard" element={<Landing />} />
         )}
+
         {doctorToken ? (
           <Route
             path="/DocBillings"
@@ -276,6 +302,7 @@ function Approuter() {
         ) : (
           <Route path="/DocDraft" element={<Landing />} />
         )}
+
         {doctorToken ? (
           <Route
             path="/DocSchedule"
@@ -314,6 +341,20 @@ function Approuter() {
           />
         ) : (
           <Route path="/DocEditProfile" element={<Landing />} />
+        )}
+
+{doctorToken ? (
+          <Route
+            path="/DoctorInvoiceSent"
+            element={
+              <AuthDocLayout>
+                {" "}
+              <DoctorInvoiceSent/>
+              </AuthDocLayout>
+            }
+          />
+        ) : (
+          <Route path="/DoctorInvoiceSent" element={<Landing />} />
         )}
       </Routes>
     </Router>
