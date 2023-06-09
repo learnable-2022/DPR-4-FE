@@ -27,7 +27,16 @@ export default function NavBar() {
             <IoIosNotificationsOutline />
           </div>
           <div className="nav-short">
-            <img src={smallLogo} alt="frame" />
+            <img
+              src={smallLogo}
+              style={{
+                width: "60px",
+                height: "60px",
+                borderRadius: "50%",
+                border: "1px solid black",
+              }}
+              alt="frame"
+            />
             <p>Mrs Rosaline Doe</p>
           </div>
         </div>

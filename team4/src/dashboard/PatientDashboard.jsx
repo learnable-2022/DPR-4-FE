@@ -23,19 +23,13 @@ import drug4 from "../assets/drug4.svg";
 import { Link, useNavigate } from "react-router-dom";
 import StateContext from "../stateProvider/stateprovider";
 export default function PatientDashboard() {
-  // const {auth} = useContext(StateContext);
-  // const patientNavigator = useNavigate();
+  let PatientId = localStorage.getItem("user_id");
+  const { makeRequest } = useRequestProcessor();
+  const { response, error } = makeRequest({ url: "/patient/", method: "GET" });
+  console.log("response:", response, "error:", error);
 
-  // console.log(auth.token);
-
-  // if (auth.doctorToken) {
-  //   return  patientNavigator("./docdashboard");
-
-  // }else if(!auth.doctorToken){
-
-  //   return patientNavigator("./landing");
-  // }
-
+  const getUser = response?.data.find((item) => item._id === PatientId);
+  console.log(getUser.name);
   const [data, setData] = useState(true);
   const drugs = [drug1, drug2, drug3, drug4];
   const [connectedWallet, setConnectedWallet] = useState(true);
@@ -56,7 +50,7 @@ export default function PatientDashboard() {
     <div className="patientdashboard">
       <header className="patientdashboard_header">
         <div className="left_side_header">
-          <h1>Welcome! Roseline,</h1>
+          <h1>Welcome! {getUser.name}</h1>
         </div>
         <div className="right_side_header">
           <button className="share_btn">Share Report</button>

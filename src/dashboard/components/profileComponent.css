@@ -35,6 +35,8 @@
 .topleft .prof_img {
   height: 160px;
   width: 160px;
+  border-radius: 50%;
+  border: 1px solid black;
 }
 @media (max-width: 667px) {
   .topleft {
@@ -53,6 +55,8 @@
   .topleft .prof_img {
     height: 120px;
     width: 120px;
+    border-radius: 50%;
+    border: 1px solid black;
   }
 }
 @media (max-width: 300px) {
