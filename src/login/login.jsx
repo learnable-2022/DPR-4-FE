@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import "./login.css";
 import medblog from "../assets/logo-02.png";
 import bigImage from "../assets/signup-second.png";
+import {
+  faEye,
+  faEyeSlash,
+} from "@fortawesome/free-solid-svg-icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import StateContext from "../stateProvider/stateprovider";
 import { useContext } from "react";
 import axioscall from "../api/secondApi";
@@ -26,9 +31,16 @@ export default function Login() {
 
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
+  const [makeVisible, setMakeVisible] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [errmsg, setErrMsg] = useState("");
+
+const handleVisibleChange =()=>{
+  setMakeVisible(!makeVisible);
+}
+  let DOCTOR_ITEM = localStorage.getItem("doctorEmail");
+  let PATIENT_ITEM = localStorage.getItem("patientEmail");
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -48,7 +60,7 @@ export default function Login() {
       email: userEmail,
       password: userPassword,
     };
-    if (user === "doctor") {
+    if (user === "doctor" || DOCTOR_ITEM) {
       let response = null;
       try {
         response = await axioscall.post(
@@ -84,7 +96,7 @@ export default function Login() {
         if (item) {
           navigate("/DocDashboard");
         } else if (!item) {
-          navigate("./landing");
+          // navigate("./landing");
           console.log("to landing");
         }
       } catch (err) {
@@ -126,7 +138,7 @@ export default function Login() {
           }
         }
       }
-    } else if (user === "patient") {
+    } else if (user === "patient" || PATIENT_ITEM) {
       try {
         const response = await axioscall.post(
           PATIENT_LOGIN,
@@ -145,7 +157,7 @@ export default function Login() {
           email: response?.data.email,
         };
         console.log(response?.data);
-        const userStringify = JSON.stringify(userdetails);
+        // const userStringify = JSON.stringify(userdetails);
         localStorage.setItem("patientToken", response?.data.token);
         localStorage.setItem("patientEmail", response?.data.email);
         setIsLoading(false);
@@ -162,7 +174,7 @@ export default function Login() {
         if (item) {
           navigate("/Dashboard");
         } else if (!item) {
-          navigate("./landing");
+          // navigate("./landing");
           console.log("to landing");
         }
       } catch (err) {
@@ -170,20 +182,20 @@ export default function Login() {
           setErrMsg("No Server Response");
           setIsLoading(false);
           setTimeout(() => {
-            navigate("/");
+            navigate(-1);
           }, 2000);
         } else if (err.response?.status === 409) {
           setErrMsg("Username Taken");
           setIsLoading(false);
           setTimeout(() => {
-            navigate("/");
+            navigate(-1);
           }, 2000);
         } else {
           setErrMsg("Registration Failed");
           setIsLoading(false);
           console.log(errmsg);
           setTimeout(() => {
-            navigate("/");
+            navigate(-1);
           }, 2000);
         }
       }
@@ -199,7 +211,13 @@ export default function Login() {
           <h2>Login</h2>
           <p>Please enter your login details to sign in.</p>
           <form className="form" onSubmit={handleLogin}>
-            {errorMessage ? <p>{errorMessage}</p> : ""}
+            {errorMessage ?
+            
+            setTimeout(()=>{
+            <p>{errorMessage}</p>}
+            ,2000)
+
+             : ""}
             {errmsg && <p>{errmsg}</p>}
             <div class="input">
               <label>Email Address</label>
@@ -212,9 +230,16 @@ export default function Login() {
               />
             </div>
             <div class="input">
-              <label>Password</label>
+              <label>
+                Password
+                <FontAwesomeIcon
+                  icon={makeVisible ?  faEye : faEyeSlash}
+                  className="password-toggle"
+                  onClick={handleVisibleChange}
+                />
+                </label>
               <input
-                type="password"
+                type={makeVisible? "text" : "password"}
                 placeholder="password"
                 value={userPassword}
                 onChange={(e) => setUserPassword(e.target.value)}
@@ -222,7 +247,7 @@ export default function Login() {
               />
             </div>
             <div className="diverge">
-              <div>
+              <div className="diverge-1">
                 <input type="checkbox" />
                 <span>Keep me logged in</span>
               </div>

@@ -25,9 +25,9 @@
     10px 10px 20px rgba(0, 0, 0, 0.04);
 }
 .signup-form h2 {
-  font-family: "Open Sans";
+  font-family: "poppins";
   font-style: normal;
-  font-weight: 900;
+  font-weight:  bold;
   font-size: 18px;
   line-height: 44px;
   margin-bottom: 10px;
@@ -74,7 +74,7 @@
 .input label {
   font-family: "Poppins";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 16px;
   line-height: 24px;
   color: #666666;
@@ -144,6 +144,11 @@
 .linky {
   text-decoration: none;
   color: blue;
+  font-weight: bold;
+}
+.linky span{
+  color:  hsl(210, 100%, 60%);
+  font-weight: bold;
 }
 .wallet-link {
   color: #000;
@@ -153,7 +158,10 @@
   font-weight: 600;
   color: #3399ff;
 }
-
+.wallet-link2 span{
+  color:  hsl(210, 100%, 60%);
+  font-weight: bold;
+}
 .valid {
   color: limegreen;
   margin-left: 0.25rem;
@@ -207,6 +215,13 @@
   border: 2px solid #ffff;
 }
 .lowest-section {
+  /* margin-top: 10px; */
   display: flex;
   justify-content: space-between;
+ align-items: center;
+}
+.diverge-1{
+  display: flex;
+  align-items: center;
+  gap: 2px;
 }
