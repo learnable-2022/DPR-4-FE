@@ -26,6 +26,16 @@ export default function DoctorsDashboard() {
 //   return navigator("./landing");
 // }
 
+const ethers = require("ethers");
+let contractAddress = "0x62a41ff78d24598a0f0e8ffac7741790918c494a";
+const [errorMessage, setErrorMessage] = useState(null);
+const [defaultAccount, setDefaultAccount] = useState(null);
+const [connButtonText, setConnButtonText] = useState('Connect Metamask');
+
+const [provider, setProvider] = useState(null);
+const [signer, setSigner] = useState(null);
+const [contract, setContract] = useState(null);
+const [connectedWallet, setConnectedWallet] = useState(false);
 
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
@@ -59,6 +69,7 @@ export default function DoctorsDashboard() {
   const handleAddCargo = (e) => {};
 
   return (
+    
     <div className="doctorsdashboard">
       <NavComponent />
 

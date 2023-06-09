@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { GrNotification } from "react-icons/gr";
 import "./PatientsDashboard.css";
 import emptyProfile from "../assets/ava3.png";
@@ -22,7 +22,10 @@ import drug3 from "../assets/drug3.svg";
 import drug4 from "../assets/drug4.svg";
 import { Link, useNavigate } from "react-router-dom";
 import StateContext from "../stateProvider/stateprovider";
+import abi from "../abi.json";
+import { ethers } from 'ethers';
 export default function PatientDashboard() {
+
   // const {auth} = useContext(StateContext);
   // const patientNavigator = useNavigate();
 
@@ -35,11 +38,99 @@ export default function PatientDashboard() {
 
   //   return patientNavigator("./landing");
   // }
-
+  // const ethers = require("ethers");
   const [data, setData] = useState(true);
   const drugs = [drug1, drug2, drug3, drug4];
-  const [connectedWallet, setConnectedWallet] = useState(true);
+  const [connectedWallet, setConnectedWallet] = useState(false);
   const diseases = [disease1, disease2, disease3];
+
+  let contractAddress = "0x847C23939F9B449aF24b8B477514334FbB1E6d15";
+  const [errorMessage, setErrorMessage] = useState(null);
+	const [defaultAccount, setDefaultAccount] = useState(null);
+	const [connButtonText, setConnButtonText] = useState('Connect Metamask');
+
+	const [provider, setProvider] = useState(null);
+	const [signer, setSigner] = useState(null);
+	const [contract, setContract] = useState(null);
+
+  const connectWalletHandler = () =>{
+
+    if (window.ethereum && window.ethereum.isMetaMask) {
+
+  window.ethereum.request({ method: 'eth_requestAccounts'})
+  .then(result => {
+    accountChangedHandler(result[0]);
+    setConnectedWallet(true);
+    // console.log(defaultAccount);
+  
+    // setConnButtonText('Wallet Connected');
+  })
+  .catch(error => {
+    setErrorMessage(error.message);
+  
+  });
+
+} else {
+  console.log('Need to install MetaMask');
+  setErrorMessage('Please install MetaMask browser extension to interact');
+}
+};
+
+
+const updateEthers = async () => {
+  try {
+    if (window.ethereum && window.ethereum.isMetaMask) {
+      let tempProvider = new ethers.BrowserProvider(window.ethereum);
+  setProvider(tempProvider);
+  console.log(tempProvider);
+
+  let tempSigner = tempProvider.getSigner();
+  setSigner(tempSigner);
+
+  let tempContract = new ethers.Contract(contractAddress, abi, tempSigner);
+  setContract(tempContract);
+  // console.log(tempContract);
+  
+  
+      
+      
+    } else {
+      console.error('Please install MetaMask or use a compatible Ethereum browser extension.');
+    }
+  } catch (error) {
+    console.error('Error updating Ethers:', error);
+  }
+};
+
+
+const accountChangedHandler = (newAccount) => {
+setDefaultAccount(newAccount);
+};
+
+
+useEffect(() => {
+  
+  updateEthers();
+  connectWalletHandler();
+}, []);
+
+
+const grantDoctorAccess = async (e) => {
+  try {
+    e.preventDefault();
+    let doctorID = e.target.doctorAddress.value;
+    if (contract) {
+      let access = await contract.grantAccess(defaultAccount, doctorID);
+      console.log('Access granted:', access);
+    } else {
+      console.error('Contract is not available');
+    };
+  } catch (error) {
+    console.error('Error granting access:', error);
+  }
+};
+
+
   const generateDrugPic = () => {
     let number = Math.floor(Math.random() * 4);
     let val = number;
@@ -52,6 +143,7 @@ export default function PatientDashboard() {
 
     return val;
   };
+
   return (
     <div className="patientdashboard">
       <header className="patientdashboard_header">
@@ -128,12 +220,15 @@ export default function PatientDashboard() {
         {connectedWallet ? (
           <div className="middle_section">
             <div className="grant_access_div">
+            <form onSubmit={grantDoctorAccess}>
               <input
+              id="doctorAddress"
                 className="grant_access_input"
                 type="text"
                 placeholder="Enter Doctor's Wallet Address to grant access"
               />
               <button className="grant_access_btn">Grant Access</button>
+              </form>
             </div>
             <div className="middle_section_header">
               <p>My Vitals</p>
@@ -592,7 +687,7 @@ export default function PatientDashboard() {
           </div>
         ) : (
           <div style={{ textAlign: "center", marginTop: "20%" }}>
-            <button className="connect_meta">Connect to Metamask!</button>
+            <button className="connect_meta" onClick={connectWalletHandler}>{connButtonText}</button>
           </div>
         )}
       </main>
