@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {IoIosNotificationsOutline} from "react-icons/io";
 import {BsArrowLeft} from "react-icons/bs";
 import smallLogo from "../assets/small.png";
@@ -11,9 +11,9 @@ import { useRequestProcessor } from '../api/requestProcessor';
 
 export default function PatientsRecord() {
 
-const {makeRequest} = useRequestProcessor();
-const{response, error} =makeRequest({url:"/api/v1/patient/",method:"GET"});
-console.log("response:",response, "error:",error);
+
+
+
 
   const navigate =useNavigate();
   const handle=()=>{
@@ -38,9 +38,9 @@ console.log("response:",response, "error:",error);
               <IoIosNotificationsOutline/>
             </div>
             <div className='nav-short'>
-              <img src={smallLogo}alt="frame"/>
+           <Link to="/Profile">   <img src={smallLogo}alt="frame"/></Link>
+
               <p>
-              Mrs Rosaline Doe
               </p>
             </div>
           </div>

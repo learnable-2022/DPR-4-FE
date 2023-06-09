@@ -187,13 +187,14 @@
   outline: none;
 }
 .con-button-1 {
-  background: #3399ff;
+  background: hsl(210, 100%, 60%);
   color: #fff;
 }
 .con-button-1:hover {
   background: #fff;
   color: #000;
   transition: 2s all;
+  border : 2px solid  hsl(210, 100%, 60%);
 }
 .con-button-2 {
   background: #d6ebff;
@@ -203,6 +204,7 @@
   background: #3399ff;
   color: #ffffff;
   transition: 2s all;
+  border: 2px solid #ffff;
 }
 .lowest-section {
   display: flex;
