@@ -10,8 +10,12 @@ import countryList from "react-select-country-list";
 import { BsCameraFill } from "react-icons/bs";
 import { BiArrowBack } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function PatientsEditProfile() {
+  let patient_Image = localStorage.getItem("patient_image");
+  let patientID = localStorage.getItem("patient_id");
+  let token = localStorage.getItem("patientToken");
   const [value, setValue] = useState("");
   const options = useMemo(() => countryList().getData(), []);
   const [data, setData] = useState();
@@ -33,6 +37,30 @@ function PatientsEditProfile() {
   const handleSelectedCity = (e) => {
     setSelectedCity(e.target.value);
   };
+  // const saveProfile = () => {
+  //   getPatientDetails();
+  // };
+  // const getPatientDetails = async () => {
+  //   const response = await axios.put(
+  //     `https://medbloc-api.onrender.com/api/v1/patient/${patientID}`,
+  //     {
+  //       image: data,
+  //     },
+  //     {
+  //       headers: {
+  //         "x-auth-token": token,
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //         "Access-Control-Allow-Origin": "*",
+  //       },
+  //     }
+  //   );
+  //   console.log(response);
+  //   // const res = response?.data.find((item) => item.email === PatientEmail);
+  //   // console.log(res);
+  //   // localStorage.setItem("patient_image", res.image);
+  //   // localStorage.setItem("patient_name", res.name);
+  // };
   const availableCities = Cities?.find((s) => s.name === selectedState);
   // handler to set the data of the selected image to "data" state
   const handleChange = (e) => {
@@ -89,7 +117,7 @@ function PatientsEditProfile() {
               ) : (
                 <img
                   style={{ objectFit: "cover" }}
-                  src={emptyProfile}
+                  src={patient_Image ? patient_Image : emptyProfile}
                   alt="profileImage"
                 />
               )}

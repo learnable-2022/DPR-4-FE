@@ -80,7 +80,7 @@ function NavComponent() {
     <div className="header">
       <div className="header_text_part">
         <h1>
-          You are welcome <span className="doc_name">Dr.Chijindu</span>
+          You are welcome <span className="doc_name">{""}</span>
         </h1>
         <p>I trust you’re ready to save lives today...</p>
       </div>
