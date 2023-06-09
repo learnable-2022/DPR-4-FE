@@ -52,6 +52,7 @@ export default function PatientDashboard() {
 	const [provider, setProvider] = useState(null);
 	const [signer, setSigner] = useState(null);
 	const [contract, setContract] = useState(null);
+  const [getForm , setGetForm] = useState('');
 
   const connectWalletHandler = () =>{
 
@@ -80,13 +81,13 @@ export default function PatientDashboard() {
 const updateEthers = async () => {
   try {
     if (window.ethereum && window.ethereum.isMetaMask) {
-      let tempProvider = new ethers.BrowserProvider(window.ethereum);
+      let tempProvider = new ethers.providers.Web3Provider(window.ethereum);
   setProvider(tempProvider);
-  console.log(tempProvider);
+  
 
   let tempSigner = tempProvider.getSigner();
   setSigner(tempSigner);
-
+  console.log(tempSigner);
   let tempContract = new ethers.Contract(contractAddress, abi, tempSigner);
   setContract(tempContract);
   // console.log(tempContract);
@@ -116,12 +117,34 @@ useEffect(() => {
 
 
 const grantDoctorAccess = async (e) => {
+
+  try{
+      if(defaultAccount == null && getForm == '')return ;
+      console.log(getForm , defaultAccount);
+      let access = await contract.grantAccess( getForm,defaultAccount);
+
+  }catch(err){
+
+  }
+  
+    // if (contract) {
+    //   if(defaultAccount == null)return ;
+    //   let doctorID = e.target.name.doctorAddress.value;
+    //   console.log(doctorID);
+    //   let access = await contract.grantAccess(defaultAccount, doctorID);
+    //   console.log('Access granted:', access);
+    // } else {
+    //   console.error('Contract is not available');
+    // };
+ 
+};
+
+
+const checkUser = async () => {
   try {
-    e.preventDefault();
-    let doctorID = e.target.doctorAddress.value;
     if (contract) {
-      let access = await contract.grantAccess(defaultAccount, doctorID);
-      console.log('Access granted:', access);
+      let access = await contract.isDoctor("0x667E5B64873B08B129eD730260d78B4739263Ead");
+      console.log('Doctor:', access);
     } else {
       console.error('Contract is not available');
     };
@@ -130,6 +153,7 @@ const grantDoctorAccess = async (e) => {
   }
 };
 
+checkUser();
 
   const generateDrugPic = () => {
     let number = Math.floor(Math.random() * 4);
@@ -220,15 +244,15 @@ const grantDoctorAccess = async (e) => {
         {connectedWallet ? (
           <div className="middle_section">
             <div className="grant_access_div">
-            <form onSubmit={grantDoctorAccess}>
               <input
-              id="doctorAddress"
+              name="doctorAddress"
                 className="grant_access_input"
                 type="text"
+                onChange={(e)=>setGetForm(e.target.value)}
                 placeholder="Enter Doctor's Wallet Address to grant access"
               />
-              <button className="grant_access_btn">Grant Access</button>
-              </form>
+              <button onClick={()=>grantDoctorAccess()}  className="grant_access_btn">Grant Access</button>
+
             </div>
             <div className="middle_section_header">
               <p>My Vitals</p>
