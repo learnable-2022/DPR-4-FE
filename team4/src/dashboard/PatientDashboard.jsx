@@ -120,9 +120,8 @@ const grantDoctorAccess = async (e) => {
 
   try{
       if(defaultAccount == null && getForm == '')return ;
-      console.log(getForm , defaultAccount);
       let access = await contract.grantAccess( getForm,defaultAccount);
-
+      console.log("Access Granted");
   }catch(err){
 
   }
