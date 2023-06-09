@@ -4,7 +4,7 @@
 .doctorsprofile {
   padding: 2rem;
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* or simply "1fr 1fr;" */
+  grid-template-columns: repeat(2, 1fr);
   grid-row-gap: 10px;
   grid-column-gap: 2rem;
   width: 100%;
@@ -12,8 +12,7 @@
 
   overflow-y: scroll;
 }
-.doctorsprofile .leftside {
-}
+
 .doctorsprofile .rightside {
   box-shadow: 1px 2px 8px rgb(91, 91, 91);
   border-radius: 10px;
@@ -77,8 +76,7 @@
   font-size: 11px;
   font-weight: 400;
 }
-.rightside {
-}
+
 .rightside .header {
   margin: 0;
   font-size: 21px;
@@ -105,7 +103,7 @@
 .link {
   color: black;
 }
-/* Responsiveness */
+
 @media (max-width: 1050px) {
   .doctorsprofile {
     display: flex;

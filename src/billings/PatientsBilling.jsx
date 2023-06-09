@@ -23,7 +23,7 @@ export default function PatientsBilling() {
   }
 
   function handlePress(e) {
-    navigate("/PatientInvoice")
+    navigate("/PatientInvoice");
   }
 
   return (
@@ -44,8 +44,8 @@ export default function PatientsBilling() {
               </div>
 
               <div className="searchIcons">
-                <img src={Notification} alt="" />
-                <img src={PatientPics} alt="" />
+                <img src={Notification} alt="pics" />
+                <img src={PatientPics} alt="pics" />
               </div>
             </div>
           </div>
@@ -58,37 +58,37 @@ export default function PatientsBilling() {
                 <div className="MoneyOptionLeft">
                   <div className="portfolio">
                     <p>Portfolio Balance</p>
-                    <img src={Show} alt="" />
+                    <img src={Show} alt="pics" />
                   </div>
                   <div className="Money">
-                    <img src={Dollar} alt="" />
+                    <img src={Dollar} alt="pics" />
                     <h3>200,000</h3>
                   </div>
                 </div>
                 <div className="MoneyOptionRight">
                   <p>USD</p>
-                  <img src={ArrowDown2} alt="" />
+                  <img src={ArrowDown2} alt="pics" />
                 </div>
               </div>
             </div>
             <div className="BillingCards">
               <div className="BillingCard">
                 <div className="BillingCardContent1">
-                  <img src={ArrowDown} />
+                  <img src={ArrowDown} alt="pics" />
                   <p>Deposit</p>
                 </div>
               </div>
 
               <div className="BillingCard">
                 <div className="BillingCardContent1">
-                  <img src={ArrowUp} />
+                  <img src={ArrowUp} alt="pics" />
                   <p>Withdraw</p>
                 </div>
               </div>
 
               <div className="BillingCard">
                 <div className="BillingCardContent1">
-                  <img src={ArrowSlant} />
+                  <img src={ArrowSlant} alt="pics" />
                   <p>Send</p>
                 </div>
               </div>
@@ -96,15 +96,15 @@ export default function PatientsBilling() {
           </div>
 
           <div className="HeroRight">
-            <img src={BlockIcon} alt="" />
+            <img src={BlockIcon} alt="pics" />
             {/* <img src={BlockIconResize} alt/> */}
           </div>
         </div>
 
         <div className="Dashboard">
-        <div className="patientDashboardHeading">
+          <div className="patientDashboardHeading">
             <p>Payment History</p>
-            </div>
+          </div>
           <div className="patientDashboard">
             <div className="patientNav">
               <ul>
@@ -115,38 +115,38 @@ export default function PatientsBilling() {
             </div>
 
             <div className="PatientEntities" onClick={handleClick}>
-              <ul >
+              <ul>
                 <li>Dr. Ada</li>
                 <li className="Successful">Successful</li>
                 <li>USD 22,000 </li>
               </ul>
               <hr className="PatientUnderline"></hr>
-              <ul >
+              <ul>
                 <li>Dr. Charl</li>
                 <li className="Declined">Declined</li>
-                <li>USD 22,000  </li>
+                <li>USD 22,000 </li>
               </ul>
               <hr className="PatientUnderline"></hr>
-              <ul >
+              <ul>
                 <li>Dr. Chris</li>
                 <li className="Successful">Successful</li>
-                <li>USD 22,000  </li>
+                <li>USD 22,000 </li>
               </ul>
               <hr className="PatientUnderline"></hr>
-              <ul >
+              <ul>
                 <li>Dr. Kemisola</li>
                 <li className="Successful">Successful</li>
-                <li>USD 22,000  </li>
+                <li>USD 22,000 </li>
               </ul>
             </div>
           </div>
           <div className="ViewAll">
-              <p onClick={handleClick}>View all</p>
-            </div> 
+            <p onClick={handleClick}>View all</p>
+          </div>
           {/* /////////////////////////down////////////////////////////// */}
           <div className="patientDashboardHeading">
             <p>Invoice Statement</p>
-            </div>
+          </div>
           <div className="patientDashboard">
             <div className="patientNav">
               <ul>
@@ -157,39 +157,37 @@ export default function PatientsBilling() {
             </div>
 
             <div className="PatientEntities" onClick={handlePress}>
-              <ul >
+              <ul>
                 <li>Dr. Ada</li>
                 <li className="Successful">Paid</li>
                 <li>USD 22,000 </li>
               </ul>
               <hr className="PatientUnderline"></hr>
-              <ul >
+              <ul>
                 <li>Dr. Charl</li>
                 <li className="Declined">Declined</li>
-                <li>USD 22,000  </li>
+                <li>USD 22,000 </li>
               </ul>
               <hr className="PatientUnderline"></hr>
-              <ul >
+              <ul>
                 <li>Dr. Chris</li>
                 <li className="Successful">Paid</li>
-                <li>USD 22,000  </li>
+                <li>USD 22,000 </li>
               </ul>
               <hr className="PatientUnderline"></hr>
-              <ul >
+              <ul>
                 <li>Dr. Kemisola</li>
                 <li className="Successful">Paid</li>
-                <li>USD 22,000  </li>
+                <li>USD 22,000 </li>
               </ul>
             </div>
           </div>
 
           <div className="ViewAll">
-              <p onClick={handlePress}>View all</p>
-          </div> 
-
+            <p onClick={handlePress}>View all</p>
+          </div>
         </div>
       </div>
     </>
   );
 }
-

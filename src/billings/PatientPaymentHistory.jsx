@@ -12,25 +12,24 @@ function PatientPaymentHistory() {
           <div className="Consultation">
             <div className="Bill">
               <h6>Consultation Bill </h6>
-              <img src={ArrowRight2} className="ArrowHistory" alt="" />
+              <img src={ArrowRight2} className="ArrowHistory" alt="pics" />
             </div>
 
             <div className="Bill">
               <h6>Payment History</h6>
-              <img src={ArrowRight2} className="ArrowHistory" alt="" />
+              <img src={ArrowRight2} className="ArrowHistory" alt="pics" />
             </div>
           </div>
         </div>
 
         <div className="coincoin">
           <div className="Details">
-          <div className="Name">
-            <div className="DateCal">
-              <h4>22nd May 2023</h4>
-              <img src={Calender} alt="" />
-            </div>
+            <div className="Name">
+              <div className="DateCal">
+                <h4>22nd May 2023</h4>
+                <img src={Calender} alt="pics" />
+              </div>
 
-            
               <ul className="ulHead">
                 <li>Name</li>
                 <li>Time </li>
@@ -110,7 +109,7 @@ function PatientPaymentHistory() {
             <div className="Details">
               <div className="DateCalDown">
                 <h4>22nd May 2023</h4>
-                <img src={Calender} alt="" />
+                <img src={Calender} alt="pics" />
               </div>
 
               <div className="DetailEntities">

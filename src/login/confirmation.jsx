@@ -50,7 +50,7 @@ const Confirmation = () => {
         <div className="sign-up-container">
           <div className="signup-form length">
             <div>
-              <img src={medblog} alt="medblog-image" />
+              <img src={medblog} alt="medblog" />
             </div>
             <h2>Get Started</h2>
             <p>
@@ -72,7 +72,7 @@ const Confirmation = () => {
             </div>
           </div>
           <div className="image-placeholder">
-            <img src={bigImage} alt="big-image" />
+            <img src={bigImage} alt="big" />
           </div>
         </div>
       </div>
