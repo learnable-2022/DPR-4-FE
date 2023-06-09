@@ -70,8 +70,7 @@
 .appointment_main .d_input:focus {
   outline: none;
 }
-.d_input::placeholder {
-}
+
 .create_appoint {
   cursor: pointer;
 }
@@ -87,8 +86,7 @@
 .appointment_div .close_div:hover {
   cursor: pointer;
 }
-.appointment_div .left_header {
-}
+
 .appointment_div .middle_header {
   flex: 0.7;
 }
@@ -166,6 +164,4 @@
   }
 }
 @media (max-width: 1018px) {
-  .notification_drop {
-  }
 }

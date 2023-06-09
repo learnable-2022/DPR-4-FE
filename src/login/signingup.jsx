@@ -156,7 +156,7 @@ export default function Signingup() {
       <div className="sign-up-container">
         <div className="signup-form ">
           <div>
-            <img src={medblog} alt="medblog-image" />
+            <img src={medblog} alt="medblog" />
           </div>
           <h2>Sign up</h2>
           <p>Create your account</p>
@@ -313,7 +313,7 @@ export default function Signingup() {
           </div>
         </div>
         <div className="image-placeholder">
-          <img src={bigImage} alt="big-image" />
+          <img src={bigImage} alt="big" />
         </div>
       </div>
     </div>

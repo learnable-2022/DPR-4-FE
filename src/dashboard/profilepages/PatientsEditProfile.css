@@ -1,7 +1,7 @@
 .patientseditprofile {
   padding: 2rem;
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* or simply "1fr 1fr;" */
+  grid-template-columns: repeat(2, 1fr);
   grid-row-gap: 10px;
   grid-column-gap: 2rem;
   width: 100%;
@@ -228,8 +228,7 @@
   .patientseditprofile {
     padding: 0.4rem;
   }
-  .patientseditprofile .topleft- .name- {
-  }
+
   .patientseditprofile .topleft- {
     text-align: center;
     flex-direction: column;

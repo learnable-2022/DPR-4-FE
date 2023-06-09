@@ -1,14 +1,14 @@
-import React from 'react'
+import React from "react";
 import { CiSearch } from "react-icons/ci";
 import Notification from "../assets/images/Notification.png";
 import PatientPics from "../assets/images/PatientPics.png";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export default function DoctorsBilling() {
   const navigate = useNavigate();
 
   function handleClick(e) {
-    navigate ("/DoctorPaymentHistory");
+    navigate("/DoctorPaymentHistory");
   }
 
   return (
@@ -17,9 +17,7 @@ export default function DoctorsBilling() {
         <div className="billingBoardDashboard">
           <div className="billingNav">
             <div className="DoctorName">
-              <h2>
-              Hello, Dr. Ada!
-              </h2>
+              <h2>Hello, Dr. Ada!</h2>
             </div>
 
             <div className="searchParent">
@@ -29,19 +27,17 @@ export default function DoctorsBilling() {
               </div>
 
               <div className="searchIcons">
-                <img src={Notification} alt="" />
-                <img src={PatientPics} alt="" />
+                <img src={Notification} alt="pics" />
+                <img src={PatientPics} alt="pics" />
               </div>
             </div>
           </div>
         </div>
 
-
-        
         <div className="Dashboard">
-        <div className="patientDashboardHeading">
+          <div className="patientDashboardHeading">
             <p>Payment History</p>
-            </div>
+          </div>
           <div className="doctorsDashboard">
             <div className="patientNav">
               <ul>
@@ -51,45 +47,43 @@ export default function DoctorsBilling() {
               </ul>
             </div>
 
-            <div className="PatientEntities" onClick={handleClick}
-            >
-              <ul >
+            <div className="PatientEntities" onClick={handleClick}>
+              <ul>
                 <li>Amaka</li>
                 <li className="Successful">Paid</li>
                 <li>USD 22,000 </li>
               </ul>
               <hr className="PatientUnderline"></hr>
-              <ul >
+              <ul>
                 <li>Timothy</li>
                 <li className="Declined">Unpaid</li>
-                <li>USD 5,000   </li>
+                <li>USD 5,000 </li>
               </ul>
               <hr className="PatientUnderline"></hr>
-              <ul >
+              <ul>
                 <li>Chris</li>
                 <li className="Successful">Paid</li>
-                <li>USD 50,000  </li>
+                <li>USD 50,000 </li>
               </ul>
               <hr className="PatientUnderline"></hr>
-              <ul >
+              <ul>
                 <li>Tobi</li>
                 <li className="Successful">Paid</li>
-                <li>USD 150,000   </li>
+                <li>USD 150,000 </li>
               </ul>
             </div>
           </div>
 
           <div className="doctorViewAll" onClick={handleClick}>
-              <p >View all</p>
-            </div> 
-
+            <p>View all</p>
           </div>
-          
-          {/* /////////////////////////down////////////////////////////// */}
-          <div className="Dashboard">
+        </div>
+
+        {/* /////////////////////////down////////////////////////////// */}
+        <div className="Dashboard">
           <div className="patientDashboardHeading">
             <p>Patient Consultation Billing</p>
-            </div>
+          </div>
           <div className="doctorsDashboard">
             <div className="ConsultationBillingNav">
               <ul>
@@ -100,38 +94,37 @@ export default function DoctorsBilling() {
             </div>
 
             <div className="ConsultationBilling">
-              <ul >
+              <ul>
                 <li>Amaka</li>
                 {/* <li className="Successful">Paid</li> */}
                 <li>USD 22,000 </li>
               </ul>
               <hr className="doctorUnderline"></hr>
-              <ul >
+              <ul>
                 <li>Timothy</li>
                 {/* <li className="Declined">Unpaid</li> */}
-                <li>USD 5,000   </li>
+                <li>USD 5,000 </li>
               </ul>
               <hr className="doctorUnderline"></hr>
-              <ul >
+              <ul>
                 <li>Chris </li>
                 {/* <li className="Successful">Paid</li> */}
-                <li>USD 50,000  </li>
+                <li>USD 50,000 </li>
               </ul>
               <hr className="doctorUnderline"></hr>
-              <ul >
+              <ul>
                 <li>Tobi</li>
                 {/* <li className="Successful">Paid</li> */}
-                <li>USD 150,000   </li>
+                <li>USD 150,000 </li>
               </ul>
             </div>
           </div>
 
           <div className="doctorViewAll" onClick={handleClick}>
-              <p>View all</p>
-          </div> 
-
+            <p>View all</p>
+          </div>
         </div>
-        </div>
+      </div>
     </>
-  )
+  );
 }

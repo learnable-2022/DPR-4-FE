@@ -87,38 +87,42 @@ export default function Login() {
         if (!err?.response) {
           setErrMsg("No Server Response");
           setIsLoading(false);
-          setAuth({userEmail, userPassword,patientToken:response?.data.token})
-          setUserEmail('');
-          setUserPassword(''); 
+          setAuth({
+            userEmail,
+            userPassword,
+            patientToken: response?.data.token,
+          });
+          setUserEmail("");
+          setUserPassword("");
           const item = localStorage.getItem("userdetails");
           // const toParse = JSON.parse(item.token);
-         
-          if(response?.data.token){
-          setTimeout(() => {
-            // navigate("/");
-          }, 2000);
-        } else if (err.response?.status === 409) {
-          setErrMsg("Username Taken");
-          setTimeout(() => {
-            navigate("/");
-          }, 2000);
-          setIsLoading(false);
-        } else if (err?.response?.status === 400) {
-          setErrMsg("this user is not found");
-          setIsLoading(false);
-          setTimeout(() => {
-            navigate("/");
-          }, 2000);
-        } else {
-          setErrMsg("Registration Failed");
-          setIsLoading(false);
-          setTimeout(() => {
-            navigate("/");
-          }, 2000);
+
+          if (response?.data.token) {
+            setTimeout(() => {
+              // navigate("/");
+            }, 2000);
+          } else if (err.response?.status === 409) {
+            setErrMsg("Username Taken");
+            setTimeout(() => {
+              navigate("/");
+            }, 2000);
+            setIsLoading(false);
+          } else if (err?.response?.status === 400) {
+            setErrMsg("this user is not found");
+            setIsLoading(false);
+            setTimeout(() => {
+              navigate("/");
+            }, 2000);
+          } else {
+            setErrMsg("Registration Failed");
+            setIsLoading(false);
+            setTimeout(() => {
+              navigate("/");
+            }, 2000);
+          }
         }
       }
-    } }
-    else if (user === "patient") {
+    } else if (user === "patient") {
       try {
         const response = await axioscall.post(
           PATIENT_LOGIN,
@@ -186,7 +190,7 @@ export default function Login() {
       <div className="sign-up-container">
         <div className="signup-form length">
           <div>
-            <img src={medblog} alt="medblog-image" />
+            <img src={medblog} alt="medblog" />
           </div>
           <h2>Login</h2>
           <p>Please enter your login details to sign in.</p>
@@ -244,7 +248,7 @@ export default function Login() {
           </p>
         </div>
         <div className="image-placeholder">
-          <img src={bigImage} alt="big-image" />
+          <img src={bigImage} alt="big" />
         </div>
       </div>
     </div>
