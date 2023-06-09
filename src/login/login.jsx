@@ -70,9 +70,13 @@ export default function Login() {
 
         // const userStringify = JSON.stringify(userdetails);
         localStorage.setItem("doctorToken", response?.data.token);
+        localStorage.setItem("doctorEmail", response?.data.email);
 
         setIsLoading(false);
-        setAuth({ userEmail, userPassword, doctorToken: response?.data.token });
+        setAuth({
+          userEmail: response?.data.email,
+          doctorToken: response?.data.token,
+        });
         setUserEmail("");
         setUserPassword("");
         const item = localStorage.getItem("doctorToken");
@@ -143,7 +147,7 @@ export default function Login() {
         console.log(response?.data);
         const userStringify = JSON.stringify(userdetails);
         localStorage.setItem("patientToken", response?.data.token);
-
+        localStorage.setItem("patientEmail", response?.data.email);
         setIsLoading(false);
         setAuth({
           userEmail,

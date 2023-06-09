@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { GrNotification } from "react-icons/gr";
 import "./PatientsDashboard.css";
 import emptyProfile from "../assets/ava3.png";
@@ -20,8 +20,11 @@ import drug1 from "../assets/drug1.svg";
 import drug2 from "../assets/drug2.svg";
 import drug3 from "../assets/drug3.svg";
 import drug4 from "../assets/drug4.svg";
+import axios from "axios";
+import { useRequestProcessor } from "../api/requestProcessor";
 import { Link, useNavigate } from "react-router-dom";
 import StateContext from "../stateProvider/stateprovider";
+
 export default function PatientDashboard() {
   // const {auth} = useContext(StateContext);
   // const patientNavigator = useNavigate();
@@ -35,7 +38,26 @@ export default function PatientDashboard() {
 
   //   return patientNavigator("./landing");
   // }
+  let PatientId = localStorage.getItem("patient_id");
+  let PatientEmail = localStorage.getItem("patientEmail");
 
+  let token = localStorage.getItem("patientToken");
+  // console.log(PatientId);
+
+  // const { makeRequest } = useRequestProcessor();
+  // const { response, error } = makeRequest({
+  //   url: "/patient/",
+  //   method: "GET",
+  // });
+  // console.log(response);
+  // console.log("response:", response, "error:", error);
+
+  // const getUser = response?.data.find((item) => item._id === PatientId);
+  // const getAll = response?.data.map((item) => item._id);
+
+  // console.log(getUser?.name);
+  const [patientName, setPatientName] = useState("");
+  const [patientImage, setPatientImage] = useState("");
   const [data, setData] = useState(true);
   const drugs = [drug1, drug2, drug3, drug4];
   const [connectedWallet, setConnectedWallet] = useState(true);
@@ -52,20 +74,47 @@ export default function PatientDashboard() {
 
     return val;
   };
+  let patient_Image = localStorage.getItem("patient_image");
+  let patient_Name = localStorage.getItem("patient_name");
+  useEffect(() => {
+    const getPatientDetails = async () => {
+      const response = await axios.get(
+        `https://medbloc-api.onrender.com/api/v1/patient/`,
+        {
+          headers: {
+            "x-auth-token": token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
+      );
+      console.log(response);
+      const res = response?.data.find((item) => item.email === PatientEmail);
+      console.log(res);
+      localStorage.setItem("patient_image", res.image);
+      localStorage.setItem("patient_name", res.name);
+    };
+    getPatientDetails();
+  }, []);
   return (
     <div className="patientdashboard">
       <header className="patientdashboard_header">
         <div className="left_side_header">
-          <h1>Welcome! Roseline,</h1>
+          <h1>Welcome! {patient_Name?.split(" ")[0]},</h1>
         </div>
         <div className="right_side_header">
           <button className="share_btn">Share Report</button>
           <GrNotification className="profile_notification" />
           <Link to="/Profile" className="link">
-            <img className="profile_img" src={emptyProfile} alt="profile" />
+            <img
+              className="profile_img"
+              src={patient_Image ? patient_Image : emptyProfile}
+              alt="profile"
+            />
           </Link>
 
-          <p className="profile_name">Ms Rosaline Doe</p>
+          <p className="profile_name">{patient_Name}</p>
         </div>
       </header>
 
@@ -73,11 +122,14 @@ export default function PatientDashboard() {
         <div className="patientsvital">
           <div className="left_patient_vitals">
             <div className="image_div">
-              <img src={emptyProfile} alt="patientspicture" />
+              <img
+                src={patient_Image ? patient_Image : emptyProfile}
+                alt="patientspicture"
+              />
             </div>
 
             <div className="info_div">
-              <h2 className="name">Miss Roseline</h2>
+              <h2 className="name">{patient_Name}</h2>
               <div className="wrapper">
                 <div className="first_info_div">
                   <p className="key">
@@ -355,54 +407,7 @@ export default function PatientDashboard() {
                         />
                       </div>
                     </div>
-                    <div className="diagnosis_container">
-                      <div className="left">
-                        <p className="diagnose_name">Malaria & Typoid</p>
-                        <p className="diagnose_status">Active</p>
-                      </div>
-                      <div className="right">
-                        <img
-                          src={diseases[generateDiseasePic()]}
-                          alt="diagnose_image"
-                        />
-                      </div>
-                    </div>
-                    <div className="diagnosis_container">
-                      <div className="left">
-                        <p className="diagnose_name">Malaria & Typoid</p>
-                        <p className="diagnose_status">Active</p>
-                      </div>
-                      <div className="right">
-                        <img
-                          src={diseases[generateDiseasePic()]}
-                          alt="diagnose_image"
-                        />
-                      </div>
-                    </div>
-                    <div className="diagnosis_container">
-                      <div className="left">
-                        <p className="diagnose_name">Malaria & Typoid</p>
-                        <p className="diagnose_status">Active</p>
-                      </div>
-                      <div className="right">
-                        <img
-                          src={diseases[generateDiseasePic()]}
-                          alt="diagnose_image"
-                        />
-                      </div>
-                    </div>
-                    <div className="diagnosis_container">
-                      <div className="left">
-                        <p className="diagnose_name">Malaria & Typoid</p>
-                        <p className="diagnose_status">Active</p>
-                      </div>
-                      <div className="right">
-                        <img
-                          src={diseases[generateDiseasePic()]}
-                          alt="diagnose_image"
-                        />
-                      </div>
-                    </div>
+
                     <div className="diagnosis_container">
                       <div className="left">
                         <p className="diagnose_name">Malaria & Typoid</p>
@@ -493,54 +498,7 @@ export default function PatientDashboard() {
                         <p className="dosage">1 Tab twice daily</p>
                       </div>
                     </div>
-                    <div className="med_div">
-                      <div
-                        className="drug_icon_div"
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        <img src={drugs[generateDrugPic()]} alt="drug" />
-                      </div>
-                      <div className="drug_name_div">
-                        <p className="drug_name">Ciprofloxacin</p>
-                        <p className="dosage">1 Tab twice daily</p>
-                      </div>
-                    </div>
-                    <div className="med_div">
-                      <div
-                        className="drug_icon_div"
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        <img src={drugs[generateDrugPic()]} alt="drug" />
-                      </div>
-                      <div className="drug_name_div">
-                        <p className="drug_name">Ciprofloxacin</p>
-                        <p className="dosage">1 Tab twice daily</p>
-                      </div>
-                    </div>
-                    <div className="med_div">
-                      <div
-                        className="drug_icon_div"
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        <img src={drugs[generateDrugPic()]} alt="drug" />
-                      </div>
-                      <div className="drug_name_div">
-                        <p className="drug_name">Ciprofloxacin</p>
-                        <p className="dosage">1 Tab twice daily</p>
-                      </div>
-                    </div>
+
                     <div className="med_div">
                       <div
                         className="drug_icon_div"
@@ -599,6 +557,7 @@ export default function PatientDashboard() {
           </div>
         ) : (
           <div style={{ textAlign: "center", marginTop: "20%" }}>
+            <p>You are not yet connected, Please click to the button connect</p>
             <button className="connect_meta">Connect to Metamask!</button>
           </div>
         )}

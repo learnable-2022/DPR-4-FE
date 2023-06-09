@@ -1,12 +1,17 @@
 import React from "react";
 import "./PatientsProfile.css";
-import ProfileImage from "../../assets/Ellipse1.png";
+
+import emptyProfile from "../../assets/ava3.png";
 import ProfileComponent from "../components/profileComponent";
 function PatientsProfile() {
+  let patient_Image = localStorage.getItem("patient_image");
+
   return (
     <div className="patientsprofile">
       <div className="left_side">
-        <ProfileComponent profileImage={ProfileImage} />
+        <ProfileComponent
+          profileImage={patient_Image ? patient_Image : emptyProfile}
+        />
         <div className="bottom_left">
           <h1 className="_header">General Information</h1>
           <div className="_bottom_profile_details">
