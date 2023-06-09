@@ -9,20 +9,20 @@ import Heart from "../assets/images/Heart.png";
 import Syring from "../assets/images/Syring.png";
 import { useNavigate } from "react-router-dom";
 import RadioButton from "../assets/images/RadioButton.png";
-import pay from "../assets/images/pay.png"
+import pay from "../assets/images/pay.png";
 import PayPal from "../assets/images/PayPal.png";
 import VISA from "../assets/images/VISA.png";
 
 function PatientInvoice() {
   const navigate = useNavigate();
 
-    function handleClick (e) {
-      navigate("/PatientsBilling")
-    }
+  function handleClick(e) {
+    navigate("/PatientsBilling");
+  }
 
-    function onPress(e) {
-      navigate("/PatientInvoiceConfirmation")
-    }
+  function onPress(e) {
+    navigate("/PatientInvoiceConfirmation");
+  }
 
   return (
     <>
@@ -34,19 +34,19 @@ function PatientInvoice() {
               <div className="Consultation">
                 <div className="Bill">
                   <h6>Invoice Statement </h6>
-                  <img src={ArrowRight2} className="ArrowHistory" alt="" />
+                  <img src={ArrowRight2} className="ArrowHistory" alt="pics" />
                 </div>
 
                 <div className="Bill">
                   <h6 onClick={handleClick}>Payment History</h6>
-                  <img src={ArrowRight2} className="ArrowHistory" alt="" />
+                  <img src={ArrowRight2} className="ArrowHistory" alt="pics" />
                 </div>
               </div>
             </div>
 
             <div className="invoiceIcons">
-              <img src={Notification} alt="" />
-              <img src={PatientPics} alt="" />
+              <img src={Notification} alt="pics" />
+              <img src={PatientPics} alt="pics" />
             </div>
           </div>
         </div>
@@ -55,7 +55,7 @@ function PatientInvoice() {
           <div className="invoiceProfile">
             <div className="patientProfile">
               <div>
-                <img src={PatientProfile} alt />
+                <img src={PatientProfile} alt="pics" />
               </div>
               <ul>
                 <li>
@@ -85,10 +85,9 @@ function PatientInvoice() {
           </div>
 
           <div className="editProfile">
-        <p>EDIT PROFILE</p>
-        <img src={ArrowDownColoured} alt="" />
-      </div>
-          
+            <p>EDIT PROFILE</p>
+            <img src={ArrowDownColoured} alt="pics" />
+          </div>
         </div>
 
         <div className="billingStatement">
@@ -97,7 +96,7 @@ function PatientInvoice() {
               Payments /<span className="invoice">Invoice 00319</span>
             </p>
             <div className="PrinterSide">
-              <img src={printer} alt="" />
+              <img src={printer} alt="pics" />
               <p>Print</p>
             </div>
           </div>
@@ -144,90 +143,83 @@ function PatientInvoice() {
           </div>
 
           <div className="billItem">
-                <h4>Billed Items</h4>
-                <div className="billItemNav">
-                    <div className="billItemContent">
-                        <p>Service name</p>
-                    <p>Amount (NGN)</p></div>
-                </div>
+            <h4>Billed Items</h4>
+            <div className="billItemNav">
+              <div className="billItemContent">
+                <p>Service name</p>
+                <p>Amount (NGN)</p>
+              </div>
+            </div>
 
-                <div className="billPreview">
-                <div>
-                    <div className="medicalTools">
-                        <img src={Heart} alt=""/> 
-                    <p>ECG Test</p>
-                    </div>
-                    <div className="medicalTools">
-                    <img src={Syring} alt=""/>
-                    <p>Blood Test</p>
-                    </div>
-                    <p>Total Amount (Including Tax)</p>
+            <div className="billPreview">
+              <div>
+                <div className="medicalTools">
+                  <img src={Heart} alt="pics" />
+                  <p>ECG Test</p>
                 </div>
+                <div className="medicalTools">
+                  <img src={Syring} alt="pics" />
+                  <p>Blood Test</p>
+                </div>
+                <p>Total Amount (Including Tax)</p>
+              </div>
 
-                <div>
-                    <p>USD 10,000</p>
-                    <p>USD 10,000</p>
-                    <p>USD 10,000</p>
-                </div>
-                </div>
-
-        </div>
-        <div className="paymentDetails">
-          <div className="paymentOptionsNav">
-            <p>Payment Options</p>
+              <div>
+                <p>USD 10,000</p>
+                <p>USD 10,000</p>
+                <p>USD 10,000</p>
+              </div>
+            </div>
           </div>
-
-          <div className="paymentOptions">
-            <div className="paymentImage">
-              <div className="radioText">
-              <img onClick={onPress} className="RadioButton"  src={RadioButton}/>
-              <p>Paystack</p>
-              </div>
-              <img className="Pay" src={pay}/>
+          <div className="paymentDetails">
+            <div className="paymentOptionsNav">
+              <p>Payment Options</p>
             </div>
 
-            <div className="paymentImage">
-              <div className="radioText">
-                {/* <customRadioButton/> */}
-              <img className="RadioButton" src={RadioButton}/>
-              <p>PayPal</p>
+            <div className="paymentOptions">
+              <div className="paymentImage">
+                <div className="radioText">
+                  <img
+                    onClick={onPress}
+                    className="RadioButton"
+                    src={RadioButton}
+                    alt="pics"
+                  />
+                  <p>Paystack</p>
+                </div>
+                <img className="Pay" src={pay} alt="pics" />
               </div>
-              <img  className="Paypal" src={PayPal}/>
-            </div>
 
-            <div className="paymentImage">
-              <div className="radioText">
-              <img className="RadioButton" src={RadioButton}/>
-              <p>Credit Card</p>
+              <div className="paymentImage">
+                <div className="radioText">
+                  {/* <customRadioButton/> */}
+                  <img className="RadioButton" alt="pics" src={RadioButton} />
+                  <p>PayPal</p>
+                </div>
+                <img className="Paypal" alt="pics" src={PayPal} />
               </div>
-              <img className="visa" src={VISA}/>
-            </div>
 
-            <div className="paymentImage">
-              <div className="radioText">
-              <img className="RadioButton" src={RadioButton}/>
-              <p>Debit Card</p>
+              <div className="paymentImage">
+                <div className="radioText">
+                  <img className="RadioButton" alt="pics" src={RadioButton} />
+                  <p>Credit Card</p>
+                </div>
+                <img className="visa" alt="pics" src={VISA} />
               </div>
-              <img className="visa" src={VISA}/>
-            </div>
 
+              <div className="paymentImage">
+                <div className="radioText">
+                  <img className="RadioButton" alt="pics" src={RadioButton} />
+                  <p>Debit Card</p>
+                </div>
+                <img className="visa" alt="pics" src={VISA} />
+              </div>
+            </div>
           </div>
-
-
         </div>
-
-        </div>
-        
-        
       </div>
-
-
-
-      
     </>
   );
 }
 
 export default PatientInvoice;
-
-

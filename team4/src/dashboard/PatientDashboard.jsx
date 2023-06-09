@@ -156,7 +156,7 @@ export default function PatientDashboard() {
                             }}
                           >
                             {" "}
-                            <img src={bpIcon} alt="patient" />
+                            <img src={bpIcon} alt="picture" />
                           </div>
                           <div className="readings_div">
                             <p className="heading">Blood Status</p>
@@ -175,7 +175,7 @@ export default function PatientDashboard() {
                             }}
                           >
                             {" "}
-                            <img src={heartIcon} alt="patient" />
+                            <img src={heartIcon} alt="picture" />
                           </div>
                           <div className="readings_div">
                             <p className="heading">Heart Rate</p>
@@ -189,8 +189,8 @@ export default function PatientDashboard() {
                         <div className="middle1_left">
                           <img
                             className="pulse_icon"
-                            alt="pics"
                             src={pulseIcon}
+                            alt="pics"
                           />
                           <div className="left_readings">
                             <img
@@ -259,7 +259,7 @@ export default function PatientDashboard() {
                             }}
                           >
                             {" "}
-                            <img src={vetIcon2} alt="patient" />{" "}
+                            <img src={vetIcon2} alt="picture" />{" "}
                           </div>
                           <div className="count_val_div">
                             <p>Glucose Level</p>

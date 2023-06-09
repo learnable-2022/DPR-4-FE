@@ -1,508 +1,479 @@
-*{
-    text-transform: capitalize;
-    box-sizing: border-box;
+* {
+  text-transform: capitalize;
+  box-sizing: border-box;
 }
-.overview-container{
-    padding: 20px 40px 20px 20px ;
-    /* border: 1px solid firebrick; */
+.overview-container {
+  padding: 20px 40px 20px 20px;
+
   width: 100%;
 }
-.overview-sub-container{
-    display: flex;
-    /* border: 1px solid rgb(10, 222, 127); */
-    justify-content: space-between;
+.overview-sub-container {
+  display: flex;
+
+  justify-content: space-between;
 }
 
-/* this is where i styled the overview component .please kindly note */
-.over-1{
-    /* border: 1px solid chocolate; */
-    background: #FFFFFF;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075), 10px 10px 20px 
-    rgba(0, 0, 0, 0.04);
-    border-radius: 10px;
-    width: 340px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.over-1 {
+  background: #ffffff;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075),
+    10px 10px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+  width: 340px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.p-tag{
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 24px;
-    letter-spacing: 0.001em;
-    color: #999999;
+.p-tag {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.001em;
+  color: #999999;
 }
-.sp-p{
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 28px;
-    margin-top: -20px;
-    margin-right: 150px;
+.sp-p {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+  margin-top: -20px;
+  margin-right: 150px;
 }
-.new-class{
-    /* border: 1px solid green; */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 60px;
+.new-class {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
 }
-.over-1-first{
-    display: flex;
-    gap:20px;
+.over-1-first {
+  display: flex;
+  gap: 20px;
 }
-.over-1-first-son{
-    display: flex;
+.over-1-first-son {
+  display: flex;
 }
-.over-1-first-son p{
-    font-size: 12px;
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 700;
-    line-height: 24px;
-        color: #444444;
+.over-1-first-son p {
+  font-size: 12px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  color: #444444;
 }
-.img-love{
-    width:30px;
-    height: 30px;
+.img-love {
+  width: 30px;
+  height: 30px;
 }
-.over-1-second-son{
-    display: flex;
-    gap: 20px;
+.over-1-second-son {
+  display: flex;
+  gap: 20px;
 }
-.over-1-second-son div img{
-    width: 100px;
-    height: 50px;
-    
+.over-1-second-son div img {
+  width: 100px;
+  height: 50px;
 }
-.over-1-1{
-    margin-top: 25px;
+.over-1-1 {
+  margin-top: 25px;
 }
-.over-1-2{
-    margin-top: 25px;
+.over-1-2 {
+  margin-top: 25px;
 }
-.over-2{
-    /* border: 1px solid aqua; */
-    padding: 0px 20px 0px 10px;
-    background: #FFFFFF;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075), 10px 10px 20px
-    rgba(0, 0, 0, 0.04);
-    border-radius: 10px;
-/* width: 340px; */
+.over-2 {
+  padding: 0px 20px 0px 10px;
+  background: #ffffff;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075),
+    10px 10px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
 }
-.over-2 h2{
-    color: #141414;
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 28px;
+.over-2 h2 {
+  color: #141414;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 28px;
 }
-.one{
-    display: flex;
-    flex-direction: column;
+.one {
+  display: flex;
+  flex-direction: column;
 }
-.two{
-    margin-top: 10px;
-    width: 283px;
-    display: flex;
-   justify-content: space-between;
-   align-items: center;
-   border-bottom: 1px solid  #E7E6E6;
-    border-radius: 10px;
+.two {
+  margin-top: 10px;
+  width: 283px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e7e6e6;
+  border-radius: 10px;
 }
-.two h2{
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px
+.two h2 {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
 }
-.two p{
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 24px;
-    letter-spacing: 0.001em;
-    color: #999999;
+.two p {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.001em;
+  color: #999999;
 }
-.three{
-  
-   margin-top: 70px;
-   width: 314px;
+.three {
+  margin-top: 70px;
+  width: 314px;
 }
 
-.over-3 h4{
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 28px;
-    color: #141414;
+.over-3 h4 {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 28px;
+  color: #141414;
 }
-.four{
-    display: flex;
-    /* border: 1px solid brown; */
-    align-items: center;
-    flex-direction: row;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075), 10px 10px 20px rgba(0, 0, 0, 0.04);
-    border-radius: 10px;
-    /* margin-bottom: 10px; */
-    /* padding: 5px; */
-}
-.four h4{
-    color: #666666;
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-}
-.four p{
-    color: #808080;
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 16px;
-}
-/* the is where i style visit component from */
+.four {
+  display: flex;
 
-.visit-navigation{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
+  align-items: center;
+  flex-direction: row;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075),
+    10px 10px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
 }
-/* used this visit-header class for visit , lab and vaccine */
+.four h4 {
+  color: #666666;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+}
+.four p {
+  color: #808080;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.visit-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .visit-header h2 {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
-.visit-header p{
-    display: flex;
-    align-items: center;
+.visit-header p {
+  display: flex;
+  align-items: center;
 }
-.visit-navigation h2{
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 32px;
-    color: #2B80D5;
+.visit-navigation h2 {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 32px;
+  color: #2b80d5;
 }
-.visit-navigation p{
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    color: #808080;
-    line-height: 36px;
+.visit-navigation p {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  color: #808080;
+  line-height: 36px;
 }
-.search{
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    border: 1px solid #000;
-    padding:5px;
-    border: 1px solid #0A1F33;
-    border-radius: 10px;
+.search {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  border: 1px solid #000;
+  padding: 5px;
+  border: 1px solid #0a1f33;
+  border-radius: 10px;
 }
-.search input{
-    outline: none;
-    border: none;
+.search input {
+  outline: none;
+  border: none;
 }
-.icon{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-left: 1px solid #0A1F33 ;
-    padding: 2px;
-}
-
-.table-1{
-    /* border: 1px solid blue; */
-    display: flex;
-    gap: 15.5%;
-    background: #D6EBFF;
-    padding: 5px 5px;
-}
-.table-1 h4{
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 32px;
-}
-.table-1-vaccine{
-    /* border: 1px solid blue; */
-    display: flex;
-    gap: 15.5%;
-    background: #D6EBFF;
-    padding: 5px 5px;
-}
-.table-1-vaccine h4{
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 32px;
-}
-.table-2{
-    border-bottom:  2px solid #D6EBFF;
-}
-.table-2 ul{
-    display: flex;
-    list-style: none;
-    align-items: center;
-    padding: 5px 0px;
-    gap: 13%;
-}
-.table-2 ul li{
-    margin-right: 10px;
-}
-.table-2 ul li button{
-    padding: 5px 10px;
-    color: #fff;
-    background: #80D580;
-    border-radius: 5px;
-    outline: none;
-    border: none;
-}
- .table-2-vaccine{
-    border-bottom:  2px solid #D6EBFF;
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 1px solid #0a1f33;
+  padding: 2px;
 }
 
-.table-2-vaccine ul{
-    display: flex;
-    list-style: none;
-    align-items: center;
-    padding: 5px 0px;
-
+.table-1 {
+  display: flex;
+  gap: 15.5%;
+  background: #d6ebff;
+  padding: 5px 5px;
 }
-.table-2-vaccine ul li{
-    margin-right: 100px;
+.table-1 h4 {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 32px;
 }
-.table-4{
-    /* border: 1px solid blue; */
-    display: flex;
-    gap:80px;
-    background: #D6EBFF;
-    padding: 5px 5px;
+.table-1-vaccine {
+  display: flex;
+  gap: 15.5%;
+  background: #d6ebff;
+  padding: 5px 5px;
 }
-.table-4 ul{
-    display: flex;
-    list-style: none;
-    align-items: center;
-    padding: 5px 0px;
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
+.table-1-vaccine h4 {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 32px;
 }
-.table-4 ul li{
-    margin-right: 80px;
+.table-2 {
+  border-bottom: 2px solid #d6ebff;
 }
-
-.table-3{
-    /* display: flex; */
-    border-bottom:  2px solid #D6EBFF;
-    /* gap: 12%;
-    align-items: center; */
-    /* flex-direction: column;
-    border: 1px solid darkblue; */
+.table-2 ul {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  padding: 5px 0px;
+  gap: 13%;
 }
-.table-3 ul{
-    display: flex;
-    list-style: none;
-    align-items: center;
-    padding: 5px 0px;
-    /* gap: 13%; */
+.table-2 ul li {
+  margin-right: 10px;
 }
-.table-3 ul li{
-    margin-right: 100px;
+.table-2 ul li button {
+  padding: 5px 10px;
+  color: #fff;
+  background: #80d580;
+  border-radius: 5px;
+  outline: none;
+  border: none;
 }
-.center{
-    /* display: flex; */
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-}
-.table-3 ul li button{
-    padding: 5px 10px;
-    color: #fff;
-    background: #80D580;
-    border-radius: 5px;
-    outline: none;
-    border: none;
-}
-.table-4 h4{
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 32px;
-}
-/* below is where i styled the prescription component */
-.pres-component{
-    display: flex;
-    /* border: 1px solid hotpink; */
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075),
-     10px 10px 20px rgba(0, 0, 0, 0.04);
-    border-radius: 10px;
-    padding: 5px 10px;
-}
-.single-h2{
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 22px;
-    line-height: 28px;
-    color: #141414;
-    margin-bottom: 20px;
-}
-.pres-component p{
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 16px;
-letter-spacing: 0.004em;
-color: #808080
-}
-.first-pres-component{
-    display: flex;
-    gap:5px;
-    align-items: center;
-}
-.first-pres-component p{
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-}
-.img{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-/* there below is where i styled the patients lab report */
-.Nav-labreport{
-    color: #2B80D5;
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 36px;
-    display: flex;
-    align-items: center;
-}
-.third-lab-report{
-    display: flex;
-    padding: 20px 10px;
-    /* border: 1px solid cornflowerblue; */
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075), 10px 10px 20px rgba(0, 0, 0, 0.04);
-    margin-bottom: 20px;
+.table-2-vaccine {
+  border-bottom: 2px solid #d6ebff;
 }
 
-.third-lab-report div p{
-    padding: 8px 8px 8px;
-    gap: 10px;
-    background: #F8F8F8;
-    margin-bottom: 15px;
-    margin-left: 10px;
-    border-radius: 10px;
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-size: 16px;
-    line-height: 22px;
-    color: #666666;
+.table-2-vaccine ul {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  padding: 5px 0px;
 }
-.third-container{
-    display: flex;
-    justify-content: center;
-    /* border: 1px solid darkred; */
+.table-2-vaccine ul li {
+  margin-right: 100px;
+}
+.table-4 {
+  display: flex;
+  gap: 80px;
+  background: #d6ebff;
+  padding: 5px 5px;
+}
+.table-4 ul {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  padding: 5px 0px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+}
+.table-4 ul li {
+  margin-right: 80px;
 }
 
-.bold{
-    
-    font-weight: 600;
+.table-3 {
+  border-bottom: 2px solid #d6ebff;
+}
+.table-3 ul {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  padding: 5px 0px;
+}
+.table-3 ul li {
+  margin-right: 100px;
+}
+.center {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+.table-3 ul li button {
+  padding: 5px 10px;
+  color: #fff;
+  background: #80d580;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+}
+.table-4 h4 {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 32px;
+}
 
+.pres-component {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075),
+    10px 10px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+  padding: 5px 10px;
 }
-.bolder{
-    font-weight: 600;
-    margin-top: 68px;
+.single-h2 {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 28px;
+  color: #141414;
+  margin-bottom: 20px;
 }
-/* there below is where i styled the patients visit report */
-.first-visit-container{
-    display: flex;
-    align-items: center;
-   gap: 150px;
-    /* border: 1px solid violet; */
-    padding: 0px 20px ;
+.pres-component p {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.004em;
+  color: #808080;
 }
-.first-visit-container p{
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 22px;
-    background: #F8F8F8;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
+.first-pres-component {
+  display: flex;
+  gap: 5px;
+  align-items: center;
 }
-.none p{
-    background: none;
-    /* margin-right: 140px !important; */
-    /* display: flex;
-    justify-content: flex-end; */
+.first-pres-component p {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
 }
-.all p{
-    color:#666666;;
+.img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.visit-table{
-    /* border: 1px solid rgb(105, 255, 163); */
-    width: 95%;
-    margin-top: 30px;
-    padding: 10px;
-    background: #D6EBFF;
-    margin-left: 5px;
+
+.Nav-labreport {
+  color: #2b80d5;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
 }
-.visit-table ul{
-    display: flex;
-   gap: 21%;
-   /* justify-content: space-between; */
-    align-items: center;
-    text-decoration: none;
-    list-style: none;
-    padding: 0px 20px ;
-    /* margin-top: 20px; */
+.third-lab-report {
+  display: flex;
+  padding: 20px 10px;
+
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075),
+    10px 10px 20px rgba(0, 0, 0, 0.04);
+  margin-bottom: 20px;
 }
-.visit-table-2{
-    /* border: 1px solid rgb(105, 255, 163); */
-    width: 95%;
-    margin-top: 30px;
-    padding: 10px;
-    border: 1px solid #BBDDFF;
-    border-radius: 5px;
+
+.third-lab-report div p {
+  padding: 8px 8px 8px;
+  gap: 10px;
+  background: #f8f8f8;
+  margin-bottom: 15px;
+  margin-left: 10px;
+  border-radius: 10px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-size: 16px;
+  line-height: 22px;
+  color: #666666;
 }
-.visit-table-2 ul{
-    display: flex;
-   gap: 19%;
-   /* justify-content: space-between; */
-    align-items: center;
-    text-decoration: none;
-    list-style: none;
-    font-size: 14px;
-    padding: 0px 20px ;
+.third-container {
+  display: flex;
+  justify-content: center;
+}
+
+.bold {
+  font-weight: 600;
+}
+.bolder {
+  font-weight: 600;
+  margin-top: 68px;
+}
+
+.first-visit-container {
+  display: flex;
+  align-items: center;
+  gap: 150px;
+
+  padding: 0px 20px;
+}
+.first-visit-container p {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 22px;
+  background: #f8f8f8;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.none p {
+  background: none;
+}
+.all p {
+  color: #666666;
+}
+.visit-table {
+  width: 95%;
+  margin-top: 30px;
+  padding: 10px;
+  background: #d6ebff;
+  margin-left: 5px;
+}
+.visit-table ul {
+  display: flex;
+  gap: 21%;
+
+  align-items: center;
+  text-decoration: none;
+  list-style: none;
+  padding: 0px 20px;
+}
+.visit-table-2 {
+  width: 95%;
+  margin-top: 30px;
+  padding: 10px;
+  border: 1px solid #bbddff;
+  border-radius: 5px;
+}
+.visit-table-2 ul {
+  display: flex;
+  gap: 19%;
+
+  align-items: center;
+  text-decoration: none;
+  list-style: none;
+  font-size: 14px;
+  padding: 0px 20px;
 }

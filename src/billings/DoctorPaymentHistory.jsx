@@ -1,20 +1,19 @@
-import React from 'react';
+import React from "react";
 import "./billing.css";
-import ArrowRight2 from "../../src/assets/images/ArrowRight2.png";  
+import ArrowRight2 from "../../src/assets/images/ArrowRight2.png";
 import Calendar from "../../src/assets/images/Calendar.png";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 function DoctorPaymentHistory() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    function handleClick(e) {
-        navigate("/DoctorsBilling")
-    }
+  function handleClick(e) {
+    navigate("/DoctorsBilling");
+  }
 
-    function handlePress(e) {
-        navigate("/ConsultationBilling")
-    }
-
+  function handlePress(e) {
+    navigate("/ConsultationBilling");
+  }
 
   return (
     <>
@@ -22,27 +21,26 @@ function DoctorPaymentHistory() {
         <div className="billingNavHistory">
           <h1>Billing</h1>
           <div className="Consultation">
-            <div className="Bill" onClick={handlePress} >
+            <div className="Bill" onClick={handlePress}>
               <h6 onClick={handlePress}>Consultation Bill </h6>
-             <img src={ArrowRight2}  className="ArrowHistory" alt=''/>           
-              </div>
+              <img src={ArrowRight2} className="ArrowHistory" alt="pics" />
+            </div>
 
             <div className="Bill">
               <h6>Payment History</h6>
-             <img src={ArrowRight2} className="ArrowHistory" alt=''/>
+              <img src={ArrowRight2} className="ArrowHistory" alt="pics" />
             </div>
           </div>
         </div>
 
         <div className="coincoin">
           <div className="Details">
-          <div className="Name">
-            <div className="DateCal">
-              <h4>22nd May 2023</h4>
-              <img src={Calendar} alt="" />
-            </div>
+            <div className="Name">
+              <div className="DateCal">
+                <h4>22nd May 2023</h4>
+                <img src={Calendar} alt="pics" />
+              </div>
 
-           
               <ul className="ulHead">
                 <li>Name</li>
                 <li>Time </li>
@@ -106,7 +104,6 @@ function DoctorPaymentHistory() {
                 <li>USD 22,000 </li>
               </ul>
               <hr className="underline"></hr>
-
             </div>
           </div>
           {/* /////////////////////////down////////////////////////////// */}
@@ -114,7 +111,7 @@ function DoctorPaymentHistory() {
             <div className="Details">
               <div className="DateCalDown">
                 <h4>22nd May 2023</h4>
-                <img src={Calendar} alt ="" />
+                <img src={Calendar} alt="pics" />
               </div>
 
               <div className="DetailEntities">
@@ -168,7 +165,7 @@ function DoctorPaymentHistory() {
         </div>
       </div>
     </>
-  )
+  );
 }
 
 export default DoctorPaymentHistory;

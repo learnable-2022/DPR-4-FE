@@ -1,8 +1,7 @@
 .App {
   display: flex;
-  /* height: 100vh; */
 }
-/* this is where i did the styling for the two sidebars. the doctors and the patients */
+
 .sideBar {
   width: 160px;
   height: 100vh;
@@ -38,7 +37,7 @@
   font-size: 14px;
   line-height: 19px;
 }
-.lower-section{
+.lower-section {
   margin-top: 35px;
   text-align: center;
 }
