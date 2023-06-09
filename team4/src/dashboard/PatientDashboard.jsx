@@ -44,7 +44,7 @@ export default function PatientDashboard() {
   const [connectedWallet, setConnectedWallet] = useState(false);
   const diseases = [disease1, disease2, disease3];
 
-  let contractAddress = "0x847C23939F9B449aF24b8B477514334FbB1E6d15";
+  let contractAddress = "0xed684d02c7549f4E79B5c3FFD58eFb94fb1D6c31";
   const [errorMessage, setErrorMessage] = useState(null);
 	const [defaultAccount, setDefaultAccount] = useState(null);
 	const [connButtonText, setConnButtonText] = useState('Connect Metamask');
@@ -140,11 +140,12 @@ const grantDoctorAccess = async (e) => {
 };
 
 
-const checkUser = async () => {
+const checkRecord = async () => {
   try {
     if (contract) {
-      let access = await contract.isDoctor("0x667E5B64873B08B129eD730260d78B4739263Ead");
-      console.log('Doctor:', access);
+      let access = await contract.getPatientRecord(defaultAccount);
+      console.log(access);
+      let recordcleaned = [];
     } else {
       console.error('Contract is not available');
     };
@@ -153,7 +154,7 @@ const checkUser = async () => {
   }
 };
 
-checkUser();
+checkRecord();
 
   const generateDrugPic = () => {
     let number = Math.floor(Math.random() * 4);
