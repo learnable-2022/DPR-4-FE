@@ -51,7 +51,8 @@ export default function PatientsRecord() {
               }}
               alt="frame"
             />
-            <p>{patient_Name}</p>
+            
+            <p>hi! {patient_Name}</p>
           </div>
         </div>
       </nav>

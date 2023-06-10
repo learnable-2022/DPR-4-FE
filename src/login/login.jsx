@@ -60,7 +60,7 @@ const handleVisibleChange =()=>{
       email: userEmail,
       password: userPassword,
     };
-    if (user === "doctor" || DOCTOR_ITEM) {
+    if (user === "doctor" ) {
       let response = null;
       try {
         response = await axioscall.post(
@@ -107,38 +107,36 @@ const handleVisibleChange =()=>{
             userEmail,
             userPassword,
             patientToken: response?.data.token,
-          });
+          })
           setUserEmail("");
           setUserPassword("");
           const item = localStorage.getItem("userdetails");
           // const toParse = JSON.parse(item.token);
-
-          if (response?.data.token) {
-            setTimeout(() => {
-              // navigate("/");
-            }, 2000);
-          } else if (err.response?.status === 409) {
+            //note kenneth above
+        }
+          else if (err.response?.status === 409) {
             setErrMsg("Username Taken");
-            setTimeout(() => {
-              navigate("/");
-            }, 2000);
             setIsLoading(false);
-          } else if (err?.response?.status === 400) {
-            setErrMsg("this user is not found");
+          } else if (err.response.status === 400) {
+            setErrMsg("invalid user, please sign up if you are new to this plateform");
             setIsLoading(false);
-            setTimeout(() => {
-              navigate("/");
-            }, 2000);
-          } else {
+            console.log(errmsg);
+           
+          } 
+            else if(err.response?.status === 204) {
+              setErrMsg("the server failed to load a response");
+              setIsLoading(false);
+          } 
+          else {
+            
             setErrMsg("Registration Failed");
             setIsLoading(false);
-            setTimeout(() => {
-              navigate("/");
-            }, 2000);
+           
           }
-        }
-      }
-    } else if (user === "patient" || PATIENT_ITEM) {
+          
+        
+      }}
+     else if (user === "patient") {
       try {
         const response = await axioscall.post(
           PATIENT_LOGIN,
@@ -181,22 +179,28 @@ const handleVisibleChange =()=>{
         if (!err?.response) {
           setErrMsg("No Server Response");
           setIsLoading(false);
-          setTimeout(() => {
-            navigate(-1);
-          }, 2000);
+       
         } else if (err.response?.status === 409) {
           setErrMsg("Username Taken");
           setIsLoading(false);
-          setTimeout(() => {
-            navigate(-1);
-          }, 2000);
-        } else {
+         
+        }
+
+          else if(err.response?.status === 204) {
+            setErrMsg("the server failed to load a response");
+            setIsLoading(false);
+            
+
+        } 
+        else if(err.response?.status === 400) {
+          setErrMsg("invalid user, please sign up if you are new to this plateform");
+          setIsLoading(false);
+      }
+        else {
           setErrMsg("Registration Failed");
           setIsLoading(false);
           console.log(errmsg);
-          setTimeout(() => {
-            navigate(-1);
-          }, 2000);
+         
         }
       }
     }
@@ -211,14 +215,9 @@ const handleVisibleChange =()=>{
           <h2>Login</h2>
           <p>Please enter your login details to sign in.</p>
           <form className="form" onSubmit={handleLogin}>
-            {errorMessage ?
+            {errorMessage ? <p style={{color:"red"}}>{errorMessage} </p> : ""}
             
-            setTimeout(()=>{
-            <p>{errorMessage}</p>}
-            ,2000)
-
-             : ""}
-            {errmsg && <p>{errmsg}</p>}
+            {errmsg && <p style={{color:"red"}}>{errmsg}</p>}
             <div class="input">
               <label>Email Address</label>
               <input
@@ -271,7 +270,7 @@ const handleVisibleChange =()=>{
           </form>
           <p className="create-account">
             Don’t have an account?
-            <Link to="/signup" className="wallet-link2">
+            <Link to="/confirmation" className="wallet-link2">
               <span>sign up</span>
             </Link>
           </p>
