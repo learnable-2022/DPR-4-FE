@@ -1,0 +1,272 @@
+.doctorseditprofile {
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-row-gap: 10px;
+  grid-column-gap: 2rem;
+  width: 100%;
+  height: 100vh;
+
+  overflow-y: scroll;
+}
+.doctorseditprofile .back_arrow {
+  display: none;
+}
+.doctorseditprofile .topleft .profile_btn {
+  border: none;
+  background-color: #55aa55;
+  padding: 0.5rem 2rem;
+  border-radius: 10px;
+  color: white;
+}
+.doctorseditprofile .topleft .profile_btn:hover {
+  cursor: pointer;
+}
+.doctorseditprofile .topleft {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  box-shadow: 1px 2px 8px rgb(91, 91, 91);
+  padding: 1rem 2rem;
+  border-radius: 10px;
+}
+.doctorseditprofile .topleft .name {
+  font-size: 20px;
+  font-weight: 600;
+  color: #444444;
+}
+.doctorseditprofile .topleft .email {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: #77bbff;
+  font-size: 13px;
+  font-weight: 600;
+}
+.doctorseditprofile .topleft img,
+.empty_profile {
+  height: 160px;
+  width: 160px;
+  border-radius: 50%;
+  border: 1px solid rgb(133, 133, 133);
+}
+#inputTag {
+  display: none;
+}
+.select_image_div {
+  position: relative;
+}
+.select_image_div label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.camera_icon {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  color: #3399ff;
+  width: 20px;
+  height: 20px;
+}
+.camera_icon:hover {
+  cursor: pointer;
+}
+.doctorseditprofile ._bottom_left {
+  box-shadow: 1px 2px 8px rgb(91, 91, 91);
+  padding: 2rem 2rem 3rem 2rem;
+  border-radius: 10px;
+  margin-top: 2rem;
+  overflow-y: scroll;
+}
+.doctorseditprofile ._bottom_left .header {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 500;
+  color: #3399ff;
+  margin-bottom: 2rem;
+}
+.doctorseditprofile ._bottom_profile_details_ {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+.doctorseditprofile ._bottom_profile_details_ ._left_section {
+  flex: 0.5;
+}
+.doctorseditprofile ._bottom_profile_details_ ._right_section {
+  flex: 0.5;
+}
+.doctorseditprofile ._bottom_profile_details_ ._left_section .input_div {
+  border: solid 1px rgb(130, 130, 130);
+  border-radius: 10px;
+  padding: 0.8rem 2rem 0.8rem 1rem;
+  margin-bottom: 1rem;
+}
+.doctorseditprofile ._bottom_profile_details_ ._left_section .label {
+  margin-bottom: 1rem;
+  font-size: 13px;
+  font-weight: 600;
+  color: #222222;
+}
+.doctorseditprofile ._bottom_profile_details_ ._left_section .input_para {
+  font-size: 11px;
+  font-weight: 400;
+}
+.doctorseditprofile ._bottom_profile_details_ ._right_section .input_div {
+  border: solid 1px rgb(130, 130, 130);
+  border-radius: 10px;
+  padding: 0.8rem 2rem 0.8rem 1rem;
+  margin-bottom: 1rem;
+}
+.doctorseditprofile ._bottom_profile_details_ ._right_section .label {
+  margin-bottom: 1rem;
+  font-size: 13px;
+  font-weight: 600;
+  color: #222222;
+}
+.doctorseditprofile ._bottom_profile_details_ ._right_section .input_para {
+  font-size: 11px;
+  font-weight: 400;
+}
+.doctorseditprofile ._right_side {
+  box-shadow: 1px 2px 8px rgb(91, 91, 91);
+  padding: 2rem;
+  border-radius: 10px;
+  align-self: baseline;
+  width: 100%;
+}
+.doctorseditprofile ._right_side .header {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 500;
+  color: #3399ff;
+  margin-bottom: 2rem;
+}
+.doctorseditprofile ._right_side ._down_part_ .input_div {
+  border: solid 1px rgb(130, 130, 130);
+  border-radius: 10px;
+  padding: 0.8rem 2rem 0.8rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.doctorseditprofile ._right_side ._down_part_ .label {
+  margin-bottom: 1rem;
+  font-size: 13px;
+  font-weight: 600;
+  color: #222222;
+}
+.doctorseditprofile ._right_side ._down_part_ .input_para {
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.doctorseditprofile .d_input,
+.doctorseditprofile .d_select,
+.state {
+  border: none;
+  width: 100%;
+  font-size: larger;
+}
+.doctorseditprofile .d_select:hover {
+  cursor: pointer;
+}
+
+.doctorseditprofile .d_input:focus,
+.doctorseditprofile .d_select:focus,
+.state:focus {
+  outline: none;
+}
+.state {
+  font-size: small;
+}
+
+.css-13cymwt-control {
+  border: none;
+}
+
+._right_section .country_div {
+  padding: 0.1rem 2rem 0.1rem 1rem !important;
+}
+
+@media (max-width: 1050px) {
+  .doctorseditprofile {
+    display: flex;
+    flex-direction: column;
+  }
+}
+@media (max-width: 667px) {
+  .doctorseditprofile {
+    padding: 0.4rem;
+  }
+  .doctorseditprofile ._bottom_profile_details_ {
+    flex-direction: column;
+    gap: 0;
+  }
+  .doctorseditprofile ._bottom_profile_details_ ._left_section {
+    width: 100%;
+  }
+  .doctorseditprofile ._bottom_profile_details_ ._right_section {
+    width: 100%;
+  }
+  .doctorseditprofile .topleft {
+    box-shadow: none;
+    border-radius: 0;
+    position: relative;
+    text-align: center;
+    flex-direction: column;
+  }
+  .doctorseditprofile ._bottom_left {
+    box-shadow: none;
+    padding: 0 2rem 0 2rem;
+    border-radius: 0;
+    margin-top: 1rem;
+  }
+  .doctorseditprofile ._bottom_left .header {
+    margin-bottom: 1rem;
+  }
+  .doctorseditprofile ._right_side {
+    box-shadow: none;
+    border-radius: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .doctorseditprofile ._right_side .header {
+    margin-bottom: 1rem;
+  }
+
+  .doctorseditprofile .back_arrow {
+    display: block;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 30px;
+    height: 30px;
+  }
+}
+@media (max-width: 514px) {
+  .doctorseditprofile ._bottom_left {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .doctorseditprofile ._right_side {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .doctorseditprofile ._bottom_profile_details_ ._right_section .input_div {
+    margin-bottom: 0.3rem;
+  }
+}
+@media (max-width: 300px) {
+  .doctorseditprofile .topleft img {
+    height: 120px;
+    width: 120px;
+  }
+  .doctorseditprofile ._bottom_left .header {
+    margin-bottom: 0.5rem;
+    font-size: 16px;
+  }
+  .doctorseditprofile ._right_side .header {
+    margin-bottom: 0.5rem;
+    font-size: 16px;
+  }
+}

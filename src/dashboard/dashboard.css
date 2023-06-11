@@ -1,0 +1,369 @@
+* {
+  box-sizing: border-box;
+}
+.dashboard {
+  width: 100%;
+}
+.doctorsdashboard {
+  width: 100%;
+  padding: 2rem;
+
+  height: 100vh;
+}
+
+.doctorsdashboard main {
+  position: absolute;
+  bottom: 0;
+  top: 6rem;
+  left: 160px;
+  right: 2rem;
+  overflow-y: hidden;
+  padding-bottom: 2rem;
+  display: flex;
+  grid-template-columns: 50% 50%;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+.doctorsdashboard main .left-side {
+  border-radius: 8px;
+  box-shadow: 1px 2px 8px rgb(91, 91, 91);
+  flex: 0.8;
+  padding: 1rem;
+  margin-left: 3.5rem;
+
+  height: 100%;
+  align-self: flex-start;
+  overflow-y: scroll;
+}
+
+.doctorsdashboard main .header_div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.doctorsdashboard main .header_div .title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #444444;
+  flex: 0.4;
+}
+.doctorsdashboard main .search_div {
+  display: flex;
+  flex: 0.6;
+  align-items: center;
+  justify-content: space-between;
+  border: solid rgb(98, 98, 98) 1px;
+  border-radius: 2rem;
+  width: fit-content;
+  padding: 0.5rem;
+}
+.doctorsdashboard main .search_div input {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+}
+.doctorsdashboard main .search_icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.doctorsdashboard main .left-side .title_div {
+  background-color: #e0f5e0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  margin-top: 1.7rem;
+}
+.doctorsdashboard .left-side .title_div > :nth-child(1) {
+  flex: 0.3;
+}
+.doctorsdashboard .left-side .title_div > :nth-child(2) {
+  flex: 0.6;
+}
+.doctorsdashboard .left-side .title_div > :nth-child(3) {
+  flex: 0.1;
+}
+.doctorsdashboard .left-side .patients_div {
+  margin-top: 0.4rem;
+}
+.doctorsdashboard .dropdown {
+  position: absolute;
+  top: 80%;
+  background-color: white;
+  right: 1rem;
+  border-radius: 8px;
+  width: fit-content;
+  z-index: 2000;
+
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14);
+}
+
+.doctorsdashboard .patients_div ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.doctorsdashboard .patients_div li {
+  padding: 8px 12px;
+}
+
+.doctorsdashboard .patients_div li:hover {
+  background-color: rgba(0, 0, 0, 0.14);
+  cursor: pointer;
+}
+.doctorsdashboard .left-side .patients_info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-top: 0.4rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.calendar-container {
+  position: relative;
+}
+.ken_class {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+.doctorsdashboard .left-side .patients_info > :nth-child(1) {
+  flex: 0.3;
+}
+.doctorsdashboard .left-side .patients_info > :nth-child(2) {
+  flex: 0.6;
+  margin-top: 4px;
+}
+.doctorsdashboard .left-side .patients_info > :nth-child(3) {
+  flex: 0.1;
+}
+.doctorsdashboard .patients_div .circle_more {
+  display: block;
+}
+.doctorsdashboard .patients_div .circle_more:hover {
+  cursor: pointer;
+}
+.doctorsdashboard main .right-side {
+  height: 100%;
+  margin-right: 2rem;
+  overflow-y: scroll;
+}
+.doctorsdashboard main .schedule_div {
+  border-radius: 10px;
+  padding-left: 10px;
+  margin-top: 1rem;
+
+  background-color: #e0f5e0;
+  padding: 1rem 0;
+  overflow-y: scroll;
+}
+.doctorsdashboard main .top {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+.doctorsdashboard main .top button {
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 0.4rem 1rem;
+}
+.doctorsdashboard main .top button:hover {
+  color: rgb(255, 254, 254);
+  cursor: pointer;
+  background-color: blue;
+  border: solid 1px blue;
+}
+.doctorsdashboard main .middle {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  padding: 0 1rem;
+}
+.doctorsdashboard main .middle .nav_icons {
+  display: flex;
+  justify-content: space-between;
+  width: 20%;
+}
+.doctorsdashboard main .middle .nav_icons > :nth-child(1):hover {
+  cursor: pointer;
+}
+.doctorsdashboard main .middle .nav_icons > :nth-child(2):hover {
+  cursor: pointer;
+}
+.doctorsdashboard main .appointment_brief {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  background-color: white;
+  margin-top: 0.7rem;
+  padding: 1rem;
+}
+.doctorsdashboard main .appointment_brief p {
+  font-size: 12px;
+  font-weight: 500;
+}
+.doc_connect_div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10rem;
+}
+.doc_connect_btn {
+  border: none;
+  background-color: #006edc;
+  padding: 1rem 2rem;
+  color: white;
+  margin-top: 0.6rem;
+  border-radius: 8px;
+}
+.react-calendar {
+  width: 270px;
+  max-width: 100%;
+  background: #ecf5fe;
+  border-radius: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.125em;
+  padding: 1rem;
+}
+
+.react-calendar--doubleView {
+  width: 700px;
+}
+
+.react-calendar--doubleView .react-calendar__viewContainer {
+  display: flex;
+  margin: -0.5em;
+}
+
+.react-calendar--doubleView .react-calendar__viewContainer > * {
+  width: 50%;
+  margin: 0.5em;
+}
+
+.react-calendar,
+.react-calendar *,
+.react-calendar *:before,
+.react-calendar *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.react-calendar button {
+  margin: 0;
+  border: 0;
+  outline: none;
+}
+
+.react-calendar button:enabled:hover {
+  cursor: pointer;
+}
+
+.react-calendar__navigation {
+  display: flex;
+  height: 44px;
+  margin-bottom: 1em;
+}
+
+.react-calendar__navigation button {
+  min-width: 44px;
+  background: none;
+}
+
+.react-calendar__navigation button:disabled {
+  background-color: #f0f0f0;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background-color: #e6e6e6;
+}
+
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.75em;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  padding: 0.5em;
+}
+
+.react-calendar__month-view__weekNumbers .react-calendar__tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75em;
+  font-weight: bold;
+}
+
+.react-calendar__month-view__days__day--weekend {
+  color: #d10000;
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #757575;
+}
+abbr {
+  text-decoration: none;
+}
+.react-calendar__year-view .react-calendar__tile,
+.react-calendar__decade-view .react-calendar__tile,
+.react-calendar__century-view .react-calendar__tile {
+  padding: 2em 0.5em;
+}
+
+.react-calendar__tile {
+  max-width: 100%;
+  padding: 10px 6.6667px;
+  background: none;
+  text-align: center;
+  line-height: 16px;
+}
+
+.react-calendar__tile:disabled {
+  background-color: #f0f0f0;
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background-color: #e6e6e6;
+}
+
+.react-calendar__tile--now {
+  background: #ffff76;
+}
+
+.react-calendar__tile--now:enabled:hover,
+.react-calendar__tile--now:enabled:focus {
+  background: #ffffa9;
+}
+
+.react-calendar__tile--hasActive {
+  background: #76baff;
+}
+
+.react-calendar__tile--hasActive:enabled:hover,
+.react-calendar__tile--hasActive:enabled:focus {
+  background: #a9d4ff;
+}
+
+.react-calendar__tile--active {
+  background: #006edc;
+  color: white;
+}
+
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+  background: #1087ff;
+}
+
+.react-calendar--selectRange .react-calendar__tile--hover {
+  background-color: #e6e6e6;
+}

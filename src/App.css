@@ -1,0 +1,95 @@
+.App {
+  display: flex;
+}
+
+.sideBar {
+  width: 160px;
+  height: 100vh;
+  background: #3399FF;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075), 10px 10px 20px rgba(0, 0, 0, 0.04);
+  left: 0%;
+  top: 0%;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 2s;
+  overflow: hidden;
+  position: relative;
+}
+.sideBar div img {
+  padding: 10px 5px;
+}
+.mid-section {
+  padding: 20px 10px;
+  text-align: center;
+  margin-top: 0px;
+}
+.mid-section .link {
+  text-decoration: none;
+  list-style: none;
+  color: #0a1f33;
+}
+.mid-section p {
+  padding: 10px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+}
+.lower-section {
+  margin-top: 50px;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+}
+.lower-section .link {
+  text-decoration: none;
+  list-style: none;
+  color: #0a1f33;
+
+}
+.lower-section p {
+  padding: 15px 0px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+}
+.middle-section {
+  padding: 20px 10px;
+  text-align: center;
+  margin-top: 0px;
+}
+.middle-section p {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+}
+.link p{
+  color: #fff;
+}
+.links {
+  text-decoration: none;
+  list-style: none;
+  color: #0a1f33;
+}
+.Layout {
+  display: flex;
+  flex-grow: 1;
+}
+.center-div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.center-div p{
+  color: #fff;
+  font-weight: 700;
+}
+.center-div span{
+  color: #fff;
+}

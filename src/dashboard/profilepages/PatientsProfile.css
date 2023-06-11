@@ -1,0 +1,189 @@
+.patientsprofile {
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-row-gap: 10px;
+  grid-column-gap: 2rem;
+  width: 100%;
+  height: 100vh;
+
+  overflow-y: scroll;
+}
+.patientsprofile .bottom_left {
+  box-shadow: 1px 2px 8px rgb(91, 91, 91);
+  padding: 2rem 2rem 3rem 2rem;
+  border-radius: 10px;
+  margin-top: 2rem;
+  overflow-y: scroll;
+  padding-bottom: 4rem;
+}
+.patientsprofile ._header {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 500;
+  color: #3399ff;
+  margin-bottom: 2rem;
+}
+.patientsprofile ._bottom_profile_details {
+  display: flex;
+  gap: 1.5rem;
+}
+.patientsprofile ._bottom_profile_details .left_section {
+  flex: 0.5;
+}
+.patientsprofile ._bottom_profile_details .right_section {
+  flex: 0.5;
+}
+.patientsprofile ._bottom_profile_details .left_section div {
+  border: solid 1px rgb(130, 130, 130);
+  border-radius: 10px;
+  padding: 0.8rem 2rem 0.8rem 1rem;
+  margin-bottom: 1rem;
+}
+.patientsprofile ._bottom_profile_details .left_section h3 {
+  margin-bottom: 1rem;
+  font-size: 13px;
+  font-weight: 600;
+  color: #222222;
+}
+.patientsprofile ._bottom_profile_details .left_section p {
+  font-size: 11px;
+  font-weight: 400;
+}
+.patientsprofile ._bottom_profile_details .right_section div {
+  border: solid 1px rgb(130, 130, 130);
+  border-radius: 10px;
+  padding: 0.8rem 2rem 0.8rem 1rem;
+  margin-bottom: 1rem;
+}
+.patientsprofile ._bottom_profile_details .right_section h3 {
+  margin-bottom: 1rem;
+  font-size: 13px;
+  font-weight: 600;
+  color: #222222;
+}
+.patientsprofile ._bottom_profile_details .right_section p {
+  font-size: 11px;
+  font-weight: 400;
+}
+.left_side .warning {
+  margin-top: 2rem;
+  width: 90%;
+}
+.left_side .warning span {
+  font-weight: 700;
+}
+.right_side .right_side_top {
+  box-shadow: 1px 2px 8px rgb(91, 91, 91);
+  border-radius: 10px;
+  padding: 2rem;
+  align-self: baseline;
+}
+._down_part div {
+  border: solid 1px rgb(130, 130, 130);
+  border-radius: 10px;
+  padding: 0.8rem 2rem 0.8rem 1rem;
+  margin-bottom: 1rem;
+}
+._down_part h3 {
+  margin-bottom: 1rem;
+  font-size: 13px;
+  font-weight: 600;
+  color: #222222;
+}
+._down_part p {
+  font-size: 11px;
+  font-weight: 400;
+}
+.bottom_right_side {
+  box-shadow: 1px 2px 8px rgb(91, 91, 91);
+  border-radius: 10px;
+  padding: 2rem;
+  margin-top: 2rem;
+  align-self: baseline;
+}
+.bottom_right_side .left_div div,
+.bottom_right_side .right_div div,
+.card div,
+.wallet div {
+  border: solid 1px rgb(130, 130, 130);
+  border-radius: 10px;
+  padding: 0.8rem 2rem 0.8rem 1rem;
+  margin-bottom: 1rem;
+}
+.bottom_right_side .left_div h3,
+.bottom_right_side .right_div h3,
+.card h3,
+.wallet h3 {
+  margin-bottom: 1rem;
+  font-size: 13px;
+  font-weight: 600;
+  color: #222222;
+}
+.bottom_right_side .left_div p,
+.bottom_right_side .right_div p,
+.card p,
+.wallet p {
+  font-size: 11px;
+  font-weight: 400;
+}
+.bottom_right_side .top_section {
+  display: flex;
+  gap: 1.5rem;
+}
+.bottom_right_side .top_section .left_div,
+.bottom_right_side .down_section .left_div {
+  flex: 0.5;
+}
+.bottom_right_side .top_section .right_div,
+.bottom_right_side .down_section .right_div {
+  flex: 0.5;
+}
+.bottom_right_side .down_section {
+  display: flex;
+  gap: 1.5rem;
+}
+
+@media (max-width: 1080px) {
+  .patientsprofile {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+}
+@media (max-width: 667px) {
+  .patientsprofile {
+    padding: 0.5rem;
+  }
+  .patientsprofile ._bottom_profile_details {
+    flex-direction: column;
+    gap: 0;
+  }
+  .patientsprofile .bottom_left {
+    box-shadow: none;
+    border-radius: 0;
+    padding-top: 1rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+  }
+  .right_side .right_side_top {
+    box-shadow: none;
+    border-radius: 0;
+    padding-top: 0.5rem;
+    padding: 0.5rem;
+  }
+  .bottom_right_side {
+    box-shadow: none;
+    border-radius: 0;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+  }
+  .bottom_right_side .top_section {
+    flex-direction: column;
+    gap: 0;
+  }
+  .bottom_right_side .down_section {
+    flex-direction: column;
+    gap: 0;
+  }
+}

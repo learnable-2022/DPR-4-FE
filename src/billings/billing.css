@@ -1,0 +1,984 @@
+.Right {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  height: 100vh;
+  overflow: scroll;
+}
+
+.billingBoardDashboard {
+  display: flex;
+}
+
+.billingNav {
+  width: 90%;
+  height: 100px;
+  background-color: #d6ebff;
+  margin-left: 20px;
+  margin-top: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+}
+
+.patientName {
+  margin-left: 20px;
+  color: #000000;
+  font-size: 15px;
+}
+
+.searchParent {
+  width: 600px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+
+  margin-right: 20px;
+  border-radius: 10px;
+}
+
+.searchBox {
+  width: 480px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #3399ff;
+  margin-left: 20px;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.searchBox input {
+  border: none;
+  border-style: none;
+
+  color: black;
+  margin-left: 10px;
+  outline: none;
+  font-size: 15px;
+}
+
+.searchIcons {
+  display: flex;
+}
+
+.searchIcons img {
+  margin-right: 20px;
+}
+
+.Hero {
+  width: 90%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.HeroRight img {
+  width: 500px;
+
+  margin-left: 80px;
+}
+
+.paymentCard {
+  height: 200px;
+  border-radius: 10px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  background: linear-gradient(#3399ff, #80d480);
+}
+
+.cardDetails {
+  width: 470px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.portfolio {
+  width: 250px;
+  display: flex;
+  align-items: center;
+}
+
+.portfolio p {
+  font-size: 25px;
+  color: #ffffff;
+}
+
+.portfolio img {
+  width: 22px;
+  height: 20px;
+  margin-left: 30px;
+}
+
+.Money {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.Money h3 {
+  font-size: 30px;
+  margin-left: 5px;
+}
+
+.Money img {
+  width: 40px;
+}
+
+.MoneyOption {
+  display: flex;
+}
+
+.MoneyOptionRight {
+  width: 90px;
+  height: 35px;
+
+  border-radius: 5px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.MoneyOptionRight p {
+  color: #666666;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.BillingCards {
+  width: 410px;
+  margin-top: 20px;
+  display: flex;
+
+  justify-content: space-between;
+}
+.BillingCard {
+  width: 120px;
+  height: 120px;
+  padding: 30px;
+  border-radius: 6px;
+  border-width: 2px 2px 4px 4px;
+  border-style: solid;
+  border-color: #cccccc;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075),
+    10px 10px 20px rgba(0, 0, 0, 0.04);
+
+  background-color: #d6ebff;
+}
+
+.BillingCardContent1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.BillingCardContent1 p {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.Dashboard {
+  width: 90%;
+
+  margin-left: 20px;
+  margin-top: 50px;
+
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.patientDashboard {
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.patientDashboardHeading {
+  margin-left: 20px;
+  padding: 10px;
+  margin-top: 15px;
+}
+
+.patientDashboardHeading p {
+  align-items: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: #333333;
+
+  margin-left: 10px;
+}
+
+.patientNav {
+  width: 90%;
+
+  margin-left: 20px;
+}
+
+.patientNav ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.patientNav li {
+  list-style: none;
+  font-size: 15px;
+}
+
+.PatientEntities {
+  width: 90%;
+  margin-left: 20px;
+}
+
+.PatientEntities ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.PatientEntities li {
+  list-style: none;
+  font-size: 18px;
+  font-weight: 400;
+  color: #666666;
+  cursor: pointer;
+}
+.Details {
+  display: flex;
+  flex-direction: column;
+}
+
+.Name li,
+.DetailEntities li {
+  color: #666666;
+  display: flex;
+  justify-content: start;
+  margin-inline-end: 30px;
+  font-size: 20px;
+  font-weight: 500;
+  width: 180px;
+}
+
+.Successful {
+  color: #66cc66;
+  font-weight: 700;
+}
+
+.Declined {
+  color: #e85151;
+  font-weight: 700;
+}
+
+.billingNavHistory {
+  width: 90%;
+  height: 100px;
+  background-color: #d6ebff;
+  margin-left: 20px;
+  margin-top: 40px;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.billingNavHistory h1 {
+  margin-left: 10px;
+  color: #666666;
+}
+
+.Consultation {
+  display: flex;
+  margin-top: 10px;
+}
+
+.Bill {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.Bill h6 {
+  cursor: pointer;
+}
+
+.ArrowHistory {
+  width: 12px;
+}
+
+.Name {
+  width: 100%;
+  height: 100px;
+  background-color: #d6ebff;
+}
+
+.ulHead li {
+  margin-top: 20px;
+  margin-left: 30px;
+}
+
+.coincoin {
+  width: 90%;
+  height: 1000px;
+  margin-top: 50px;
+  margin-left: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.navFlex {
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+}
+
+.DateCal {
+  display: flex;
+  margin-top: 10px;
+}
+
+.DateCal h4 {
+  color: #3399ff;
+  margin-left: 30px;
+}
+
+.ulContent li {
+  color: #666666;
+  margin-top: 25px;
+  font-size: 16px;
+}
+
+.ulHead,
+.ulContent {
+  display: flex;
+}
+
+.DateCal img {
+  margin-left: 25px;
+}
+
+.DetailEntities {
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 30px;
+  margin-left: 30px;
+}
+
+.underline {
+  width: 90%;
+  margin-top: 10px;
+}
+
+.PatientUnderline {
+  margin-top: 10px;
+}
+
+.DateCalDown {
+  display: flex;
+  margin-left: 30px;
+}
+
+.DateCalDown h4 {
+  color: #3399ff;
+}
+.DateCalDown img {
+  margin-left: 40px;
+}
+
+.invoiceIcons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 90px;
+  height: 50px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.invoiceHero {
+  max-width: 90%;
+  padding: 40px;
+  margin-top: 50px;
+  margin-left: 20px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.invoiceProfile {
+  display: flex;
+  justify-content: space-between;
+}
+
+.patientProfile {
+  display: flex;
+  align-items: center;
+}
+
+.editProfile {
+  display: flex;
+  color: #3399ff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.editProfile img {
+  width: 15px;
+  color: #66cc66;
+  margin-left: 10px;
+}
+
+.editProfile p {
+  font-size: 12px;
+  color: #66cc66;
+  margin-left: 860px;
+}
+
+.ViewAll {
+  text-align: end;
+  margin-top: 30px;
+  color: #3399ff;
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 40px;
+}
+
+.patientProfile ul li {
+  height: 40px;
+  font-size: 15px;
+  margin-left: 20px;
+  margin-block: 5px;
+  list-style: none;
+  color: #999999;
+}
+
+.patientProfile img {
+  width: 100px;
+}
+
+.profileLeft p {
+  color: #999999;
+}
+
+.profileLeft .id {
+  margin-top: 20px;
+}
+
+span {
+  color: #666666;
+  font-weight: 600;
+}
+
+.billingStatement {
+  width: 90%;
+  padding: 40px;
+  margin-top: 50px;
+  margin-left: 20px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.billingStatementNav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.PrinterSide {
+  width: 70px;
+  display: flex;
+  margin-right: 20px;
+  justify-content: space-between;
+}
+
+.PrinterSide p {
+  font-size: 14px;
+  color: #66cc66;
+}
+
+.PrinterSide img {
+  width: 20px;
+}
+
+.invoice {
+  color: #3399ff;
+}
+
+.billingStatementNavUnderline {
+  margin-top: 20px;
+}
+
+.invoiceDetails {
+  margin-top: 30px;
+  list-style: none;
+}
+
+.invoiceDetails li {
+  margin-block: 20px;
+  font-size: 15px;
+}
+
+.billingPatientDetails {
+  width: 700px;
+  height: 200px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.BillingDetails li {
+  color: #999999;
+  font-size: 15px;
+  list-style: none;
+  margin-block: 18px;
+}
+
+.BillingDetails h3 {
+  color: #666666;
+}
+
+.PatientDetails li {
+  color: #999999;
+  font-size: 15px;
+  list-style: none;
+  margin-block: 18px;
+}
+
+.PatientDetails h3 {
+  color: #666666;
+}
+
+.demarcation {
+  height: 170px;
+  margin-top: 10px;
+  margin-left: 190px;
+}
+
+.paid {
+  color: #66cc66;
+}
+
+.billItem {
+  margin-top: 20px;
+  background-color: #ffffff;
+}
+
+.billItem h4 {
+  color: #666666;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.billItemNav {
+  background-color: #d6ebff;
+  padding: 20px;
+}
+
+.billItemContent {
+  width: 600px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.billPreview {
+  width: 600px;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 20px;
+}
+
+.billPreview p {
+  margin-block: 20px;
+  color: #666666;
+  font-weight: 500;
+}
+
+.medicalTools {
+  display: flex;
+  align-items: center;
+}
+
+.medicalTools p {
+  margin-left: 10px;
+}
+
+.DoctorName {
+  margin-left: 20px;
+  color: #000000;
+  font-size: 15px;
+}
+
+.doctorsDashboard {
+  height: 200px;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.doctorViewAll {
+  text-align: end;
+  margin-top: 30px;
+  color: #3399ff;
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 40px;
+  padding: 40px;
+}
+
+.ConsultationBilling {
+  width: 60%;
+  margin-left: 20px;
+}
+
+.ConsultationBilling ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  color: #666666;
+}
+
+.ConsultationBilling li {
+  list-style: none;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.ConsultationBillingNav {
+  width: 60%;
+  margin-left: 20px;
+}
+
+.ConsultationBillingNav ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ConsultationBillingNav li {
+  list-style: none;
+  font-size: 15px;
+}
+
+.doctorUnderline {
+  width: 150%;
+  margin-top: 10px;
+}
+
+.ConsultationBillingContainer {
+  width: 90%;
+  margin-left: 20px;
+  margin-top: 20px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075),
+    10px 10px 20px rgba(0, 0, 0, 0.04);
+}
+
+.ConsultationInformation {
+  width: 95%;
+  display: flex;
+  margin-left: 30px;
+  margin-top: 40px;
+  justify-content: space-between;
+}
+
+.ConsultationName {
+  width: 18%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ConsultationPropertyDown {
+  margin-top: 18px;
+}
+
+.DateCalConsultationPropertyDown {
+  display: flex;
+  margin-top: 18px;
+}
+
+.DateCalConsultationPropertyDown img {
+  margin-left: 30px;
+}
+
+.scroll {
+  margin-top: 10px;
+}
+
+.ConsultationBillItemNav {
+  width: 90%;
+  background-color: #d6ebff;
+  padding: 20px;
+  margin-left: 30px;
+}
+
+.ConsultationBillItemContent {
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.ConsultationBillItemContent p {
+  font-size: 20px;
+}
+
+.deleteFlex {
+  display: flex;
+  align-items: center;
+}
+
+.deleteFlex img {
+  margin-top: 8px;
+}
+
+.ConsultationBillPreview {
+  width: 90%;
+  margin-left: 30px;
+
+  background-color: #f9f9f9;
+}
+
+.billPreview p {
+  margin-block: 20px;
+  color: #666666;
+  font-weight: 500;
+}
+
+.ConsultationBillPreviewDetails {
+  width: 85%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 25px;
+}
+
+.ConsultationMedicalTools {
+  display: flex;
+  align-items: center;
+}
+
+.ConsultationMedicalTools p {
+  margin-left: 10px;
+}
+
+.DetailEntities {
+  margin-left: 20px;
+}
+
+.summary {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 20px;
+  padding: 50px;
+}
+
+.addService {
+  display: flex;
+}
+
+.addService p {
+  margin-left: 10px;
+  color: #66cc66;
+  font-weight: 600;
+}
+
+.authUp {
+  width: 50%;
+  display: flex;
+  margin-left: 10px;
+  padding: 10px;
+  justify-content: space-around;
+}
+
+.authDown {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 10px;
+  padding: 10px;
+}
+
+.authDownPaid {
+  color: #e85151;
+  margin-left: 55px;
+}
+
+.paidWrapper {
+  width: 40%;
+}
+.authDownPaidU {
+  margin-left: 55px;
+}
+
+.check {
+  display: flex;
+}
+
+.check p {
+  margin-left: 10px;
+}
+
+.check img {
+  width: 20px;
+  cursor: pointer;
+}
+
+.checkWrapper {
+  display: flex;
+}
+
+.checkMail {
+  display: flex;
+  margin-right: 40px;
+}
+
+.checkMail p {
+  margin-left: 10px;
+}
+
+.checkMail img {
+  width: 20px;
+  cursor: pointer;
+}
+
+.sendInvoice button {
+  width: 300px;
+  height: 50px;
+  background-color: #3399ff;
+  border-radius: 10px;
+  margin-top: 30px;
+  align-items: center;
+  margin-left: 30%;
+  color: #ffffff;
+  font-size: 15px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.shitty {
+  color: #e85151;
+}
+
+.paymentDetails {
+  margin-top: 20px;
+  background-color: #ffffff;
+  background-color: #ffffff;
+}
+
+.paymentOptionsNav {
+  padding: 18px;
+  background-color: #d6ebff;
+}
+
+.paymentOptionsNav p {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.paymentImage {
+  width: 35%;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.radioText {
+  display: flex;
+  align-items: center;
+}
+
+.Pay {
+  width: 20px;
+  margin-right: 170px;
+}
+
+.Paypal {
+  margin-right: 100px;
+}
+
+.visa {
+  width: 200px;
+}
+
+.RadioButton {
+  width: 18px;
+}
+
+.radioText p {
+  margin-left: 10px;
+  color: #666666;
+  font-weight: 500;
+}
+
+.Confirmation {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Confirmation img {
+  width: 100px;
+}
+
+.Confirmation p {
+  color: #666666;
+  margin-top: 40px;
+  text-align: center;
+  font-family: Open Sans;
+  font-weight: 500;
+}
+
+.dangerButtons {
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 80px;
+  margin-top: 50px;
+}
+
+.danger1 {
+  width: 250px;
+  color: #ffffff;
+  padding: 15px;
+  border-radius: 10px;
+  border: none;
+  font-size: 15px;
+  font-weight: 500;
+  background-color: #66cc66;
+  cursor: pointer;
+}
+
+.danger2 {
+  width: 250px;
+  padding: 15px;
+  border-radius: 10px;
+  border: none;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.successfullyBtn {
+  width: 450px;
+  color: #ffffff;
+  background-color: #3399ff;
+  padding: 15px;
+  border-radius: 10px;
+  border: none;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-left: 55px;
+  font-family: Open Sans;
+}

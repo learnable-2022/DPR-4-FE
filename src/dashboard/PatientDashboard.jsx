@@ -20,13 +20,12 @@ import drug1 from "../assets/drug1.svg";
 import drug2 from "../assets/drug2.svg";
 import drug3 from "../assets/drug3.svg";
 import drug4 from "../assets/drug4.svg";
+import axios from "axios";
+import { useRequestProcessor } from "../api/requestProcessor";
 import { Link, useNavigate } from "react-router-dom";
 import StateContext from "../stateProvider/stateprovider";
-import abi from "../abi.json";
-import { ethers } from 'ethers';
-export default function PatientDashboard() {
-<<<<<<< HEAD
 
+export default function PatientDashboard() {
   // const {auth} = useContext(StateContext);
   // const patientNavigator = useNavigate();
 
@@ -39,132 +38,30 @@ export default function PatientDashboard() {
 
   //   return patientNavigator("./landing");
   // }
-  // const ethers = require("ethers");
-=======
-  let PatientId = localStorage.getItem("user_id");
-  const { makeRequest } = useRequestProcessor();
-  const { response, error } = makeRequest({ url: "/patient/", method: "GET" });
-  console.log("response:", response, "error:", error);
+  let PatientId = localStorage.getItem("patient_id");
+  let PatientEmail = localStorage.getItem("patientEmail");
 
-  const getUser = response?.data.find((item) => item._id === PatientId);
-  console.log(getUser.name);
->>>>>>> develop
+  let token = localStorage.getItem("patientToken");
+  // console.log(PatientId);
+
+  // const { makeRequest } = useRequestProcessor();
+  // const { response, error } = makeRequest({
+  //   url: "/patient/",
+  //   method: "GET",
+  // });
+  // console.log(response);
+  // console.log("response:", response, "error:", error);
+
+  // const getUser = response?.data.find((item) => item._id === PatientId);
+  // const getAll = response?.data.map((item) => item._id);
+
+  // console.log(getUser?.name);
+  const [patientName, setPatientName] = useState("");
+  const [patientImage, setPatientImage] = useState("");
   const [data, setData] = useState(true);
   const drugs = [drug1, drug2, drug3, drug4];
-  const [connectedWallet, setConnectedWallet] = useState(false);
+  const [connectedWallet, setConnectedWallet] = useState(true);
   const diseases = [disease1, disease2, disease3];
-
-  let contractAddress = "0xed684d02c7549f4E79B5c3FFD58eFb94fb1D6c31";
-  const [errorMessage, setErrorMessage] = useState(null);
-	const [defaultAccount, setDefaultAccount] = useState(null);
-	const [connButtonText, setConnButtonText] = useState('Connect Metamask');
-
-	const [provider, setProvider] = useState(null);
-	const [signer, setSigner] = useState(null);
-	const [contract, setContract] = useState(null);
-  const [getForm , setGetForm] = useState('');
-
-  const connectWalletHandler = () =>{
-
-    if (window.ethereum && window.ethereum.isMetaMask) {
-
-  window.ethereum.request({ method: 'eth_requestAccounts'})
-  .then(result => {
-    accountChangedHandler(result[0]);
-    setConnectedWallet(true);
-    // console.log(defaultAccount);
-  
-    // setConnButtonText('Wallet Connected');
-  })
-  .catch(error => {
-    setErrorMessage(error.message);
-  
-  });
-
-} else {
-  console.log('Need to install MetaMask');
-  setErrorMessage('Please install MetaMask browser extension to interact');
-}
-};
-
-
-const updateEthers = async () => {
-  try {
-    if (window.ethereum && window.ethereum.isMetaMask) {
-      let tempProvider = new ethers.providers.Web3Provider(window.ethereum);
-  setProvider(tempProvider);
-  
-
-  let tempSigner = tempProvider.getSigner();
-  setSigner(tempSigner);
-  console.log(tempSigner);
-  let tempContract = new ethers.Contract(contractAddress, abi, tempSigner);
-  setContract(tempContract);
-  // console.log(tempContract);
-  
-  
-      
-      
-    } else {
-      console.error('Please install MetaMask or use a compatible Ethereum browser extension.');
-    }
-  } catch (error) {
-    console.error('Error updating Ethers:', error);
-  }
-};
-
-
-const accountChangedHandler = (newAccount) => {
-setDefaultAccount(newAccount);
-};
-
-
-useEffect(() => {
-  
-  updateEthers();
-  connectWalletHandler();
-}, []);
-
-
-const grantDoctorAccess = async (e) => {
-
-  try{
-      if(defaultAccount == null && getForm == '')return ;
-      let access = await contract.grantAccess( getForm,defaultAccount);
-      console.log("Access Granted");
-  }catch(err){
-
-  }
-  
-    // if (contract) {
-    //   if(defaultAccount == null)return ;
-    //   let doctorID = e.target.name.doctorAddress.value;
-    //   console.log(doctorID);
-    //   let access = await contract.grantAccess(defaultAccount, doctorID);
-    //   console.log('Access granted:', access);
-    // } else {
-    //   console.error('Contract is not available');
-    // };
- 
-};
-
-
-const checkRecord = async () => {
-  try {
-    if (contract) {
-      let access = await contract.getPatientRecord(defaultAccount);
-      console.log(access);
-      let recordcleaned = [];
-    } else {
-      console.error('Contract is not available');
-    };
-  } catch (error) {
-    console.error('Error granting access:', error);
-  }
-};
-
-checkRecord();
-
   const generateDrugPic = () => {
     let number = Math.floor(Math.random() * 4);
     let val = number;
@@ -177,21 +74,47 @@ checkRecord();
 
     return val;
   };
-
+  let patient_Image = localStorage.getItem("patient_image");
+  let patient_Name = localStorage.getItem("patient_name");
+  useEffect(() => {
+    const getPatientDetails = async () => {
+      const response = await axios.get(
+        `https://medbloc-api.onrender.com/api/v1/patient/`,
+        {
+          headers: {
+            "x-auth-token": token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
+      );
+      console.log(response);
+      const res = response?.data.find((item) => item.email === PatientEmail);
+      console.log(res);
+      localStorage.setItem("patient_image", res.image);
+      localStorage.setItem("patient_name", res.name);
+    };
+    getPatientDetails();
+  }, []);
   return (
     <div className="patientdashboard">
       <header className="patientdashboard_header">
         <div className="left_side_header">
-          <h1>Welcome! {getUser.name}</h1>
+          <h1>Welcome! {patient_Name?.split(" ")[0]},</h1>
         </div>
         <div className="right_side_header">
           <button className="share_btn">Share Report</button>
           <GrNotification className="profile_notification" />
           <Link to="/Profile" className="link">
-            <img className="profile_img" src={emptyProfile} alt="profile" />
+            <img
+              className="profile_img"
+              src={patient_Image ? patient_Image : emptyProfile}
+              alt="profile"
+            />
           </Link>
 
-          <p className="profile_name">Ms Rosaline Doe</p>
+          <p className="profile_name">{patient_Name}</p>
         </div>
       </header>
 
@@ -199,11 +122,14 @@ checkRecord();
         <div className="patientsvital">
           <div className="left_patient_vitals">
             <div className="image_div">
-              <img src={emptyProfile} alt="patientspicture" />
+              <img
+                src={patient_Image ? patient_Image : emptyProfile}
+                alt="patientspicture"
+              />
             </div>
 
             <div className="info_div">
-              <h2 className="name">Miss Roseline</h2>
+              <h2 className="name">{patient_Name}</h2>
               <div className="wrapper">
                 <div className="first_info_div">
                   <p className="key">
@@ -255,14 +181,11 @@ checkRecord();
           <div className="middle_section">
             <div className="grant_access_div">
               <input
-              name="doctorAddress"
                 className="grant_access_input"
                 type="text"
-                onChange={(e)=>setGetForm(e.target.value)}
                 placeholder="Enter Doctor's Wallet Address to grant access"
               />
-              <button onClick={()=>grantDoctorAccess()}  className="grant_access_btn">Grant Access</button>
-
+              <button className="grant_access_btn">Grant Access</button>
             </div>
             <div className="middle_section_header">
               <p>My Vitals</p>
@@ -285,7 +208,7 @@ checkRecord();
                             }}
                           >
                             {" "}
-                            <img src={bpIcon} alt="picture" />
+                            <img src={bpIcon} alt="patient" />
                           </div>
                           <div className="readings_div">
                             <p className="heading">Blood Status</p>
@@ -304,7 +227,7 @@ checkRecord();
                             }}
                           >
                             {" "}
-                            <img src={heartIcon} alt="picture" />
+                            <img src={heartIcon} alt="patient" />
                           </div>
                           <div className="readings_div">
                             <p className="heading">Heart Rate</p>
@@ -318,8 +241,8 @@ checkRecord();
                         <div className="middle1_left">
                           <img
                             className="pulse_icon"
-                            src={pulseIcon}
                             alt="pics"
+                            src={pulseIcon}
                           />
                           <div className="left_readings">
                             <img
@@ -388,7 +311,7 @@ checkRecord();
                             }}
                           >
                             {" "}
-                            <img src={vetIcon2} alt="picture" />{" "}
+                            <img src={vetIcon2} alt="patient" />{" "}
                           </div>
                           <div className="count_val_div">
                             <p>Glucose Level</p>
@@ -484,54 +407,7 @@ checkRecord();
                         />
                       </div>
                     </div>
-                    <div className="diagnosis_container">
-                      <div className="left">
-                        <p className="diagnose_name">Malaria & Typoid</p>
-                        <p className="diagnose_status">Active</p>
-                      </div>
-                      <div className="right">
-                        <img
-                          src={diseases[generateDiseasePic()]}
-                          alt="diagnose_image"
-                        />
-                      </div>
-                    </div>
-                    <div className="diagnosis_container">
-                      <div className="left">
-                        <p className="diagnose_name">Malaria & Typoid</p>
-                        <p className="diagnose_status">Active</p>
-                      </div>
-                      <div className="right">
-                        <img
-                          src={diseases[generateDiseasePic()]}
-                          alt="diagnose_image"
-                        />
-                      </div>
-                    </div>
-                    <div className="diagnosis_container">
-                      <div className="left">
-                        <p className="diagnose_name">Malaria & Typoid</p>
-                        <p className="diagnose_status">Active</p>
-                      </div>
-                      <div className="right">
-                        <img
-                          src={diseases[generateDiseasePic()]}
-                          alt="diagnose_image"
-                        />
-                      </div>
-                    </div>
-                    <div className="diagnosis_container">
-                      <div className="left">
-                        <p className="diagnose_name">Malaria & Typoid</p>
-                        <p className="diagnose_status">Active</p>
-                      </div>
-                      <div className="right">
-                        <img
-                          src={diseases[generateDiseasePic()]}
-                          alt="diagnose_image"
-                        />
-                      </div>
-                    </div>
+
                     <div className="diagnosis_container">
                       <div className="left">
                         <p className="diagnose_name">Malaria & Typoid</p>
@@ -622,54 +498,7 @@ checkRecord();
                         <p className="dosage">1 Tab twice daily</p>
                       </div>
                     </div>
-                    <div className="med_div">
-                      <div
-                        className="drug_icon_div"
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        <img src={drugs[generateDrugPic()]} alt="drug" />
-                      </div>
-                      <div className="drug_name_div">
-                        <p className="drug_name">Ciprofloxacin</p>
-                        <p className="dosage">1 Tab twice daily</p>
-                      </div>
-                    </div>
-                    <div className="med_div">
-                      <div
-                        className="drug_icon_div"
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        <img src={drugs[generateDrugPic()]} alt="drug" />
-                      </div>
-                      <div className="drug_name_div">
-                        <p className="drug_name">Ciprofloxacin</p>
-                        <p className="dosage">1 Tab twice daily</p>
-                      </div>
-                    </div>
-                    <div className="med_div">
-                      <div
-                        className="drug_icon_div"
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        <img src={drugs[generateDrugPic()]} alt="drug" />
-                      </div>
-                      <div className="drug_name_div">
-                        <p className="drug_name">Ciprofloxacin</p>
-                        <p className="dosage">1 Tab twice daily</p>
-                      </div>
-                    </div>
+
                     <div className="med_div">
                       <div
                         className="drug_icon_div"
@@ -728,7 +557,8 @@ checkRecord();
           </div>
         ) : (
           <div style={{ textAlign: "center", marginTop: "20%" }}>
-            <button className="connect_meta" onClick={connectWalletHandler}>{connButtonText}</button>
+            <p>You are not yet connected, Please click to the button connect</p>
+            <button className="connect_meta">Connect to Metamask!</button>
           </div>
         )}
       </main>
