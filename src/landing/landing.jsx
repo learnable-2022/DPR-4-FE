@@ -41,7 +41,7 @@ export default function Landing() {
             <Link className="link" id="nav-link" to="">
               <li>Support</li>
             </Link>
-            <Link className="link" id="get-link" to="/confirmation">
+            <Link className="link" id="get-link" to="/login">
               {/* <button className="btn">sign in</button> */}
               <span>sign in</span>
             </Link>
