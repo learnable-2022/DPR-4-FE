@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./PatientsProfile.css";
 
 import emptyProfile from "../../assets/ava3.png";
 import ProfileComponent from "../components/profileComponent";
 function PatientsProfile() {
-  let patient_Image = localStorage.getItem("patient_image");
+  const [patient_Image, setPatientImage] = useState("");
+
+  useEffect(() => {
+    let pat_Image = localStorage.getItem("patient_image");
+    setPatientImage(pat_Image);
+  }, [patient_Image]);
 
   return (
     <div className="patientsprofile">

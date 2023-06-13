@@ -1,13 +1,12 @@
 .patientdashboard {
   width: 100%;
   padding: 1.3rem 0;
-
+  position: relative;
   height: 100vh;
   overflow-y: scroll;
 }
+
 .patients_dashboard_main {
-  padding-left: 2rem;
-  padding-right: 5rem;
 }
 .main_not_registered {
   padding-left: 2rem;
@@ -15,7 +14,12 @@
   display: flex;
   flex-direction: column;
 }
-
+.open_nav {
+  display: none;
+}
+.close_nav {
+  display: none;
+}
 .connect_meta {
   background-color: #55aa55;
   border: none;
@@ -31,6 +35,7 @@
 }
 .patientdashboard_header {
   display: flex;
+  position: relative;
   justify-content: space-between;
   align-items: center;
   border-bottom: solid 1px #d6ebff;
@@ -40,14 +45,34 @@
 .patientdashboard .right_side_header {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
+}
+.patientdashboard .left_side_header {
+}
+.patientdashboard .hamburger_icon {
+  margin-left: 1rem;
+  display: none;
+}
+.patientdashboard .responsive_h1_header_title {
+  display: none;
 }
 .patientdashboard .right_side_header .profile_img {
-  height: 30px;
+  height: 40px;
   width: 40px;
   border-radius: 50%;
-  border: 1px solid rgb(132, 132, 132);
-  object-fit: cover;
+  border: 1px solid rgb(255, 255, 255);
+  object-fit: fill;
+}
+
+.drop_down_btn {
+  font-size: 24px;
+  margin-left: -20px;
+}
+.drop_down_btn:hover {
+  cursor: pointer;
+}
+.relative {
+  position: relative;
 }
 .patientdashboard .right_side_header .profile_img:hover {
   cursor: pointer;
@@ -64,7 +89,6 @@
   padding: 0.5rem 1rem;
   border-radius: 10px;
   color: white;
-  margin-right: 20px;
 }
 .patientdashboard .share_btn:hover {
   cursor: pointer;
@@ -76,18 +100,21 @@
 .patientdashboard .profile_name {
   font-weight: 400;
   font-size: 14px;
+  margin-left: -11px;
 }
 .patientdashboard .patientsvital {
   display: flex;
   margin-top: 1rem;
   justify-content: space-between;
+  padding: 0 1rem;
 }
 .patientdashboard .patientsvital .image_div img {
   height: 120px;
   width: 120px;
+  border: 1px solid rgb(255 255 255);
   border-radius: 50%;
-  border: 1px solid rgb(132, 132, 132);
-  object-fit: cover;
+
+  object-fit: fill;
 }
 .patientdashboard .left_patient_vitals {
   display: flex;
@@ -127,27 +154,69 @@
   right: 0;
   top: -30px;
 }
+.patientdashboard .drop_content {
+  position: absolute;
+  right: 2rem;
+  top: 60px;
+  border-radius: 10px;
+  padding: 1rem 2px 0.5rem 2px;
+  background-color: rgb(247, 246, 246);
+  z-index: 120;
+  box-shadow: 0.5px 0.5px 0.5px 1px #d2d2d2;
+}
+
+.patientdashboard .drop_content_item {
+  margin-bottom: 1px;
+  padding: 0.4rem 1rem;
+  text-align: left;
+
+  background-color: white;
+}
+.patientdashboard .drop_content_item:hover {
+  cursor: pointer;
+  background-color: rgb(242, 242, 242);
+}
 .patientdashboard .middle_section {
   margin-top: 4rem;
 }
 .patientdashboard .grant_access_div {
   display: flex;
-  justify-content: center;
+
   align-items: center;
-  gap: 1rem;
+  padding: 0 1rem;
   margin-bottom: 2rem;
+  width: 90%;
+  justify-content: space-between;
+}
+.patientdashboard .access_div {
+  display: flex;
+  gap: 10px;
+  flex: 0.8;
+}
+.patientdashboard .revoke_div {
+  display: flex;
+  gap: 10px;
+  flex: 0.8;
 }
 .grant_access_div .grant_access_input {
-  flex: 0.4;
+  flex: 0.7;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   border-color: #d2d2d2;
   border-width: 0;
   box-shadow: 1px 1px 4px rgb(142, 142, 142);
 }
+
 .grant_access_div .grant_access_input:focus {
   outline-width: 0.4px;
   outline-color: #a3c7ec;
+}
+.grant_access_div .revoke_access_btn {
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background-color: #fc1a44;
+  color: white;
 }
 .grant_access_div .grant_access_btn {
   border: none;
@@ -158,6 +227,11 @@
 }
 .grant_access_div .grant_access_btn:hover {
   cursor: pointer;
+  background-color: #7cdb7c;
+}
+.grant_access_div .revoke_access_btn:hover {
+  background-color: #eb4866;
+  cursor: pointer;
 }
 .grant_access_input::placeholder {
   padding-left: 1rem;
@@ -166,6 +240,7 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
+  padding: 0 1rem;
 }
 .patientdashboard .middle_section .middle_section_header .report_btn {
   background-color: #66cc66;
@@ -185,6 +260,7 @@
 .patientdashboard .vitals_readings_cards .card1 {
   padding: 1rem 3rem 2rem 1rem;
   border-radius: 10px;
+  margin: 0 1rem;
   align-self: baseline;
   flex: 0.2;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
@@ -351,6 +427,7 @@
   box-shadow: 1px 1px 4px rgb(142, 142, 142);
   display: flex;
   flex: 0.4;
+  margin: 0 1rem;
   flex-direction: column;
   align-self: baseline;
 }
@@ -390,6 +467,7 @@
 .patientdashboard .card3 {
   padding: 1rem 0rem 1rem 1rem;
   flex: 0.5;
+  margin: 0 1rem;
 }
 .patientdashboard .card3 .card3_header {
   margin-bottom: 1.5rem;
@@ -421,4 +499,168 @@
   color: #808080;
   font-size: 12px;
   font-weight: 400;
+}
+@media (max-width: 1300px) {
+  .grant_access_div .grant_access_input::placeholder {
+    font-size: small;
+  }
+  .patientdashboard_header {
+  }
+  .patientdashboard .right_side_header {
+    flex: 0.5;
+    justify-content: flex-end;
+  }
+  .patientdashboard .left_side_header {
+    flex: 0.5;
+  }
+  .patientdashboard .right_patient_vitals {
+    width: auto;
+  }
+  .patientdashboard .patientsvital {
+  }
+  .patientdashboard .right_patient_vitals .right_patient_vitals_btn {
+  }
+  .patientdashboard .vitals_readings_cards {
+    flex-direction: column;
+  }
+  .patientdashboard .card2 {
+    align-self: normal;
+    margin: 1rem 1rem;
+  }
+  .patientdashboard .grant_access_div {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .grant_access_div .grant_access_input {
+    flex: 0.7;
+  }
+  .patients_dashboard_main {
+  }
+  .patientdashboard .middle1 {
+    justify-content: space-between;
+  }
+  .patientdashboard .card3 .med_div {
+    justify-content: space-between;
+  }
+}
+@media (max-width: 926px) {
+  .patientdashboard .right_side_header {
+    flex: none;
+  }
+  .open_nav {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 7000;
+    width: 100%;
+    height: 40vh;
+  }
+  .close_nav {
+    display: none;
+  }
+  .sideBar {
+    display: none;
+  }
+  .patientdashboard .hamburger_icon {
+    display: block;
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+  }
+  .patientdashboard .hamburger_icon:hover {
+    cursor: pointer;
+  }
+  .patientdashboard .h1_header_title {
+    display: none;
+  }
+  .patientdashboard .responsive_h1_header_title {
+    display: block;
+    font-weight: 700;
+    color: #2b80d4;
+    margin-left: 1rem;
+  }
+  .patientdashboard .grant_access_div {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .patientdashboard .access_div {
+    width: 90%;
+    align-items: center;
+    justify-content: center;
+  }
+  .patientdashboard .revoke_div {
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+  }
+  .patientdashboard .patientsvital {
+    flex-direction: column;
+  }
+  .patientdashboard .right_patient_vitals .right_patient_vitals_btn {
+    position: revert;
+  }
+  .patientdashboard .right_patient_vitals {
+    margin-top: 1rem;
+  }
+  .patientdashboard .left_patient_vitals {
+    flex-direction: column;
+    gap: 0;
+  }
+  .left_patient_vitals .name {
+    text-align: center;
+  }
+  .info_div {
+    width: 100%;
+  }
+  .info_div .wrapper {
+    justify-content: space-between;
+  }
+  .relative::after {
+    content: "";
+    width: 47px;
+    height: 47px;
+    border-radius: 50%;
+    background: linear-gradient(
+      90deg,
+      rgb(34, 49, 255) 0%,
+      rgb(46, 58, 227) 100%,
+      rgba(0, 212, 255, 1) 100%
+    );
+    display: block;
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    z-index: -1;
+  }
+}
+
+@media (max-width: 679px) {
+  .patientdashboard .access_div {
+    width: 100%;
+  }
+  .patientdashboard .revoke_div {
+    width: 100%;
+  }
+}
+@media (max-width: 607px) {
+  .patientdashboard .access_div {
+    flex-direction: column;
+    width: 100%;
+  }
+  .patientdashboard .revoke_div {
+    flex-direction: column;
+    width: 100%;
+  }
+  .grant_access_div .grant_access_input {
+    width: 100%;
+  }
+}
+@media (max-width: 432px) {
+  .patientdashboard_header {
+  }
 }

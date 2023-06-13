@@ -45,6 +45,7 @@ export default function SideBar() {
           <div
             onClick={() => {
               localStorage.removeItem("patientToken");
+              localStorage.removeItem("patientEmail");
             }}
           >
             <Link to="/" className="link">
