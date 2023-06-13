@@ -11,20 +11,29 @@
   color: #3399ff;
   font-size: 24px;
   font-weight: 600;
+  flex: 0.5;
 }
 .drafts_header_right {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  justify-content: space-between;
   flex: 0.3;
 }
-.drafts_header_right img {
+.drafts_header_right_no_justify {
+  display: flex;
+  align-items: center;
+  flex: 0.3;
+  justify-content: flex-end;
+}
+.drafts_header_right img,
+.drafts_header_right_no_justify img {
   height: 30px;
   width: 40px;
   border-radius: 50%;
   object-fit: cover;
 }
-.drafts_header_right img:hover {
+.drafts_header_right img:hover,
+.drafts_header_right_no_justify img:hover {
   cursor: pointer;
 }
 .doctorsdraft_header {
@@ -32,6 +41,17 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 3.5rem;
+}
+.draft_update_btn {
+  background-color: #3399ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem 1rem;
+}
+.draft_update_btn:hover {
+  cursor: pointer;
+  background-color: #69aef4;
 }
 .drafts_profile_name {
 }
@@ -57,6 +77,9 @@
   border-radius: 50%;
   padding: 0.5rem 0.7rem;
   background-color: #3399ff;
+}
+.navigation_section .circle:hover {
+  background-color: #90c1f1;
 }
 .link:hover {
   cursor: pointer;
@@ -92,11 +115,17 @@
 }
 .grant_access_div {
   display: flex;
-  justify-content: center;
+  width: 85%;
   align-items: center;
+
   gap: 1rem;
-  width: 70%;
   margin-bottom: 2rem;
+}
+.grant_access_div_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .access_input {
   flex: 0.4 1;
@@ -115,4 +144,43 @@
 }
 .access_btn:hover {
   cursor: pointer;
+  background-color: #69aef4;
+}
+
+.drafts_action_btn {
+  margin-top: 2rem;
+  display: flex;
+  gap: 8px;
+  width: 85%;
+  margin-left: -0.8rem;
+  justify-content: flex-end;
+}
+.draft_save {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 7px;
+  background-color: #3399ff;
+  color: white;
+}
+.draft_next {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 7px;
+  background-color: #3399ff;
+  color: white;
+}
+.draft_next:hover,
+.draft_save:hover {
+  cursor: pointer;
+  background-color: #58a4f0;
+}
+.report_btn_style {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 2rem;
+}
+.no_btn {
+  display: none;
 }

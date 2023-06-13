@@ -7,6 +7,7 @@ import emptyProfile from "../../assets/empty_profile.png";
 import { Link } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
 import { AiOutlinePlus } from "react-icons/ai";
+import notification from "../../assets/Notification.svg";
 
 function NavComponent() {
   const [open, setOpen] = useState(false);
@@ -91,7 +92,15 @@ function NavComponent() {
           onMouseOut={handleMouseOut}
           onClick={handleCreateAppoint}
         />
-        <GrNotification className="header_icon" onClick={handleButtonClick} />
+        <div>
+          {" "}
+          <img
+            src={notification}
+            className="header_icon"
+            onClick={handleButtonClick}
+          />
+        </div>
+
         <Link to="/DocProfile" className="link">
           {
             <img src={emptyProfile} className="header_icon" alt="profile" />

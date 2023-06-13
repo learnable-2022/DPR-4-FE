@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import "./login.css";
 import medblog from "../assets/logo-02.png";
 import bigImage from "../assets/signup-second.png";
-import {
-  faEye,
-  faEyeSlash,
-} from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import StateContext from "../stateProvider/stateprovider";
@@ -36,9 +33,9 @@ export default function Login() {
   const [errorMessage, setErrorMessage] = useState("");
   const [errmsg, setErrMsg] = useState("");
 
-const handleVisibleChange =()=>{
-  setMakeVisible(!makeVisible);
-}
+  const handleVisibleChange = () => {
+    setMakeVisible(!makeVisible);
+  };
   let DOCTOR_ITEM = localStorage.getItem("doctorEmail");
   let PATIENT_ITEM = localStorage.getItem("patientEmail");
 
@@ -60,7 +57,7 @@ const handleVisibleChange =()=>{
       email: userEmail,
       password: userPassword,
     };
-    if (user === "doctor" ) {
+    if (user === "doctor") {
       let response = null;
       try {
         response = await axioscall.post(
@@ -107,36 +104,30 @@ const handleVisibleChange =()=>{
             userEmail,
             userPassword,
             patientToken: response?.data.token,
-          })
+          });
           setUserEmail("");
           setUserPassword("");
           const item = localStorage.getItem("userdetails");
           // const toParse = JSON.parse(item.token);
-            //note kenneth above
+          //note kenneth above
+        } else if (err.response?.status === 409) {
+          setErrMsg("Username Taken");
+          setIsLoading(false);
+        } else if (err.response.status === 400) {
+          setErrMsg(
+            "invalid user, please sign up if you are new to this plateform"
+          );
+          setIsLoading(false);
+          console.log(errmsg);
+        } else if (err.response?.status === 204) {
+          setErrMsg("the server failed to load a response");
+          setIsLoading(false);
+        } else {
+          setErrMsg("Registration Failed");
+          setIsLoading(false);
         }
-          else if (err.response?.status === 409) {
-            setErrMsg("Username Taken");
-            setIsLoading(false);
-          } else if (err.response.status === 400) {
-            setErrMsg("invalid user, please sign up if you are new to this plateform");
-            setIsLoading(false);
-            console.log(errmsg);
-           
-          } 
-            else if(err.response?.status === 204) {
-              setErrMsg("the server failed to load a response");
-              setIsLoading(false);
-          } 
-          else {
-            
-            setErrMsg("Registration Failed");
-            setIsLoading(false);
-           
-          }
-          
-        
-      }}
-     else if (user === "patient") {
+      }
+    } else if (user === "patient") {
       try {
         const response = await axioscall.post(
           PATIENT_LOGIN,
@@ -155,9 +146,11 @@ const handleVisibleChange =()=>{
           email: response?.data.email,
         };
         console.log(response?.data);
+
         // const userStringify = JSON.stringify(userdetails);
         localStorage.setItem("patientToken", response?.data.token);
-        localStorage.setItem("patientEmail", response?.data.email);
+        localStorage.setItem("patient_email", response?.data.email);
+
         setIsLoading(false);
         setAuth({
           userEmail,
@@ -168,7 +161,7 @@ const handleVisibleChange =()=>{
         setUserPassword("");
         const item = localStorage.getItem("patientToken");
         // const toParse = JSON.parse(item.token);
-        console.log(response);
+
         if (item) {
           navigate("/Dashboard");
         } else if (!item) {
@@ -179,28 +172,21 @@ const handleVisibleChange =()=>{
         if (!err?.response) {
           setErrMsg("No Server Response");
           setIsLoading(false);
-       
         } else if (err.response?.status === 409) {
           setErrMsg("Username Taken");
           setIsLoading(false);
-         
-        }
-
-          else if(err.response?.status === 204) {
-            setErrMsg("the server failed to load a response");
-            setIsLoading(false);
-            
-
-        } 
-        else if(err.response?.status === 400) {
-          setErrMsg("invalid user, please sign up if you are new to this plateform");
+        } else if (err.response?.status === 204) {
+          setErrMsg("the server failed to load a response");
           setIsLoading(false);
-      }
-        else {
+        } else if (err.response?.status === 400) {
+          setErrMsg(
+            "invalid user, please sign up if you are new to this plateform"
+          );
+          setIsLoading(false);
+        } else {
           setErrMsg("Registration Failed");
           setIsLoading(false);
           console.log(errmsg);
-         
         }
       }
     }
@@ -215,9 +201,13 @@ const handleVisibleChange =()=>{
           <h2>Login</h2>
           <p>Please enter your login details to sign in.</p>
           <form className="form" onSubmit={handleLogin}>
-            {errorMessage ? <p style={{color:"red"}}>{errorMessage} </p> : ""}
-            
-            {errmsg && <p style={{color:"red"}}>{errmsg}</p>}
+            {errorMessage ? (
+              <p style={{ color: "red" }}>{errorMessage} </p>
+            ) : (
+              ""
+            )}
+
+            {errmsg && <p style={{ color: "red" }}>{errmsg}</p>}
             <div class="input">
               <label>Email Address</label>
               <input
@@ -232,13 +222,13 @@ const handleVisibleChange =()=>{
               <label>
                 Password
                 <FontAwesomeIcon
-                  icon={makeVisible ?  faEye : faEyeSlash}
+                  icon={makeVisible ? faEye : faEyeSlash}
                   className="password-toggle"
                   onClick={handleVisibleChange}
                 />
-                </label>
+              </label>
               <input
-                type={makeVisible? "text" : "password"}
+                type={makeVisible ? "text" : "password"}
                 placeholder="password"
                 value={userPassword}
                 onChange={(e) => setUserPassword(e.target.value)}

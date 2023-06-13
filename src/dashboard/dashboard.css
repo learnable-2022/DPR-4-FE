@@ -169,10 +169,12 @@
   background-color: transparent;
   border: 1px solid black;
   border-radius: 10px;
+  color: black !important;
+  font-size: 15px;
   padding: 0.4rem 1rem;
 }
 .doctorsdashboard main .top button:hover {
-  color: rgb(255, 254, 254);
+  color: rgb(255, 254, 254) !important;
   cursor: pointer;
   background-color: blue;
   border: solid 1px blue;
@@ -220,6 +222,9 @@
   color: white;
   margin-top: 0.6rem;
   border-radius: 8px;
+}
+.doc_connect_btn:hover {
+  cursor: pointer;
 }
 .react-calendar {
   width: 270px;
