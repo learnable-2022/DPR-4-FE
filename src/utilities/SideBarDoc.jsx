@@ -3,7 +3,7 @@ import { RxDashboard } from "react-icons/rx";
 import { TfiWrite } from "react-icons/tfi";
 import { AiOutlineSetting } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
-import logo1 from "../assets/images/logo-03.png";
+import ourlogo from "../assets/ourlogo.png";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
@@ -22,27 +22,28 @@ export default function SideBarDoc() {
   ];
   return (
     <div className="sideBar">
-      <div>
-        <img src={logo1} alt="pics" />
+      <div className="center-div">
+        <img src={ourlogo} alt="pics" />
+        <p>Med<span>loc</span></p>
       </div>
       <div className="mid-section">
         <Link to="/DocDashboard" className="link">
-          <RxDashboard />
+          <RxDashboard style={{color:"white"}} />
           <p>Dashboard</p>
         </Link>
 
         <Link to="/DocBillings" className="link">
-          <FontAwesomeIcon icon={faCoins} />
+          <FontAwesomeIcon icon={faCoins}  style={{color:"white"}}/>
           <p>Billings</p>
         </Link>
         <Link to="/DocDraft" className="link">
-          <TfiWrite />
+          <TfiWrite style={{color:"white"}} />
           <p>Draft</p>
         </Link>
       </div>
       <div className="lower-section">
         <Link to="/Docsettings" className="link">
-          <AiOutlineSetting />
+          <AiOutlineSetting style={{color:"white"}} />
           <p>settings</p>
         </Link>
         <div
@@ -52,7 +53,7 @@ export default function SideBarDoc() {
           }}
         >
           <Link to="/" className="link">
-            <FiLogOut />
+            <FiLogOut  style={{color:"white"}}/>
             <p>logout</p>
           </Link>
         </div>

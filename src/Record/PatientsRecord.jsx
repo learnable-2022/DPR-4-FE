@@ -1,17 +1,21 @@
-import { React, useEffect } from "react";
+import React, { useState } from 'react';
+import {  useEffect } from "react";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { BsArrowLeft } from "react-icons/bs";
 import smallLogo from "../assets/small.png";
-import bigpic from "../assets/big.png";
+
 import "./Record.css";
 import { Link, Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useRequestProcessor } from "../api/requestProcessor";
-import axios from "axios";
+
 
 export default function PatientsRecord() {
   let patient_Image = localStorage.getItem("patient_image");
   let patient_Name = localStorage.getItem("patient_name");
+
+
+
 
   const { makeRequest } = useRequestProcessor();
   const { response, error } = makeRequest({ url: "/patient/", method: "GET" });
@@ -26,12 +30,12 @@ export default function PatientsRecord() {
     <div className="container">
       <nav className="nav-container">
         <div className="nav-container-left">
-          <BsArrowLeft onClick={handle} />
+          <BsArrowLeft onClick={handle} style={{cursor:"pointer"}} />
           <h2>Medical Record</h2>
         </div>
         <div className="nav-container-right">
           <div>
-            <button>share report</button>
+            <button style={{cursor:"pointer"}}>share report</button>
           </div>
           <div>
             <IoIosNotificationsOutline />
@@ -47,7 +51,8 @@ export default function PatientsRecord() {
               }}
               alt="frame"
             />
-            <p>{patient_Name}</p>
+            
+            <p>hi! {patient_Name}</p>
           </div>
         </div>
       </nav>

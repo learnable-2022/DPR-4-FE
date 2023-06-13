@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import "./login.css";
 import medblog from "../assets/logo-02.png";
 import bigImage from "../assets/signup-second.png";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import StateContext from "../stateProvider/stateprovider";
 import { useContext } from "react";
 import axioscall from "../api/secondApi";
@@ -26,9 +28,16 @@ export default function Login() {
 
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
+  const [makeVisible, setMakeVisible] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [errmsg, setErrMsg] = useState("");
+
+  const handleVisibleChange = () => {
+    setMakeVisible(!makeVisible);
+  };
+  let DOCTOR_ITEM = localStorage.getItem("doctorEmail");
+  let PATIENT_ITEM = localStorage.getItem("patientEmail");
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -84,7 +93,7 @@ export default function Login() {
         if (item) {
           navigate("/DocDashboard");
         } else if (!item) {
-          navigate("./landing");
+          // navigate("./landing");
           console.log("to landing");
         }
       } catch (err) {
@@ -100,30 +109,22 @@ export default function Login() {
           setUserPassword("");
           const item = localStorage.getItem("userdetails");
           // const toParse = JSON.parse(item.token);
-
-          if (response?.data.token) {
-            setTimeout(() => {
-              // navigate("/");
-            }, 2000);
-          } else if (err.response?.status === 409) {
-            setErrMsg("Username Taken");
-            setTimeout(() => {
-              navigate("/");
-            }, 2000);
-            setIsLoading(false);
-          } else if (err?.response?.status === 400) {
-            setErrMsg("this user is not found");
-            setIsLoading(false);
-            setTimeout(() => {
-              navigate("/");
-            }, 2000);
-          } else {
-            setErrMsg("Registration Failed");
-            setIsLoading(false);
-            setTimeout(() => {
-              navigate("/");
-            }, 2000);
-          }
+          //note kenneth above
+        } else if (err.response?.status === 409) {
+          setErrMsg("Username Taken");
+          setIsLoading(false);
+        } else if (err.response.status === 400) {
+          setErrMsg(
+            "invalid user, please sign up if you are new to this plateform"
+          );
+          setIsLoading(false);
+          console.log(errmsg);
+        } else if (err.response?.status === 204) {
+          setErrMsg("the server failed to load a response");
+          setIsLoading(false);
+        } else {
+          setErrMsg("Registration Failed");
+          setIsLoading(false);
         }
       }
     } else if (user === "patient") {
@@ -146,6 +147,7 @@ export default function Login() {
         };
         console.log(response?.data);
 
+        // const userStringify = JSON.stringify(userdetails);
         localStorage.setItem("patientToken", response?.data.token);
         localStorage.setItem("patient_email", response?.data.email);
 
@@ -163,29 +165,28 @@ export default function Login() {
         if (item) {
           navigate("/Dashboard");
         } else if (!item) {
-          navigate("./landing");
+          // navigate("./landing");
           console.log("to landing");
         }
       } catch (err) {
         if (!err?.response) {
           setErrMsg("No Server Response");
           setIsLoading(false);
-          setTimeout(() => {
-            navigate("/");
-          }, 2000);
         } else if (err.response?.status === 409) {
           setErrMsg("Username Taken");
           setIsLoading(false);
-          setTimeout(() => {
-            navigate("/");
-          }, 2000);
+        } else if (err.response?.status === 204) {
+          setErrMsg("the server failed to load a response");
+          setIsLoading(false);
+        } else if (err.response?.status === 400) {
+          setErrMsg(
+            "invalid user, please sign up if you are new to this plateform"
+          );
+          setIsLoading(false);
         } else {
           setErrMsg("Registration Failed");
           setIsLoading(false);
           console.log(errmsg);
-          setTimeout(() => {
-            navigate("/");
-          }, 2000);
         }
       }
     }
@@ -200,8 +201,13 @@ export default function Login() {
           <h2>Login</h2>
           <p>Please enter your login details to sign in.</p>
           <form className="form" onSubmit={handleLogin}>
-            {errorMessage ? <p>{errorMessage}</p> : ""}
-            {errmsg && <p>{errmsg}</p>}
+            {errorMessage ? (
+              <p style={{ color: "red" }}>{errorMessage} </p>
+            ) : (
+              ""
+            )}
+
+            {errmsg && <p style={{ color: "red" }}>{errmsg}</p>}
             <div class="input">
               <label>Email Address</label>
               <input
@@ -213,9 +219,16 @@ export default function Login() {
               />
             </div>
             <div class="input">
-              <label>Password</label>
+              <label>
+                Password
+                <FontAwesomeIcon
+                  icon={makeVisible ? faEye : faEyeSlash}
+                  className="password-toggle"
+                  onClick={handleVisibleChange}
+                />
+              </label>
               <input
-                type="password"
+                type={makeVisible ? "text" : "password"}
                 placeholder="password"
                 value={userPassword}
                 onChange={(e) => setUserPassword(e.target.value)}
@@ -223,7 +236,7 @@ export default function Login() {
               />
             </div>
             <div className="diverge">
-              <div>
+              <div className="diverge-1">
                 <input type="checkbox" />
                 <span>Keep me logged in</span>
               </div>
@@ -247,7 +260,7 @@ export default function Login() {
           </form>
           <p className="create-account">
             Don’t have an account?
-            <Link to="/signup" className="wallet-link2">
+            <Link to="/confirmation" className="wallet-link2">
               <span>sign up</span>
             </Link>
           </p>
