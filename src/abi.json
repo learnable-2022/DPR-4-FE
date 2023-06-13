@@ -1,0 +1,264 @@
+[
+  { "inputs": [], "stateMutability": "nonpayable", "type": "constructor" },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "patientAddress",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "doctorAddress",
+        "type": "address"
+      }
+    ],
+    "name": "AccessGranted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "patientAddress",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "doctorAddress",
+        "type": "address"
+      }
+    ],
+    "name": "AccessRevoked",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "patientAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "recordIndex",
+        "type": "uint256"
+      }
+    ],
+    "name": "PatientRecordAdded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "patientAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "recordIndex",
+        "type": "uint256"
+      }
+    ],
+    "name": "PatientRecordUpdated",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "doctorAddress", "type": "address" }
+    ],
+    "name": "addDoctor",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "patientAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "string[7]",
+        "name": "vitalSigns",
+        "type": "string[7]"
+      },
+      {
+        "internalType": "string[3]",
+        "name": "treatmentDetails",
+        "type": "string[3]"
+      },
+      { "internalType": "string[3]", "name": "vaccine", "type": "string[3]" },
+      {
+        "internalType": "string[3]",
+        "name": "prescription",
+        "type": "string[3]"
+      }
+    ],
+    "name": "addPatientRecord",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "patientAddress", "type": "address" }
+    ],
+    "name": "getPatientRecord",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string[7]",
+            "name": "vitalSigns",
+            "type": "string[7]"
+          },
+          {
+            "internalType": "string[3]",
+            "name": "treatmentDetails",
+            "type": "string[3]"
+          },
+          {
+            "internalType": "string[3]",
+            "name": "vaccine",
+            "type": "string[3]"
+          },
+          {
+            "internalType": "string[3]",
+            "name": "prescription",
+            "type": "string[3]"
+          }
+        ],
+        "internalType": "struct PatientRecord.Record[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "grantedAddress",
+        "type": "address"
+      },
+      { "internalType": "address", "name": "patientAddress", "type": "address" }
+    ],
+    "name": "grantAccess",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "account", "type": "address" }
+    ],
+    "name": "isAdmin",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "account", "type": "address" }
+    ],
+    "name": "isDoctor",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "doctorAddress", "type": "address" }
+    ],
+    "name": "removeDoctor",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "patientAddress", "type": "address" }
+    ],
+    "name": "removePatient",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "grantedAddress",
+        "type": "address"
+      },
+      { "internalType": "address", "name": "patientAddress", "type": "address" }
+    ],
+    "name": "revokeAccess",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "patientAddress",
+        "type": "address"
+      },
+      { "internalType": "uint256", "name": "recordIndex", "type": "uint256" },
+      {
+        "internalType": "string[7]",
+        "name": "updatedVitalSigns",
+        "type": "string[7]"
+      },
+      {
+        "internalType": "string[3]",
+        "name": "updatedTreatmentDetails",
+        "type": "string[3]"
+      },
+      {
+        "internalType": "string[3]",
+        "name": "updatedVaccine",
+        "type": "string[3]"
+      },
+      {
+        "internalType": "string[3]",
+        "name": "updatedPrescription",
+        "type": "string[3]"
+      }
+    ],
+    "name": "updatePatientRecord",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

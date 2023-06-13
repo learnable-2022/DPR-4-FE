@@ -93,14 +93,14 @@ export default function DoctorsDrafts() {
         <p className={isActive2 ? "title_blue" : ""}>Report</p>
         <p className={isActive3 ? "title_blue" : ""}>Finish</p>
       </div>
-      <div className="grant_access_div">
+      {/* <div className="grant_access_div">
         <input
           className="access_input"
           type="text"
           placeholder="Enter Patients Wallet Address"
         />
         <button className="access_btn">Grant Access</button>
-      </div>
+      </div> */}
       <Outlet className="draft_outlet" />
     </div>
   );

@@ -9,6 +9,8 @@ import Calendar from "react-calendar";
 import NavComponent from "./components/navComponent";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import abi from "../abi.json";
+import { ethers } from 'ethers';
 
 //rescue kenneth
 export default function DoctorsDashboard() {
@@ -33,6 +35,71 @@ export default function DoctorsDashboard() {
   const options = { month: "short", year: "numeric" };
   const options2 = { day: "numeric", weekday: "long" };
   const mobileMenuRef = useRef();
+
+  let contractAddress = "0xd018103D21Cc9ae90a5Bc23aFB920F95A1C140D2";
+  const [errorMessage, setErrorMessage] = useState(null);
+	const [defaultAccount, setDefaultAccount] = useState(null);
+	const [connButtonText, setConnButtonText] = useState('Connect to Metamask!');
+
+	const [provider, setProvider] = useState(null);
+	const [signer, setSigner] = useState(null);
+	const [contract, setContract] = useState(null);
+  const [getForm , setGetForm] = useState('');
+
+  const connectWalletHandler = () =>{
+
+    if (window.ethereum && window.ethereum.isMetaMask) {
+
+  window.ethereum.request({ method: 'eth_requestAccounts'})
+  .then(result => {
+    accountChangedHandler(result[0]);
+    setConnectedWallet(true);
+    console.log(defaultAccount);
+  
+    // setConnButtonText('Wallet Connected');
+  })
+  .catch(error => {
+    setErrorMessage(error.message);
+  
+  });
+
+} else {
+  console.log('Need to install MetaMask');
+  setErrorMessage('Please install MetaMask browser extension to interact');
+}
+};
+
+
+const updateEthers = async () => {
+  try {
+    if (window.ethereum && window.ethereum.isMetaMask) {
+      let tempProvider = new ethers.providers.Web3Provider(window.ethereum);
+  setProvider(tempProvider);
+  
+
+  let tempSigner = tempProvider.getSigner();
+  setSigner(tempSigner);
+  console.log(tempSigner);
+  let tempContract = new ethers.Contract(contractAddress, abi, tempSigner);
+  setContract(tempContract);
+  // console.log(tempContract);
+
+      
+    } else {
+      console.error('Please install MetaMask or use a compatible Ethereum browser extension.');
+    }
+  } catch (error) {
+    console.error('Error updating Ethers:', error);
+  }
+};
+
+
+const accountChangedHandler = (newAccount) => {
+setDefaultAccount(newAccount);
+};
+
+
+
   const closeOpenMenus = useCallback(
     (e) => {
       if (
@@ -271,7 +338,7 @@ export default function DoctorsDashboard() {
       ) : (
         <div className="doc_connect_div">
           <p>You are not yet connected, Please click to the button connect</p>
-          <button className="doc_connect_btn">Connect to Metamask</button>
+          <button className="doc_connect_btn" onClick={connectWalletHandler}>{connButtonText}</button>
         </div>
       )}
     </div>
