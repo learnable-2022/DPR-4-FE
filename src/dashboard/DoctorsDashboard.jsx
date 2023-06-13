@@ -98,7 +98,7 @@ const accountChangedHandler = (newAccount) => {
 setDefaultAccount(newAccount);
 };
 
-
+console.log(contract);
 
   const closeOpenMenus = useCallback(
     (e) => {
@@ -129,6 +129,8 @@ setDefaultAccount(newAccount);
       // const res = response?.data.find((item) => item._ === PatientEmail);
       // console.log(res);
     };
+    connectWalletHandler();
+    updateEthers();
     getDoctorsDetails();
     console.log("uder");
     document.addEventListener("mousedown", closeOpenMenus);
@@ -341,6 +343,7 @@ setDefaultAccount(newAccount);
           <button className="doc_connect_btn" onClick={connectWalletHandler}>{connButtonText}</button>
         </div>
       )}
+      {/* <Finish contract={contract}/> */}
     </div>
   );
 }

@@ -102,6 +102,8 @@ export default function DoctorsDrafts() {
         <button className="access_btn">Grant Access</button>
       </div> */}
       <Outlet className="draft_outlet" />
+
+      
     </div>
   );
 }

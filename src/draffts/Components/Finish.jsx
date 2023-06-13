@@ -58,6 +58,7 @@ function Finish() {
       treatments +
       " "
   );
+  
   return (
     <div>
       <div className="action_button">
