@@ -40,8 +40,8 @@ export default function PatientsRecord() {
             <img
               src={patient_Image ? patient_Image : smallLogo}
               style={{
-                width: "60px",
-                height: "60px",
+                width: "40px",
+                height: "40px",
                 borderRadius: "50%",
                 border: "1px solid black",
               }}

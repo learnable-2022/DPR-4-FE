@@ -145,9 +145,10 @@ export default function Login() {
           email: response?.data.email,
         };
         console.log(response?.data);
-        const userStringify = JSON.stringify(userdetails);
+
         localStorage.setItem("patientToken", response?.data.token);
-        localStorage.setItem("patientEmail", response?.data.email);
+        localStorage.setItem("patient_email", response?.data.email);
+
         setIsLoading(false);
         setAuth({
           userEmail,
@@ -158,7 +159,7 @@ export default function Login() {
         setUserPassword("");
         const item = localStorage.getItem("patientToken");
         // const toParse = JSON.parse(item.token);
-        console.log(response);
+
         if (item) {
           navigate("/Dashboard");
         } else if (!item) {

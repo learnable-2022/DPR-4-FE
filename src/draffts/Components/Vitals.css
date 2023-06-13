@@ -72,8 +72,28 @@ ion-icon {
   height: 60px;
   font-weight: 100;
 }
+.vitals_action_btn {
+  margin-top: 2rem;
+  display: flex;
+  gap: 8px;
+  width: 85%;
+  margin-left: -0.8rem;
+  justify-content: flex-end;
+}
 .vitals .vitals_next {
-  padding: 0.5rem 4rem;
+  padding: 0.5rem 2rem;
+  border: none;
+  border-radius: 7px;
+  background-color: #3399ff;
+  color: white;
+}
+.vitals .vitals_next:hover,
+.vitals .vitals_save:hover {
+  cursor: pointer;
+  background-color: #58a4f0;
+}
+.vitals .vitals_save {
+  padding: 0.5rem 1rem;
   border: none;
   border-radius: 7px;
   background-color: #3399ff;

@@ -87,6 +87,7 @@
 }
 .second-image img {
   width: 120px;
+  height: 120px;
 }
 .second-section-text {
   display: flex;
