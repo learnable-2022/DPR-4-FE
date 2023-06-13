@@ -4,6 +4,9 @@ import {CiSearch} from "react-icons/ci";
 import {IoIosArrowForward} from "react-icons/io";
 import {  useNavigate } from 'react-router-dom';
 import{MdOutlineCancel} from "react-icons/md";
+import Table from './table';
+import { useTable } from 'react-table';
+import { useMemo } from 'react';
 
 
 export default function Visit() {
@@ -15,15 +18,43 @@ const takeme =()=>{
 }
 
   const dummyData= [
-    {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine",date:"02/05/2023",Time:"13:00 PM" ,Remark:"complete",Report:"view-report"},
-    {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine", date:"02/05/2023",Time:"13:00 PM" ,Remark:"complete",Report:"view-report"},
-    {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine", date:"02/05/2023",Time:"13:00 PM" ,Remark:"complete",Report:"view-report"},
-    {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine", date:"02/05/2023",Time:"13:00 PM" ,Remark:"complete",Report:"view-report"},
-    {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine", date:"02/05/2023",Time:"13:00 PM" ,Remark:"complete",Report:"view-report"},
-    {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine", date:"02/05/2023",Time:"13:00 PM" ,Remark:"complete",Report:"view-report"},
-    {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine", date:"02/05/2023",Time:"13:00 PM" ,Remark:"complete",Report:"view-report"},
-    {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine", date:"02/05/2023",Time:"13:00 PM" ,Remark:"complete",Report:"view-report"},
+    {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine",date:"02/05/2023",Time:"13:00 PM" ,complaint:"malariaX2",Report:"view-report"},
+    {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine", date:"02/05/2023",Time:"13:00 PM" ,complaint:"malariaX2",Report:"view-report"},
+    {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine", date:"02/05/2023",Time:"13:00 PM" ,complaint:"malariaX2",Report:"view-report"},
+    {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine", date:"02/05/2023",Time:"13:00 PM" ,complaint:"malariaX2",Report:"view-report"},
+    {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine", date:"02/05/2023",Time:"13:00 PM" ,complaint:"malariaX2",Report:"view-report"},
+  
   ]
+  const CALA =[
+    {
+        Headers: "Hospital/laboratory",
+        accessor:"hosiptalName",
+    
+    },
+    
+    {
+        Headers: "Data/time",
+        accessor:"date",
+    },
+    {
+        Headers: "Complaint",
+        accessor:"complaint",
+    },
+    {
+        Headers: "",
+        accessor:"Report",
+        cell:({cell:{row}})=>{
+            <div>
+          <p>{row.original.Report}</p>
+        </div>
+       
+        }
+    },
+];
+
+const columns = useMemo(()=> CALA,[]);
+const data = useMemo(()=> dummyData,[]);
+
   return (
     <div className='overview-container'>
       <div className='visit-navigation'>
@@ -41,14 +72,15 @@ const takeme =()=>{
         </div>
       </div>
       <div className='table'>
-        <div className='table-1'>
+      <Table columns={columns} data={data}/>
+        {/* <div className='table-1'>
           <h4>Hospital/ Attending</h4>
           <h4>Date/Time</h4>
           <h4>Complaint </h4>
-        </div>
+        </div> */}
 
         {/* this would layout component to return the data based on filter request */}
-        {dummyData.map((items)=>{
+        {/* {dummyData.map((items)=>{
           return(
         <div className='table-2'>
           <ul>
@@ -59,7 +91,7 @@ const takeme =()=>{
           </ul>
         </div>
         )
-      })}
+      })} */}
       
       </div>
     </div>

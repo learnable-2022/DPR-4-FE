@@ -4,25 +4,59 @@ import {CiSearch} from "react-icons/ci";
 import {IoIosArrowForward} from "react-icons/io";
 import{FcCheckmark} from "react-icons/fc";
 import {MdOutlineCancel} from "react-icons/md";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useMemo } from 'react';
+import Table from './table';
+
+function MyCell({ value, columnProps: { rest: { someFunc } } }) {
+  return <button onClick={someFunc}>{value}</button>
+}
 
 export default function Lab() {
-    const dummyData= [
-        {hosiptalName:"general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report" , status:"Approve",complaint:"malariaX2"},
-        {hosiptalName:"general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
-        {hosiptalName:"general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
-        {hosiptalName:"general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
-        {hosiptalName:"general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
-        {hosiptalName:"general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
-        {hosiptalName:"general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
-        {hosiptalName:"general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
-        {hosiptalName:"general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
-        {hosiptalName:"general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
-      ]
-        // const checking =()=>{
-        //   console.log("working fine")
-        // }
 
+  const  link = "/lab/view-report";
+    const dummyData= [
+        {hosiptalName:"Alpha general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report" , status:"Approve",complaint:"malariaX2"},
+        {hosiptalName:"Beta general",OwnerName:"chuks", testResult:" chest x-ray",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
+        {hosiptalName:"omega general",OwnerName:"chuks", testResult:" condensation test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
+        {hosiptalName:"zootopia general",OwnerName:"chuks", testResult:" breast cancer test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
+        {hosiptalName:" kentuky general",OwnerName:"chuks", testResult:" stapyloccous test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
+        {hosiptalName:" paradise general",OwnerName:"chuks", testResult:"chicken-pox test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
+       
+      ];
+
+      const COLA =[
+        {
+            Headers: "Hospital/laboratory",
+            accessor:"hosiptalName",
+        },
+        {
+            Headers: "Test-type",
+            accessor:"testResult",
+        },
+        {
+            Headers: "Complaint",
+            accessor:"complaint",
+        },
+        {
+            Headers: "Status",
+            accessor:"status",
+        },
+        {
+            Headers: "",
+            accessor:"Report",
+            cell: ({row}) =>(<Link to={row.link}> {row.original.Report} </Link>)
+           
+           
+            
+        },
+    ];
+
+
+    const columns = useMemo(()=> COLA, []);
+    const data = useMemo(()=> dummyData, []);
+
+   
       const navigate = useNavigate();
       const handleclick=()=>{
         navigate("/lab/view-report");
@@ -44,31 +78,40 @@ export default function Lab() {
         </div>
       </div>
       <div className='table'>
-        <div className='table-4'>
-          <ul>
-            <li>Hospital/ Laboratory</li>
-            <li>Test-type</li>
-            <li>Complaint</li>
-            <li>Status</li>
-          </ul>
-        </div>
-          {/* this would layout component to return the data based on filter request */}
-                { dummyData.map((items)=>{
-                    return(
-                        <>        
-            <div className='table-3'>
-            <ul>
-              <li>{items.hosiptalName}<br/> {items.OwnerName}</li>
-              <li>{items.testResult}</li>
-              <li>{items.complaint}</li>
-              <li>< FcCheckmark className='center'/><br/>{items.status}</li>
-              <li><button onClick={handleclick}>{items.Report}</button></li>                      
-            </ul>
-        </div>
-            </>
-                    )
-                })}
+
+      <Table columns={columns} data={data}/>
+
+
+              {/* <div className='table-4'>
+                <ul>
+                  <li>Hospital/ Laboratory</li>
+                  <li>Test-type</li>
+                  <li>Complaint</li>
+                  <li>Status</li>
+                </ul>
+              </div> */}
+                {/* this would layout component to return the data based on filter request */}
+                      {/* { dummyData.map((items)=>{
+                          return(
+                              <>        
+                  <div className='table-3'>
+                  <ul>
+                    <li>{items.hosiptalName}<br/> {items.OwnerName}</li>
+                    <li>{items.testResult}</li>
+                    <li>{items.complaint}</li>
+                    <li>< FcCheckmark className='center'/><br/>{items.status}</li>
+                    <li><button onClick={handleclick}>{items.Report}</button></li>                      
+                  </ul>
+              </div>
+                  </>
+                          )
+                      })} */}
+
+
+
+
       </div>
     </div>
   )
 }
+

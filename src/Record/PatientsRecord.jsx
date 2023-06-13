@@ -115,7 +115,7 @@ export default function PatientsRecord() {
       </div>
       <div className="third-section-link">
         <li>
-          <Link className="navi-link" to="overview">
+          <Link className="navi-link" to="">
             <p>Overview</p>
           </Link>
         </li>
