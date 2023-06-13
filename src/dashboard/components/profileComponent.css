@@ -4,6 +4,7 @@
   padding: 0.5rem 2rem;
   border-radius: 10px;
   color: white;
+  font-size: 14px;
 }
 .topleft .profile_btn:hover {
   cursor: pointer;
@@ -18,7 +19,11 @@
   border-radius: 10px;
 }
 .topleft .back_arrow {
-  display: none;
+  width: 1.5em;
+  height: 1.5em;
+  position: absolute;
+  left: 8px;
+  top: 5px;
 }
 .topleft .name {
   font-size: 20px;
@@ -36,7 +41,8 @@
   height: 160px;
   width: 160px;
   border-radius: 50%;
-  border: 1px solid black;
+  object-fit: fill;
+  border: 1px solid white;
 }
 @media (max-width: 667px) {
   .topleft {
@@ -46,7 +52,6 @@
   .topleft .back_arrow {
     width: 30px;
     height: 30px;
-    display: block;
     position: absolute;
     left: 0;
   }

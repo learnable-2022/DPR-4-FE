@@ -1,5 +1,11 @@
-import React, { useContext, useState, useEffect } from "react";
-import { GrNotification } from "react-icons/gr";
+import React, {
+  useContext,
+  useState,
+  useRef,
+  useCallback,
+  useEffect,
+} from "react";
+
 import "./PatientsDashboard.css";
 import emptyProfile from "../assets/ava3.png";
 import bpIcon from "../assets/bp_icon.svg";
@@ -9,7 +15,6 @@ import leftLine from "../assets/Line_9.png";
 import redPulseIcon from "../assets/redpulse.svg";
 import dotIcon from "../assets/dot.png";
 import waveIcon from "../assets/wave.png";
-import heartIcon2 from "../assets/heart1.png";
 import vetIcon from "../assets/vetbar.svg";
 import vetIcon2 from "../assets/vetbar2.svg";
 import EmptyCard from "./components/emptyCard";
@@ -20,46 +25,22 @@ import drug1 from "../assets/drug1.svg";
 import drug2 from "../assets/drug2.svg";
 import drug3 from "../assets/drug3.svg";
 import drug4 from "../assets/drug4.svg";
+import notification from "../assets/Notification.svg";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { RiArrowDropDownFill } from "react-icons/ri";
 import axios from "axios";
-import { useRequestProcessor } from "../api/requestProcessor";
+
 import { Link, useNavigate } from "react-router-dom";
 import StateContext from "../stateProvider/stateprovider";
 import abi from "../abi.json";
 import { ethers } from 'ethers';
 
 export default function PatientDashboard() {
-  // const {auth} = useContext(StateContext);
-  // const patientNavigator = useNavigate();
-
-  // console.log(auth.token);
-
-  // if (auth.doctorToken) {
-  //   return  patientNavigator("./docdashboard");
-
-  // }else if(!auth.doctorToken){
-
-  //   return patientNavigator("./landing");
-  // }
-  let PatientId = localStorage.getItem("patient_id");
-  let PatientEmail = localStorage.getItem("patientEmail");
-
   let token = localStorage.getItem("patientToken");
-  // console.log(PatientId);
-
-  // const { makeRequest } = useRequestProcessor();
-  // const { response, error } = makeRequest({
-  //   url: "/patient/",
-  //   method: "GET",
-  // });
-  // console.log(response);
-  // console.log("response:", response, "error:", error);
-
-  // const getUser = response?.data.find((item) => item._id === PatientId);
-  // const getAll = response?.data.map((item) => item._id);
-
-  // console.log(getUser?.name);
-  const [patientName, setPatientName] = useState("");
-  const [patientImage, setPatientImage] = useState("");
+  const [isDropOpen, setIsDropOpen] = useState(false);
+  const [patient_Name, setPatientName] = useState("");
+  const [patient_Image, setPatientImage] = useState("");
+  const [patient_Email, setPatientEmail] = useState("");
   const [data, setData] = useState(true);
   const drugs = [drug1, drug2, drug3, drug4];
   const [connectedWallet, setConnectedWallet] = useState(false);
@@ -208,15 +189,67 @@ const generateDrugPic = () => {
     let val = number;
 
     return val;
+  const mobileMenuRef = useRef();
+  const [navOpen, setIsOpen] = useState(false);
+  const checkEffectName = localStorage.getItem("patient_name");
+  const checkEffectImage = localStorage.getItem("patient_image");
+  const toggleNav = () => {
+    setIsOpen(!navOpen);
   };
-  const generateDiseasePic = () => {
-    let number1 = Math.floor(Math.random() * 3);
-    let val = number1;
 
-    return val;
+  const closeOpenMenus = useCallback(
+    (e) => {
+      if (
+        mobileMenuRef.current &&
+        isDropOpen &&
+        !mobileMenuRef.current.contains(e.target)
+      ) {
+        setIsDropOpen(false);
+      }
+    },
+
+    [isDropOpen]
+  );
+
+  let id = localStorage.getItem("patient_ID");
+
+  const handleDropButtonClick = () => {
+    setIsDropOpen(!isDropOpen);
   };
-  let patient_Image = localStorage.getItem("patient_image");
-  let patient_Name = localStorage.getItem("patient_name");
+
+  const getPatientDetails = async () => {
+    let PatientEmail = localStorage.getItem("patient_email");
+    console.log(PatientEmail);
+    const response = await axios
+      ?.get(`https://medbloc-api.onrender.com/api/v1/patient/`, {
+        headers: {
+          "x-auth-token": token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
+      .then((res) => {
+        const res1 = res?.data.find((item) => item.email === PatientEmail);
+      
+        localStorage.setItem("patient_image", res1?.image);
+        localStorage.setItem("patient_name", res1?.name);
+        localStorage.setItem("patient_email", res1?.email);
+        localStorage.setItem("patient_password", res1?.password);
+        localStorage.setItem("patient_walletId", res1?.walletId);
+        localStorage.setItem("patient_ID", res1?._id);
+
+        let patient_Image = localStorage.getItem("patient_image");
+        setPatientImage(patient_Image);
+        let patient_Name = localStorage.getItem("patient_name");
+        setPatientName(patient_Name);
+        let patient_Email = localStorage.getItem("patient_email");
+        setPatientEmail(patient_Email);
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+  };
   useEffect(() => {
     const getPatientDetails = async () => {
       const response = await axios.get(
@@ -240,40 +273,81 @@ const generateDrugPic = () => {
     updateEthers();
     checkRecord();
     getPatientDetails();
-  }, []);
+
+    document.addEventListener("mousedown", closeOpenMenus);
+
+    return () => {
+      document.removeEventListener("mousedown", closeOpenMenus);
+    };
+  }, [closeOpenMenus, checkEffectName]); //]);
+
   return (
     <div className="patientdashboard">
       <header className="patientdashboard_header">
+        <GiHamburgerMenu className="hamburger_icon" onClick={toggleNav} />
         <div className="left_side_header">
-          <h1>Welcome! {patient_Name?.split(" ")[0]},</h1>
+          <h1 className="h1_header_title">
+            Welcome!{" "}
+            {patient_Name
+              ? patient_Name?.split(" ")[0]
+              : checkEffectName?.split(" ")[0]}
+            ,
+          </h1>
         </div>
         <div className="right_side_header">
           <button className="share_btn">Share Report</button>
-          <GrNotification className="profile_notification" />
-          <Link to="/Profile" className="link">
-            <img
-              className="profile_img"
-              src={patient_Image ? patient_Image : emptyProfile}
-              alt="profile"
-            />
+          <img src={notification} alt="notification" className="notifi_btn" />
+          {/* <GrNotification className="profile_notification" /> */}
+
+          <Link to="/Profile" className="link ">
+            <div className="relative">
+              <img
+                className="profile_img"
+                src={patient_Image ? patient_Image : checkEffectImage}
+                alt="profile"
+              />
+            </div>
           </Link>
 
-          <p className="profile_name">{patient_Name}</p>
+          <p className="profile_name">
+            {patient_Name ? patient_Name : checkEffectName}
+          </p>
+          <RiArrowDropDownFill
+            onClick={handleDropButtonClick}
+            className="drop_down_btn"
+          />
         </div>
       </header>
+      {isDropOpen && (
+        <div className="drop_content" ref={mobileMenuRef}>
+          <Link to="/Profile" className="link ">
+            <p className="drop_content_item">View Profile</p>
+          </Link>
+          <p className="drop_content_item">View Full Report</p>
+        </div>
+      )}
 
       <main className="patients_dashboard_main">
+        <h1 className="responsive_h1_header_title">
+          Welcome!{" "}
+          {patient_Name
+            ? patient_Name?.split(" ")[0]
+            : checkEffectName?.split(" ")[0]}
+          ,
+        </h1>
         <div className="patientsvital">
           <div className="left_patient_vitals">
             <div className="image_div">
               <img
-                src={patient_Image ? patient_Image : emptyProfile}
+                src={patient_Image ? patient_Image : checkEffectImage}
                 alt="patientspicture"
               />
             </div>
 
             <div className="info_div">
-              <h2 className="name">{patient_Name}</h2>
+              <h2 className="name">
+                {patient_Name ? patient_Name : checkEffectName}
+              </h2>
               <div className="wrapper">
                 <div className="first_info_div">
                   <p className="key">
@@ -340,6 +414,22 @@ const generateDrugPic = () => {
                 placeholder="Enter Doctor's Wallet Address to revoke access"
               />
               <button onClick={()=>revokeDoctorAccess()}  className="revoke_access_btn">Revoke Access</button>
+              <div className="access_div">
+                <input
+                  className="grant_access_input"
+                  type="text"
+                  placeholder="Enter Doctor's Wallet Address to grant access"
+                />
+                <button className="grant_access_btn">Grant Access</button>
+              </div>
+              <div className="revoke_div">
+                <input
+                  className="grant_access_input"
+                  type="text"
+                  placeholder="Enter Doctor's Wallet Address to grant access"
+                />
+                <button className="revoke_access_btn">Revoke Access</button>
+              </div>
             </div>
             <div className="middle_section_header">
               <p>My Vitals</p>
@@ -531,10 +621,7 @@ const generateDrugPic = () => {
                         <p className="diagnose_status">Active</p>
                       </div>
                       <div className="right">
-                        <img
-                          src={diseases[generateDiseasePic()]}
-                          alt="diagnose_image"
-                        />
+                        <img src={diseases[0]} alt="diagnose_image" />
                       </div>
                     </div>
                     <div className="diagnosis_container">
@@ -543,10 +630,7 @@ const generateDrugPic = () => {
                         <p className="diagnose_status">Active</p>
                       </div>
                       <div className="right">
-                        <img
-                          src={diseases[generateDiseasePic()]}
-                          alt="diagnose_image"
-                        />
+                        <img src={diseases[1]} alt="diagnose_image" />
                       </div>
                     </div>
                     <div className="diagnosis_container">
@@ -555,10 +639,7 @@ const generateDrugPic = () => {
                         <p className="diagnose_status">Active</p>
                       </div>
                       <div className="right">
-                        <img
-                          src={diseases[generateDiseasePic()]}
-                          alt="diagnose_image"
-                        />
+                        <img src={diseases[2]} alt="diagnose_image" />
                       </div>
                     </div>
 
@@ -568,10 +649,7 @@ const generateDrugPic = () => {
                         <p className="diagnose_status">Active</p>
                       </div>
                       <div className="right">
-                        <img
-                          src={diseases[generateDiseasePic()]}
-                          alt="diagnose_image"
-                        />
+                        <img src={diseases[1]} alt="diagnose_image" />
                       </div>
                     </div>
                     <div className="diagnosis_container">
@@ -580,10 +658,7 @@ const generateDrugPic = () => {
                         <p className="diagnose_status">Active</p>
                       </div>
                       <div className="right">
-                        <img
-                          src={diseases[generateDiseasePic()]}
-                          alt="diagnose_image"
-                        />
+                        <img src={diseases[0]} alt="diagnose_image" />
                       </div>
                     </div>
                     <div className="diagnosis_container">
@@ -592,10 +667,7 @@ const generateDrugPic = () => {
                         <p className="diagnose_status">Active</p>
                       </div>
                       <div className="right">
-                        <img
-                          src={diseases[generateDiseasePic()]}
-                          alt="diagnose_image"
-                        />
+                        <img src={diseases[2]} alt="diagnose_image" />
                       </div>
                     </div>
 
@@ -605,10 +677,7 @@ const generateDrugPic = () => {
                         <p className="diagnose_status">Active</p>
                       </div>
                       <div className="right">
-                        <img
-                          src={diseases[generateDiseasePic()]}
-                          alt="diagnose_image"
-                        />
+                        <img src={diseases[0]} alt="diagnose_image" />
                       </div>
                     </div>
                   </div>
@@ -631,7 +700,7 @@ const generateDrugPic = () => {
                           alignItems: "center",
                         }}
                       >
-                        <img src={drugs[generateDrugPic()]} alt="drug" />
+                        <img src={drugs[0]} alt="drug" />
                       </div>
                       <div className="drug_name_div">
                         <p className="drug_name">{drug[0]}</p>

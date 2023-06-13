@@ -6,17 +6,20 @@ import { FiLogOut } from "react-icons/fi";
 import ourlogo from "../assets/ourlogo.png";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoins } from '@fortawesome/free-solid-svg-icons';
-
+import { faCoins } from "@fortawesome/free-solid-svg-icons";
 
 export default function SideBarDoc() {
   const paths = [
-      {name: "DocDashboard", route: "/DocDashboard", icon: <RxDashboard />},
-      {name: "DocBillings", route: "/DocBillings", icon:<FontAwesomeIcon icon={faCoins} />},
-      {name: "DocDraft", route:"/DocDraft", icon:<TfiWrite/>},
-      {name: "Docsettings", route:"/Docsettings" , icon:<AiOutlineSetting/>},
-      {name: "DocLogout", route:"/DocLogout", icon:<FiLogOut/>}
-    ]
+    { name: "DocDashboard", route: "/DocDashboard", icon: <RxDashboard /> },
+    {
+      name: "DocBillings",
+      route: "/DocBillings",
+      icon: <FontAwesomeIcon icon={faCoins} />,
+    },
+    { name: "DocDraft", route: "/DocDraft", icon: <TfiWrite /> },
+    { name: "Docsettings", route: "/Docsettings", icon: <AiOutlineSetting /> },
+    { name: "DocLogout", route: "/DocLogout", icon: <FiLogOut /> },
+  ];
   return (
     <div className="sideBar">
       <div className="center-div">
@@ -46,6 +49,7 @@ export default function SideBarDoc() {
         <div
           onClick={() => {
             localStorage.removeItem("doctorToken");
+            localStorage.removeItem("doctorEmail");
           }}
         >
           <Link to="/" className="link">

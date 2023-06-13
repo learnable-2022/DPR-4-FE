@@ -31,7 +31,7 @@ export default function DoctorsDashboard() {
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
-  const [connectedWallet, setConnectedWallet] = useState(false);
+  const [connectedWallet, setConnectedWallet] = useState(true);
   const options = { month: "short", year: "numeric" };
   const options2 = { day: "numeric", weekday: "long" };
   const mobileMenuRef = useRef();
@@ -114,17 +114,19 @@ console.log(contract);
   );
   useEffect(() => {
     const getDoctorsDetails = async () => {
-      const response = await axios.get(
-        `https://medbloc-api.onrender.com/api/v1/doctor/`,
-        {
+      const response = await axios
+        .get(`https://medbloc-api.onrender.com/api/v1/doctor/`, {
           headers: {
             "x-auth-token": token,
             Accept: "application/json",
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
           },
-        }
-      );
+        })
+        .then((res) => {})
+        .catch((error) => {
+          console.error(error.message);
+        });
       console.log(response);
       // const res = response?.data.find((item) => item._ === PatientEmail);
       // console.log(res);

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import "./PatientsEditProfile.css";
 import emptyProfile from "../../assets/ava3.png";
 import States from "../data/states";
@@ -11,18 +11,22 @@ import { BsCameraFill } from "react-icons/bs";
 import { BiArrowBack } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { FaSpinner } from "react-icons/fa";
 
 function PatientsEditProfile() {
+  const inputRef = useRef(null);
   let patient_Image = localStorage.getItem("patient_image");
-  let patientID = localStorage.getItem("patient_id");
+  let patientID = localStorage.getItem("patient_ID");
   let token = localStorage.getItem("patientToken");
   const [value, setValue] = useState("");
+  const [NoImage, setNoImageMsg] = useState("");
   const options = useMemo(() => countryList().getData(), []);
   const [data, setData] = useState();
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [year, setYear] = useState("");
   let thisYear = new Date().getFullYear();
+  const [isLoading, setIsLoading] = useState(false);
 
   let allYears = [];
   // handler to set the state of value of selected country
@@ -37,30 +41,57 @@ function PatientsEditProfile() {
   const handleSelectedCity = (e) => {
     setSelectedCity(e.target.value);
   };
-  // const saveProfile = () => {
-  //   getPatientDetails();
-  // };
-  // const getPatientDetails = async () => {
-  //   const response = await axios.put(
-  //     `https://medbloc-api.onrender.com/api/v1/patient/${patientID}`,
-  //     {
-  //       image: data,
-  //     },
-  //     {
-  //       headers: {
-  //         "x-auth-token": token,
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json",
-  //         "Access-Control-Allow-Origin": "*",
-  //       },
-  //     }
-  //   );
-  //   console.log(response);
-  //   // const res = response?.data.find((item) => item.email === PatientEmail);
-  //   // console.log(res);
-  //   // localStorage.setItem("patient_image", res.image);
-  //   // localStorage.setItem("patient_name", res.name);
-  // };
+  const saveProfile = () => {
+    if (data) {
+      UpdatePatientDetails();
+    } else {
+      setNoImageMsg("Please Select an Image before Saving");
+      setTimeout(() => {
+        setNoImageMsg("");
+      }, 3000);
+    }
+  };
+
+  let email = localStorage.getItem("patient_email");
+  let password = localStorage.getItem("patient_password");
+  let name = localStorage.getItem("patient_name");
+  let walletId = localStorage.getItem("patient_walletId");
+  let gpassword = localStorage.getItem("patient_password");
+  const UpdatePatientDetails = async () => {
+    setIsLoading(true);
+
+    const response = await axios
+      .put(
+        `https://medbloc-api.onrender.com/api/v1/patient/${patientID}`,
+        {
+          name: name,
+          email: email,
+          password: password,
+          walletId: walletId,
+          image: data,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/json",
+
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        localStorage.setItem("patient_image", response?.data.image);
+        localStorage.setItem("patient_name", response?.data.name);
+        console.log(localStorage.getItem("patient_image"));
+        console.log(localStorage.getItem("patient_name"));
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setIsLoading(false);
+      });
+  };
   const availableCities = Cities?.find((s) => s.name === selectedState);
   // handler to set the data of the selected image to "data" state
   const handleChange = (e) => {
@@ -87,7 +118,9 @@ function PatientsEditProfile() {
       boxShadow: "none",
     }),
   };
-  useEffect(() => {});
+  useEffect(() => {
+    inputRef.current.focus();
+  });
 
   // function to set states for state and lga selection
 
@@ -116,7 +149,6 @@ function PatientsEditProfile() {
                 />
               ) : (
                 <img
-                  style={{ objectFit: "cover" }}
                   src={patient_Image ? patient_Image : emptyProfile}
                   alt="profileImage"
                 />
@@ -127,7 +159,14 @@ function PatientsEditProfile() {
           <div className="profile_details-">
             <h2 className="name-">Dr. chukwuemeka James Eze</h2>
             <p className="email-">Chukwuemekaeeze@gmail.com</p>
-            <button className="profile_btn-">Save Changes</button>
+            <button
+              className="profile_btn-"
+              onClick={saveProfile}
+              disabled={isLoading}
+            >
+              {isLoading ? <FaSpinner className="spin" /> : "Save Changes"}
+            </button>
+            {<p style={{ color: "red", fontSize: "12px" }}>{NoImage}</p>}
           </div>
         </div>
 
@@ -142,6 +181,7 @@ function PatientsEditProfile() {
               <div className="input_div-">
                 <p className="input_para-">
                   <input
+                    ref={inputRef}
                     className="p_input"
                     type="text "
                     placeholder="Enter First Name"
@@ -311,90 +351,71 @@ function PatientsEditProfile() {
 
         {/* BOTTOM RIGHT SIDE */}
         <div className="right_bottom_side-">
-          <h1 className="header-">Billing Information</h1>
+          <h1 className="header-">Biometric and Genetic Information</h1>
           <div className="top_section-">
             <div className="first_name_div">
-              <h3 className="label-">First name</h3>
+              <h3 className="label-">Blood Group</h3>
               <div className="input_div-">
                 <p className="input_para-">
                   <input
                     className="p_input"
                     type="text "
-                    placeholder="Enter First Name"
+                    placeholder="Enter Blood Group"
                   />
                 </p>
               </div>
             </div>
             <div className="last_name_div">
-              <h3 className="label-">Last name</h3>
+              <h3 className="label-">Genotype</h3>
               <div className="input_div-">
                 <p className="input_para-">
                   <input
                     className="p_input"
                     type="text "
-                    placeholder="Enter  Name"
+                    placeholder="Enter Genotype"
                   />
                 </p>
               </div>
             </div>
           </div>
-          <h3 className="label-">Card number</h3>
+          <h3 className="label-">Height(metres)</h3>
           <div className="input_div-">
             <p className="input_para-">
               <input
                 className="p_input"
-                type="number "
-                placeholder="Enter Card Number"
+                type="number"
+                placeholder="Enter Height"
               />
             </p>
           </div>
 
           <div className="bottom_section-">
             <div className="expiry_month">
-              <h3 className="label-">Exp. Month</h3>
+              <h3 className="label-">Weight(kilogram)</h3>
               <div className="input_div-">
-                <select
-                  className="state-"
-                  name="gender"
-                  id="gender" /*onChange={""}*/
-                >
-                  {Months.map((month, key) => (
-                    <option className="state_option-" value={month} key={key}>
-                      {month}
-                    </option>
-                  ))}
-                </select>
+                <p className="input_para-">
+                  <input
+                    className="p_input"
+                    type="number"
+                    placeholder="Enter Weight"
+                  />
+                </p>
               </div>
             </div>
             <div className="expiry_year">
-              <h3 className="label-">Exp. Year</h3>
+              <h3 className="label-">Allergies</h3>
               <div className="input_div-">
-                <select
-                  className="state-"
-                  name="gender"
-                  id="gender"
-                  onChange={handleYearChange}
-                  /*onChange={""}*/
-                >
-                  {Array.from(new Array(20), (v, i) => (
-                    <option
-                      className="state_option-"
-                      key={i}
-                      value={thisYear + i}
-                    >
-                      {thisYear + i}
-                    </option>
-                  ))}
-                  {/* {allYears.map((year, key) => (
-                    <option className="state_option-" value={year} key={key}>
-                      {year}
-                    </option>
-                  ))} */}
-                </select>
+                <p className="input_para-">
+                  <input
+                    className="p_input"
+                    type="text "
+                    placeholder="Enter Allergies"
+                  />
+                </p>
               </div>
             </div>
           </div>
-          <h3 className="label-">Wallet Address</h3>
+          {/* <h3 className="label-"></h3>
           <div className="input_div-">
             <p className="input_para-">
               <input
@@ -403,7 +424,7 @@ function PatientsEditProfile() {
                 placeholder="Enter Wallet Address"
               />
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
       {/* END OF RIGHT SIDE TOP SECTION */}
