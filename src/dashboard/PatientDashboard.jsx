@@ -45,6 +45,14 @@ export default function PatientDashboard() {
   const drugs = [drug1, drug2, drug3, drug4];
   const [connectedWallet, setConnectedWallet] = useState(false);
   const diseases = [disease1, disease2, disease3];
+  const mobileMenuRef = useRef();
+  const [navOpen, setIsOpen] = useState(false);
+  const checkEffectName = localStorage.getItem("patient_name");
+  const checkEffectImage = localStorage.getItem("patient_image");
+  const toggleNav = () => {
+    setIsOpen(!navOpen);
+  };
+
 
 
   let contractAddress = "0xd018103D21Cc9ae90a5Bc23aFB920F95A1C140D2";
@@ -169,10 +177,9 @@ const checkRecord = async () => {
       for (let i = 0; i < formattedRecords.length; i++) {
         setDiagnosis(formattedRecords[i].treatmentDetails);
         setMedication(formattedRecords[i].prescription);
-        console.log(getDiagnosis);
       };
-      
-      
+      console.log(getDiagnosis);
+      console.log(getMedication);
       
     } else {
       console.error('Contract is not available');
@@ -184,18 +191,18 @@ const checkRecord = async () => {
 
 // console.log(getFormattedRecords);
 
-const generateDrugPic = () => {
-    let number = Math.floor(Math.random() * 4);
-    let val = number;
+// const generateDrugPic = () => {
+//     let number = Math.floor(Math.random() * 4);
+//     let val = number;
 
-    return val;
-  const mobileMenuRef = useRef();
-  const [navOpen, setIsOpen] = useState(false);
-  const checkEffectName = localStorage.getItem("patient_name");
-  const checkEffectImage = localStorage.getItem("patient_image");
-  const toggleNav = () => {
-    setIsOpen(!navOpen);
-  };
+//     return val;
+//   const mobileMenuRef = useRef();
+//   const [navOpen, setIsOpen] = useState(false);
+//   const checkEffectName = localStorage.getItem("patient_name");
+//   const checkEffectImage = localStorage.getItem("patient_image");
+//   const toggleNav = () => {
+//     setIsOpen(!navOpen);
+//   };
 
   const closeOpenMenus = useCallback(
     (e) => {
@@ -251,24 +258,6 @@ const generateDrugPic = () => {
       });
   };
   useEffect(() => {
-    const getPatientDetails = async () => {
-      const response = await axios.get(
-        `https://medbloc-api.onrender.com/api/v1/patient/`,
-        {
-          headers: {
-            "x-auth-token": token,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        }
-      );
-      console.log(response);
-      const res = response?.data.find((item) => item.email === PatientEmail);
-      console.log(res);
-      localStorage.setItem("patient_image", res.image);
-      localStorage.setItem("patient_name", res.name);
-    };
     connectWalletHandler();
     updateEthers();
     checkRecord();
@@ -398,37 +387,24 @@ const generateDrugPic = () => {
         {connectedWallet ? (
           <div className="middle_section">
             <div className="grant_access_div">
-            <input
-              name="doctorAddress"
-                className="grant_access_input"
-                type="text"
-                onChange={(e)=>setGetForm(e.target.value)}
-                placeholder="Enter Doctor's Wallet Address to grant access"
-              />
-              <button onClick={()=>grantDoctorAccess()}  className="grant_access_btn">Grant Access</button>
-              <input
-              name="doctorAddress"
-                className="grant_access_input"
-                type="text"
-                onChange={(e)=>setGetForm(e.target.value)}
-                placeholder="Enter Doctor's Wallet Address to revoke access"
-              />
-              <button onClick={()=>revokeDoctorAccess()}  className="revoke_access_btn">Revoke Access</button>
+    
               <div className="access_div">
                 <input
                   className="grant_access_input"
                   type="text"
+                  onChange={(e)=>setGetForm(e.target.value)}
                   placeholder="Enter Doctor's Wallet Address to grant access"
                 />
-                <button className="grant_access_btn">Grant Access</button>
+                <button onClick={()=>grantDoctorAccess()} className="grant_access_btn">Grant Access</button>
               </div>
               <div className="revoke_div">
                 <input
                   className="grant_access_input"
                   type="text"
-                  placeholder="Enter Doctor's Wallet Address to grant access"
+                  onChange={(e)=>setGetForm(e.target.value)}
+                  placeholder="Enter Doctor's Wallet Address to revoke access"
                 />
-                <button className="revoke_access_btn">Revoke Access</button>
+                <button onClick={()=>revokeDoctorAccess()} className="revoke_access_btn">Revoke Access</button>
               </div>
             </div>
             <div className="middle_section_header">

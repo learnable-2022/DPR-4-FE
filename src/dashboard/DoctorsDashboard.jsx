@@ -31,7 +31,7 @@ export default function DoctorsDashboard() {
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
-  const [connectedWallet, setConnectedWallet] = useState(true);
+  const [connectedWallet, setConnectedWallet] = useState(false);
   const options = { month: "short", year: "numeric" };
   const options2 = { day: "numeric", weekday: "long" };
   const mobileMenuRef = useRef();

@@ -147,7 +147,7 @@ export default function DoctorsDrafts() {
               type="text"
               placeholder="Enter Patients Wallet Address"
             />
-            <button className="access_btn">Grant Access</button>
+            {/* <button className="access_btn">Grant Access</button> */}
           </div>
         </div>
       )}
