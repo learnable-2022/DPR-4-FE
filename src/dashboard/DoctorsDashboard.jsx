@@ -24,6 +24,13 @@ export default function DoctorsDashboard() {
 
   //   return navigator("./landing");
   // }
+
+
+  const navigator = useNavigate();
+  const  handleAction=()=> {
+    navigator("/DoctorsRecords")
+  }
+
   let token = localStorage.getItem("doctorToken");
   let doctorID = localStorage.getItem("doctor_id");
   const [date, setDate] = useState(new Date());
@@ -108,8 +115,7 @@ export default function DoctorsDashboard() {
                 {open && (
                   <div class="dropdown" ref={mobileMenuRef}>
                     <ul>
-                      <li>Patients Profile</li>
-                      <li>Patients medical record</li>
+                      <li  onClick={handleAction}>Patients medical record</li>
                     </ul>
                   </div>
                 )}

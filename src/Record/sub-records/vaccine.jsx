@@ -1,8 +1,10 @@
 import React from 'react'
 import {BiFilter} from "react-icons/bi";
 import {CiSearch} from "react-icons/ci";
-import {IoIosArrowForward} from "react-icons/io";
-import{MdOutlineCancel} from "react-icons/md";
+import { useGlobalFilter } from 'react-table';
+import Table from './table';
+import { useTable } from 'react-table';
+import { useMemo } from 'react';
 
 export default function Vaccine() {
   const dummyData= [
@@ -14,30 +16,89 @@ export default function Vaccine() {
     {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)", Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3",Date:"02/05/2023"},
     
   ]
+  const COCA_COLA =[
+    {
+        Headers: "Hospital/laboratory",
+        accessor:"hosiptalName",
+        Cell: ({ cell: { row } }) => {
+          return (
+            <div>
+             <span style={{fontSize:"13px"}}> {row.original.hosiptalName}</span>
+              <br/>
+             <span> {row.original.name}</span>
+            </div>
+          );
+        },
+    },
+    {
+        Headers: "Vaccines",
+        accessor:"vaccine",
+    },
+    {
+        Headers: "Date/time",
+        accessor:"Time",
+        Cell: ({ cell: { row } }) => {
+          return (
+            <div>
+             <span style={{fontSize:"13px"}}> {row.original.Date}</span>
+              <br/>
+             <span> {row.original.Time}</span>
+            </div>
+          );
+        },
+    },
+    {
+        Headers: "Remark",
+        accessor:"Remark",
+    },
+  
+];
+  const columns = useMemo(()=> COCA_COLA,[]);
+  const data = useMemo(()=> dummyData,[])
 
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    state,
+    setGlobalFilter,
+    prepareRow,
+}= useTable({columns, data}, useGlobalFilter);
+
+const { globalFilter } = state;
   return (
     <div className='overview-container'>
       <div className='visit-navigation'>
         <div className= "visit-header">
-          <h2>Medical Record <IoIosArrowForward/>  Vaccines</h2>
-          <p>This Month<MdOutlineCancel/></p>
+          
         </div>
          {/* /search component would be here  */}
         <div className='search'>
           <CiSearch/>
-          <input  type="text" placeholder='search'/>
+          <input 
+           type="text" 
+           value={globalFilter || ''}
+           placeholder='search'
+           onChange={(e) => setGlobalFilter(e.target.value)}
+           />
+
           <BiFilter className='icon'/>
         </div>
       </div>
       <div className='table'>
-        <div className='table-1-vaccine'>
+
+
+        <Table columns={columns} data={data}  getTableProps={ getTableProps}    getTableBodyProps={  getTableBodyProps} headerGroups={headerGroups} rows={rows} state={state} setGlobalFilter={ setGlobalFilter} prepareRow={  prepareRow}/>
+        
+        {/* <div className='table-1-vaccine'>
           <h4>Hospital/ Laboratory</h4>
           <h4>Vaccines</h4>
           <h4>Date/Time </h4>
-          <h4>Remark</h4>
-        </div>
+          <h4>Remark</h4> */}
+        {/* </div> */}
           {/* this would layout component to return the data based on filter request */}
-        {dummyData.map((items)=>{
+        {/* {dummyData.map((items)=>{
             return(
         <div className='table-2-vaccine'>
               <ul>
@@ -50,7 +111,9 @@ export default function Vaccine() {
 
 
             )
-        })}
+        })} */}
+
+
       </div>
     </div>
   )

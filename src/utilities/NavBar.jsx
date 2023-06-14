@@ -15,7 +15,6 @@ export default function NavBar() {
             Medical Record
             <IoIosArrowForward />
             Hospital Visit
-            <IoIosArrowForward />
             <IoIosArrowForward /> View Report
           </h2>
         </div>

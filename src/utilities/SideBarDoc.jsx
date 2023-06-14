@@ -1,7 +1,6 @@
 import React from "react";
 import { RxDashboard } from "react-icons/rx";
 import { TfiWrite } from "react-icons/tfi";
-import { AiOutlineSetting } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import ourlogo from "../assets/ourlogo.png";
 import { Link } from "react-router-dom";
@@ -17,7 +16,6 @@ export default function SideBarDoc() {
       icon: <FontAwesomeIcon icon={faCoins} />,
     },
     { name: "DocDraft", route: "/DocDraft", icon: <TfiWrite /> },
-    { name: "Docsettings", route: "/Docsettings", icon: <AiOutlineSetting /> },
     { name: "DocLogout", route: "/DocLogout", icon: <FiLogOut /> },
   ];
   return (
@@ -42,10 +40,6 @@ export default function SideBarDoc() {
         </Link>
       </div>
       <div className="lower-section">
-        <Link to="/Docsettings" className="link">
-          <AiOutlineSetting style={{color:"white"}} />
-          <p>settings</p>
-        </Link>
         <div
           onClick={() => {
             localStorage.removeItem("doctorToken");
