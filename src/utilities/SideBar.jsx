@@ -2,23 +2,27 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
 import { BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
-import { TfiWrite } from "react-icons/tfi";
 import { FiLogOut } from "react-icons/fi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
-import ourlogo from "../assets/ourlogo.png"
+import ourlogo from "../assets/ourlogo.png";
+import { useNavigate } from "react-router-dom";
 // import logo1 from "../assets/logo-03.png";
 import logo1 from "../assets/images/logo-03.png";
 
 import "../App.css";
 
 export default function SideBar() {
-
+  
+  const navigate = useNavigate();
+  const returnHomeHandler =()=>{
+    navigate("/");
+  }
   return (
     <>
       <div className="sideBar">
         <div className="center-div">
-          <img src={ourlogo} alt="app-logo" />
+          <img src={ourlogo} alt="app-logo" onClick={returnHomeHandler} style={{cursor:"pointer"}}/>
           <p>Med<span>bloc</span></p>
         </div>
 

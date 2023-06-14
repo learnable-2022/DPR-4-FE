@@ -22,6 +22,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid mediumblue;
+}
+.contain-container{
+  border: 1px solid coral;
 }
 .p-tag {
   font-family: "Open Sans";
@@ -51,6 +55,7 @@
 .over-1-first {
   display: flex;
   gap: 20px;
+  border: 1px solid gray;
 }
 .over-1-first-son {
   display: flex;
@@ -77,9 +82,11 @@
 }
 .over-1-1 {
   margin-top: 25px;
+  border: 1px solid chartreuse;
 }
 .over-1-2 {
   margin-top: 25px;
+  border: 1px solid firebrick;
 }
 .over-2 {
   padding: 0px 20px 0px 10px;
@@ -113,14 +120,14 @@
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 24px;
 }
 .two p {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 24px;
   letter-spacing: 0.001em;
   color: #999999;
