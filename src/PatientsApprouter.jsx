@@ -45,6 +45,12 @@ import Otp from "./Password/otp";
 import NewPassword from "./Password/newPassword";
 import StateContext from "./stateProvider/stateprovider";
 
+import DoctorsRecords from "./doctorsPatientsRecord/doctorsRecords";
+import DoctorsOverview from "./doctorsPatientsRecord/subrecords/DoctorsOverview";
+import DoctorsLab from "./doctorsPatientsRecord/subrecords/DoctorsLab";
+import DoctorsVaccine from "./doctorsPatientsRecord/subrecords/DoctorsVaccine";
+import DoctorsPresciption from "./doctorsPatientsRecord/subrecords/DoctorsPresciption";
+
 // note!!!
 // i have only created the router part for the signup , login and Landing page.
 // subsequent route path would follow suite.
@@ -144,24 +150,7 @@ function Approuter() {
           ) : (
             <Route path="PatientInvoice" element={<Landing />} />
           )}
-          {patientToken ? (
-            <Route
-              path="Records"
-              element={
-                <AuthUserLayout>
-                  <PatientsRecord />
-                </AuthUserLayout>
-              }
-            >
-              <Route index="overview" element={<Overview />} />
-              <Route path="lab" element={<Lab />} />
-              <Route path="vaccine" element={<Vaccine />} />
-              <Route path="visit" element={<Visit />} />
-              <Route path="prescription" element={<Prescription />} />
-            </Route>
-          ) : (
-            <Route path="Records" element={<Landing />} />
-          )}
+ 
           {patientToken ? (
             <Route
               path="/lab/view-report"
@@ -194,9 +183,39 @@ function Approuter() {
           ) : (
             <Route path="/PatientInvoiceConfirmation" element={<Landing />} />
           )}
+          {patientToken ? (
+            <Route  
+              path="Records"
+              element={
+                <AuthUserLayout>
+                 {" "}
+                  <PatientsRecord />{" "}
+                </AuthUserLayout>
+              }
+            >
+              <Route index="overview" element={<Overview/>} />
+              <Route path="lab" element={<Lab />} />
+              <Route path="vaccine" element={<Vaccine />} />
+              <Route path="visit" element={<Visit />} />
+              <Route path="prescription" element={<Prescription />} />
+            </Route>
+          ) : (
+            <Route path="Records" element={<Landing />} />
+          )}
         </>
-        {/* {routes to doctors app and the sub components} */}
-        {/* <Route path="/DocPatientPaymentHistory" element={<AuthDocLayout><DoctorsBilling/></AuthDocLayout>}/> */}
+
+
+
+
+
+                                 {/* {routes to doctors app and the sub components} */}
+     
+
+
+
+
+
+
         {doctorToken ? (
           <Route
             path="/DoctorPaymentHistory"
@@ -325,10 +344,54 @@ function Approuter() {
         ) : (
           <Route path="/DoctorInvoiceSent" element={<Landing />} />
         )}
+
+
+{doctorToken ? (
+            <Route  
+              path="DoctorsRecords"
+              element={
+                <AuthDocLayout>
+                 {" "}
+                  <DoctorsRecords />{" "}
+                </AuthDocLayout>
+              }
+            >
+              <Route path="doctorsoverview" element={<DoctorsOverview />} />
+              <Route path="doctorslab" element={<DoctorsLab />} />
+              <Route path="doctorsvaccine" element={<DoctorsVaccine />} />
+              <Route path="doctorsprescription" element={<DoctorsPresciption />} />
+            </Route>
+          ) : (
+            <Route path="DoctorsRecords" element={<Landing />} />
+          )}
+
+
+
+
+
+
+
       </Routes>
     </Router>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const AuthUserLayout = ({ children }) => {
   return (
     <div className="Layout">

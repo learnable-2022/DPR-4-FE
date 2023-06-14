@@ -161,6 +161,7 @@
 .wallet-link2 span{
   color:  hsl(210, 100%, 60%);
   font-weight: bold;
+  margin-left: 5px;
 }
 .valid {
   color: limegreen;
@@ -176,7 +177,7 @@
 .password-toggle {
   position: absolute;
   margin-top: 35px;
-  left: 350px;
+  left: 390px;
 }
 .confirmation-buttons {
   margin-top: 50px;

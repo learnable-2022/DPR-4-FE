@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
 import { BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
 import { TfiWrite } from "react-icons/tfi";
-import { AiOutlineSetting } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
@@ -38,10 +37,6 @@ export default function SideBar() {
           </Link>
         </div>
         <div className="lower-section">
-          <Link to="*" className="link">
-            <AiOutlineSetting style={{color:"white"}} />
-            <p>settings</p>
-          </Link>
           <div
             onClick={() => {
               localStorage.removeItem("patientToken");

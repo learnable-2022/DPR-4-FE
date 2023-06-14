@@ -7,8 +7,10 @@ import pill from "../landing/Images/pill.png";
 import "../landing/landing.css";
 import { Link } from "react-router-dom";
 
+
 export default function Landing() {
   const [isNavOpen, setIsNavOpen] = useState(false)
+
 
   function navOpen(){
     setIsNavOpen(true)
@@ -41,7 +43,7 @@ export default function Landing() {
             <Link className="link" id="nav-link" to="">
               <li>Support</li>
             </Link>
-            <Link className="link" id="get-link" to="/login">
+            <Link className="link" id="get-link" to="/confirmation">
               {/* <button className="btn">sign in</button> */}
               <span>sign in</span>
             </Link>
