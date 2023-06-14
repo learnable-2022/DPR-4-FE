@@ -487,10 +487,11 @@
 }
 
 table {
-  font-family: arial, sans-serif;
+  font-family:'Open Sans';
   border-collapse: collapse;
   width: 100%;
-  overflow: hidden;
+  height:100vh !important;
+ 
 }
 
 .view-report-button {
@@ -517,8 +518,9 @@ th {
 td{
   border: none;
   text-align: left;
-  padding: 15px 0px;
+  padding: 12px 0px;
   color: #555555;;
+  font-weight: 600;
 
 }
 tr:nth-child(even) {
@@ -527,9 +529,4 @@ tr:nth-child(even) {
 }
 tr:nth-child(odd){
   border-bottom:2px solid  #D6ebff ;
-}
-.mdoutline{
-  border: 1px solid gold;
-  font-size: 34px;
-  width: 100px;
 }

@@ -32,9 +32,9 @@ export default function Lab() {
             Cell: ({ cell: { row } }) => {
               return (
                 <div>
-                 <p style={{fontSize:"13px"}}> {row.original.hosiptalName} </p>
+                 <span style={{fontSize:"13px"}}> {row.original.hosiptalName} </span>
                   <br/>
-                  <p>{row.original.OwnerName}</p>
+                  <span>{row.original.OwnerName}</span>
                 </div>
               );
             },
@@ -92,13 +92,13 @@ const { globalFilter } = state;
       }
 
   return (
+    
     <div className='overview-container'>
       <div className='visit-navigation'>
         <div className= "visit-header">
-          {/* <h2>Medical Record <IoIosArrowForward/> Lab</h2> */}
-          {/* <p>This Month <MdOutlineCancel /></p> */}
+       
         </div>
-        {/* /search component would be here  */}
+       
         <div className='search'>
           <CiSearch/>
           <input 
@@ -114,36 +114,6 @@ const { globalFilter } = state;
       <div className='table'>
 
       <Table columns={columns} data={data}  getTableProps={ getTableProps}    getTableBodyProps={  getTableBodyProps} headerGroups={headerGroups} rows={rows} state={state} setGlobalFilter={ setGlobalFilter} prepareRow={  prepareRow}/>
-
-
-              {/* <div className='table-4'>
-                <ul>
-                  <li>Hospital/ Laboratory</li>
-                  <li>Test-type</li>
-                  <li>Complaint</li>
-                  <li>Status</li>
-                </ul>
-              </div> */}
-                {/* this would layout component to return the data based on filter request */}
-                      {/* { dummyData.map((items)=>{
-                          return(
-                              <>        
-                  <div className='table-3'>
-                  <ul>
-                    <li>{items.hosiptalName}<br/> {items.OwnerName}</li>
-                    <li>{items.testResult}</li>
-                    <li>{items.complaint}</li>
-                    <li>< FcCheckmark className='center'/><br/>{items.status}</li>
-                    <li><button onClick={handleclick}>{items.Report}</button></li>                      
-                  </ul>
-              </div>
-                  </>
-                          )
-                      })} */}
-
-
-
-
       </div>
     </div>
   )

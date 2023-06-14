@@ -33,9 +33,9 @@ const takeme =()=>{
         Cell: ({ cell: { row } }) => {
           return (
             <div>
-             <p style={{fontSize:"13px"}}> {row.original.hosiptalName}</p>
+             <span style={{fontSize:"13px"}}> {row.original.hosiptalName}</span>
               <br/>
-             <p> {row.original.name}</p>
+             <span > {row.original.name}</ span>
             </div>
           );
         },
@@ -48,9 +48,9 @@ const takeme =()=>{
         Cell: ({ cell: { row } }) => {
           return (
             <div>
-             <p style={{fontSize:"13px"}}> {row.original.date}</p>
+             <span style={{fontSize:"13px"}}> {row.original.date}</span>
               <br/>
-             <p> {row.original.Time}</p>
+             <span> {row.original.Time}</span>
             </div>
           );
         },

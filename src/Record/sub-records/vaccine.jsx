@@ -23,9 +23,9 @@ export default function Vaccine() {
         Cell: ({ cell: { row } }) => {
           return (
             <div>
-             <p style={{fontSize:"13px"}}> {row.original.hosiptalName}</p>
+             <span style={{fontSize:"13px"}}> {row.original.hosiptalName}</span>
               <br/>
-             <p> {row.original.name}</p>
+             <span> {row.original.name}</span>
             </div>
           );
         },
@@ -40,9 +40,9 @@ export default function Vaccine() {
         Cell: ({ cell: { row } }) => {
           return (
             <div>
-             <p style={{fontSize:"13px"}}> {row.original.Date}</p>
+             <span style={{fontSize:"13px"}}> {row.original.Date}</span>
               <br/>
-             <p> {row.original.Time}</p>
+             <span> {row.original.Time}</span>
             </div>
           );
         },
