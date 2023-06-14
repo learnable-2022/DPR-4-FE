@@ -2,19 +2,13 @@ import React from 'react';
 import { useTable } from 'react-table';
 import "./sub-records.css";
 
-export default function Table({ columns, data}) {
+export default function Table({ getTableProps, getTableBodyProps,headerGroups,rows,state,prepareRow}) {
 
-    const tableInstance  = useTable({columns, data})
+   
 
-    const {
-          getTableProps,
-          getTableBodyProps,
-          headerGroups,
-          rows,
-          prepareRow
-    }= useTable({columns, data})
+   
 
-
+   
   return (
     <>
     <div className='container'>

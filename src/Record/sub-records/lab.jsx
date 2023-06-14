@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import {BiFilter} from "react-icons/bi";
 import {CiSearch} from "react-icons/ci";
-import {IoIosArrowForward} from "react-icons/io";
-import{FcCheckmark} from "react-icons/fc";
-import {MdOutlineCancel} from "react-icons/md";
+import { useTable } from 'react-table';
 import { Link, useNavigate } from 'react-router-dom';
 import { useMemo } from 'react';
 import Table from './table';
+import { useGlobalFilter } from 'react-table';
 
 function MyCell({ value, columnProps: { rest: { someFunc } } }) {
   return <button onClick={someFunc}>{value}</button>
@@ -15,6 +14,7 @@ function MyCell({ value, columnProps: { rest: { someFunc } } }) {
 export default function Lab() {
 
   const  link = "/lab/view-report";
+
     const dummyData= [
         {hosiptalName:"Alpha general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report" , status:"Approve",complaint:"malariaX2"},
         {hosiptalName:"Beta general",OwnerName:"chuks", testResult:" chest x-ray",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
@@ -29,6 +29,15 @@ export default function Lab() {
         {
             Headers: "Hospital/laboratory",
             accessor:"hosiptalName",
+            Cell: ({ cell: { row } }) => {
+              return (
+                <div>
+                 <p style={{fontSize:"13px"}}> {row.original.hosiptalName} </p>
+                  <br/>
+                  <p>{row.original.OwnerName}</p>
+                </div>
+              );
+            },
         },
         {
             Headers: "Test-type",
@@ -38,15 +47,22 @@ export default function Lab() {
             Headers: "Complaint",
             accessor:"complaint",
         },
-        {
-            Headers: "Status",
-            accessor:"status",
-        },
+        // {
+        //     Headers: "Status",
+        //     accessor:"status",
+        // },
         {
             Headers: "",
-            accessor:"Report",
-            cell: ({row}) =>(<Link to={row.link}> {row.original.Report} </Link>)
-           
+            accessor:"him",
+            Cell: ({ cell: { row } }) => (
+              <>
+             <div className='view-report-button'>
+             <Link to={link} style={{color:"#fff", textDecoration:"none",}}>
+             {row.original.Report}  
+              </Link>
+             </div>
+            </>
+            ),
            
             
         },
@@ -56,7 +72,19 @@ export default function Lab() {
     const columns = useMemo(()=> COLA, []);
     const data = useMemo(()=> dummyData, []);
 
-   
+    const {
+      getTableProps,
+      getTableBodyProps,
+      headerGroups,
+      rows,
+      state,
+      setGlobalFilter,
+      prepareRow,
+}= useTable({columns, data}, useGlobalFilter);
+
+const { globalFilter } = state;
+
+
       const navigate = useNavigate();
       const handleclick=()=>{
         navigate("/lab/view-report");
@@ -67,19 +95,25 @@ export default function Lab() {
     <div className='overview-container'>
       <div className='visit-navigation'>
         <div className= "visit-header">
-          <h2>Medical Record <IoIosArrowForward/> Lab</h2>
-          <p>This Month <MdOutlineCancel/></p>
+          {/* <h2>Medical Record <IoIosArrowForward/> Lab</h2> */}
+          {/* <p>This Month <MdOutlineCancel /></p> */}
         </div>
         {/* /search component would be here  */}
         <div className='search'>
           <CiSearch/>
-          <input  type="text" placeholder='search'/>
+          <input 
+           type="text" 
+           value={globalFilter || ''}
+           placeholder='search'
+           onChange={(e) => setGlobalFilter(e.target.value)}
+           />
+
           <BiFilter className='icon'/>
         </div>
       </div>
       <div className='table'>
 
-      <Table columns={columns} data={data}/>
+      <Table columns={columns} data={data}  getTableProps={ getTableProps}    getTableBodyProps={  getTableBodyProps} headerGroups={headerGroups} rows={rows} state={state} setGlobalFilter={ setGlobalFilter} prepareRow={  prepareRow}/>
 
 
               {/* <div className='table-4'>

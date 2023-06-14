@@ -1,8 +1,7 @@
 import React from 'react'
 import {BiFilter} from "react-icons/bi";
 import {CiSearch} from "react-icons/ci";
-import {IoIosArrowForward} from "react-icons/io";
-import{MdOutlineCancel} from "react-icons/md";
+import { useGlobalFilter } from 'react-table';
 import Table from './table';
 import { useTable } from 'react-table';
 import { useMemo } from 'react';
@@ -21,6 +20,15 @@ export default function Vaccine() {
     {
         Headers: "Hospital/laboratory",
         accessor:"hosiptalName",
+        Cell: ({ cell: { row } }) => {
+          return (
+            <div>
+             <p style={{fontSize:"13px"}}> {row.original.hosiptalName}</p>
+              <br/>
+             <p> {row.original.name}</p>
+            </div>
+          );
+        },
     },
     {
         Headers: "Vaccines",
@@ -29,6 +37,15 @@ export default function Vaccine() {
     {
         Headers: "Date/time",
         accessor:"Time",
+        Cell: ({ cell: { row } }) => {
+          return (
+            <div>
+             <p style={{fontSize:"13px"}}> {row.original.Date}</p>
+              <br/>
+             <p> {row.original.Time}</p>
+            </div>
+          );
+        },
     },
     {
         Headers: "Remark",
@@ -38,22 +55,41 @@ export default function Vaccine() {
 ];
   const columns = useMemo(()=> COCA_COLA,[]);
   const data = useMemo(()=> dummyData,[])
+
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    state,
+    setGlobalFilter,
+    prepareRow,
+}= useTable({columns, data}, useGlobalFilter);
+
+const { globalFilter } = state;
   return (
     <div className='overview-container'>
       <div className='visit-navigation'>
         <div className= "visit-header">
-          <h2>Medical Record <IoIosArrowForward/>  Vaccines</h2>
-          <p>This Month<MdOutlineCancel/></p>
+          
         </div>
          {/* /search component would be here  */}
         <div className='search'>
           <CiSearch/>
-          <input  type="text" placeholder='search'/>
+          <input 
+           type="text" 
+           value={globalFilter || ''}
+           placeholder='search'
+           onChange={(e) => setGlobalFilter(e.target.value)}
+           />
+
           <BiFilter className='icon'/>
         </div>
       </div>
       <div className='table'>
-        <Table columns={columns} data={data}/>
+
+
+        <Table columns={columns} data={data}  getTableProps={ getTableProps}    getTableBodyProps={  getTableBodyProps} headerGroups={headerGroups} rows={rows} state={state} setGlobalFilter={ setGlobalFilter} prepareRow={  prepareRow}/>
         
         {/* <div className='table-1-vaccine'>
           <h4>Hospital/ Laboratory</h4>
