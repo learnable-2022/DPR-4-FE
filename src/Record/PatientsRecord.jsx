@@ -5,7 +5,7 @@ import { BsArrowLeft } from "react-icons/bs";
 import smallLogo from "../assets/small.png";
 
 import "./Record.css";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet,NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useRequestProcessor } from "../api/requestProcessor";
 
@@ -115,33 +115,33 @@ export default function PatientsRecord() {
       </div>
       <div className="third-section-link">
         <li>
-          <Link className="navi-link" to="">
+          <NavLink  exact  activeClassName="active" to="overview">
             <p>Overview</p>
-          </Link>
+          </NavLink>
         </li>
         <li>
           {" "}
-          <Link className="navi-link" to="visit">
+          <NavLink activeClassName="active" to="visit">
             <p>Visits</p>
-          </Link>
+          </NavLink>
         </li>
         <li>
           {" "}
-          <Link className="navi-link" to="lab">
+          <NavLink activeClassName="active" to="lab">
             <p>Labs</p>
-          </Link>
+          </NavLink>
         </li>
         <li>
           {" "}
-          <Link className="navi-link" to="vaccine">
+          <NavLink activeClassName="active" to="vaccine">
             <p>Vaccines</p>
-          </Link>
+          </NavLink>
         </li>
         <li>
           {" "}
-          <Link className="navi-link" to="prescription">
+          <NavLink activeClassName="active" to="prescription">
             <p>Prescription</p>
-          </Link>
+          </NavLink>
         </li>
       </div>
       <div>

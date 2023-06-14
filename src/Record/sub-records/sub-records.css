@@ -9,7 +9,6 @@
 }
 .overview-sub-container {
   display: flex;
-
   justify-content: space-between;
 }
 
@@ -22,10 +21,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid mediumblue;
+ 
 }
 .contain-container{
-  border: 1px solid coral;
+ 
 }
 .p-tag {
   font-family: "Open Sans";
@@ -36,14 +35,20 @@
   letter-spacing: 0.001em;
   color: #999999;
 }
+.new-class{
+ 
+  
+ 
+}
 .sp-p {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 600;
-  font-size: 16px;
-  line-height: 28px;
-  margin-top: -20px;
+  font-size: 14px;
+  line-height: 24px;
+ 
   margin-right: 150px;
+  
 }
 .new-class {
   display: flex;
@@ -54,8 +59,7 @@
 }
 .over-1-first {
   display: flex;
-  gap: 20px;
-  border: 1px solid gray;
+  gap: 40px;
 }
 .over-1-first-son {
   display: flex;
@@ -69,24 +73,33 @@
   color: #444444;
 }
 .img-love {
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
+}
+.border-line{
+  border: 1px solid #e7f0f9;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .over-1-second-son {
   display: flex;
   gap: 20px;
+  
 }
 .over-1-second-son div img {
-  width: 100px;
-  height: 50px;
+  width: 140px;
+  height: 55px;
 }
 .over-1-1 {
   margin-top: 25px;
-  border: 1px solid chartreuse;
+ 
 }
 .over-1-2 {
   margin-top: 25px;
-  border: 1px solid firebrick;
+  
+  
 }
 .over-2 {
   padding: 0px 20px 0px 10px;
