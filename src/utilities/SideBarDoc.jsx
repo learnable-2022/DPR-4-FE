@@ -6,6 +6,7 @@ import ourlogo from "../assets/ourlogo.png";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 export default function SideBarDoc() {
   const paths = [
@@ -18,10 +19,14 @@ export default function SideBarDoc() {
     { name: "DocDraft", route: "/DocDraft", icon: <TfiWrite /> },
     { name: "DocLogout", route: "/DocLogout", icon: <FiLogOut /> },
   ];
+  const navigate = useNavigate();
+  const returnHomeHandler =()=>{
+    navigate("/");
+  }
   return (
     <div className="sideBar">
       <div className="center-div">
-        <img src={ourlogo} alt="pics" />
+        <img src={ourlogo} alt="pics" onClick={returnHomeHandler}  style={{cursor:"pointer"}}/>
         <p>Med<span>loc</span></p>
       </div>
       <div className="mid-section">

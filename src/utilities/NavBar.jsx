@@ -4,13 +4,18 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { BsArrowLeft } from "react-icons/bs";
 import smallLogo from "../assets/small.png";
 import { IoIosArrowForward } from "react-icons/io";
-
+import { useNavigate } from "react-router";
 export default function NavBar() {
+
+const navigation = useNavigate();
+const returnHandler =()=>{
+  navigation(-1);
+}
   return (
     <>
       <nav className="nav-container">
         <div className="nav-container-left">
-          <BsArrowLeft />
+          <BsArrowLeft onClick={returnHandler} style={{cursor:"pointer"}}/>
           <h2 className="Nav-labreport">
             Medical Record
             <IoIosArrowForward />
