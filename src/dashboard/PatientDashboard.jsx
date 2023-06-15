@@ -185,6 +185,12 @@ const checkRecord = async () => {
     console.error('Error checking record:', error);
   }
 };
+
+useEffect(() => {
+  if (defaultAccount) {
+    checkRecord();
+  }
+}, [defaultAccount]);
   
 
   const closeOpenMenus = useCallback(

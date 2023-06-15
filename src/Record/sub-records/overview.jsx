@@ -15,7 +15,10 @@ import picture12 from "../../assets/Group 91.png";
 
 export default function Overview() {
   let vitalSigns = localStorage.getItem("vitalSigns");
-  console.log(vitalSigns);
+  let treatmentDetails = localStorage.getItem('treatmentDetails');
+  let vaccine = localStorage.getItem('vaccine');
+  let prescription = localStorage.getItem('prescription');
+  
   return (
     <div className="overview-container">
       <p className="p-tag">Recent Report </p>
