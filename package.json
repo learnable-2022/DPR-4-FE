@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "react-pin-field": "^3.1.3",
     "react-verification-input": "^3.3.0"
   }
 }
