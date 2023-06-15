@@ -4,7 +4,7 @@ import { useServiceProviderValue } from "../../ServiceProvider";
 import addButton from "../../assets/add-circle.svg";
 import { useLocation } from "react-router-dom";
 
-function Finish() {
+function Finish({contract}) {
   const [
     {
       temperature,

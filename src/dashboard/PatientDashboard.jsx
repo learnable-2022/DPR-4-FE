@@ -64,9 +64,11 @@ export default function PatientDashboard() {
 	const [signer, setSigner] = useState(null);
 	const [contract, setContract] = useState(null);
   const [getForm , setGetForm] = useState('');
-  const [getFormattedRecords , setFormattedRecords] = useState([["45","76","68"],[],[]]);
-  const [getMedication , setMedication] = useState([]);
-  const [getDiagnosis , setDiagnosis] = useState([]);
+  const [getFormattedRecords , setFormattedRecords] = useState([]);
+  const [vitalSigns, setVitalSigns] = useState([]);
+  const [treatmentDetails, setTreatmentDetails] = useState([]);
+  const [vaccine, setVaccine] = useState([]);
+  const [prescription, setPrescription] = useState([]);
 
   const connectWalletHandler = () =>{
 
@@ -103,8 +105,12 @@ const updateEthers = async () => {
   console.log(tempSigner);
   let tempContract = new ethers.Contract(contractAddress, abi, tempSigner);
   setContract(tempContract);
+  // window.location.reload();
   // console.log(tempContract);
-  
+ 
+  // setTimeout(() => {
+  //   checkRecord();
+  // }, 3000);
   
       
       
@@ -146,7 +152,7 @@ const revokeDoctorAccess = async (e) => {
  
 };
 
-
+// console.log(defaultAccount);
 
 const checkRecord = async () => {
   try {
@@ -155,32 +161,23 @@ const checkRecord = async () => {
       
       const formattedRecords = record.map(record => {
         return {
-          vitalSigns: record.vitalSigns.slice(-5),
-          treatmentDetails: record.treatmentDetails.slice(-5),
-          vaccine: record.vaccine.slice(-5),
-          prescription: record.prescription.slice(-5)
+          vitalSigns: record.vitalSigns,
+          treatmentDetails: record.treatmentDetails,
+          vaccine: record.vaccine,
+          prescription: record.prescription
         };
-        
       });
-      // setFormattedRecords(formattedRecords);
+      setFormattedRecords(formattedRecords.reverse());
+   console.log(formattedRecords);
+      setVitalSigns(formattedRecords.map((record) => record.vitalSigns));
+      setTreatmentDetails(formattedRecords.map((record) => record.treatmentDetails));
+      setVaccine(formattedRecords.map((record) => record.vaccine));
+      setPrescription(formattedRecords.map((record) => record.prescription));
       
-      // const lastFiveRecords = formattedRecords.map(record => {
-        //   return {
-          //     vitalSigns: record.vitalSigns.slice(-5),
-      //     treatmentDetails: record.treatmentDetails.slice(-5), // Get the last 5 entries
-      //     vaccine: record.vaccine.slice(-5),
-      //     prescription: record.prescription.slice(-5) // Get the last 5 entries
-      //   };
-      // });
-      // console.log(formattedRecords);
-
-      for (let i = 0; i < formattedRecords.length; i++) {
-        setDiagnosis(formattedRecords[i].treatmentDetails);
-        setMedication(formattedRecords[i].prescription);
-      };
-      console.log(getDiagnosis);
-      console.log(getMedication);
-      
+      localStorage.setItem('vitalSigns', JSON.stringify(vitalSigns));
+      localStorage.setItem('treatmentDetails', JSON.stringify(treatmentDetails));
+      localStorage.setItem('vaccine', JSON.stringify(vaccine));
+      localStorage.setItem('prescription', JSON.stringify(prescription));
     } else {
       console.error('Contract is not available');
     };
@@ -188,21 +185,7 @@ const checkRecord = async () => {
     console.error('Error checking record:', error);
   }
 };
-
-// console.log(getFormattedRecords);
-
-// const generateDrugPic = () => {
-//     let number = Math.floor(Math.random() * 4);
-//     let val = number;
-
-//     return val;
-//   const mobileMenuRef = useRef();
-//   const [navOpen, setIsOpen] = useState(false);
-//   const checkEffectName = localStorage.getItem("patient_name");
-//   const checkEffectImage = localStorage.getItem("patient_image");
-//   const toggleNav = () => {
-//     setIsOpen(!navOpen);
-//   };
+  
 
   const closeOpenMenus = useCallback(
     (e) => {
@@ -260,15 +243,32 @@ const checkRecord = async () => {
   useEffect(() => {
     connectWalletHandler();
     updateEthers();
-    checkRecord();
     getPatientDetails();
-
     document.addEventListener("mousedown", closeOpenMenus);
 
     return () => {
       document.removeEventListener("mousedown", closeOpenMenus);
     };
-  }, [closeOpenMenus, checkEffectName]); //]);
+  }, [checkEffectName]); 
+
+  useEffect(() => {
+    localStorage.setItem('vitalSigns', JSON.stringify(vitalSigns));
+  }, [vitalSigns]);
+
+  useEffect(() => {
+    localStorage.setItem('treatmentDetails', JSON.stringify(treatmentDetails));
+  }, [treatmentDetails]);
+
+  useEffect(() => {
+    localStorage.setItem('vaccine', JSON.stringify(vaccine));
+  }, [vaccine]);
+
+  useEffect(() => {
+    localStorage.setItem('prescription', JSON.stringify(prescription));
+  }, [prescription]);
+
+
+// checkRecord();
 
   return (
     <div className="patientdashboard">
@@ -415,7 +415,7 @@ const checkRecord = async () => {
               <div>
                 <div className="card1">
                   <h4 className="card1_header">My Heart Condition</h4>
-                  {data ? (
+                  {vitalSigns.length > 0 ? (
                     <div>
                       <div className="top">
                         <div className="left_div">
@@ -433,7 +433,7 @@ const checkRecord = async () => {
                           <div className="readings_div">
                             <p className="heading">Blood Status</p>
                             <p>
-                              <strong className="value">116/70</strong>
+                              <strong className="value">{vitalSigns[0][0]}</strong>
                             </p>
                           </div>
                         </div>
@@ -452,7 +452,7 @@ const checkRecord = async () => {
                           <div className="readings_div">
                             <p className="heading">Heart Rate</p>
                             <p>
-                              <strong className="value">120bpm</strong>
+                              <strong className="value">{vitalSigns[0][1]}</strong>
                             </p>
                           </div>
                         </div>
@@ -470,7 +470,7 @@ const checkRecord = async () => {
                               src={leftLine}
                               alt="line"
                             />
-                            116
+                            {vitalSigns[0][0]}
                             <br />
                             <span className="value_span">/70</span>
                             <img
@@ -492,7 +492,7 @@ const checkRecord = async () => {
                               src={leftLine}
                               alt="line"
                             />
-                            120
+                            {vitalSigns[0][1]}
                             <br />
                             <span className="value_span1">bpm</span>
                             <img
@@ -518,7 +518,7 @@ const checkRecord = async () => {
                           </div>
                           <div className="count_val_div">
                             <p>Blood Count</p>
-                            <p>80/90</p>
+                            <p>{vitalSigns[0][2]}</p>
                           </div>
                         </div>
                         <div className="middle2_right">
@@ -535,7 +535,7 @@ const checkRecord = async () => {
                           </div>
                           <div className="count_val_div">
                             <p>Glucose Level</p>
-                            <p>240ml</p>
+                            <p>{vitalSigns[0][3]}</p>
                           </div>
                         </div>
                       </div>
@@ -549,7 +549,7 @@ const checkRecord = async () => {
                             />
                             <div className="left_readings">
                               <img className="dot" src={dotIcon} alt="line" />
-                              80
+                              {vitalSigns[0][2]}
                               <br />
                               <span className="value_span">/90</span>
                             </div>
@@ -563,7 +563,7 @@ const checkRecord = async () => {
                             alt="pics"
                           />
                           <div className="left_readings">
-                            240
+                          {vitalSigns[0][3]}
                             <br />
                             <span className="value_span1">ml</span>
                             <img
@@ -589,106 +589,54 @@ const checkRecord = async () => {
 
               <div className="card2">
                 <h4 className="card2_header">Recent Diagnosis</h4>
-                {data ? (
-                  <div>
-                    <div className="diagnosis_container">
+                {treatmentDetails.length > 0 ? (
+                <div>
+                  {treatmentDetails.slice(0, 5).map((detail, index) => (
+                    <div className="diagnosis_container" key={index}>
                       <div className="left">
-                        <p className="diagnose_name">Malaria & Typoid</p>
+                        <p className="diagnose_name">{detail}</p>
                         <p className="diagnose_status">Active</p>
                       </div>
                       <div className="right">
-                        <img src={diseases[0]} alt="diagnose_image" />
+                        <img src={diseases[index % diseases.length]} alt="diagnose_image" />
                       </div>
                     </div>
-                    <div className="diagnosis_container">
-                      <div className="left">
-                        <p className="diagnose_name">Malaria & Typoid</p>
-                        <p className="diagnose_status">Active</p>
-                      </div>
-                      <div className="right">
-                        <img src={diseases[1]} alt="diagnose_image" />
-                      </div>
-                    </div>
-                    <div className="diagnosis_container">
-                      <div className="left">
-                        <p className="diagnose_name">Malaria & Typoid</p>
-                        <p className="diagnose_status">Active</p>
-                      </div>
-                      <div className="right">
-                        <img src={diseases[2]} alt="diagnose_image" />
-                      </div>
-                    </div>
-
-                    <div className="diagnosis_container">
-                      <div className="left">
-                        <p className="diagnose_name">Malaria & Typoid</p>
-                        <p className="diagnose_status">Active</p>
-                      </div>
-                      <div className="right">
-                        <img src={diseases[1]} alt="diagnose_image" />
-                      </div>
-                    </div>
-                    <div className="diagnosis_container">
-                      <div className="left">
-                        <p className="diagnose_name">Malaria & Typoid</p>
-                        <p className="diagnose_status">Active</p>
-                      </div>
-                      <div className="right">
-                        <img src={diseases[0]} alt="diagnose_image" />
-                      </div>
-                    </div>
-                    <div className="diagnosis_container">
-                      <div className="left">
-                        <p className="diagnose_name">Malaria & Typoid</p>
-                        <p className="diagnose_status">Active</p>
-                      </div>
-                      <div className="right">
-                        <img src={diseases[2]} alt="diagnose_image" />
-                      </div>
-                    </div>
-
-                    <div className="diagnosis_container">
-                      <div className="left">
-                        <p className="diagnose_name">Malaria & Typoid</p>
-                        <p className="diagnose_status">Active</p>
-                      </div>
-                      <div className="right">
-                        <img src={diseases[0]} alt="diagnose_image" />
-                      </div>
-                    </div>
+                  ))}
                   </div>
                 ) : (
                   <EmptyCard />
                 )}
               </div>
-              {}
+              
               <div className="card3">
                 <h4 className="card3_header">Active Medication</h4>
-                { getFormattedRecords ? getFormattedRecords?.map((meds)=>(
-                  meds?.prescription?.map((drug)=>(
-                     <div>
-                    <div className="med_div">
-                      <div
-                        className="drug_icon_div"
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        <img src={drugs[0]} alt="drug" />
-                      </div>
-                      <div className="drug_name_div">
-                        <p className="drug_name">{drug[0]}</p>
-                        <p className="dosage">{drug[1]}</p>
-                      </div>
-                    </div>
-                    </div>
-
-                  ))
-                )): <EmptyCard />}
-                  
-                 
+                {prescription.length > 0 ? (
+                    <div>
+                      {prescription.slice(0, 5).map((medication, index) => (
+                        <div className="med_div" key={index}>
+                          <div
+                            className="drug_icon_div"
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                            }}
+                          >
+                            <img src={drugs[index % drugs.length]} alt="drug" />
+                          </div>
+                          <div className="drug_name_div">
+                            <p className="drug_name">{medication}</p>
+                            <p className="dosage">1 Tab twice daily</p>
+                          </div>
+                        </div>
+                      ))}
+    
+                    
+                    
+                  </div>
+                  ) : (
+                     <EmptyCard />
+                )}               
               </div>
             </div>
           </div>

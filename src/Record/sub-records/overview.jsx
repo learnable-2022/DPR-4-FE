@@ -14,6 +14,8 @@ import picture11 from "../../assets/Frame 185 (3).png";
 import picture12 from "../../assets/Group 91.png";
 
 export default function Overview() {
+  let vitalSigns = localStorage.getItem("vitalSigns");
+  console.log(vitalSigns);
   return (
     <div className="overview-container">
       <p className="p-tag">Recent Report </p>
