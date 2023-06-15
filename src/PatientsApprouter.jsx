@@ -238,7 +238,7 @@ setDefaultAccount(newAccount);
                 </AuthUserLayout>
               }
             >
-              <Route index="overview" element={<Overview/>} />
+              <Route path="overview" element={<Overview/>} />
               <Route path="lab" element={<Lab />} />
               <Route path="vaccine" element={<Vaccine />} />
               <Route path="visit" element={<Visit />} />

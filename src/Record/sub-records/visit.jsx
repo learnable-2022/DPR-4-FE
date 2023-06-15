@@ -116,28 +116,44 @@ const { globalFilter } = state;
 
           <BiFilter className='icon'/>
         </div>
+        <div className='select-folder'>
+          <select name="link" id="link-id" onChange={(e)=> navigate(e.target.value)}>
+            <option value="/Records/overview">overview</option>
+            <option   value="/Records/visit">visit</option>
+            <option   value="/Records/vaccine">vaccine</option>
+            <option  value="/Records/prescription">prescription</option>
+            <option  value="/Records/lab">lab</option>
+          </select>
+        </div>
       </div>
       <div className='table'>
-      <Table columns={columns} data={data}  getTableProps={ getTableProps}    getTableBodyProps={  getTableBodyProps} headerGroups={headerGroups} rows={rows} state={state} setGlobalFilter={ setGlobalFilter} prepareRow={  prepareRow}/>
-        {/* <div className='table-1'>
-          <h4>Hospital/ Attending</h4>
-          <h4>Date/Time</h4>
-          <h4>Complaint </h4>
+      <div className='table-display'>
+      <Table columns={columns} data={data}  getTableProps={ getTableProps}    getTableBodyProps={  getTableBodyProps} headerGroups={headerGroups} rows={rows} state={state} setGlobalFilter={ setGlobalFilter} prepareRow={  prepareRow} />
+      </div>
+       <div className='table2-display'>
+         {/* <div className='table-1'>
+         
+          
+         
         </div> */}
 
-        {/* this would layout component to return the data based on filter request */}
-        {/* {dummyData.map((items)=>{
+        {dummyData.map((items)=>{
           return(
-        <div className='table-2'>
+        <div className='table-2-vaccine'>
           <ul>
+          <h4>Hospital/ Attending</h4>
             <li>{items.hosiptalName}<br/>{items.date}</li>
+            <h4>Date/Time</h4>
             <li>{items.Time}</li>
-            <li>{items.Remark}</li>
+            <h4>Complaint </h4>
+            <li>{items.complaint}</li>
+        
             <li><button onClick={takeme}>{items.Report}</button></li>
           </ul>
         </div>
         )
-      })} */}
+      })}
+       </div>
       
       </div>
     </div>

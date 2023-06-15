@@ -26,15 +26,15 @@ export default function Table({ getTableProps, getTableBodyProps,headerGroups,ro
                    </tr>
                ))}
            </thead>
-           <tbody {...getTableBodyProps()}>
+           <tbody {...getTableBodyProps()} className='tbody'>
                {rows.map((row) => {
                    prepareRow(row);
                    return (
-                       <tr {...row.getRowProps()}>
+                       <tr {...row.getRowProps()} className='trow'>
                            {row.cells.map((cell) => {
                                return (
                                  <>
-                                   <td {...cell.getCellProps()}>
+                                   <td {...cell.getCellProps()} className='tdate'>
                                        {cell.render('Cell')}
                                    </td>
                                   

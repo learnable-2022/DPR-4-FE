@@ -12,6 +12,7 @@ import picture9 from "../../assets/Frame 185 (1).png";
 import picture10 from "../../assets/Frame 185.png";
 import picture11 from "../../assets/Frame 185 (3).png";
 import picture12 from "../../assets/Group 91.png";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Overview() {
@@ -20,10 +21,23 @@ export default function Overview() {
   let vaccine = JSON.parse(localStorage.getItem('vaccine'));
   let prescription = JSON.parse(localStorage.getItem('prescription'));
   
+  const navigate = useNavigate();
   return (
     <div className="overview-container">
+      <div className="split-div">
       <p className="p-tag">Recent Report </p>
+      <div className='select-folder'>
+          <select name="link" id="link-id" onChange={(e)=> navigate(e.target.value)}>
+            <option value="/Records/overview">overview</option>
+            <option   value="/Records/visit">visit</option>
+            <option   value="/Records/vaccine">vaccine</option>
+            <option  value="/Records/prescription">prescription</option>
+            <option  value="/Records/lab">lab</option>
+          </select>
+        </div>
+      </div>
       <div className="overview-sub-container">
+     
         <div className="over-1">
           <div className="contain-container">
             <p className="sp-p"> My Heart Condition</p>
@@ -36,6 +50,7 @@ export default function Overview() {
                     <p>
                       Blood Status <br />
                       {vitalSigns[0][5]}
+                    <span style={{color:"#000"}}>  116/70</span>
                     </p>
                   </div>
                   <div className="over-1-first-son">
@@ -43,6 +58,7 @@ export default function Overview() {
                     <p>
                       Heart Rate <br />
                       {vitalSigns[0][1]}
+                     <span style={{color:"#000"}}> 120bpm</span>
                     </p>
                   </div>
                 </div>
@@ -56,6 +72,7 @@ export default function Overview() {
                   </div>
                 </div>
               </div>
+                <div className="border-line"></div>
               <div className="over-1-2">
                 <div className="over-1-first">
                   <div className="over-1-first-son">
@@ -63,6 +80,7 @@ export default function Overview() {
                     <p>
                       Blood Count <br />
                       {vitalSigns[0][6]}-90
+                     <span style={{color:"#000"}}> 80-90</span>
                     </p>
                   </div>
                   <div className="over-1-first-son">
@@ -70,6 +88,7 @@ export default function Overview() {
                     <p>
                       Glucose Level <br />
                       {vitalSigns[0][6]}ml
+                     <span style={{color:"#000", fontWeight:"bold",}}> 240ml</span>
                     </p>
                   </div>
                 </div>

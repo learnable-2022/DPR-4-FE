@@ -1,9 +1,9 @@
 import React from 'react';
 import "../Record/Record.css";
-import { IoIosNotificationsOutline } from "react-icons/io";
+
 import { BsArrowLeft } from "react-icons/bs";
-import smallLogo from "../assets/small.png";
-import { Link, Outlet } from "react-router-dom";
+
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 function DoctorsRecords() {
@@ -20,12 +20,16 @@ const handle=()=>{
   return (
     <div className="container">
     <nav className="nav-container">
+    <div className="nav-container-left-reverse">
+        <BsArrowLeft onClick={handle} style={{cursor:"pointer"}} />
+        <h2>Medical Record</h2>
+      </div>
       <div className="nav-container-left">
         <BsArrowLeft onClick={handle} style={{cursor:"pointer"}} />
         <h2>Medical Record</h2>
       </div>
       <div className="nav-container-right">
-        <div>
+        {/* <div>
           <button style={{cursor:"pointer"}}>share report</button>
         </div>
         <div>
@@ -44,7 +48,7 @@ const handle=()=>{
           />
           
           <p>hi! patient name</p>
-        </div>
+        </div> */}
       </div>
     </nav>
     <div className="second-section">
@@ -106,27 +110,27 @@ const handle=()=>{
     </div>
     <div className="third-section-link">
       <li>
-        <Link className="navi-link" to="doctorsoverview">
+        <NavLink exact activeClassName="active" to="doctorsoverview">
           <p>Overview</p>
-        </Link>
+        </NavLink>
       </li>
       <li>
         {" "}
-        <Link className="navi-link" to="doctorslab">
+        <NavLink activeClassName="active" to="doctorslab">
           <p>Labs</p>
-        </Link>
+        </NavLink>
       </li>
       <li>
         {" "}
-        <Link className="navi-link" to="doctorsvaccine">
+        <NavLink activeClassName="active" to="doctorsvaccine">
           <p>Vaccines</p>
-        </Link>
+        </NavLink>
       </li>
       <li>
         {" "}
-        <Link className="navi-link" to="doctorsprescription">
+        <NavLink activeClassName="active"to="doctorsprescription">
           <p>Prescription</p>
-        </Link>
+        </NavLink>
       </li>
     </div>
     <div>
