@@ -7,13 +7,14 @@ import { useMemo } from 'react';
 import Table from './table';
 import { useGlobalFilter } from 'react-table';
 
-function MyCell({ value, columnProps: { rest: { someFunc } } }) {
-  return <button onClick={someFunc}>{value}</button>
-}
+
 
 export default function Lab() {
 
   const  link = "/lab/view-report";
+
+
+
 
     const dummyData= [
         {hosiptalName:"Alpha general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report" , status:"Approve",complaint:"malariaX2"},
@@ -110,10 +111,49 @@ const { globalFilter } = state;
 
           <BiFilter className='icon'/>
         </div>
+        <div className='select-folder'>
+        <select name="link" id="link-id" onChange={(e)=> navigate(e.target.value)}>
+          <option value="/Records/overview">overview</option>
+            <option   value="/Records/visit">visit</option>
+            <option   value="/Records/vaccine">vaccine</option>
+            <option  value="/Records/prescription">prescription</option>
+            <option  value="/Records/lab">lab</option>
+          </select>
+        </div>
       </div>
       <div className='table'>
 
-      <Table columns={columns} data={data}  getTableProps={ getTableProps}    getTableBodyProps={  getTableBodyProps} headerGroups={headerGroups} rows={rows} state={state} setGlobalFilter={ setGlobalFilter} prepareRow={  prepareRow}/>
+     <div className='table-display'>
+     <Table columns={columns} data={data}  getTableProps={ getTableProps}    getTableBodyProps={  getTableBodyProps} headerGroups={headerGroups} rows={rows} state={state} setGlobalFilter={ setGlobalFilter} prepareRow={  prepareRow} />
+     </div>
+
+     <div className='table2-display' >
+            {/* <div className='table-1-vaccine'>
+             
+             
+             
+            
+            </div>
+             */}
+            {dummyData.map((items)=>{
+                return(
+            <div className='table-2-vaccine'>
+                  <ul>
+                  <h4>Hospital/ Laboratory</h4>
+                    <li>{items.hosiptalName} <br/>{items.name}</li>
+                    <h4>Test-type</h4>
+                    <li>{items.testResult}</li>
+                    <h4>complaint</h4> 
+                    <li>{items.complaint}</li>
+                    <li><button onClick={handleclick}>{items.Report}</button></li>
+                  </ul>
+            </div>
+
+
+              )
+          })}
+       </div>
+
       </div>
     </div>
   )

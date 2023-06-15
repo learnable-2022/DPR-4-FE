@@ -23,9 +23,8 @@
   align-items: center;
  
 }
-.contain-container{
- 
-}
+
+
 .p-tag {
   font-family: "Open Sans";
   font-style: normal;
@@ -35,11 +34,7 @@
   letter-spacing: 0.001em;
   color: #999999;
 }
-.new-class{
- 
-  
- 
-}
+
 .sp-p {
   font-family: "Open Sans";
   font-style: normal;
@@ -549,4 +544,115 @@ tr:nth-child(even) {
 }
 tr:nth-child(odd){
   border-bottom:2px solid  #D6ebff ;
+}
+.select-folder{
+  display: none;
+}
+.table2-display{
+  display: none;
+}
+@media (max-width: 700px){
+  .visit-header{
+    display: none;
+  }
+  .select-folder{
+    display:flex;
+    
+  }
+  .select-folder select{
+    padding: 10px;
+    border: none;
+    background: #f9f9f9;
+  }
+  .select-folder select option{
+    font-family:"open sas";
+    font-size: small;
+  }
+  .visit-navigation{
+    display: flex;
+    align-items: center;
+  }
+  .search input::placeholder{
+    font-size: small;
+    background: #f9f9f9 ;
+  }
+  .pres-flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .table-display{
+    display: none;
+  }
+  .table2-display{
+    display: flex;
+    flex-direction: column;
+  }
+  .table-2-vaccine ul{
+    display: flex;
+    flex-direction: column;
+    align-items: normal;
+  }
+  .table-2-vaccine ul li{
+    padding: 20px 5px;
+    color: #666666;
+    font-weight: 600;
+  }
+  .table-2-vaccine h4{
+    padding: 5px;
+  }
+  .table-2-vaccine{
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075), 10px 10px 20px rgba(0, 0, 0, 0.04);
+    border-radius: 10px;
+    margin: 10px 0px;
+  }
+  .table-2-vaccine ul li button{
+    padding: 5px 10px;
+  color: #fff;
+  background: #80d580;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  }
+  .overview-sub-container{
+    display: flex;
+    flex-direction: column;
+    
+  }
+  .overview-sub-container div{
+    margin-bottom: 10px;
+  }
+  .over-1{
+    width: 100%;
+    align-items: normal;
+    background: #f9f9f9;
+  }
+  .new-class{
+    margin-top: 0px;
+    align-items: normal;
+  }
+  .over-1-first{
+    justify-content: space-between;
+    gap: none;
+  }
+  .over-2{
+    background: #f9f9f9;
+
+  }
+  .two{
+    width: 100%;
+  }
+  .four{
+  
+  }
+  .three{
+    margin-top: 30px;
+    width: 100%;
+  }
+  .split-div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }

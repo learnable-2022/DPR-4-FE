@@ -356,7 +356,7 @@ function Approuter() {
                 </AuthDocLayout>
               }
             >
-              <Route index="doctorsoverview" element={<DoctorsOverview />} />
+              <Route path="doctorsoverview" element={<DoctorsOverview />} />
               <Route path="doctorslab" element={<DoctorsLab />} />
               <Route path="doctorsvaccine" element={<DoctorsVaccine />} />
               <Route path="doctorsprescription" element={<DoctorsPresciption />} />
