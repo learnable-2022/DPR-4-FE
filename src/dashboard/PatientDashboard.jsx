@@ -185,7 +185,7 @@ const checkRecord = async () => {
     console.error('Error checking record:', error);
   }
 };
-
+checkRecord();
 useEffect(() => {
   if (defaultAccount) {
     checkRecord();
@@ -439,7 +439,7 @@ useEffect(() => {
                           <div className="readings_div">
                             <p className="heading">Blood Status</p>
                             <p>
-                              <strong className="value">{vitalSigns[0][0]}</strong>
+                              <strong className="value">{vitalSigns[0][4]}</strong>
                             </p>
                           </div>
                         </div>
@@ -476,7 +476,7 @@ useEffect(() => {
                               src={leftLine}
                               alt="line"
                             />
-                            {vitalSigns[0][0]}
+                            {vitalSigns[0][4]}
                             <br />
                             <span className="value_span">/70</span>
                             <img
@@ -524,7 +524,7 @@ useEffect(() => {
                           </div>
                           <div className="count_val_div">
                             <p>Blood Count</p>
-                            <p>{vitalSigns[0][2]}</p>
+                            <p>{vitalSigns[0][5]}</p>
                           </div>
                         </div>
                         <div className="middle2_right">
@@ -541,7 +541,7 @@ useEffect(() => {
                           </div>
                           <div className="count_val_div">
                             <p>Glucose Level</p>
-                            <p>{vitalSigns[0][3]}</p>
+                            <p>{vitalSigns[0][6]}</p>
                           </div>
                         </div>
                       </div>
@@ -555,7 +555,7 @@ useEffect(() => {
                             />
                             <div className="left_readings">
                               <img className="dot" src={dotIcon} alt="line" />
-                              {vitalSigns[0][2]}
+                              {vitalSigns[0][5]}
                               <br />
                               <span className="value_span">/90</span>
                             </div>
@@ -569,7 +569,7 @@ useEffect(() => {
                             alt="pics"
                           />
                           <div className="left_readings">
-                          {vitalSigns[0][3]}
+                          {vitalSigns[0][6]}
                             <br />
                             <span className="value_span1">ml</span>
                             <img

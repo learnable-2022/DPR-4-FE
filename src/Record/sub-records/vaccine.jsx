@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import {BiFilter} from "react-icons/bi";
 import {CiSearch} from "react-icons/ci";
 import { useGlobalFilter } from 'react-table';
@@ -7,6 +7,29 @@ import { useTable } from 'react-table';
 import { useMemo } from 'react';
 
 export default function Vaccine() {
+
+  const [vitalSigns, setVitalSigns] = useState([]);
+  const [treatmentDetails, setTreatmentDetails] = useState([]);
+  const [vaccine, setVaccine] = useState([]);
+  const [prescription, setPrescription] = useState([]);
+
+  useEffect(() => {
+    const fetchDataFromLocalStorage = () => {
+      let storedVitalSigns = JSON.parse(localStorage.getItem("vitalSigns"));
+      let storedTreatmentDetails = JSON.parse(localStorage.getItem('treatmentDetails'));
+      let storedVaccine = JSON.parse(localStorage.getItem('vaccine'));
+      let storedPrescription = JSON.parse(localStorage.getItem('prescription'));
+
+      setVitalSigns(storedVitalSigns || []);
+      setTreatmentDetails(storedTreatmentDetails || []);
+      setVaccine(storedVaccine || []);
+      setPrescription(storedPrescription || []);
+    };
+
+    fetchDataFromLocalStorage();
+  }, []);
+
+
   const dummyData= [
     {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)",Date:"02/05/2023",Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3"},
     {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)", Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3",Date:"02/05/2023"},
@@ -54,7 +77,7 @@ export default function Vaccine() {
   
 ];
   const columns = useMemo(()=> COCA_COLA,[]);
-  const data = useMemo(()=> dummyData,[])
+  const data = useMemo(() => vaccine || [], [vaccine]);
 
   const {
     getTableProps,

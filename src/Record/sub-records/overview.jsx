@@ -13,11 +13,12 @@ import picture10 from "../../assets/Frame 185.png";
 import picture11 from "../../assets/Frame 185 (3).png";
 import picture12 from "../../assets/Group 91.png";
 
+
 export default function Overview() {
-  let vitalSigns = localStorage.getItem("vitalSigns");
-  let treatmentDetails = localStorage.getItem('treatmentDetails');
-  let vaccine = localStorage.getItem('vaccine');
-  let prescription = localStorage.getItem('prescription');
+  let vitalSigns = JSON.parse(localStorage.getItem("vitalSigns"));
+  let treatmentDetails = JSON.parse(localStorage.getItem('treatmentDetails'));
+  let vaccine = JSON.parse(localStorage.getItem('vaccine'));
+  let prescription = JSON.parse(localStorage.getItem('prescription'));
   
   return (
     <div className="overview-container">
@@ -26,6 +27,7 @@ export default function Overview() {
         <div className="over-1">
           <div className="contain-container">
             <p className="sp-p"> My Heart Condition</p>
+            {vitalSigns.length > 0 ? (
             <div className="new-class">
               <div className="over-1-1">
                 <div className="over-1-first">
@@ -33,14 +35,14 @@ export default function Overview() {
                     <img src={picture9} className="img-love" alt="pic9" />
                     <p>
                       Blood Status <br />
-                      116/70
+                      {vitalSigns[0][5]}
                     </p>
                   </div>
                   <div className="over-1-first-son">
                     <img src={picture10} className="img-love" alt="pic10" />
                     <p>
                       Heart Rate <br />
-                      120bpm
+                      {vitalSigns[0][1]}
                     </p>
                   </div>
                 </div>
@@ -50,6 +52,7 @@ export default function Overview() {
                   </div>
                   <div>
                     <img src={picture8} alt="pics8" />
+                    
                   </div>
                 </div>
               </div>
@@ -59,14 +62,14 @@ export default function Overview() {
                     <img src={picture11} className="img-love" alt="pic9" />
                     <p>
                       Blood Count <br />
-                      80-90
+                      {vitalSigns[0][6]}-90
                     </p>
                   </div>
                   <div className="over-1-first-son">
                     <img src={picture12} className="img-love" alt="pic10" />
                     <p>
                       Glucose Level <br />
-                      240ml
+                      {vitalSigns[0][6]}ml
                     </p>
                   </div>
                 </div>
@@ -80,122 +83,51 @@ export default function Overview() {
                 </div>
               </div>
             </div>
+            ): null}
+           
           </div>
         </div>
         <div className="over-2">
           <h2> Recent Diagnosis</h2>
+          {treatmentDetails.length > 0 ? (
           <div className="one">
+            {treatmentDetails.slice(0, 5).map((detail, index) => (
             <div>
-              {" "}
-              <div className="two">
-                {" "}
+             
+              <div className="two" key={index}>
+                
                 <div>
-                  <h2>Malaria & Typoid</h2>
+                  <h2>{detail}</h2>
                   <p>Active</p>
-                </div>{" "}
+                </div>
                 <div>
                   <img src={picture1} alt="pics" />
                 </div>
               </div>
             </div>
-            <div>
-              {" "}
-              <div className="two">
-                {" "}
-                <div>
-                  <h2>Chest Pain</h2>
-                  <p>Last Month</p>
-                </div>{" "}
-                <div>
-                  <img src={picture2} alt="pics" />
-                </div>
-              </div>{" "}
-            </div>
-            <div>
-              {" "}
-              <div className="two">
-                {" "}
-                <div>
-                  <h2>Cold & Flu</h2>
-                  <p>2 Month Ago</p>
-                </div>{" "}
-                <div>
-                  <img src={picture3} alt="pics" />
-                </div>
-              </div>{" "}
-            </div>
-            <div>
-              {" "}
-              <div className="two">
-                {" "}
-                <div>
-                  <h2>Cold & Flu</h2>
-                  <p>Last Month</p>
-                </div>{" "}
-                <div>
-                  <img src={picture3} alt="pics" />
-                </div>
-              </div>
-            </div>
-            <div>
-              {" "}
-              <div className="two">
-                {" "}
-                <div>
-                  <h2>Chest Pain</h2>
-                  <p>Last Month</p>
-                </div>{" "}
-                <div>
-                  <img src={picture2} alt="pics" />
-                </div>
-              </div>
-            </div>
+            ))}
+            
           </div>
+          ): null}
         </div>
         <div className="over-3">
           <h4>Active Medication</h4>
+          {prescription.length > 0 ? (
           <div className="three">
+          {prescription.slice(0, 5).map((medication, index) => (
             <div className="four">
-              {" "}
-              <div>
+            
+              <div key={index}>
                 <img src={picture7} alt="overview" />
               </div>
               <div>
-                <h4>Ciprofloxacin</h4>
-                <p>1 Tab twice daily</p>
-              </div>{" "}
-            </div>
-            <div className="four">
-              {" "}
-              <div>
-                <img src={picture6} alt="overview" />
-              </div>
-              <div>
-                <h4>Amatem Forte soft gel</h4>
+                <h4>{medication}</h4>
                 <p>1 Tab twice daily</p>
               </div>
             </div>
-            <div className="four">
-              {" "}
-              <div>
-                <img src={picture5} alt="overview" />
-              </div>
-              <div>
-                <h4>Vitamin C</h4>
-                <p>1 Tab twice daily</p>
-              </div>
-            </div>
-            <div className="four">
-              {" "}
-              <div>
-                <img src={picture4} alt="overview" />
-              </div>
-              <div>
-                <h4>Omega 3</h4>
-                <p>1 Tab twice daily</p>
-              </div>
-            </div>
+            ))}
           </div>
+          ): null}
         </div>
       </div>
     </div>
