@@ -1,5 +1,9 @@
 [
-  { "inputs": [], "stateMutability": "nonpayable", "type": "constructor" },
+  {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
   {
     "anonymous": false,
     "inputs": [
@@ -90,7 +94,11 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "doctorAddress", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "doctorAddress",
+        "type": "address"
+      }
     ],
     "name": "addDoctor",
     "outputs": [],
@@ -114,11 +122,30 @@
         "name": "treatmentDetails",
         "type": "string[3]"
       },
-      { "internalType": "string[3]", "name": "vaccine", "type": "string[3]" },
+      {
+        "internalType": "string[3]",
+        "name": "vaccine",
+        "type": "string[3]"
+      },
       {
         "internalType": "string[3]",
         "name": "prescription",
         "type": "string[3]"
+      },
+      {
+        "internalType": "string[4]",
+        "name": "billing",
+        "type": "string[4]"
+      },
+      {
+        "internalType": "string[4]",
+        "name": "service",
+        "type": "string[4]"
+      },
+      {
+        "internalType": "string[1]",
+        "name": "amount",
+        "type": "string[1]"
       }
     ],
     "name": "addPatientRecord",
@@ -128,7 +155,11 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "patientAddress", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "patientAddress",
+        "type": "address"
+      }
     ],
     "name": "getPatientRecord",
     "outputs": [
@@ -153,6 +184,21 @@
             "internalType": "string[3]",
             "name": "prescription",
             "type": "string[3]"
+          },
+          {
+            "internalType": "string[4]",
+            "name": "billing",
+            "type": "string[4]"
+          },
+          {
+            "internalType": "string[4]",
+            "name": "service",
+            "type": "string[4]"
+          },
+          {
+            "internalType": "string[1]",
+            "name": "amount",
+            "type": "string[1]"
           }
         ],
         "internalType": "struct PatientRecord.Record[]",
@@ -170,7 +216,11 @@
         "name": "grantedAddress",
         "type": "address"
       },
-      { "internalType": "address", "name": "patientAddress", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "patientAddress",
+        "type": "address"
+      }
     ],
     "name": "grantAccess",
     "outputs": [],
@@ -179,25 +229,49 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "account", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
     ],
     "name": "isAdmin",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "account", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
     ],
     "name": "isDoctor",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "doctorAddress", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "doctorAddress",
+        "type": "address"
+      }
     ],
     "name": "removeDoctor",
     "outputs": [],
@@ -206,7 +280,11 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "patientAddress", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "patientAddress",
+        "type": "address"
+      }
     ],
     "name": "removePatient",
     "outputs": [],
@@ -220,7 +298,11 @@
         "name": "grantedAddress",
         "type": "address"
       },
-      { "internalType": "address", "name": "patientAddress", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "patientAddress",
+        "type": "address"
+      }
     ],
     "name": "revokeAccess",
     "outputs": [],
@@ -234,7 +316,11 @@
         "name": "patientAddress",
         "type": "address"
       },
-      { "internalType": "uint256", "name": "recordIndex", "type": "uint256" },
+      {
+        "internalType": "uint256",
+        "name": "recordIndex",
+        "type": "uint256"
+      },
       {
         "internalType": "string[7]",
         "name": "updatedVitalSigns",
@@ -254,6 +340,21 @@
         "internalType": "string[3]",
         "name": "updatedPrescription",
         "type": "string[3]"
+      },
+      {
+        "internalType": "string[4]",
+        "name": "updatedBilling",
+        "type": "string[4]"
+      },
+      {
+        "internalType": "string[4]",
+        "name": "updatedService",
+        "type": "string[4]"
+      },
+      {
+        "internalType": "string[1]",
+        "name": "updatedAmount",
+        "type": "string[1]"
       }
     ],
     "name": "updatePatientRecord",

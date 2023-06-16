@@ -1,5 +1,4 @@
 import React, { useState,useEffect } from 'react'
-import React from 'react';
 import {BiFilter} from "react-icons/bi";
 import {CiSearch} from "react-icons/ci";
 import { useGlobalFilter } from 'react-table';

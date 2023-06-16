@@ -63,46 +63,46 @@ function Approuter() {
   const patientToken = localStorage.getItem("patientToken");
   const doctorToken = localStorage.getItem("doctorToken");
 
-  let contractAddress = "0xd018103D21Cc9ae90a5Bc23aFB920F95A1C140D2";
+//   let contractAddress = "0xFFE09412B070bC1880D5FBD2BeD09639E367061A";
   
-  const [errorMessage, setErrorMessage] = useState(null);
-	const [defaultAccount, setDefaultAccount] = useState(null);
+//   const [errorMessage, setErrorMessage] = useState(null);
+// 	const [defaultAccount, setDefaultAccount] = useState(null);
 	
 
-	const [provider, setProvider] = useState(null);
-	const [signer, setSigner] = useState(null);
-	const [contract, setContract] = useState(null);
-  const [getForm , setGetForm] = useState('');
+// 	const [provider, setProvider] = useState(null);
+// 	const [signer, setSigner] = useState(null);
+// 	const [contract, setContract] = useState(null);
+//   const [getForm , setGetForm] = useState('');
 
 
 
-const updateEthers = async () => {
-  try {
-    if (window.ethereum && window.ethereum.isMetaMask) {
-      let tempProvider = new ethers.providers.Web3Provider(window.ethereum);
-  setProvider(tempProvider);
+// const updateEthers = async () => {
+//   try {
+//     if (window.ethereum && window.ethereum.isMetaMask) {
+//       let tempProvider = new ethers.providers.Web3Provider(window.ethereum);
+//   setProvider(tempProvider);
   
 
-  let tempSigner = tempProvider.getSigner();
-  setSigner(tempSigner);
-  console.log(tempSigner);
-  let tempContract = new ethers.Contract(contractAddress, abi, tempSigner);
-  setContract(tempContract);
-  console.log(tempContract);
+//   let tempSigner = tempProvider.getSigner();
+//   setSigner(tempSigner);
+//   console.log(tempSigner);
+//   let tempContract = new ethers.Contract(contractAddress, abi, tempSigner);
+//   setContract(tempContract);
+//   console.log(tempContract);
 
       
-    } else {
-      console.error('Please install MetaMask or use a compatible Ethereum browser extension.');
-    }
-  } catch (error) {
-    console.error('Error updating Ethers:', error);
-  }
-};
+//     } else {
+//       console.error('Please install MetaMask or use a compatible Ethereum browser extension.');
+//     }
+//   } catch (error) {
+//     console.error('Error updating Ethers:', error);
+//   }
+// };
 
 
-const accountChangedHandler = (newAccount) => {
-setDefaultAccount(newAccount);
-};
+// const accountChangedHandler = (newAccount) => {
+// setDefaultAccount(newAccount);
+// };
 
 
   return (
@@ -302,7 +302,7 @@ setDefaultAccount(newAccount);
             path="/DocDashboard"
             element={
               <AuthDocLayout>
-                <DoctorsDashboard contract={contract} accountChangedHandler={accountChangedHandler} defaultAccount={defaultAccount}/>
+                <DoctorsDashboard />
               </AuthDocLayout>
             }
           />
@@ -332,7 +332,7 @@ setDefaultAccount(newAccount);
           >
             <Route index element={<Vitals />} /> {/*A nested route!*/}
             <Route path="report" element={<Report />} /> {/*A nested route!*/}
-            <Route path="finish" element={<Finish contract={contract}/>} /> {/*A nested route!*/}
+            <Route path="finish" element={<Finish />} /> {/*A nested route!*/}
           </Route>
         ) : (
           <Route path="/DocDraft" element={<Landing />} />

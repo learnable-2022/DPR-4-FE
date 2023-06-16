@@ -55,7 +55,7 @@ export default function PatientDashboard() {
 
 
 
-  let contractAddress = "0xd018103D21Cc9ae90a5Bc23aFB920F95A1C140D2";
+  let contractAddress = "0xFFE09412B070bC1880D5FBD2BeD09639E367061A";
   const [errorMessage, setErrorMessage] = useState(null);
 	const [defaultAccount, setDefaultAccount] = useState(null);
 	const [connButtonText, setConnButtonText] = useState('Connect to Metamask!');
@@ -105,14 +105,7 @@ const updateEthers = async () => {
   console.log(tempSigner);
   let tempContract = new ethers.Contract(contractAddress, abi, tempSigner);
   setContract(tempContract);
-  // window.location.reload();
-  // console.log(tempContract);
- 
-  // setTimeout(() => {
-  //   checkRecord();
-  // }, 3000);
   
-      
       
     } else {
       console.error('Please install MetaMask or use a compatible Ethereum browser extension.');
@@ -126,7 +119,7 @@ const updateEthers = async () => {
 const accountChangedHandler = (newAccount) => {
 setDefaultAccount(newAccount);
 };
-
+console.log(contract);
 
 const grantDoctorAccess = async (e) => {
 
@@ -185,7 +178,7 @@ const checkRecord = async () => {
     console.error('Error checking record:', error);
   }
 };
-checkRecord();
+
 useEffect(() => {
   if (defaultAccount) {
     checkRecord();

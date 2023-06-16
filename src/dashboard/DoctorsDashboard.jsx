@@ -12,22 +12,11 @@ import axios from "axios";
 import abi from "../abi.json";
 import { ethers } from 'ethers';
 
+
 //rescue kenneth
-export default function DoctorsDashboard({contract,accountChangedHandler,defaultAccount}) {
-  // const {auth} = useContext(StateContext);
-  // const navigator = useNavigate();
+export default function DoctorsDashboard() {
 
-  // console.log(auth.token);
-
-  // if (auth.doctorToken) {
-  //   return  navigator("./docdashboard");
-
-  // }else if(!auth.doctorToken){
-
-  //   return navigator("./landing");
-  // }
-
-
+ 
   const navigator = useNavigate();
   const  handleAction=()=> {
     navigator("/DoctorsRecords")
@@ -44,8 +33,14 @@ export default function DoctorsDashboard({contract,accountChangedHandler,default
   const mobileMenuRef = useRef();
   const [connButtonText, setConnButtonText] = useState('Connect to Metamask!');
   const [errorMessage, setErrorMessage] = useState(null);
+  let contractAddress = "0xFFE09412B070bC1880D5FBD2BeD09639E367061A";
+	const [defaultAccount, setDefaultAccount] = useState(null);
 
 
+	const [provider, setProvider] = useState(null);
+	const [signer, setSigner] = useState(null);
+	const [contract, setContract] = useState(null);
+  const [getForm , setGetForm] = useState('');
 
   const connectWalletHandler = () =>{
 
@@ -56,8 +51,8 @@ export default function DoctorsDashboard({contract,accountChangedHandler,default
     accountChangedHandler(result[0]);
     setConnectedWallet(true);
     console.log(defaultAccount);
-  
-   
+    updateEthers(); 
+    // setConnButtonText('Wallet Connected');
   })
   .catch(error => {
     setErrorMessage(error.message);
@@ -71,69 +66,48 @@ export default function DoctorsDashboard({contract,accountChangedHandler,default
 };
 
 
-//   let contractAddress = "0xd018103D21Cc9ae90a5Bc23aFB920F95A1C140D2";
-// 	const [defaultAccount, setDefaultAccount] = useState(null);
-// 	const [connButtonText, setConnButtonText] = useState('Connect to Metamask!');
+const updateEthers = async () => {
+  try {
+    if (window.ethereum && window.ethereum.isMetaMask) {
+      const tempProvider = new ethers.providers.Web3Provider(window.ethereum);
+      setProvider(tempProvider);
 
-// 	const [provider, setProvider] = useState(null);
-// 	const [signer, setSigner] = useState(null);
-// 	const [contract, setContract] = useState(null);
-//   const [getForm , setGetForm] = useState('');
-
-//   const connectWalletHandler = () =>{
-
-//     if (window.ethereum && window.ethereum.isMetaMask) {
-
-//   window.ethereum.request({ method: 'eth_requestAccounts'})
-//   .then(result => {
-//     accountChangedHandler(result[0]);
-//     setConnectedWallet(true);
-//     console.log(defaultAccount);
-  
-//     // setConnButtonText('Wallet Connected');
-//   })
-//   .catch(error => {
-//     setErrorMessage(error.message);
-  
-//   });
-
-// } else {
-//   console.log('Need to install MetaMask');
-//   setErrorMessage('Please install MetaMask browser extension to interact');
-// }
-// };
-
-
-// const updateEthers = async () => {
-//   try {
-//     if (window.ethereum && window.ethereum.isMetaMask) {
-//       let tempProvider = new ethers.providers.Web3Provider(window.ethereum);
-//   setProvider(tempProvider);
-  
-
-//   let tempSigner = tempProvider.getSigner();
-//   setSigner(tempSigner);
-//   console.log(tempSigner);
-//   let tempContract = new ethers.Contract(contractAddress, abi, tempSigner);
-//   setContract(tempContract);
-//   // console.log(tempContract);
-
+      const tempSigner = tempProvider.getSigner();
+      setSigner(tempSigner);
       
-//     } else {
-//       console.error('Please install MetaMask or use a compatible Ethereum browser extension.');
-//     }
-//   } catch (error) {
-//     console.error('Error updating Ethers:', error);
-//   }
-// };
+      const tempContract = new ethers.Contract(contractAddress, abi, tempSigner);
+      // console.log(tempContract);
+      if (tempContract) {
+        // Store necessary information from the contract
+        const contractInfo = {
+          address: contractAddress,
+          abi: abi,
+        };
 
+        // Store the contract information in local storage
+        
+        
+        setContract(tempContract);
+      }
+    } else {
+      console.error('Please install MetaMask or use a compatible Ethereum browser extension.');
+    }
+  } catch (error) {
+    console.error('Error updating Ethers:', error);
+  }
+};
 
-// const accountChangedHandler = (newAccount) => {
-// setDefaultAccount(newAccount);
-// };
+const accountChangedHandler = (newAccount) => {
+setDefaultAccount(newAccount);
+updateEthers();
+};
 
-console.log(contract);
+useEffect(() => {
+  updateEthers();
+  connectWalletHandler();
+}, []);
 
+localStorage.setItem('contract', contract);
   const closeOpenMenus = useCallback(
     (e) => {
       if (
