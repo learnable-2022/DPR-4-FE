@@ -173,11 +173,7 @@ export default function DoctorsDashboard() {
                   <CiSearch className="search_icon" />
                 </div>
               </div>
-              <div className="title_div">
-                <p>File no.</p>
-                <p>Patient Name</p>
-                <p></p>
-              </div>
+
               <div className="title_div">
                 <p>File no.</p>
                 <p>Patient Name</p>
@@ -207,14 +203,6 @@ export default function DoctorsDashboard() {
                       className="circle_more"
                       onClick={handleButtonClick}
                     />
-                    {open && (
-                      <div class="dropdown" ref={mobileMenuRef}>
-                        <ul>
-                          <li>Patients Profile</li>
-                          <li>Patients medical record</li>
-                        </ul>
-                      </div>
-                    )}
                   </div>
                   <div className="patients_info">
                     <p>#2451</p>
