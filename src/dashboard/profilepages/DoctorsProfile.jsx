@@ -6,6 +6,26 @@ import { BiArrowBack } from "react-icons/bi";
 import ProfileComponent from "../components/profileComponent";
 
 function DoctorsProfile() {
+  let doctors_DOB = localStorage.getItem("doctor_DOB");
+
+  let doctors_Gender = localStorage.getItem("doctor_gender");
+
+  let doctors_License = localStorage.getItem("doctor_license");
+
+  let doctors_Email = localStorage.getItem("doctor_email");
+
+  let doctors_Image = localStorage.getItem("doctor_image");
+
+  let doctors_Name = localStorage.getItem("doctor_name");
+  let doctors_hospital = localStorage.getItem("doctor_hospital");
+  let doctors_address = localStorage.getItem("doctor_address");
+  let doctors_country = localStorage.getItem("doctor_country");
+  let doctors_number = localStorage.getItem("doctor_number");
+  let doctors_origin = localStorage.getItem("doctor_origin");
+  let doctors_residence = localStorage.getItem("doctor_residence");
+
+  let doctors_wallet = localStorage.getItem("doctor_wallet");
+
   return (
     <div className="doctorsprofile">
       <div className="leftside">
@@ -14,10 +34,10 @@ function DoctorsProfile() {
             <BiArrowBack className="back_arrow" />
           </Link>
 
-          <img className="prof_img" src={profileImage} alt="profileImage" />
+          <img className="prof_img" src={doctors_Image} alt="profileImage" />
           <div className="profile_details">
-            <h2 className="name">Dr. chukwuemeka James Eze</h2>
-            <p className="email">Chukwuemekaeeze@gmail.com</p>
+            <h2 className="name">Dr. {doctors_Name}</h2>
+            <p className="email">{doctors_Email}</p>
             <Link to="/DocEditProfile" className="link">
               <button className="profile_btn">Edit profile</button>
             </Link>
@@ -29,29 +49,29 @@ function DoctorsProfile() {
             <div className="leftsection">
               <h3>First name</h3>
               <div>
-                <p>Chukwuemeka</p>
+                <p>{doctors_Name.split(" ")[0]}</p>
               </div>
-              <h3>Middle name</h3>
+              <h3>Phone Number</h3>
               <div>
-                <p>James</p>
+                <p>{doctors_number ? doctors_number : "-"}</p>
               </div>
               <h3>Date of birth</h3>
               <div>
-                <p>13/10/1989</p>
+                <p>{doctors_DOB ? doctors_DOB : "-"}</p>
               </div>
             </div>
             <div className="rightsection">
               <h3>Last name</h3>
               <div>
-                <p>Eze</p>
+                <p>{doctors_Name.split(" ")[1]}</p>
               </div>
               <h3>Gender</h3>
               <div>
-                <p>Male</p>
+                <p>{doctors_Gender ? doctors_Gender : "-"}</p>
               </div>
               <h3>Doctor’s ID</h3>
               <div>
-                <p>1122334455</p>
+                <p>{doctors_License ? doctors_License : "-"}</p>
               </div>
             </div>
           </div>
@@ -63,32 +83,36 @@ function DoctorsProfile() {
           <div className="leftsection">
             <h3>Address</h3>
             <div>
-              <p>Uwani road</p>
+              <p>{doctors_address ? doctors_address : "-"}</p>
             </div>
             <h3>State of origin</h3>
             <div>
-              <p>Imo</p>
+              <p>{doctors_origin ? doctors_origin : "-"}</p>
             </div>
           </div>
           <div className="rightsection">
             <h3>Country</h3>
             <div>
-              <p>Nigeria</p>
+              <p>{doctors_country ? doctors_country : ""}</p>
             </div>
             <h3>State of residence</h3>
             <div>
-              <p>Enugu</p>
+              <p>{doctors_residence ? doctors_residence : "-"}</p>
             </div>
           </div>
         </div>
         <div className="down_part">
-          <h3>Phone number</h3>
+          <h3>Wallet address</h3>
           <div>
-            <p>0913245675</p>
+            <p>{doctors_wallet ? doctors_wallet : "-"}</p>
           </div>
           <h3>Email address</h3>
           <div>
-            <p>chukwue@gmail.com</p>
+            <p>{doctors_Email ? doctors_Email : "-"}</p>
+          </div>
+          <h3>Hospital Name</h3>
+          <div>
+            <p>{doctors_hospital ? doctors_hospital : "-"}</p>
           </div>
         </div>
       </div>

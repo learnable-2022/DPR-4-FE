@@ -72,6 +72,9 @@
   margin-right: 25px;
   margin-left: 15px;
 }
+.hidden {
+  display: none;
+}
 .report_vaccine_input {
   display: flex;
   border-radius: 4px;
@@ -100,7 +103,7 @@
 .vi_common:focus {
   outline: none;
 }
-.prescription_input:focus {
+.prescription_input_:focus {
   outline: none;
 }
 .report .add_more {
@@ -153,7 +156,7 @@ ion-icon {
 .light {
   color: #999999;
 }
-.prescription_input {
+.prescription_input_ {
   height: 30px;
   text-align: center;
   margin: 0.2rem 0.3rem;
@@ -208,4 +211,104 @@ ion-icon {
   display: flex;
   flex-direction: column;
   margin-left: 2.1rem;
+}
+@media (max-width: 860px) {
+  .report_holder_text {
+    flex: 0.3 1;
+  }
+}
+@media (max-width: 790px) {
+  .consultation_input_div {
+    width: 100%;
+  }
+  .prescription_div {
+    width: 100%;
+    margin: 0.5rem;
+  }
+  .report_value_div {
+    flex: 0.5 1;
+  }
+  .vaccine_input_div {
+    width: 100%;
+    margin: 0.5rem;
+  }
+  .doctorsdraft {
+    padding: 1rem;
+  }
+}
+@media (max-width: 718px) {
+  .vaccine_input1::placeholder {
+    font-size: small;
+  }
+  .prescription_input_::placeholder {
+    font-size: small;
+  }
+  .presc_delete_btn {
+    width: 15px;
+  }
+  .report_value_div {
+    flex: 0.8;
+  }
+}
+@media (max-width: 571px) {
+  .prescription_div {
+    flex-direction: column;
+
+    gap: 20px;
+  }
+  .hidden {
+    color: #999999;
+    text-align: center;
+    display: block;
+  }
+  .prescription_header {
+    display: none;
+  }
+  .prescription_input_div {
+    justify-content: space-between;
+    flex-direction: column;
+    margin-left: -8px;
+    width: 100%;
+  }
+  .prescription_div_header {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .prescription_input_ {
+    text-align: left;
+    height: 45px;
+    padding: 0.4rem 0.3rem 0.4rem 0.3rem;
+  }
+  .presc_delete_btn {
+    margin-left: 50%;
+  }
+  .vaccine_input_div {
+    flex-direction: row;
+  }
+  .report_vaccine_header_div {
+    display: none;
+  }
+  .consultation_div_header {
+    text-align: center;
+  }
+  .report_vaccine_input {
+    flex-direction: column;
+    margin-right: 10px;
+    width: 100%;
+  }
+  .vaccine_input2,
+  .vaccine_input3 {
+    height: 45px;
+  }
+  .vaccine_input1 {
+    height: 45px;
+  }
+}
+@media (max-width: 420px) {
+  .prescription_header {
+    display: none;
+  }
+  .report_vaccine_header_div {
+    display: none;
+  }
 }

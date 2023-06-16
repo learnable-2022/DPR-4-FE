@@ -11,13 +11,16 @@ export default function DoctorsBilling() {
     navigate("/DoctorPaymentHistory");
   }
 
+  let doctors_Name = localStorage.getItem("doctor_name");
+  let doctors_Image = localStorage.getItem("doctor_image");
+
   return (
     <>
       <div className="Right">
         <div className="billingBoardDashboard">
           <div className="billingNav">
             <div className="DoctorName">
-              <h2>Hello, Dr. Ada!</h2>
+              <h2>Hello, Dr. {doctors_Name.split(" ")[0]}</h2>
             </div>
 
             <div className="searchParent">
@@ -28,7 +31,11 @@ export default function DoctorsBilling() {
 
               <div className="searchIcons">
                 <img src={Notification} alt="pics" />
-                <img src={PatientPics} alt="pics" />
+                <img
+                  style={{ width: "20px", height: "20px", borderRadius: "50%" }}
+                  src={doctors_Image ? doctors_Image : PatientPics}
+                  alt="pics"
+                />
               </div>
             </div>
           </div>

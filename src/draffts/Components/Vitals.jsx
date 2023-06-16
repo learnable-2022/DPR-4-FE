@@ -32,6 +32,7 @@ function Vitals() {
   const handleSetRespRate = (e) => {
     dispatch({ type: "SET_RESPRATE", respRate: e.target.value });
   };
+
   const [
     {
       temperature,
