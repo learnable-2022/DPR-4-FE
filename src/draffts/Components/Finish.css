@@ -14,7 +14,9 @@
   justify-content: center;
   margin-bottom: 2rem;
 }
-
+._hidden {
+  display: none;
+}
 .billing_info_div {
   display: flex;
   width: 80%;
@@ -154,4 +156,60 @@
   align-items: center;
   justify-content: center;
   margin-top: 2rem;
+}
+@media (max-width: 869px) {
+  .billing_info_div {
+    width: 100%;
+  }
+  .service_charge_header {
+    width: 100%;
+  }
+  .all_service_charge_values_container {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+@media (max-width: 693px) {
+  .billing_info_div {
+    flex-direction: column;
+  }
+  .draft_billing_input {
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+  .draft_billing_header {
+    margin-bottom: 0;
+  }
+  ._hidden {
+    display: block;
+  }
+  .service_charge_header {
+    display: none;
+  }
+  .service_charge_inputs {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  .service_charge_values {
+    flex-direction: column;
+    padding-bottom: 0;
+  }
+}
+@media (max-width: 500px) {
+  .drafts_header_right {
+    flex-direction: column;
+    flex: 0.2;
+  }
+  .draft_update_btn {
+    position: absolute;
+    right: 20px;
+    top: 3rem;
+  }
+  .drafts_header_right img {
+    margin-left: 0;
+    display: none;
+  }
+  .drafts_header_right p {
+    display: none;
+  }
 }
