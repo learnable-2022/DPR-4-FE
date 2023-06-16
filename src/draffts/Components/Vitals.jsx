@@ -4,7 +4,13 @@ import { useOutletContext } from "react-router-dom";
 import { MdDeleteOutline } from "react-icons/md";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { useServiceProviderValue } from "../../ServiceProvider";
+import { useNavigate } from "react-router-dom";
+
 function Vitals() {
+  const navigate = useNavigate();
+  const handleNext = () => {
+    navigate("report");
+  };
   const handleSetTemperature = (e) => {
     dispatch({ type: "SET_TEMPERATURE", temperature: e.target.value });
   };
@@ -26,6 +32,7 @@ function Vitals() {
   const handleSetRespRate = (e) => {
     dispatch({ type: "SET_RESPRATE", respRate: e.target.value });
   };
+
   const [
     {
       temperature,
@@ -161,6 +168,12 @@ function Vitals() {
           </div> */}
         </div>
       </div>
+      {/* <div className="vitals_action_btn">
+        <button className="vitals_save ">Save</button>
+        <button onClick={handleNext} className="vitals_next">
+          Next
+        </button>
+      </div> */}
     </div>
   );
 }

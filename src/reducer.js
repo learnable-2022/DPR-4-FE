@@ -14,9 +14,12 @@ export const initialState = {
   heartRate: null,
   oxygen: null,
   respRate: null,
-  dosage: [],
-  duration: [],
-  medication: [],
+  billingDate: null,
+  billingPatientName: null,
+  billingProvider: null,
+  billingLocation: null,
+  prescriptions: [],
+  billings: [],
   user_details: null,
 };
 const reducer = (state, action) => {
@@ -66,7 +69,11 @@ const reducer = (state, action) => {
         ...state,
         comments: action.comment,
       };
-
+    case "SET_PRESCRIPTION":
+      return {
+        ...state,
+        prescriptions: action.prescriptions,
+      };
     //end of store for report details
 
     case "SET_TEMPERATURE":
@@ -106,20 +113,31 @@ const reducer = (state, action) => {
       };
     //end of store for vital details
 
-    case "SET_DOSAGE":
+    //Billings store
+    case "SET_BILLINGS":
       return {
         ...state,
-        dosage: action.dosage,
+        billings: action.billings,
       };
-    case "SET_DURATION":
+    case "SET_BILLING_DATE":
       return {
         ...state,
-        duration: action.duration,
+        billingDate: action.billingDate,
       };
-    case "SET_MEDICATION":
+    case "SET_BILLING_NAME":
       return {
         ...state,
-        medication: action.medication,
+        billingPatientName: action.billingPatientName,
+      };
+    case "SET_BILLING_PROVIDER":
+      return {
+        ...state,
+        billingProvider: action.billingProvider,
+      };
+    case "SET_BILLING_LOCATION":
+      return {
+        ...state,
+        billingLocation: action.billingLocation,
       };
 
     default:

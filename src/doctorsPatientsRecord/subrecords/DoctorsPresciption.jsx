@@ -2,7 +2,7 @@ import React from "react";
 import drugpic1 from "../../assets/Frame 185 (4).png";
 import { useNavigate } from "react-router-dom";
 
-export default function Prescription() {
+export default function DoctorsPresciption() {
   const navigate =useNavigate();
   return (
     <div className="overview-container">
@@ -10,11 +10,10 @@ export default function Prescription() {
      <h2 className="single-h2">Active Medication</h2>
       <div className='select-folder'>
       <select name="link" id="link-id" onChange={(e)=> navigate(e.target.value)}>
-          <option value="/Records/overview">overview</option>
-            <option   value="/Records/visit">visit</option>
-            <option   value="/Records/vaccine">vaccine</option>
-            <option  value="/Records/prescription">prescription</option>
-            <option  value="/Records/lab">lab</option>
+      <option value="/DoctorsRecords/doctorsoverview">overview</option>
+            <option   value="/DoctorsRecords/doctorsvaccine">vaccine</option>
+            <option  value="/DoctorsRecords/doctorsprescription">prescription</option>
+            <option  value="/DoctorsRecords/doctorslab">lab</option>
           </select>
         </div>
      </div>

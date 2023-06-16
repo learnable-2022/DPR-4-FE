@@ -10,7 +10,26 @@
   overflow-y: scroll;
 }
 .patientseditprofile .back_arrow {
-  display: none;
+  width: 1.5em;
+  height: 1.5em;
+  position: absolute;
+  top: 5px;
+  left: 8px;
+}
+.spin {
+  color: white;
+}
+.spin {
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 .patientseditprofile .topleft- .profile_btn- {
   border: none;
@@ -25,6 +44,7 @@
 .patientseditprofile .topleft- {
   display: flex;
   gap: 1rem;
+  position: relative;
   align-items: center;
   box-shadow: 1px 2px 8px rgb(91, 91, 91);
   padding: 1rem 2rem;
@@ -34,6 +54,14 @@
   font-size: 20px;
   font-weight: 600;
   color: #444444;
+}
+.patientseditprofile input[type="date"] {
+  font-weight: 200;
+}
+.patientseditprofile .warning_msg {
+  margin-top: 1rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 .patientseditprofile .topleft- .email- {
   margin-top: 1rem;
@@ -47,8 +75,8 @@
   height: 160px;
   width: 160px;
   border-radius: 50%;
-  border: 1px solid rgb(133, 133, 133);
-  object-fit: contain;
+  border: 1px solid rgb(255, 255, 255);
+  object-fit: fill;
 }
 
 #inputTag {
@@ -125,6 +153,9 @@
   font-weight: 600;
   color: #222222;
 }
+.patientseditprofile .p_input::placeholder {
+  font-size: small;
+}
 .patientseditprofile ._bottom_profile_details- ._right_section- .input_para- {
   font-size: 11px;
   font-weight: 400;
@@ -168,6 +199,9 @@
   border: none;
   width: 100%;
   font-size: larger;
+  padding: 0;
+  border-radius: 0;
+  margin: 0;
 }
 .patientseditprofile .select-:hover,
 .state-:hover {
@@ -308,6 +342,9 @@
   .patientseditprofile .back_arrow {
     width: 20px;
     height: 20px;
+  }
+  .patientseditprofile .warning_msg {
+    font-size: 12px;
   }
   .doctorseditprofile .back_arrow {
     width: 20px;

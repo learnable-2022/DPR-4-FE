@@ -5,26 +5,43 @@
   width: 100%;
   height: 100vh;
   padding: 2rem;
+  position: relative;
   overflow-y: scroll;
 }
 .drafts_header_left {
   color: #3399ff;
   font-size: 24px;
   font-weight: 600;
+  flex: 0.5;
+}
+
+.doctorsdraft .hamburger_icon {
+  margin-left: 1rem;
+  display: none;
 }
 .drafts_header_right {
   display: flex;
+  gap: 10px;
   align-items: center;
-  gap: 1.5rem;
-  flex: 0.3;
+  justify-content: space-between;
+  flex: 0.5;
 }
-.drafts_header_right img {
-  height: 30px;
+.drafts_header_right_no_justify {
+  display: flex;
+  align-items: center;
+  flex: 0.5;
+  gap: 5px;
+  justify-content: flex-end;
+}
+.drafts_header_right img,
+.drafts_header_right_no_justify img {
+  height: 40px;
   width: 40px;
   border-radius: 50%;
-  object-fit: cover;
+  object-fit: fill;
 }
-.drafts_header_right img:hover {
+.drafts_header_right img:hover,
+.drafts_header_right_no_justify img:hover {
   cursor: pointer;
 }
 .doctorsdraft_header {
@@ -32,6 +49,18 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 3.5rem;
+}
+.draft_update_btn {
+  background-color: #3399ff;
+  color: white;
+  margin-left: auto;
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem 1rem;
+}
+.draft_update_btn:hover {
+  cursor: pointer;
+  background-color: #69aef4;
 }
 .drafts_profile_name {
 }
@@ -57,6 +86,9 @@
   border-radius: 50%;
   padding: 0.5rem 0.7rem;
   background-color: #3399ff;
+}
+.navigation_section .circle:hover {
+  background-color: #90c1f1;
 }
 .link:hover {
   cursor: pointer;
@@ -92,11 +124,17 @@
 }
 .grant_access_div {
   display: flex;
-  justify-content: center;
+  width: 85%;
   align-items: center;
+
   gap: 1rem;
-  width: 70%;
   margin-bottom: 2rem;
+}
+.grant_access_div_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .access_input {
   flex: 0.4 1;
@@ -115,4 +153,208 @@
 }
 .access_btn:hover {
   cursor: pointer;
+  background-color: #69aef4;
+}
+
+.drafts_action_btn {
+  margin-top: 2rem;
+  display: flex;
+  gap: 8px;
+  width: 85%;
+  margin-left: -0.8rem;
+  justify-content: flex-end;
+}
+.draft_save {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 7px;
+  background-color: #3399ff;
+  color: white;
+}
+.draft_next {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 7px;
+  background-color: #3399ff;
+  color: white;
+}
+.draft_next:hover,
+.draft_save:hover {
+  cursor: pointer;
+  background-color: #58a4f0;
+}
+.report_btn_style {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 2rem;
+}
+.no_btn {
+  display: none;
+}
+._side_Bar {
+  width: 180px;
+  height: 100vh;
+  background: #3399ff;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075),
+    10px 10px 20px rgba(0, 0, 0, 0.04);
+  left: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 2s;
+  overflow: hidden;
+  position: fixed;
+  z-index: 7000;
+  animation: slideIn 0.3s ease-in-out;
+}
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+._side_Bar div img {
+  padding: 10px 5px;
+}
+._mid__section {
+  padding: 20px 10px;
+  text-align: center;
+  margin-top: 0px;
+}
+._mid__section .link {
+  text-decoration: none;
+  list-style: none;
+  color: #0a1f33;
+}
+._mid__section p {
+  padding: 10px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+}
+._lower__section {
+  margin-top: 50px;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+}
+._lower__section .link {
+  text-decoration: none;
+  list-style: none;
+  color: #0a1f33;
+}
+._lower__section p {
+  padding: 15px 0px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+}
+._middle__section {
+  padding: 20px 10px;
+  text-align: center;
+  margin-top: 0px;
+}
+._middle__section p {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+}
+.link p {
+  color: #fff;
+}
+.links {
+  text-decoration: none;
+  list-style: none;
+  color: #0a1f33;
+}
+
+._center__div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+._center__div p {
+  color: #fff;
+  font-weight: 700;
+}
+._center__div span {
+  color: #fff;
+}
+.close__btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+  font-size: larger;
+}
+.closeNav {
+  display: none;
+  animation: slideOut 0.3s ease-out;
+}
+
+@media (max-width: 926px) {
+  .doctorsdraft .hamburger_icon {
+    display: block;
+    position: absolute;
+    left: 10px;
+    top: 15px;
+    width: 20px;
+    height: 20px;
+  }
+  .drafts_header_left {
+    position: absolute;
+    top: 10px;
+    left: 20%;
+  }
+  .drafts_header_right_no_justify {
+    flex: 1;
+  }
+  .drafts_header_right {
+    margin-left: auto;
+  }
+  .doctorsdraft .hamburger_icon:hover {
+    cursor: pointer;
+  }
+}
+@media (max-width: 753px) {
+  .draft_update_btn {
+    position: absolute;
+    right: 20px;
+    top: 4rem;
+  }
+  .navigation_section {
+    margin-top: 5rem;
+  }
+  .drafts_header_right img,
+  .drafts_header_right_no_justify img {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 516px) {
+  .doctorsdraft {
+    padding: 1rem;
+  }
+  .drafts_profile_name {
+    font-size: 10px;
+  }
 }

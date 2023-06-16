@@ -161,6 +161,7 @@
 .wallet-link2 span{
   color:  hsl(210, 100%, 60%);
   font-weight: bold;
+  margin-left: 5px;
 }
 .valid {
   color: limegreen;
@@ -176,7 +177,7 @@
 .password-toggle {
   position: absolute;
   margin-top: 35px;
-  left: 350px;
+  left: 390px;
 }
 .confirmation-buttons {
   margin-top: 50px;
@@ -215,7 +216,7 @@
   border: 2px solid #ffff;
 }
 .lowest-section {
-  /* margin-top: 10px; */
+ 
   display: flex;
   justify-content: space-between;
  align-items: center;
@@ -224,4 +225,64 @@
   display: flex;
   align-items: center;
   gap: 2px;
+}
+@media (max-width: 805px) {
+    .sign-up-container{
+      display:flex;
+      flex-direction:column-reverse;
+      align-items: center;
+      gap: 50px;
+    }
+   
+}
+@media (max-width: 630px) {
+  .signup-form{
+    width: 100%;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+  }
+  .signup-form img{
+    display: none;
+  }
+  .signup-form h2{
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  .signup-form p{
+    text-align: center;
+  }
+  .input input::placeholder{
+    font-size: small;
+  }
+  .input label{
+    font-size: small;
+  }
+  .image-placeholder img{
+    width: 100%;
+   
+  }
+  .input input{
+    width: 100%;
+  }
+  .form button{
+    width: 100%;
+  }
+  .first-container{
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 0px 0px 0px;
+  }
+  .password-toggle{
+    position: absolute;
+    margin-top: 35px;
+    left: 260px;
+  }
+  .lowest-section{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 }

@@ -7,16 +7,32 @@ import emptyProfile from "../../assets/empty_profile.png";
 import { Link } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
 import { AiOutlinePlus } from "react-icons/ai";
+import notification from "../../assets/Notification.svg";
+import medLogo from "../../assets/medb_logo.svg";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { RxDashboard } from "react-icons/rx";
+import { TfiWrite } from "react-icons/tfi";
+import { AiOutlineSetting } from "react-icons/ai";
+import { FiLogOut } from "react-icons/fi";
+import ourlogo from "../../assets/ourlogo.png";
+import { BiArrowBack } from "react-icons/bi";
 
-function NavComponent() {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCoins } from "@fortawesome/free-solid-svg-icons";
+
+function NavComponent({ name, image }) {
   const [open, setOpen] = useState(false);
   const [isPromptOpen, setIsPromptOpen] = useState(false);
   const [isCreateAppointOpen, setIsCreateAppointOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
-
+  const [navOpen, setIsNavOpen] = useState(false);
+  const mobileNavRef = useRef();
   const [isThereNotification, setisThereNotification] = useState(true);
   const mobileMenuRef = useRef();
 
+  let doctor_Image = localStorage.getItem("doctor_image");
+
+  let doctor_Name = localStorage.getItem("doctor_name");
   const closeOpenMenus = useCallback(
     (e) => {
       if (
@@ -36,9 +52,27 @@ function NavComponent() {
     },
     [isCreateAppointOpen, open]
   );
+  const closeOpenNav = useCallback(
+    (e) => {
+      if (
+        mobileNavRef.current &&
+        navOpen === true &&
+        !mobileNavRef.current.contains(e.target)
+      ) {
+        setIsNavOpen(false);
+      }
+    },
+    [navOpen]
+  );
   useEffect(() => {
     document.addEventListener("mousedown", closeOpenMenus);
-  }, [closeOpenMenus]);
+    document.addEventListener("mousedown", closeOpenNav);
+  }, [closeOpenMenus, closeOpenNav]);
+
+  //navbar hamburger toggler
+  const toggleNav = () => {
+    setIsNavOpen(!navOpen);
+  };
 
   // function for handling open and closing of notificaton box
   const handleButtonClick = () => {
@@ -78,12 +112,18 @@ function NavComponent() {
   };
   return (
     <div className="header">
+      <GiHamburgerMenu className="hamburger_icon" onClick={toggleNav} />
+      <img className="doc_med_logo" src={medLogo} alt="med_logo" />
       <div className="header_text_part">
         <h1>
-          You are welcome <span className="doc_name">{""}</span>
+          You are welcome{" "}
+          <span className="doc_name">
+            Dr. {name ? name : doctor_Name.split(" ")[0]}
+          </span>
         </h1>
         <p>I trust you’re ready to save lives today...</p>
       </div>
+
       <div className="header_icon_part">
         <AiOutlinePlus
           className="create_appoint"
@@ -91,10 +131,22 @@ function NavComponent() {
           onMouseOut={handleMouseOut}
           onClick={handleCreateAppoint}
         />
-        <GrNotification className="header_icon" onClick={handleButtonClick} />
+        <div>
+          {" "}
+          <img
+            src={notification}
+            className="header_icon"
+            onClick={handleButtonClick}
+          />
+        </div>
+
         <Link to="/DocProfile" className="link">
           {
-            <img src={emptyProfile} className="header_icon" alt="profile" />
+            <img
+              src={image ? image : doctor_Image}
+              className="header_icon"
+              alt="profile"
+            />
             // <RiAccountCircleFill className="header_icon" />
           }
         </Link>
@@ -226,6 +278,52 @@ function NavComponent() {
           </div>
         )}
       </div>
+      <nav
+        className={navOpen ? "doctors_dashboard_nav" : "closeNav"}
+        ref={mobileNavRef}
+      >
+        <div className="_sideBar_">
+          <AiOutlineClose className="_close_btn_" onClick={toggleNav} />
+          <div className="_center-div_">
+            <img src={ourlogo} alt="pics" />
+            <p>
+              Med<span>loc</span>
+            </p>
+          </div>
+          <div className="_mid-section_">
+            <Link to="/DocDashboard" className="link">
+              <RxDashboard style={{ color: "white" }} />
+              <p>Dashboard</p>
+            </Link>
+
+            <Link to="/DocBillings" className="link">
+              <FontAwesomeIcon icon={faCoins} style={{ color: "white" }} />
+              <p>Billings</p>
+            </Link>
+            <Link to="/DocDraft" className="link">
+              <TfiWrite style={{ color: "white" }} />
+              <p>Draft</p>
+            </Link>
+          </div>
+          <div className="_lower-section_">
+            <Link to="/Docsettings" className="link">
+              <AiOutlineSetting style={{ color: "white" }} />
+              <p>settings</p>
+            </Link>
+            <div
+              onClick={() => {
+                localStorage.removeItem("doctorToken");
+                localStorage.removeItem("doctorEmail");
+              }}
+            >
+              <Link to="/" className="link">
+                <FiLogOut style={{ color: "white" }} />
+                <p>logout</p>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </nav>
     </div>
   );
 }

@@ -1,0 +1,215 @@
+.finish {
+}
+.billing_name_header {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+  align-items: center;
+  color: rgb(51, 153, 255);
+}
+.billing_name_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+._hidden {
+  display: none;
+}
+.billing_info_div {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+}
+.billing_info_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.draft_billing_header {
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #999999;
+  font-size: 14px;
+}
+.billing_input_date::-webkit-calendar-picker-indicator {
+  color: #3399ff;
+}
+
+.billing_input_date {
+  font-weight: 400;
+  text-transform: lowercase;
+}
+.draft_billing_input {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  text-align: center;
+  padding-bottom: 0.6rem;
+  border-color: rgb(196, 196, 196);
+}
+.draft_billing_input:focus {
+  outline: none;
+}
+.service_charge_header_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.draft_service_header {
+  font-size: 14px;
+}
+.service_charge_header {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0.5rem;
+  background-color: #d6ebff;
+}
+.service_charge_values_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.service_charge_values {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.all_service_charge_values_container {
+  background-color: rgb(249, 249, 249);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  gap: 1rem;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.service_charge_inputs {
+  text-align: center;
+  padding: 0.7rem 0.5rem;
+  border: none;
+}
+.add_total_div_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.add_total_div {
+  display: flex;
+  width: 80%;
+  margin-top: 2.5rem;
+  justify-content: space-between;
+  align-items: center;
+}
+.total_val_input {
+  padding: 0.3rem 0.5rem;
+  border-color: rgb(201, 201, 201);
+  border: 0.4px solid rgb(201, 201, 201);
+}
+.total_add_btn:hover {
+  cursor: pointer;
+}
+.finish_action_btn {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  width: 80%;
+}
+.finish_save {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 7px;
+  background-color: #3399ff;
+  color: white;
+}
+.finish_next {
+  padding: 0.5rem 2rem;
+  border: none;
+  border-radius: 7px;
+  background-color: #3399ff;
+  color: white;
+}
+.finish .finish_next:hover,
+.finish .finish_save:hover {
+  cursor: pointer;
+  background-color: #58a4f0;
+}
+.finish_action_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+@media (max-width: 869px) {
+  .billing_info_div {
+    width: 100%;
+  }
+  .service_charge_header {
+    width: 100%;
+  }
+  .all_service_charge_values_container {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+@media (max-width: 693px) {
+  .billing_info_div {
+    flex-direction: column;
+  }
+  .draft_billing_input {
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+  .draft_billing_header {
+    margin-bottom: 0;
+  }
+  ._hidden {
+    display: block;
+  }
+  .service_charge_header {
+    display: none;
+  }
+  .service_charge_inputs {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  .service_charge_values {
+    flex-direction: column;
+    padding-bottom: 0;
+  }
+}
+@media (max-width: 500px) {
+  .drafts_header_right {
+    flex-direction: column;
+    flex: 0.2;
+  }
+  .draft_update_btn {
+    position: absolute;
+    right: 20px;
+    top: 3rem;
+  }
+  .drafts_header_right img {
+    margin-left: 0;
+    display: none;
+  }
+  .drafts_header_right p {
+    display: none;
+  }
+}

@@ -1,22 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import "./Report.css";
 import { useServiceProviderValue } from "../../ServiceProvider";
 import { useLocation } from "react-router-dom";
 import Prescription from "./prescription";
+import Delete from "../../assets/images/Delete.svg";
+import AddButton from "../../assets/add-circle1.svg";
 
 function Report() {
   // const [dosage, setDosage] = useState("");
   // const [medication, setMedication] = useState("");
   // const [duration, setDuration] = useState("");
-  // const [val, setVal] = useState([{ med: "", dur: "", dos: "" }]);
+  const [val, setVal] = useState([{ med: "", dur: "", dos: "" }]);
   // const location = useLocation();
 
   // const [reportValues, setState] = useState({});
   // let reportValues = location.state?.reportValues;
 
-  // function addComponent() {
-  //   setVal([...val, { med: "", dur: "", dos: "" }]);
-  // }
+  function addComponent() {
+    setVal([...val, { med: "", dur: "", dos: "" }]);
+  }
   // console.log(reportValues);
   const [
     {
@@ -28,7 +30,8 @@ function Report() {
       vaccineStatus,
       dosage,
       duration,
-      medication,
+      prescriptions,
+      billings,
     },
     dispatch,
   ] = useServiceProviderValue();
@@ -46,6 +49,7 @@ function Report() {
   //   vaccineDate,
   //   vaccineStatus,
   // };
+
   const handleSetComplaint = (e) => {
     // setComplaint(e.target.value);
     dispatch({ type: "SET_COMPLAINT", complaint: e.target.value });
@@ -70,34 +74,24 @@ function Report() {
     // setComment(e.target.value);
     dispatch({ type: "SET_COMMENT", comment: e.target.value });
   };
-  const handleSetDuration = (e) => {
-    dispatch({ type: "SET_DURATION", duration: e.target.value });
-  };
-  const handleSetDosage = (e) => {
-    dispatch({ type: "SET_DOSAGE", dosage: e.target.value });
-  };
-  const handleSetMedication = (e) => {
-    dispatch({ type: "SET_MEDICATION", medication: e.target.value });
-  };
-  // const handleChange = (e, i) => {
-  //   const { name, value } = e.target;
-  //   const onChangeVal = [...val];
-  //   onChangeVal[i][name] = value;
-  //   setVal(onChangeVal);
 
-  //   dispatch({ type: "SET_DURATION", duration: onChangeVal[0].dur });
-  //   dispatch({ type: "SET_DOSAGE", dosage: onChangeVal[0].dos});
-  //   dispatch({ type: "SET_MEDICATION", medication:onChangeVal[0].med});
-  //   setDosage(onChangeVal[0].dos)
-  //   setDuration(onChangeVal[0].dur)
-  //   setMedication(onChangeVal[0].med)
-  //   console.log(val);
-  // };
-  // const handleDelete = (i) => {
-  //   const deleteVal = [...val];
-  //   deleteVal.splice(i, 1);
-  //   setVal(deleteVal);
-  // };
+  const handleChange = (e, i) => {
+    const { name, value } = e.target;
+    const onChangeVal = [...val];
+    onChangeVal[i][name] = value;
+    setVal(onChangeVal);
+
+    console.log(val);
+    dispatch({
+      type: "SET_PRESCRIPTION",
+      prescriptions: [...val],
+    });
+  };
+  const handleDelete = (i) => {
+    const deleteVal = [...val];
+    deleteVal.splice(i, 1);
+    setVal(deleteVal);
+  };
   // const handleMedication = (e, i) => {
   //   setMedication(val[0].med);
   // };
@@ -156,8 +150,13 @@ function Report() {
         <p className="consultation_div_header">Vaccine Report</p>
 
         <div className="vaccine_input_div">
-          <div>
+          <div className="report_vaccine_header_div">
             <p className="vaccine_name vaccine_common">Name of Vaccine</p>
+            <p className="vaccine_time vaccine_common">Time/Date</p>
+            <p className="vaccine_status vaccine_common">Status</p>
+          </div>
+          <div className="report_vaccine_input">
+            <p className="hidden">Name of Vaccine</p>
             <input
               className="vaccine_input1 vi_common"
               onChange={handleSetVaccineName}
@@ -165,9 +164,7 @@ function Report() {
               type="text"
               placeholder="Enter Vaccine Name"
             />
-          </div>
-          <div>
-            <p className="vaccine_time vaccine_common">Time/Date</p>
+            <p className="hidden">Time/Date</p>
             <input
               className="vaccine_input2 vi_common"
               onChange={handleSetVaccineDate}
@@ -175,9 +172,7 @@ function Report() {
               type="date"
               placeholder="Enter Vaccine Name"
             />
-          </div>
-          <div>
-            <p className="vaccine_status vaccine_common">Status</p>
+            <p className="hidden">Status</p>
             <select
               className="vaccine_input3 vi_common"
               onChange={handleSetVaccineStatus}
@@ -194,8 +189,9 @@ function Report() {
             <p className="light">Medication</p>
             <p className="light">Duration</p>
             <p className="light">Dosage</p>
+            <p></p>
           </div>
-          <div className="prescription_input_div">
+          {/* <div className="prescription_input_div">
             <input
               className="prescription_input"
               type="text"
@@ -220,53 +216,73 @@ function Report() {
               onChange={handleSetDosage} //(e) => handleChange(e, i)}
               placeholder="Enter Dosage"
             />
-            {/* <button
+            <button
                   className="presc_delete_btn"
                   onClick={() => handleDelete(i)}
                 >
                   x
-                </button> */}
-          </div>
-          {/*val.map((data, i) => {
+                </button> 
+          </div> */}
+          {val.map((data, i) => {
             return (
               <div className="prescription_input_div">
+                <p className="hidden">Medication</p>
                 <input
-                  className="prescription_input"
+                  className="prescription_input_"
                   type="text"
                   name="med"
                   onChange={(e) => handleChange(e, i)}
                   value={data.med}
                   placeholder="Enter Medication"
                 />
+                <p className="hidden">Duration</p>
                 <input
-                  className="prescription_input"
+                  className="prescription_input_"
                   name="dur"
                   type="text"
                   onChange={(e) => handleChange(e, i)}
                   value={data.dur}
                   placeholder="Enter Duration"
                 />
+                <p className="hidden">Dosage</p>
                 <input
-                  className="prescription_input"
+                  className="prescription_input_"
                   type="text"
                   name="dos"
                   value={data.dos}
                   onChange={(e) => handleChange(e, i)}
                   placeholder="Enter Dosage"
                 />
-                {/* <button
-                  className="presc_delete_btn"
-                  onClick={() => handleDelete(i)}
-                >
-                  x
-                </button> }
+                {
+                  <img
+                    className="presc_delete_btn"
+                    src={Delete}
+                    onClick={() => handleDelete(i)}
+                  />
+                }
               </div>
             );
-          })*/}
+          })}
         </div>
-        {/* <div className="add_more" onClick={addComponent}>
-          <ion-icon className="add_icon" name="add-circle-outline"></ion-icon>
-        </div> */}
+
+        {}
+      </div>
+      <div className="bottom_action_wrapper">
+        <div className="bottom_action_div">
+          <div className="add_more">
+            <p>Add Another Medication</p>
+            <img
+              src={AddButton}
+              className="add_icon"
+              onClick={addComponent}
+              name="add-circle-outline"
+            />
+          </div>
+          {/* <div className="report_action_btn">
+            <button className="report_save ">Save </button>
+            <button className="report_next">Next</button>
+          </div> */}
+        </div>
       </div>
     </div>
   );

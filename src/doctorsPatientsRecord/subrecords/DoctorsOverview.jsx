@@ -1,5 +1,5 @@
 import React from "react";
-import "./sub-records.css";
+import "../../Record/sub-records/sub-records.css";
 import picture1 from "../../assets/Vector (1).png";
 import picture2 from "../../assets/Vector (2).png";
 import picture3 from "../../assets/Mask Group.png";
@@ -14,7 +14,7 @@ import picture11 from "../../assets/Frame 185 (3).png";
 import picture12 from "../../assets/Group 91.png";
 import { useNavigate } from "react-router-dom";
 
-export default function Overview() {
+export default function DoctorsOverview() {
   const navigate = useNavigate();
   return (
     <div className="overview-container">
@@ -22,11 +22,10 @@ export default function Overview() {
       <p className="p-tag">Recent Report </p>
       <div className='select-folder'>
           <select name="link" id="link-id" onChange={(e)=> navigate(e.target.value)}>
-            <option value="/Records/overview">overview</option>
-            <option   value="/Records/visit">visit</option>
-            <option   value="/Records/vaccine">vaccine</option>
-            <option  value="/Records/prescription">prescription</option>
-            <option  value="/Records/lab">lab</option>
+            <option value="/DoctorsRecords/doctorsoverview">overview</option>
+            <option   value="/DoctorsRecords/doctorsvaccine">vaccine</option>
+            <option  value="/DoctorsRecords/doctorsprescription">prescription</option>
+            <option  value="/DoctorsRecords/doctorslab">lab</option>
           </select>
         </div>
       </div>

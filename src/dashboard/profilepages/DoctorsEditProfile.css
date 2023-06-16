@@ -10,7 +10,6 @@
   overflow-y: scroll;
 }
 .doctorseditprofile .back_arrow {
-  display: none;
 }
 .doctorseditprofile .topleft .profile_btn {
   border: none;
@@ -48,6 +47,7 @@
   width: 160px;
   border-radius: 50%;
   border: 1px solid rgb(133, 133, 133);
+  object-fit: fill;
 }
 #inputTag {
   display: none;
@@ -95,10 +95,12 @@
 }
 .doctorseditprofile ._bottom_profile_details_ ._right_section {
   flex: 0.5;
+  width: 100%;
 }
 .doctorseditprofile ._bottom_profile_details_ ._left_section .input_div {
   border: solid 1px rgb(130, 130, 130);
   border-radius: 10px;
+  width: 100%;
   padding: 0.8rem 2rem 0.8rem 1rem;
   margin-bottom: 1rem;
 }
@@ -111,12 +113,28 @@
 .doctorseditprofile ._bottom_profile_details_ ._left_section .input_para {
   font-size: 11px;
   font-weight: 400;
+  width: 100%;
 }
 .doctorseditprofile ._bottom_profile_details_ ._right_section .input_div {
   border: solid 1px rgb(130, 130, 130);
   border-radius: 10px;
   padding: 0.8rem 2rem 0.8rem 1rem;
   margin-bottom: 1rem;
+  width: 100%;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.spin {
+  color: white;
+}
+.spin {
+  animation: spin 1s infinite linear;
 }
 .doctorseditprofile ._bottom_profile_details_ ._right_section .label {
   margin-bottom: 1rem;
@@ -127,6 +145,7 @@
 .doctorseditprofile ._bottom_profile_details_ ._right_section .input_para {
   font-size: 11px;
   font-weight: 400;
+  width: 100%;
 }
 .doctorseditprofile ._right_side {
   box-shadow: 1px 2px 8px rgb(91, 91, 91);
@@ -147,6 +166,7 @@
   border-radius: 10px;
   padding: 0.8rem 2rem 0.8rem 1rem;
   margin-bottom: 1rem;
+  width: 100%;
 }
 
 .doctorseditprofile ._right_side ._down_part_ .label {
@@ -158,6 +178,7 @@
 .doctorseditprofile ._right_side ._down_part_ .input_para {
   font-size: 11px;
   font-weight: 400;
+  width: 100%;
 }
 
 .doctorseditprofile .d_input,
@@ -166,6 +187,8 @@
   border: none;
   width: 100%;
   font-size: larger;
+  padding: 0;
+  margin: 0;
 }
 .doctorseditprofile .d_select:hover {
   cursor: pointer;
@@ -192,6 +215,21 @@
   .doctorseditprofile {
     display: flex;
     flex-direction: column;
+  }
+}
+@media (max-width: 926px) {
+  .doctorseditprofile .back_arrow {
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 25px;
+    height: 25px;
+  }
+}
+@media (max-width: 717px) {
+  .doctorseditprofile .d_input::placeholder {
+    font-size: 12px;
   }
 }
 @media (max-width: 667px) {
@@ -232,15 +270,6 @@
   }
   .doctorseditprofile ._right_side .header {
     margin-bottom: 1rem;
-  }
-
-  .doctorseditprofile .back_arrow {
-    display: block;
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 30px;
-    height: 30px;
   }
 }
 @media (max-width: 514px) {

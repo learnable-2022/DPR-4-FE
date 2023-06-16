@@ -61,21 +61,38 @@
 }
 .vaccine_input_div {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+
   width: 90%;
   margin-left: 2.1rem;
 }
+.report_vaccine_header_div {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 25px;
+  margin-left: 15px;
+}
+.hidden {
+  display: none;
+}
+.report_vaccine_input {
+  display: flex;
+  border-radius: 4px;
+  justify-content: space-between;
+  box-shadow: 1px 2px 8px rgb(91, 91, 91);
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
+}
 .vaccine_input1 {
   padding: 0.4rem 0.3rem 0.4rem 0.3rem;
-  box-shadow: 1px 2px 8px rgb(91, 91, 91);
-  width: 12rem;
   border-radius: 3px;
   border-width: 0.1rem;
   border-color: #f2f2f2;
 }
 .vaccine_input2,
 .vaccine_input3 {
-  box-shadow: 1px 2px 8px rgb(91, 91, 91);
   border-radius: 3px;
   border-width: 0.1rem;
   border-color: #f2f2f2;
@@ -86,12 +103,16 @@
 .vi_common:focus {
   outline: none;
 }
-.prescription_input:focus {
+.prescription_input_:focus {
   outline: none;
 }
 .report .add_more {
-  margin-left: 95%;
   margin-top: 1rem;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
   color: #2b80d4;
 }
 ion-icon {
@@ -99,12 +120,20 @@ ion-icon {
   --ionicon-stroke-width: 16px;
 }
 .report .add_icon {
-  width: 60px;
-  height: 60px;
+  width: 30px;
+  height: 30px;
   font-weight: 100;
+}
+.report .add_icon:hover {
+  cursor: pointer;
 }
 .prescription_div {
   margin-top: 0.5rem;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+
+  margin-left: 2.1rem;
 }
 .prescription_header {
   display: flex;
@@ -127,20 +156,159 @@ ion-icon {
 .light {
   color: #999999;
 }
-.prescription_input {
+.prescription_input_ {
   height: 30px;
   text-align: center;
   margin: 0.2rem 0.3rem;
   box-shadow: 1px 2px 6px #b8b5b5;
   border: none;
 }
+
 .presc_delete_btn {
   width: 30px;
-  background-color: #fe5454;
+
   color: #ffffff;
   border: none;
   border-radius: 2px;
 }
 .presc_delete_btn:hover {
   cursor: pointer;
+}
+.report_action_btn {
+  margin-top: 2rem;
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  justify-content: space-around;
+}
+.report_save {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 7px;
+  background-color: #3399ff;
+  color: white;
+}
+.report_next {
+  padding: 0.5rem 2rem;
+  border: none;
+  border-radius: 7px;
+  background-color: #3399ff;
+  color: white;
+}
+.report .report_next:hover,
+.report .report_save:hover {
+  cursor: pointer;
+  background-color: #58a4f0;
+}
+.report .bottom_action_div {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+.report .bottom_action_wrapper {
+  margin-top: 0.5rem;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 2.1rem;
+}
+@media (max-width: 860px) {
+  .report_holder_text {
+    flex: 0.3 1;
+  }
+}
+@media (max-width: 790px) {
+  .consultation_input_div {
+    width: 100%;
+  }
+  .prescription_div {
+    width: 100%;
+    margin: 0.5rem;
+  }
+  .report_value_div {
+    flex: 0.5 1;
+  }
+  .vaccine_input_div {
+    width: 100%;
+    margin: 0.5rem;
+  }
+  .doctorsdraft {
+    padding: 1rem;
+  }
+}
+@media (max-width: 718px) {
+  .vaccine_input1::placeholder {
+    font-size: small;
+  }
+  .prescription_input_::placeholder {
+    font-size: small;
+  }
+  .presc_delete_btn {
+    width: 15px;
+  }
+  .report_value_div {
+    flex: 0.8;
+  }
+}
+@media (max-width: 571px) {
+  .prescription_div {
+    flex-direction: column;
+
+    gap: 20px;
+  }
+  .hidden {
+    color: #999999;
+    text-align: center;
+    display: block;
+  }
+  .prescription_header {
+    display: none;
+  }
+  .prescription_input_div {
+    justify-content: space-between;
+    flex-direction: column;
+    margin-left: -8px;
+    width: 100%;
+  }
+  .prescription_div_header {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .prescription_input_ {
+    text-align: left;
+    height: 45px;
+    padding: 0.4rem 0.3rem 0.4rem 0.3rem;
+  }
+  .presc_delete_btn {
+    margin-left: 50%;
+  }
+  .vaccine_input_div {
+    flex-direction: row;
+  }
+  .report_vaccine_header_div {
+    display: none;
+  }
+  .consultation_div_header {
+    text-align: center;
+  }
+  .report_vaccine_input {
+    flex-direction: column;
+    margin-right: 10px;
+    width: 100%;
+  }
+  .vaccine_input2,
+  .vaccine_input3 {
+    height: 45px;
+  }
+  .vaccine_input1 {
+    height: 45px;
+  }
+}
+@media (max-width: 420px) {
+  .prescription_header {
+    display: none;
+  }
+  .report_vaccine_header_div {
+    display: none;
+  }
 }

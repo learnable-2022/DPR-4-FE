@@ -94,7 +94,6 @@ export default function Signingup() {
         navigate("/login", { replace: true, state: { state } });
 
         dispatch({ type: "SET_USER_DETAILS", user_details: response.data._id });
-        localStorage.setItem("doctor_id", response.data._id);
         console.log(response);
       } catch (err) {
         if (!err?.response) {
@@ -125,7 +124,6 @@ export default function Signingup() {
         setPassWord("");
         setWalletId("");
         console.log(response);
-        localStorage.setItem("patient_id", response.data._id);
 
         navigate("/login", { replace: true, state: { state } });
       } catch (err) {
@@ -214,7 +212,7 @@ export default function Signingup() {
                   className={validPassword || !password ? "hide" : "invalid"}
                 />
                 <FontAwesomeIcon
-                  icon={passwordVisible ? faEyeSlash : faEye}
+                  icon={passwordVisible ? faEye:faEyeSlash  }
                   className="password-toggle"
                   onClick={toggle}
                 />

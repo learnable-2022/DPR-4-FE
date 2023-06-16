@@ -1,5 +1,11 @@
-import React, { useContext, useState, useEffect } from "react";
-import { GrNotification } from "react-icons/gr";
+import React, {
+  useContext,
+  useState,
+  useRef,
+  useCallback,
+  useEffect,
+} from "react";
+
 import "./PatientsDashboard.css";
 import emptyProfile from "../assets/ava3.png";
 import bpIcon from "../assets/bp_icon.svg";
@@ -9,7 +15,6 @@ import leftLine from "../assets/Line_9.png";
 import redPulseIcon from "../assets/redpulse.svg";
 import dotIcon from "../assets/dot.png";
 import waveIcon from "../assets/wave.png";
-import heartIcon2 from "../assets/heart1.png";
 import vetIcon from "../assets/vetbar.svg";
 import vetIcon2 from "../assets/vetbar2.svg";
 import EmptyCard from "./components/emptyCard";
@@ -20,145 +25,377 @@ import drug1 from "../assets/drug1.svg";
 import drug2 from "../assets/drug2.svg";
 import drug3 from "../assets/drug3.svg";
 import drug4 from "../assets/drug4.svg";
+import notification from "../assets/Notification.svg";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { RiArrowDropDownFill } from "react-icons/ri";
+
+// for nav bar
+
+import { Link } from "react-router-dom";
+import { RxDashboard } from "react-icons/rx";
+import { BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
+import { TfiWrite } from "react-icons/tfi";
+import { AiOutlineSetting } from "react-icons/ai";
+import { FiLogOut } from "react-icons/fi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import ourlogo from "../assets/ourlogo.png";
 import axios from "axios";
-import { useRequestProcessor } from "../api/requestProcessor";
-import { Link, useNavigate } from "react-router-dom";
-import StateContext from "../stateProvider/stateprovider";
+import { AiOutlineClose } from "react-icons/ai";
+
+// end for nav bar
 
 export default function PatientDashboard() {
-  // const {auth} = useContext(StateContext);
-  // const patientNavigator = useNavigate();
-
-  // console.log(auth.token);
-
-  // if (auth.doctorToken) {
-  //   return  patientNavigator("./docdashboard");
-
-  // }else if(!auth.doctorToken){
-
-  //   return patientNavigator("./landing");
-  // }
-  let PatientId = localStorage.getItem("patient_id");
-  let PatientEmail = localStorage.getItem("patientEmail");
-
   let token = localStorage.getItem("patientToken");
-  // console.log(PatientId);
+  const [isDropOpen, setIsDropOpen] = useState(false);
+  const [patient_Name, setPatientName] = useState("");
+  const [patient_Image, setPatientImage] = useState("");
+  const [patient_Email, setPatientEmail] = useState("");
+  const [patient_gender, setPatientGender] = useState("");
+  const [patient_Age, setPatientAge] = useState("");
+  const [patient_Blood, setPatientBlood] = useState("");
+  const [patient_Geno, setPatientGeno] = useState("");
+  const [patient_Height, setPatientHeight] = useState("");
+  const [patient_Weight, setPatientWeight] = useState("");
+  const [patient_Alle, setPatientAlle] = useState("");
+  const [patient_WalletId, setPatientWallet] = useState("");
 
-  // const { makeRequest } = useRequestProcessor();
-  // const { response, error } = makeRequest({
-  //   url: "/patient/",
-  //   method: "GET",
-  // });
-  // console.log(response);
-  // console.log("response:", response, "error:", error);
-
-  // const getUser = response?.data.find((item) => item._id === PatientId);
-  // const getAll = response?.data.map((item) => item._id);
-
-  // console.log(getUser?.name);
-  const [patientName, setPatientName] = useState("");
-  const [patientImage, setPatientImage] = useState("");
   const [data, setData] = useState(true);
   const drugs = [drug1, drug2, drug3, drug4];
   const [connectedWallet, setConnectedWallet] = useState(true);
   const diseases = [disease1, disease2, disease3];
-  const generateDrugPic = () => {
-    let number = Math.floor(Math.random() * 4);
-    let val = number;
+  const mobileMenuRef = useRef();
+  const mobileNavRef = useRef();
+  const [navOpen, setIsNavOpen] = useState(false);
+  const checkEffectName = localStorage.getItem("patient_name");
+  const checkEffectImage = localStorage.getItem("patient_image");
+  let checkEffectgender = localStorage.getItem("patient_gender");
 
-    return val;
-  };
-  const generateDiseasePic = () => {
-    let number1 = Math.floor(Math.random() * 3);
-    let val = number1;
+  let checkEffectDOB = localStorage.getItem("patient_DOB");
 
-    return val;
+  let checkEffectBlood = localStorage.getItem("patient_blood");
+
+  let checkEffectGeno = localStorage.getItem("patient_genotype");
+
+  let checkEffectHeight = localStorage.getItem("patient_height");
+
+  let checkEffectWeight = localStorage.getItem("patient_weight");
+
+  let checkEffectAlle = localStorage.getItem("patient_allergies");
+
+  let checkEffectwallet = localStorage.getItem("patient_walletId");
+
+  const toggleNav = () => {
+    setIsNavOpen(!navOpen);
   };
-  let patient_Image = localStorage.getItem("patient_image");
-  let patient_Name = localStorage.getItem("patient_name");
+
+  const closeOpenMenus = useCallback(
+    (e) => {
+      if (
+        mobileMenuRef.current &&
+        isDropOpen &&
+        !mobileMenuRef.current.contains(e.target)
+      ) {
+        setIsDropOpen(false);
+      }
+    },
+
+    [isDropOpen]
+  );
+  const closeOpenNav = useCallback(
+    (e) => {
+      if (
+        mobileNavRef.current &&
+        navOpen === true &&
+        !mobileNavRef.current.contains(e.target)
+      ) {
+        setIsNavOpen(false);
+      }
+    },
+    [, navOpen]
+  );
+  let id = localStorage.getItem("patient_ID");
+
+  const handleDropButtonClick = () => {
+    setIsDropOpen(!isDropOpen);
+  };
+  //let patient_id = "64872c34b42f825762355d86";
+  // const deletePatient = async () => {
+  //   const response = await axios
+  //     ?.delete(
+  //       `https://medbloc-api.onrender.com/api/v1/patient/${patient_id}`,
+  //       {
+  //         headers: {
+  //           "x-auth-token": token,
+  //           Accept: "application/json",
+  //           "Content-Type": "application/json",
+  //           "Access-Control-Allow-Origin": "*",
+  //         },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       console.log("Patient successfully deleted");
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+  const getPatientDetails = async () => {
+    let PatientEmail = localStorage.getItem("patient_email");
+    console.log(PatientEmail);
+    const response = await axios
+      ?.get(`https://medbloc-api.onrender.com/api/v1/patient/`, {
+        headers: {
+          "x-auth-token": token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        const res1 = res?.data.find((item) => item.email === PatientEmail);
+        console.log(res1);
+        localStorage.setItem("patient_image", res1?.image);
+        localStorage.setItem("patient_name", res1?.name);
+        localStorage.setItem("patient_email", res1?.email);
+        localStorage.setItem("patient_password", res1?.password);
+        localStorage.setItem("patient_walletId", res1?.walletId);
+        localStorage.setItem("patient_genotype", res1?.genotype);
+        localStorage.setItem("patient_gender", res1?.gender);
+        localStorage.setItem("patient_DOB", res1?.dateOfBirth);
+        localStorage.setItem("patient_blood", res1?.bloodgroup);
+        localStorage.setItem("patient_ID", res1?._id);
+        localStorage.setItem("patient_middle_name", res1?.middleName);
+        localStorage.setItem("patient_height", res1?.height);
+        localStorage.setItem("patient_allergies", res1?.allergies);
+        localStorage.setItem("patient_weight", res1?.weight);
+        localStorage.setItem("patient_address", res1?.address);
+        localStorage.setItem("patient_city", res1?.city);
+        localStorage.setItem("patient_country", res1?.country);
+        localStorage.setItem("patient_number", res1?.number);
+        localStorage.setItem("patient_state", res1?.state);
+
+        let patient_Image = localStorage.getItem("patient_image");
+        setPatientImage(patient_Image);
+        let patient_Name = localStorage.getItem("patient_name");
+        setPatientName(patient_Name);
+        let patient_Email = localStorage.getItem("patient_email");
+        setPatientEmail(patient_Email);
+        let patient_gender = localStorage.getItem("patient_gender");
+        setPatientGender(patient_gender);
+        let patient_DOB = localStorage.getItem("patient_DOB");
+        setPatientAge(patient_DOB);
+        let patient_Blood = localStorage.getItem("patient_blood");
+        setPatientBlood(patient_Blood);
+        let patient_Geno = localStorage.getItem("patient_genotype");
+        setPatientGeno(patient_Geno);
+        let patient_Height = localStorage.getItem("patient_height");
+        setPatientHeight(patient_Height);
+        let patient_Weight = localStorage.getItem("patient_weight");
+        setPatientWeight(patient_Weight);
+
+        let patient_Alle = localStorage.getItem("patient_allergies");
+        setPatientAlle(patient_Alle);
+        let patient_wallet = localStorage.getItem("patient_walletId");
+        setPatientWallet(patient_wallet);
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+  };
   useEffect(() => {
-    const getPatientDetails = async () => {
-      const response = await axios.get(
-        `https://medbloc-api.onrender.com/api/v1/patient/`,
-        {
-          headers: {
-            "x-auth-token": token,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        }
-      );
-      console.log(response);
-      const res = response?.data.find((item) => item.email === PatientEmail);
-      console.log(res);
-      localStorage.setItem("patient_image", res.image);
-      localStorage.setItem("patient_name", res.name);
-    };
     getPatientDetails();
-  }, []);
+
+    document.addEventListener("mousedown", closeOpenMenus);
+    document.addEventListener("mousedown", closeOpenNav);
+
+    return () => {
+      document.removeEventListener("mousedown", closeOpenMenus);
+      document.removeEventListener("mousedown", closeOpenNav);
+    };
+  }, [
+    closeOpenMenus,
+    checkEffectName,
+    closeOpenNav,
+    checkEffectAlle,
+    checkEffectBlood,
+    checkEffectDOB,
+    checkEffectGeno,
+    checkEffectHeight,
+    checkEffectImage,
+    checkEffectWeight,
+    checkEffectgender,
+    checkEffectwallet,
+  ]); //]);
+
   return (
     <div className="patientdashboard">
+      <nav
+        className={navOpen ? "patient_dashboard_nav" : "closeNav"}
+        ref={mobileNavRef}
+      >
+        <div className="_sideBar">
+          <AiOutlineClose className="close_btn" onClick={toggleNav} />
+          <div className="_center-div">
+            <img src={ourlogo} alt="app-logo" />
+            <p>
+              Med<span>bloc</span>
+            </p>
+          </div>
+
+          <div className="_mid-section">
+            <Link to="/Dashboard" className="link">
+              <RxDashboard style={{ color: "white" }} />
+              <p>Dashboard</p>
+            </Link>
+            <Link to="/Records" className="link">
+              <BsReverseLayoutTextSidebarReverse style={{ color: "white" }} />
+              <p>Records</p>
+            </Link>
+            <Link to="/Billing" className="link">
+              <FontAwesomeIcon icon={faCoins} style={{ color: "white" }} />
+              <p>Billings</p>
+            </Link>
+          </div>
+          <div className="_lower-section">
+            <Link to="*" className="link">
+              <AiOutlineSetting style={{ color: "white" }} />
+              <p>settings</p>
+            </Link>
+            <div
+              onClick={() => {
+                localStorage.removeItem("patientToken");
+                localStorage.removeItem("patientEmail");
+              }}
+            >
+              <Link to="/" className="link">
+                <FiLogOut style={{ color: "white" }} />
+                <p>logout</p>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+
       <header className="patientdashboard_header">
+        <GiHamburgerMenu className="hamburger_icon" onClick={toggleNav} />
         <div className="left_side_header">
-          <h1>Welcome! {patient_Name?.split(" ")[0]},</h1>
+          <h1 className="h1_header_title">
+            Welcome!{" "}
+            {patient_Name
+              ? patient_Name?.split(" ")[0]
+              : checkEffectName?.split(" ")[0]}
+            ,
+          </h1>
         </div>
         <div className="right_side_header">
           <button className="share_btn">Share Report</button>
-          <GrNotification className="profile_notification" />
-          <Link to="/Profile" className="link">
-            <img
-              className="profile_img"
-              src={patient_Image ? patient_Image : emptyProfile}
-              alt="profile"
-            />
+          <img src={notification} alt="notification" className="notifi_btn" />
+          {/* <GrNotification className="profile_notification" /> */}
+
+          <Link to="/Profile" className="link ">
+            <div className="relative">
+              <img
+                className="profile_img"
+                src={patient_Image ? patient_Image : checkEffectImage}
+                alt="profile"
+              />
+            </div>
           </Link>
 
-          <p className="profile_name">{patient_Name}</p>
+          <p className="profile_name">
+            {patient_Name ? patient_Name : checkEffectName}
+          </p>
+          <RiArrowDropDownFill
+            onClick={handleDropButtonClick}
+            className="drop_down_btn"
+          />
         </div>
       </header>
+      {isDropOpen && (
+        <div className="drop_content" ref={mobileMenuRef}>
+          <Link to="/Profile" className="link ">
+            <p className="drop_content_item">View Profile</p>
+          </Link>
+          <p className="drop_content_item">View Full Report</p>
+        </div>
+      )}
 
       <main className="patients_dashboard_main">
+        <h1 className="responsive_h1_header_title">
+          Welcome!{" "}
+          {patient_Name
+            ? patient_Name?.split(" ")[0]
+            : checkEffectName?.split(" ")[0]}
+          ,
+        </h1>
         <div className="patientsvital">
           <div className="left_patient_vitals">
             <div className="image_div">
               <img
-                src={patient_Image ? patient_Image : emptyProfile}
+                src={patient_Image ? patient_Image : checkEffectImage}
                 alt="patientspicture"
               />
             </div>
 
             <div className="info_div">
-              <h2 className="name">{patient_Name}</h2>
+              <h2 className="name">
+                {patient_Name ? patient_Name : checkEffectName}
+              </h2>
               <div className="wrapper">
                 <div className="first_info_div">
                   <p className="key">
-                    Sex: <strong className="value">Female</strong>
+                    Sex:{" "}
+                    <strong className="value">
+                      {patient_gender ? patient_gender : checkEffectgender}
+                    </strong>
                   </p>
 
                   <p className="key">
-                    Age: <strong className="value">28</strong>
+                    Age:{" "}
+                    <strong className="value">
+                      {new Date().getFullYear() -
+                        parseInt(patient_Age.split("-")[0])}
+                    </strong>
                   </p>
 
                   <p className="key">
-                    BloodGroup: <strong className="value">Nil</strong>
+                    BloodGroup:{" "}
+                    <strong className="value">
+                      {patient_Blood ? patient_Blood : checkEffectBlood}
+                    </strong>
                   </p>
 
                   <p className="key">
-                    Genotype: <strong className="value">Nil</strong>
+                    Genotype:{" "}
+                    <strong className="value">
+                      {patient_Geno ? patient_Geno : checkEffectGeno}
+                    </strong>
                   </p>
                 </div>
                 <div className="second_info_div">
                   <p className="key">
-                    Height: <strong className="value">Nil</strong>
+                    Height:{" "}
+                    <strong className="value">
+                      {patient_Height ? patient_Height : checkEffectHeight}
+                    </strong>{" "}
+                    Metres
                   </p>
 
                   <p className="key">
-                    Weight: <strong className="value">Nil</strong>
+                    Weight:{" "}
+                    <strong className="value">
+                      {patient_Weight ? patient_Weight : checkEffectWeight}
+                    </strong>{" "}
+                    Kilogram
                   </p>
 
                   <p className="key">
-                    Allergies: <strong className="value">Nil</strong>
+                    Allergies:{" "}
+                    <strong className="value">
+                      {patient_Alle ? patient_Alle : checkEffectAlle}
+                    </strong>
                   </p>
                 </div>
               </div>
@@ -180,12 +417,22 @@ export default function PatientDashboard() {
         {connectedWallet ? (
           <div className="middle_section">
             <div className="grant_access_div">
-              <input
-                className="grant_access_input"
-                type="text"
-                placeholder="Enter Doctor's Wallet Address to grant access"
-              />
-              <button className="grant_access_btn">Grant Access</button>
+              <div className="access_div">
+                <input
+                  className="grant_access_input"
+                  type="text"
+                  placeholder="Enter Doctor's Wallet Address to grant access"
+                />
+                <button className="grant_access_btn">Grant Access</button>
+              </div>
+              <div className="revoke_div">
+                <input
+                  className="grant_access_input"
+                  type="text"
+                  placeholder="Enter Doctor's Wallet Address to grant access"
+                />
+                <button className="revoke_access_btn">Revoke Access</button>
+              </div>
             </div>
             <div className="middle_section_header">
               <p>My Vitals</p>
@@ -196,7 +443,7 @@ export default function PatientDashboard() {
                 <div className="card1">
                   <h4 className="card1_header">My Heart Condition</h4>
                   {data ? (
-                    <div>
+                    <div className="display_div">
                       <div className="top">
                         <div className="left_div">
                           <div
@@ -377,10 +624,7 @@ export default function PatientDashboard() {
                         <p className="diagnose_status">Active</p>
                       </div>
                       <div className="right">
-                        <img
-                          src={diseases[generateDiseasePic()]}
-                          alt="diagnose_image"
-                        />
+                        <img src={diseases[0]} alt="diagnose_image" />
                       </div>
                     </div>
                     <div className="diagnosis_container">
@@ -389,10 +633,7 @@ export default function PatientDashboard() {
                         <p className="diagnose_status">Active</p>
                       </div>
                       <div className="right">
-                        <img
-                          src={diseases[generateDiseasePic()]}
-                          alt="diagnose_image"
-                        />
+                        <img src={diseases[1]} alt="diagnose_image" />
                       </div>
                     </div>
                     <div className="diagnosis_container">
@@ -401,10 +642,7 @@ export default function PatientDashboard() {
                         <p className="diagnose_status">Active</p>
                       </div>
                       <div className="right">
-                        <img
-                          src={diseases[generateDiseasePic()]}
-                          alt="diagnose_image"
-                        />
+                        <img src={diseases[2]} alt="diagnose_image" />
                       </div>
                     </div>
 
@@ -414,10 +652,7 @@ export default function PatientDashboard() {
                         <p className="diagnose_status">Active</p>
                       </div>
                       <div className="right">
-                        <img
-                          src={diseases[generateDiseasePic()]}
-                          alt="diagnose_image"
-                        />
+                        <img src={diseases[1]} alt="diagnose_image" />
                       </div>
                     </div>
                     <div className="diagnosis_container">
@@ -426,10 +661,7 @@ export default function PatientDashboard() {
                         <p className="diagnose_status">Active</p>
                       </div>
                       <div className="right">
-                        <img
-                          src={diseases[generateDiseasePic()]}
-                          alt="diagnose_image"
-                        />
+                        <img src={diseases[0]} alt="diagnose_image" />
                       </div>
                     </div>
                     <div className="diagnosis_container">
@@ -438,10 +670,7 @@ export default function PatientDashboard() {
                         <p className="diagnose_status">Active</p>
                       </div>
                       <div className="right">
-                        <img
-                          src={diseases[generateDiseasePic()]}
-                          alt="diagnose_image"
-                        />
+                        <img src={diseases[2]} alt="diagnose_image" />
                       </div>
                     </div>
 
@@ -451,10 +680,7 @@ export default function PatientDashboard() {
                         <p className="diagnose_status">Active</p>
                       </div>
                       <div className="right">
-                        <img
-                          src={diseases[generateDiseasePic()]}
-                          alt="diagnose_image"
-                        />
+                        <img src={diseases[0]} alt="diagnose_image" />
                       </div>
                     </div>
                   </div>
@@ -475,7 +701,7 @@ export default function PatientDashboard() {
                           alignItems: "center",
                         }}
                       >
-                        <img src={drugs[generateDrugPic()]} alt="drug" />
+                        <img src={drugs[0]} alt="drug" />
                       </div>
                       <div className="drug_name_div">
                         <p className="drug_name">Ciprofloxacin</p>
@@ -491,24 +717,7 @@ export default function PatientDashboard() {
                           alignItems: "center",
                         }}
                       >
-                        <img src={drugs[generateDrugPic()]} alt="drug" />
-                      </div>
-                      <div className="drug_name_div">
-                        <p className="drug_name">Ciprofloxacin</p>
-                        <p className="dosage">1 Tab twice daily</p>
-                      </div>
-                    </div>
-
-                    <div className="med_div">
-                      <div
-                        className="drug_icon_div"
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        <img src={drugs[generateDrugPic()]} alt="drug" />
+                        <img src={drugs[1]} alt="drug" />
                       </div>
                       <div className="drug_name_div">
                         <p className="drug_name">Ciprofloxacin</p>
@@ -525,7 +734,24 @@ export default function PatientDashboard() {
                           alignItems: "center",
                         }}
                       >
-                        <img src={drugs[generateDrugPic()]} alt="drug" />
+                        <img src={drugs[2]} alt="drug" />
+                      </div>
+                      <div className="drug_name_div">
+                        <p className="drug_name">Ciprofloxacin</p>
+                        <p className="dosage">1 Tab twice daily</p>
+                      </div>
+                    </div>
+
+                    <div className="med_div">
+                      <div
+                        className="drug_icon_div"
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <img src={drugs[3]} alt="drug" />
                       </div>
                       <div className="drug_name_div">
                         <p className="drug_name">Ciprofloxacin</p>
@@ -541,7 +767,7 @@ export default function PatientDashboard() {
                           alignItems: "center",
                         }}
                       >
-                        <img src={drugs[generateDrugPic()]} alt="drug" />
+                        <img src={drugs[0]} alt="drug" />
                       </div>
                       <div className="drug_name_div">
                         <p className="drug_name">Ciprofloxacin</p>

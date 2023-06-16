@@ -1,21 +1,30 @@
-import React, { useState } from 'react';
-import {  useEffect } from "react";
+import React, { useState } from "react";
+import { useEffect } from "react";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { BsArrowLeft } from "react-icons/bs";
 import smallLogo from "../assets/small.png";
-
+import { GiHamburgerMenu } from "react-icons/gi";
 import "./Record.css";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet,NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useRequestProcessor } from "../api/requestProcessor";
-
 
 export default function PatientsRecord() {
   let patient_Image = localStorage.getItem("patient_image");
   let patient_Name = localStorage.getItem("patient_name");
+  let patient_gender = localStorage.getItem("patient_gender");
+  let patient_DOB = localStorage.getItem("patient_DOB");
+  let patient_Blood = localStorage.getItem("patient_blood");
 
+  let patient_Geno = localStorage.getItem("patient_genotype");
 
+  let patient_Height = localStorage.getItem("patient_height");
 
+  let patient_Weight = localStorage.getItem("patient_weight");
+
+  let patient_Alle = localStorage.getItem("patient_allergies");
+
+  let patient_wallet = localStorage.getItem("patient_walletId");
 
   const { makeRequest } = useRequestProcessor();
   const { response, error } = makeRequest({ url: "/patient/", method: "GET" });
@@ -29,13 +38,14 @@ export default function PatientsRecord() {
   return (
     <div className="container">
       <nav className="nav-container">
+        <GiHamburgerMenu className="hamburger"/>
         <div className="nav-container-left">
-          <BsArrowLeft onClick={handle} style={{cursor:"pointer"}} />
+          <BsArrowLeft onClick={handle} style={{ cursor: "pointer" }} />
           <h2>Medical Record</h2>
         </div>
         <div className="nav-container-right">
           <div>
-            <button style={{cursor:"pointer"}}>share report</button>
+            <button style={{ cursor: "pointer" }}>share report</button>
           </div>
           <div>
             <IoIosNotificationsOutline />
@@ -44,14 +54,14 @@ export default function PatientsRecord() {
             <img
               src={patient_Image ? patient_Image : smallLogo}
               style={{
-                width: "60px",
-                height: "60px",
+                width: "40px",
+                height: "40px",
                 borderRadius: "50%",
                 border: "1px solid black",
               }}
               alt="frame"
             />
-            
+
             <p>hi! {patient_Name}</p>
           </div>
         </div>
@@ -65,39 +75,48 @@ export default function PatientsRecord() {
               alt="bigpics"
             />
           </div>
-          <div>
+          <div className='second-section-inner'>
             <h2>{patient_Name.split(" ")[0]}</h2>
             <div className="second-section-text">
               <div>
                 <p>
-                  Sex: <span>Female</span>
+                  Sex: <span>{patient_gender ? patient_gender : "Nil"}</span>
                 </p>
                 <p>
-                  Age: <span>28</span>
+                  Age:{" "}
+                  <span>
+                    {new Date().getFullYear() -
+                      parseInt(patient_DOB.split("-")[0])}
+                  </span>
                 </p>
                 <p>
-                  Blood Group:<span> O+</span>
+                  Blood Group:
+                  <span> {patient_Blood ? patient_Blood : "Nil"}</span>
                 </p>
                 <p>
-                  Genotype:<span> AA</span>
+                  Genotype:<span> {patient_Geno ? patient_Geno : "Nil"}</span>
                 </p>
               </div>
               <div>
                 <p>
-                  Height: <span>5ft 8 inc</span>
+                  Height: <span>{patient_Height ? patient_Height : "Nil"}</span>{" "}
+                  Metres
                 </p>
                 <p>
-                  Weight:<span> 62kg</span>
+                  Weight:
+                  <span> {patient_Weight ? patient_Weight : "Nil"}</span>{" "}
+                  Kilograms
                 </p>
                 <p>
-                  Allergies: <span>Peanut, Aspirin, Penicillin</span>
+                  Allergies: <span>{patient_Alle}</span>
                 </p>
               </div>
             </div>
           </div>
         </div>
         <div className="second-section-second">
-          <span className="patient">patient</span>
+         <div>
+         <span className="patient">patient</span>
           <p>
             Cancer type: <span> Adenocarcinoma</span>
           </p>
@@ -111,37 +130,38 @@ export default function PatientsRecord() {
           <p>
             Medical Condition:<span> Asthma</span>
           </p>
+         </div>
         </div>
       </div>
       <div className="third-section-link">
         <li>
-          <Link className="navi-link" to="overview">
+          <NavLink  exact  activeClassName="active" to="overview">
             <p>Overview</p>
-          </Link>
+          </NavLink>
         </li>
         <li>
           {" "}
-          <Link className="navi-link" to="visit">
+          <NavLink activeClassName="active" to="visit">
             <p>Visits</p>
-          </Link>
+          </NavLink>
         </li>
         <li>
           {" "}
-          <Link className="navi-link" to="lab">
+          <NavLink activeClassName="active" to="lab">
             <p>Labs</p>
-          </Link>
+          </NavLink>
         </li>
         <li>
           {" "}
-          <Link className="navi-link" to="vaccine">
+          <NavLink activeClassName="active" to="vaccine">
             <p>Vaccines</p>
-          </Link>
+          </NavLink>
         </li>
         <li>
           {" "}
-          <Link className="navi-link" to="prescription">
+          <NavLink activeClassName="active" to="prescription">
             <p>Prescription</p>
-          </Link>
+          </NavLink>
         </li>
       </div>
       <div>
