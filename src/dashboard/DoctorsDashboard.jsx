@@ -25,6 +25,12 @@ export default function DoctorsDashboard() {
 
   //   return navigator("./landing");
   // }
+
+  const navigator = useNavigate();
+  const handleAction = () => {
+    navigator("/DoctorsRecords");
+  };
+
   let token = localStorage.getItem("doctorToken");
   let doctorID = localStorage.getItem("doctor_id");
   const [date, setDate] = useState(new Date());
@@ -172,6 +178,11 @@ export default function DoctorsDashboard() {
                 <p>Patient Name</p>
                 <p></p>
               </div>
+              <div className="title_div">
+                <p>File no.</p>
+                <p>Patient Name</p>
+                <p></p>
+              </div>
               <div className="patients_div">
                 <div className="patients_info">
                   <p>#2451</p>
@@ -183,146 +194,163 @@ export default function DoctorsDashboard() {
                   {open && (
                     <div class="dropdown" ref={mobileMenuRef}>
                       <ul>
-                        <li>Patients Profile</li>
-                        <li>Patients medical record</li>
+                        <li onClick={handleAction}>Patients medical record</li>
                       </ul>
                     </div>
                   )}
                 </div>
-                <div className="patients_info">
-                  <p>#2451</p>
-                  <p>Omengbeoji Ifeanyichukwu</p>
-                  <CiCircleMore className="circle_more" />
-                  {/* <div class="dropdown">
+                <div className="patients_div">
+                  <div className="patients_info">
+                    <p>#2451</p>
+                    <p>Omengbeoji Ifeanyichukwu</p>
+                    <CiCircleMore
+                      className="circle_more"
+                      onClick={handleButtonClick}
+                    />
+                    {open && (
+                      <div class="dropdown" ref={mobileMenuRef}>
+                        <ul>
+                          <li>Patients Profile</li>
+                          <li>Patients medical record</li>
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                  <div className="patients_info">
+                    <p>#2451</p>
+                    <p>Omengbeoji Ifeanyichukwu</p>
+                    <CiCircleMore className="circle_more" />
+                    {/* <div class="dropdown">
                 <ul>
                   <li>Patients Profile</li>
                   <li>Request Access</li>
                 </ul>
               </div> */}
-                </div>
-                <div className="patients_info">
-                  <p>#2451</p>
-                  <p>Omengbeoji Ifeanyichukwu</p>
-                  <CiCircleMore className="circle_more" />
-                  {/* <div class="dropdown">
+                  </div>
+                  <div className="patients_info">
+                    <p>#2451</p>
+                    <p>Omengbeoji Ifeanyichukwu</p>
+                    <CiCircleMore className="circle_more" />
+                    {/* <div class="dropdown">
                 <ul>
                   <li>Patients Profile</li>
                   <li>Request Access</li>
                 </ul>
               </div> */}
-                </div>
+                  </div>
 
-                <div className="patients_info">
-                  <p>#2451</p>
-                  <p>Omengbeoji Ifeanyichukwu</p>
-                  <CiCircleMore className="circle_more" />
-                  {/* <div class="dropdown">
+                  <div className="patients_info">
+                    <p>#2451</p>
+                    <p>Omengbeoji Ifeanyichukwu</p>
+                    <CiCircleMore className="circle_more" />
+                    {/* <div class="dropdown">
                 <ul>
                   <li>Patients Profile</li>
                   <li>Request Access</li>
                 </ul>
               </div> */}
-                </div>
-                <div className="patients_info">
-                  <p>#2451</p>
-                  <p>Omengbeoji Ifeanyichukwu</p>
-                  <CiCircleMore className="circle_more" />
-                  {/* <div class="dropdown">
+                  </div>
+                  <div className="patients_info">
+                    <p>#2451</p>
+                    <p>Omengbeoji Ifeanyichukwu</p>
+                    <CiCircleMore className="circle_more" />
+                    {/* <div class="dropdown">
                 <ul>
                   <li>Patients Profile</li>
                   <li>Request Access</li>
                 </ul>
               </div> */}
-                </div>
-                <div className="patients_info">
-                  <p>#2451</p>
-                  <p>Omengbeoji Ifeanyichukwu</p>
-                  <CiCircleMore className="circle_more" />
-                  {/* <div class="dropdown">
+                  </div>
+                  <div className="patients_info">
+                    <p>#2451</p>
+                    <p>Omengbeoji Ifeanyichukwu</p>
+                    <CiCircleMore className="circle_more" />
+                    {/* <div class="dropdown">
                 <ul>
                   <li>Patients Profile</li>
                   <li>Request Access</li>
                 </ul>
               </div> */}
-                </div>
-                <div className="patients_info">
-                  <p>#2451</p>
-                  <p>Omengbeoji Ifeanyichukwu</p>
-                  <CiCircleMore className="circle_more" />
-                  {/* <div class="dropdown">
+                  </div>
+                  <div className="patients_info">
+                    <p>#2451</p>
+                    <p>Omengbeoji Ifeanyichukwu</p>
+                    <CiCircleMore className="circle_more" />
+                    {/* <div class="dropdown">
                 <ul>
                   <li>Patients Profile</li>
                   <li>Request Access</li>
                 </ul>
               </div> */}
-                </div>
-                <div className="patients_info">
-                  <p>#2451</p>
-                  <p>Omengbeoji Ifeanyichukwu</p>
-                  <CiCircleMore className="circle_more" />
-                  {/* <div class="dropdown">
+                  </div>
+                  <div className="patients_info">
+                    <p>#2451</p>
+                    <p>Omengbeoji Ifeanyichukwu</p>
+                    <CiCircleMore className="circle_more" />
+                    {/* <div class="dropdown">
                 <ul>
                   <li>Patients Profile</li>
                   <li>Request Access</li>
                 </ul>
               </div> */}
-                </div>
-                <div className="patients_info">
-                  <p>#2451</p>
-                  <p>Omengbeoji Ifeanyichukwu</p>
-                  <CiCircleMore className="circle_more" />
-                  {/* <div class="dropdown">
+                  </div>
+                  <div className="patients_info">
+                    <p>#2451</p>
+                    <p>Omengbeoji Ifeanyichukwu</p>
+                    <CiCircleMore className="circle_more" />
+                    {/* <div class="dropdown">
                 <ul>
                   <li>Patients Profile</li>
                   <li>Request Access</li>
                 </ul>
               </div> */}
-                </div>
+                  </div>
 
-                <div className="patients_info">
-                  <p>#2451</p>
-                  <p>Omengbeoji Ifeanyichukwu</p>
-                  <CiCircleMore
-                    className="circle_more"
-                    onClick={handleButtonClick2}
-                  />
-                  {open2 && (
-                    <div class="dropdown">
-                      <ul>
-                        <li>Patients Profile</li>
-                        <li>Patients medical record</li>
-                      </ul>
-                    </div>
-                  )}
+                  <div className="patients_info">
+                    <p>#2451</p>
+                    <p>Omengbeoji Ifeanyichukwu</p>
+                    <CiCircleMore
+                      className="circle_more"
+                      onClick={handleButtonClick2}
+                    />
+                    {open2 && (
+                      <div class="dropdown">
+                        <ul>
+                          <li>Patients Profile</li>
+                          <li>Patients medical record</li>
+                        </ul>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="right-side">
-            <div className="calendar-container">
-              <Calendar
-                onClickDay={handleAddCargo}
-                onChange={setDate}
-                value={date}
-              />
-            </div>
-            <div className="schedule_div">
-              <div className="schedule_wrapper">
-                <div className="top">
-                  <Link to="/DocSchedule" className="link">
-                    <button>Schedule</button>
-                  </Link>
 
-                  <p>{date.toLocaleDateString("en-us", options)}</p>
-                </div>
-                <div className="middle">
-                  <p>{date.toLocaleDateString("en-us", options2)}</p>
-                </div>
-                <div className="appointment_brief">
-                  <p>Appointment with #2589 </p>
-                  <p>12pm - 2pm</p>
-                </div>
-                {/* <div className="appointment_brief">
+            <div className="right-side">
+              <div className="calendar-container">
+                <Calendar
+                  onClickDay={handleAddCargo}
+                  onChange={setDate}
+                  value={date}
+                />
+              </div>
+              <div className="schedule_div">
+                <div className="schedule_wrapper">
+                  <div className="top">
+                    <Link to="/DocSchedule" className="link">
+                      <button>Schedule</button>
+                    </Link>
+
+                    <p>{date.toLocaleDateString("en-us", options)}</p>
+                  </div>
+                  <div className="middle">
+                    <p>{date.toLocaleDateString("en-us", options2)}</p>
+                  </div>
+                  <div className="appointment_brief">
+                    <p>Appointment with #2589 </p>
+                    <p>12pm - 2pm</p>
+                  </div>
+                  {/* <div className="appointment_brief">
                 <p>Appointment with #2589 </p>
                 <p>12pm - 2pm</p>
               </div>
@@ -338,6 +366,7 @@ export default function DoctorsDashboard() {
                 <p>Appointment with #2589 </p>
                 <p>12pm - 2pm</p>
               </div> */}
+                </div>
               </div>
             </div>
           </div>

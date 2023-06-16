@@ -212,7 +212,7 @@ export default function Signingup() {
                   className={validPassword || !password ? "hide" : "invalid"}
                 />
                 <FontAwesomeIcon
-                  icon={passwordVisible ? faEyeSlash : faEye}
+                  icon={passwordVisible ? faEye:faEyeSlash  }
                   className="password-toggle"
                   onClick={toggle}
                 />

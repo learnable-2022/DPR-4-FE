@@ -2,12 +2,12 @@ import React from 'react';
 import {BiFilter} from "react-icons/bi";
 import {CiSearch} from "react-icons/ci";
 import { useGlobalFilter } from 'react-table';
-import Table from './table';
+import Table from '../../Record/sub-records/table';
 import { useTable } from 'react-table';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function Vaccine() {
+export default function DoctorsVaccine() {
   const navigate = useNavigate();
   const dummyData= [
     {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)",Date:"02/05/2023",Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3"},
@@ -89,11 +89,10 @@ const { globalFilter } = state;
         </div>
         <div className='select-folder'>
         <select name="link" id="link-id" onChange={(e)=> navigate(e.target.value)}>
-          <option value="/Records/overview">overview</option>
-            <option   value="/Records/visit">visit</option>
-            <option   value="/Records/vaccine">vaccine</option>
-            <option  value="/Records/prescription">prescription</option>
-            <option  value="/Records/lab">lab</option>
+        <option value="/DoctorsRecords/doctorsoverview">overview</option>
+            <option   value="/DoctorsRecords/doctorsvaccine">vaccine</option>
+            <option  value="/DoctorsRecords/doctorsprescription">prescription</option>
+            <option  value="/DoctorsRecords/doctorslab">lab</option>
           </select>
         </div>
       </div>

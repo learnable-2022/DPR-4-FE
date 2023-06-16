@@ -1,12 +1,12 @@
 import React from "react";
 import { RxDashboard } from "react-icons/rx";
 import { TfiWrite } from "react-icons/tfi";
-import { AiOutlineSetting } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import ourlogo from "../assets/ourlogo.png";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 export default function SideBarDoc() {
   const paths = [
@@ -17,13 +17,16 @@ export default function SideBarDoc() {
       icon: <FontAwesomeIcon icon={faCoins} />,
     },
     { name: "DocDraft", route: "/DocDraft", icon: <TfiWrite /> },
-    { name: "Docsettings", route: "/Docsettings", icon: <AiOutlineSetting /> },
     { name: "DocLogout", route: "/DocLogout", icon: <FiLogOut /> },
   ];
+  const navigate = useNavigate();
+  const returnHomeHandler =()=>{
+    navigate("/");
+  }
   return (
     <div className="sideBar">
       <div className="center-div">
-        <img src={ourlogo} alt="pics" />
+        <img src={ourlogo} alt="pics" onClick={returnHomeHandler}  style={{cursor:"pointer"}}/>
         <p>Med<span>loc</span></p>
       </div>
       <div className="mid-section">
@@ -42,10 +45,6 @@ export default function SideBarDoc() {
         </Link>
       </div>
       <div className="lower-section">
-        <Link to="/Docsettings" className="link">
-          <AiOutlineSetting style={{color:"white"}} />
-          <p>settings</p>
-        </Link>
         <div
           onClick={() => {
             localStorage.removeItem("doctorToken");

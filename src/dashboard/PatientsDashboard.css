@@ -5,9 +5,6 @@
   height: 100vh;
   overflow-y: scroll;
 }
-
-.patients_dashboard_main {
-}
 .main_not_registered {
   padding-left: 2rem;
   padding-right: 5rem;
@@ -505,6 +502,7 @@
     font-size: small;
   }
   .patientdashboard_header {
+    
   }
   .patientdashboard .right_side_header {
     flex: 0.5;

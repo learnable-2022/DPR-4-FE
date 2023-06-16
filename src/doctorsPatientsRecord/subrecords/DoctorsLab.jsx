@@ -4,12 +4,12 @@ import {CiSearch} from "react-icons/ci";
 import { useTable } from 'react-table';
 import { Link, useNavigate } from 'react-router-dom';
 import { useMemo } from 'react';
-import Table from './table';
+import Table from '../../Record/sub-records/table';
 import { useGlobalFilter } from 'react-table';
 
 
 
-export default function Lab() {
+export default function DoctorsLab() {
 
   const  link = "/lab/view-report";
 
@@ -113,11 +113,10 @@ const { globalFilter } = state;
         </div>
         <div className='select-folder'>
         <select name="link" id="link-id" onChange={(e)=> navigate(e.target.value)}>
-          <option value="/Records/overview">overview</option>
-            <option   value="/Records/visit">visit</option>
-            <option   value="/Records/vaccine">vaccine</option>
-            <option  value="/Records/prescription">prescription</option>
-            <option  value="/Records/lab">lab</option>
+        <option value="/DoctorsRecords/doctorsoverview">overview</option>
+            <option   value="/DoctorsRecords/doctorsvaccine">vaccine</option>
+            <option  value="/DoctorsRecords/doctorsprescription">prescription</option>
+            <option  value="/DoctorsRecords/doctorslab">lab</option>
           </select>
         </div>
       </div>
