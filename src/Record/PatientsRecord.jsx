@@ -5,7 +5,7 @@ import { BsArrowLeft } from "react-icons/bs";
 import smallLogo from "../assets/small.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import "./Record.css";
-import { Link, Outlet,NavLink } from "react-router-dom";
+import {  Outlet,NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useRequestProcessor } from "../api/requestProcessor";
 
