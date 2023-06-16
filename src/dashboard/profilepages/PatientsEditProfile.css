@@ -55,6 +55,14 @@
   font-weight: 600;
   color: #444444;
 }
+.patientseditprofile input[type="date"] {
+  font-weight: 200;
+}
+.patientseditprofile .warning_msg {
+  margin-top: 1rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
 .patientseditprofile .topleft- .email- {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -144,6 +152,9 @@
   font-size: 13px;
   font-weight: 600;
   color: #222222;
+}
+.patientseditprofile .p_input::placeholder {
+  font-size: small;
 }
 .patientseditprofile ._bottom_profile_details- ._right_section- .input_para- {
   font-size: 11px;
@@ -331,6 +342,9 @@
   .patientseditprofile .back_arrow {
     width: 20px;
     height: 20px;
+  }
+  .patientseditprofile .warning_msg {
+    font-size: 12px;
   }
   .doctorseditprofile .back_arrow {
     width: 20px;

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {  useEffect } from "react";
+import React, { useState } from "react";
+import { useEffect } from "react";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { BsArrowLeft } from "react-icons/bs";
 import smallLogo from "../assets/small.png";
@@ -9,13 +9,22 @@ import {  Outlet,NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useRequestProcessor } from "../api/requestProcessor";
 
-
 export default function PatientsRecord() {
   let patient_Image = localStorage.getItem("patient_image");
   let patient_Name = localStorage.getItem("patient_name");
+  let patient_gender = localStorage.getItem("patient_gender");
+  let patient_DOB = localStorage.getItem("patient_DOB");
+  let patient_Blood = localStorage.getItem("patient_blood");
 
+  let patient_Geno = localStorage.getItem("patient_genotype");
 
+  let patient_Height = localStorage.getItem("patient_height");
 
+  let patient_Weight = localStorage.getItem("patient_weight");
+
+  let patient_Alle = localStorage.getItem("patient_allergies");
+
+  let patient_wallet = localStorage.getItem("patient_walletId");
 
   const { makeRequest } = useRequestProcessor();
   const { response, error } = makeRequest({ url: "/patient/", method: "GET" });
@@ -31,12 +40,12 @@ export default function PatientsRecord() {
       <nav className="nav-container">
         <GiHamburgerMenu className="hamburger"/>
         <div className="nav-container-left">
-          <BsArrowLeft onClick={handle} style={{cursor:"pointer"}} />
+          <BsArrowLeft onClick={handle} style={{ cursor: "pointer" }} />
           <h2>Medical Record</h2>
         </div>
         <div className="nav-container-right">
           <div>
-            <button style={{cursor:"pointer"}}>share report</button>
+            <button style={{ cursor: "pointer" }}>share report</button>
           </div>
           <div>
             <IoIosNotificationsOutline />
@@ -52,7 +61,7 @@ export default function PatientsRecord() {
               }}
               alt="frame"
             />
-            
+
             <p>hi! {patient_Name}</p>
           </div>
         </div>
@@ -71,27 +80,35 @@ export default function PatientsRecord() {
             <div className="second-section-text">
               <div>
                 <p>
-                  Sex: <span>Female</span>
+                  Sex: <span>{patient_gender ? patient_gender : "Nil"}</span>
                 </p>
                 <p>
-                  Age: <span>28</span>
+                  Age:{" "}
+                  <span>
+                    {new Date().getFullYear() -
+                      parseInt(patient_DOB.split("-")[0])}
+                  </span>
                 </p>
                 <p>
-                  Blood Group:<span> O+</span>
+                  Blood Group:
+                  <span> {patient_Blood ? patient_Blood : "Nil"}</span>
                 </p>
                 <p>
-                  Genotype:<span> AA</span>
+                  Genotype:<span> {patient_Geno ? patient_Geno : "Nil"}</span>
                 </p>
               </div>
               <div>
                 <p>
-                  Height: <span>5ft 8 inc</span>
+                  Height: <span>{patient_Height ? patient_Height : "Nil"}</span>{" "}
+                  Metres
                 </p>
                 <p>
-                  Weight:<span> 62kg</span>
+                  Weight:
+                  <span> {patient_Weight ? patient_Weight : "Nil"}</span>{" "}
+                  Kilograms
                 </p>
                 <p>
-                  Allergies: <span>Peanut, Aspirin, Penicillin</span>
+                  Allergies: <span>{patient_Alle}</span>
                 </p>
               </div>
             </div>

@@ -156,6 +156,7 @@ function Report() {
             <p className="vaccine_status vaccine_common">Status</p>
           </div>
           <div className="report_vaccine_input">
+            <p className="hidden">Name of Vaccine</p>
             <input
               className="vaccine_input1 vi_common"
               onChange={handleSetVaccineName}
@@ -163,6 +164,7 @@ function Report() {
               type="text"
               placeholder="Enter Vaccine Name"
             />
+            <p className="hidden">Time/Date</p>
             <input
               className="vaccine_input2 vi_common"
               onChange={handleSetVaccineDate}
@@ -170,6 +172,7 @@ function Report() {
               type="date"
               placeholder="Enter Vaccine Name"
             />
+            <p className="hidden">Status</p>
             <select
               className="vaccine_input3 vi_common"
               onChange={handleSetVaccineStatus}
@@ -223,24 +226,27 @@ function Report() {
           {val.map((data, i) => {
             return (
               <div className="prescription_input_div">
+                <p className="hidden">Medication</p>
                 <input
-                  className="prescription_input"
+                  className="prescription_input_"
                   type="text"
                   name="med"
                   onChange={(e) => handleChange(e, i)}
                   value={data.med}
                   placeholder="Enter Medication"
                 />
+                <p className="hidden">Duration</p>
                 <input
-                  className="prescription_input"
+                  className="prescription_input_"
                   name="dur"
                   type="text"
                   onChange={(e) => handleChange(e, i)}
                   value={data.dur}
                   placeholder="Enter Duration"
                 />
+                <p className="hidden">Dosage</p>
                 <input
-                  className="prescription_input"
+                  className="prescription_input_"
                   type="text"
                   name="dos"
                   value={data.dos}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import emptyProfile from "../assets/ava3.png";
 import "./draft.css";
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
@@ -7,9 +7,25 @@ import { RiNumber1 } from "react-icons/ri";
 import { RiNumber2 } from "react-icons/ri";
 import { RiNumber3 } from "react-icons/ri";
 import { useServiceProviderValue } from "../ServiceProvider";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { FiLogOut } from "react-icons/fi";
+import { AiOutlineSetting } from "react-icons/ai";
+import { RxDashboard } from "react-icons/rx";
+import { TfiWrite } from "react-icons/tfi";
+import { BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import ourlogo from "../assets/ourlogo.png";
+
+import { AiOutlineClose } from "react-icons/ai";
 
 export default function DoctorsDrafts() {
   const [{}, dispatch] = useServiceProviderValue();
+  const mobileNavRef = useRef();
+  const [navOpen, setIsNavOpen] = useState(false);
+  const toggleNav = () => {
+    setIsNavOpen(!navOpen);
+  };
   const navigate = useNavigate();
   const location = useLocation();
   const shouldApplyStyle = location.pathname.includes("/finish");
@@ -19,6 +35,21 @@ export default function DoctorsDrafts() {
   const handle = (e) => {
     navigate(+1);
   };
+  const closeOpenNav = useCallback(
+    (e) => {
+      if (
+        mobileNavRef.current &&
+        navOpen === true &&
+        !mobileNavRef.current.contains(e.target)
+      ) {
+        setIsNavOpen(false);
+      }
+    },
+    [navOpen]
+  );
+  let doctors_Image = localStorage.getItem("doctor_image");
+
+  let doctors_Name = localStorage.getItem("doctor_name");
   const handleNext = () => {
     if (report) {
       navigate("finish");
@@ -84,9 +115,59 @@ export default function DoctorsDrafts() {
     navigate("./");
     setNumber1(<TiTick className="tick" />);
     setIsActive1(true);
+    document.addEventListener("mousedown", closeOpenNav);
+
+    return () => {
+      document.removeEventListener("mousedown", closeOpenNav);
+    };
   }, []);
   return (
     <div className="doctorsdraft">
+      <nav
+        className={navOpen ? "patient_dashboard_nav" : "closeNav"}
+        ref={mobileNavRef}
+      >
+        <div className="_side_Bar">
+          <AiOutlineClose className="close__btn" onClick={toggleNav} />
+          <div className="_center__div">
+            <img src={ourlogo} alt="app-logo" />
+            <p>
+              Med<span>bloc</span>
+            </p>
+          </div>
+
+          <div className="_mid__section">
+            <Link to="/DocDashboard" className="link">
+              <RxDashboard style={{ color: "white" }} />
+              <p>Dashboard</p>
+            </Link>
+
+            <Link to="/DocBillings" className="link">
+              <FontAwesomeIcon icon={faCoins} style={{ color: "white" }} />
+              <p>Billings</p>
+            </Link>
+            <Link to="/DocDraft" className="link">
+              <TfiWrite style={{ color: "white" }} />
+              <p>Draft</p>
+            </Link>
+          </div>
+          <div className="_lower__section">
+            <div
+              onClick={() => {
+                localStorage.removeItem("patientToken");
+                localStorage.removeItem("patientEmail");
+              }}
+            >
+              <Link to="/" className="link">
+                <FiLogOut style={{ color: "white" }} />
+                <p>logout</p>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <GiHamburgerMenu className="hamburger_icon" onClick={toggleNav} />
       <header className="doctorsdraft_header">
         <p className="drafts_header_left"> Add Patient Record</p>
         <div
@@ -99,8 +180,11 @@ export default function DoctorsDrafts() {
           {window.location.pathname === "/DocDraft/finish" && (
             <button className="draft_update_btn">Update Patient Portal</button>
           )}
-          <img src={emptyProfile} alt="patientspicture" />
-          <p className="drafts_profile_name">Mrs Roseline Doe</p>
+          <img
+            src={doctors_Image ? doctors_Image : emptyProfile}
+            alt="patientspicture"
+          />
+          <p className="drafts_profile_name">{doctors_Name}</p>
         </div>
       </header>
       <div className="navigation_section">
