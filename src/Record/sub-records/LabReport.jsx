@@ -11,20 +11,23 @@ export default function LabReport() {
         <NavBar/>
         <Labvisitreport/>
         <div className='first-visit-container'>
-          <div>
-        <p> Name of Lab :</p>
-        <p> Doctor’s Name:</p>
-          </div>
-          <div className='all'>
-          <p>Alpha Diagnostics Laboratories, Enugu</p>
-          <p>None, None</p>
+         <div className='intro'>
+            <div>
+              <p> Name of Lab :</p>
+              <p> Doctor’s Name:</p>
+                </div>
+                <div className='all'>
+                <p>Alpha Diagnostics Laboratories, Enugu</p>
+                <p>None, None</p>
+              </div>
+         </div>
+            <div className='none'>
+            <p >Date:<span> 02/05/2023
+              </span></p>
+            <p >Time:<span> 11:59am</span></p>
+            </div>
         </div>
-        <div className='none'>
-        <p >Date:<span>02/05/2023
-          </span></p>
-        <p >Time:<span>11:59am</span></p>
-        </div>
-        </div>
+
          <div className='visit-table'>
             <ul>
               <li>S/N</li>
@@ -38,7 +41,8 @@ export default function LabReport() {
             <li>#1</li>
             <li>Malaria Parasite Test</li>
             <li>Trophozoite stage of p. falciparium(+) seen</li>
-            <li>Significant titer of salm spp gignificant titer80</li>
+            <li className='disappear'>Remark</li>
+            <li style={{color:"#1A4D80"}}>Significant titer of salm spp gignificant titer80</li>
           </ul>
         </div>
     </div>

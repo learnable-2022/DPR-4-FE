@@ -4,10 +4,21 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { BsArrowLeft } from "react-icons/bs";
 import smallLogo from "../assets/small.png";
 import { GiHamburgerMenu } from "react-icons/gi";
+
 import "./Record.css";
 import {  Outlet,NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useRequestProcessor } from "../api/requestProcessor";
+
+import { Link } from "react-router-dom";
+import { RxDashboard } from "react-icons/rx";
+import { BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
+
+import { FiLogOut } from "react-icons/fi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import ourlogo from "../assets/ourlogo.png";
+import { AiOutlineClose } from "react-icons/ai";
 
 export default function PatientsRecord() {
   let patient_Image = localStorage.getItem("patient_image");
@@ -35,10 +46,57 @@ export default function PatientsRecord() {
     navigate(-1);
   };
   useEffect(() => {}, []);
+
+  const [navOpen, setIsNavOpen] = useState(false);
+  const toggleNav = () => {
+    setIsNavOpen(!navOpen);
+  };
   return (
     <div className="container">
+       <div
+        className={navOpen ? "patient_dashboard_nav" : "closeNav"}
+        // ref={mobileNavRef}
+      >
+        <div className="_sideBar">
+          <AiOutlineClose className="close_btn" onClick={toggleNav} />
+          <div className="_center-div">
+            <img src={ourlogo} alt="app-logo" />
+            <p>
+              Med<span>bloc</span>
+            </p>
+          </div>
+
+          <div className="_mid-section">
+            <Link to="/Dashboard" className="link">
+              <RxDashboard style={{ color: "white" }} />
+              <p>Dashboard</p>
+            </Link>
+            <Link to="/Records" className="link">
+              <BsReverseLayoutTextSidebarReverse style={{ color: "white" }} />
+              <p>Records</p>
+            </Link>
+            <Link to="/Billing" className="link">
+              <FontAwesomeIcon icon={faCoins} style={{ color: "white" }} />
+              <p>Billings</p>
+            </Link>
+          </div>
+          <div className="_lower-section">
+            <div
+              onClick={() => {
+                localStorage.removeItem("patientToken");
+                localStorage.removeItem("patientEmail");
+              }}
+            >
+              <Link to="/" className="link">
+                <FiLogOut style={{ color: "white" }} />
+                <p>logout</p>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
       <nav className="nav-container">
-        <GiHamburgerMenu className="hamburger"/>
+        <GiHamburgerMenu className="hamburger"  onClick={toggleNav}/>
         <div className="nav-container-left">
           <BsArrowLeft onClick={handle} style={{ cursor: "pointer" }} />
           <h2>Medical Record</h2>
@@ -135,7 +193,7 @@ export default function PatientsRecord() {
       </div>
       <div className="third-section-link">
         <li>
-          <NavLink  exact  activeClassName="active" to="overview">
+          <NavLink  exact  activeClassName="active" to="">
             <p>Overview</p>
           </NavLink>
         </li>

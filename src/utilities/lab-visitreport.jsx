@@ -3,19 +3,22 @@ import "../Record/Record.css";
 import bigpic from "../assets/big.png";
 
 export default function Labvisitreport() {
+
+  let patient_Image = localStorage.getItem("patient_image");
+  let patient_Name = localStorage.getItem("patient_name");
   return (
     <>
       <div className="second-section">
         <div className="second-section-first">
           <div className="second-image">
             <img
-              src={bigpic}
+              src={patient_Image}
               style={{ borderRadius: "50%", border: "1px solid black" }}
               alt="bigpics"
             />
           </div>
           <div>
-            <h2>Miss Roseline</h2>
+            <h2>{patient_Name}</h2>
             <div className="second-section-text">
               <div>
                 <p>

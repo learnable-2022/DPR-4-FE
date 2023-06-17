@@ -82,6 +82,7 @@ export default function DoctorsDashboard() {
       let DoctorEmail = localStorage.getItem("doctorEmail");
       const response = await axios
         .get(`https://medbloc-api.onrender.com/api/v1/doctor/`, {
+
           headers: {
             "x-auth-token": token,
             Accept: "application/json",
@@ -153,6 +154,7 @@ export default function DoctorsDashboard() {
   };
 
   const handleAddCargo = (e) => {};
+  
 
   return (
     <div className="doctorsdashboard">

@@ -259,10 +259,6 @@ export default function PatientDashboard() {
             </Link>
           </div>
           <div className="_lower-section">
-            <Link to="*" className="link">
-              <AiOutlineSetting style={{ color: "white" }} />
-              <p>settings</p>
-            </Link>
             <div
               onClick={() => {
                 localStorage.removeItem("patientToken");
