@@ -70,6 +70,7 @@ function Report() {
     // setVaccineStatus(e.target.value);
     dispatch({ type: "SET_STATUS", vaccineStatus: e.target.value });
   };
+  console.log(vaccineStatus);
   const handleSetComment = (e) => {
     // setComment(e.target.value);
     dispatch({ type: "SET_COMMENT", comment: e.target.value });

@@ -312,3 +312,8 @@ ion-icon {
     display: none;
   }
 }
+@media (max-width: 290px) {
+  .doctorsdraft {
+    padding: 0.6rem;
+  }
+}

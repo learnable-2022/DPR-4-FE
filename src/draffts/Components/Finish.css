@@ -213,3 +213,11 @@
     display: none;
   }
 }
+@media (max-width: 290px) {
+  .add_total_div {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    gap: 1rem;
+  }
+}
