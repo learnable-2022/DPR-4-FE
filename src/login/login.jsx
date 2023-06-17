@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./login.css";
-import medblog from "../assets/logo-02.png";
+
 import bigImage from "../assets/signup-second.png";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import StateContext from "../stateProvider/stateprovider";
 import { useContext } from "react";
 import axioscall from "../api/secondApi";
 import { useServiceProviderValue } from "../ServiceProvider";
+import newlogo from "../assets/newlogo2.png"
 
 const validEmailRex = new RegExp(
   "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$"
@@ -196,7 +197,7 @@ export default function Login() {
       <div className="sign-up-container">
         <div className="signup-form length">
           <div>
-            <img src={medblog} alt="medblog" />
+            <img src={newlogo} alt="medblog" />
           </div>
           <h2>Login</h2>
           <p>Please enter your login details to sign in.</p>

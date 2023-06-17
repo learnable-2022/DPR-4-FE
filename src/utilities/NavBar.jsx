@@ -11,6 +11,8 @@ const navigation = useNavigate();
 const returnHandler =()=>{
   navigation(-1);
 }
+let patient_Image = localStorage.getItem("patient_image");
+let patient_Name = localStorage.getItem("patient_name");
   return (
     <>
       <nav className="nav-container">
@@ -32,7 +34,7 @@ const returnHandler =()=>{
           </div>
           <div className="nav-short">
             <img
-              src={smallLogo}
+             src={patient_Image ? patient_Image : smallLogo}
               style={{
                 width: "60px",
                 height: "60px",
@@ -41,7 +43,7 @@ const returnHandler =()=>{
               }}
               alt="frame"
             />
-            <p>Mrs Rosaline Doe</p>
+            <p>hi! {patient_Name}</p>
           </div>
         </div>
       </nav>
