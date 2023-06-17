@@ -2,15 +2,129 @@
   width: 100%;
   padding: 2rem;
   padding-bottom: 0;
+  position: relative;
 }
 .schedulepage main {
   position: absolute;
-  bottom: 0;
   top: 4rem;
-  left: 160px;
+  left: 2rem;
   right: 2rem;
   overflow-y: scroll;
   margin-top: 4rem;
   margin-bottom: 2rem;
   box-shadow: 1px 2px 8px rgb(91, 91, 91);
+}
+.schedulepage .back_arrow {
+  display: block;
+  position: absolute;
+  left: 20px;
+  top: 10px;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.schedulepage .doc_med_logo {
+  display: none;
+}
+.schedulepage .hamburger_icon {
+  display: none;
+}
+@media (max-width: 1100px) {
+  .schedulepage .header_text_part {
+    position: absolute;
+    top: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+  }
+  .schedulepage main {
+    top: 9rem;
+  }
+  .schedulepage .header_text_part p {
+    width: 100%;
+    text-align: center;
+    font-size: 1.3rem;
+  }
+  .schedulepage .doc_med_logo {
+    display: block;
+    margin-left: 40%;
+  }
+}
+@media (max-width: 926px) {
+  .schedulepage .hamburger_icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+  }
+  .schedulepage main {
+    left: 2rem;
+  }
+  .schedulepage .doc_med_logo {
+    display: block;
+    margin-left: 0;
+  }
+}
+@media (max-width: 753px) {
+  .rbc-toolbar {
+    gap: 10px;
+  }
+  .rbc-calendar {
+    margin: 1.5rem 1rem 2rem !important;
+  }
+  .schedulepage .header_text_part h1 {
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 500px) {
+  .rbc-toolbar {
+    gap: 10px;
+  }
+  .rbc-calendar {
+    margin: 1.5rem 1rem 2rem !important;
+    width: 700px;
+  }
+}
+@media (max-width: 439px) {
+  .schedulepage .header_icon {
+    width: 1rem;
+    height: 1rem;
+  }
+  .rbc-calendar {
+    height: 700px;
+  }
+  .calendarcomponent {
+    height: 600px;
+  }
+  .schedulepage main {
+    height: 600px;
+    left: 1rem;
+    right: 1rem;
+  }
+  .schedulepage .header_text_part {
+    top: 4rem;
+  }
+  .schedulepage .header_icon_part {
+    justify-content: end;
+    gap: 0.5rem;
+  }
+}
+@media (max-width: 306px) {
+  .schedulepage .doc_med_logo {
+    position: absolute;
+    top: 2rem;
+    left: 28%;
+  }
+  .schedulepage .header {
+    margin-top: 1rem;
+  }
+  .schedulepage {
+    padding: 1rem;
+  }
+  .schedulepage .header_text_part p {
+    font-size: 1rem;
+  }
+  .schedulepage .header_text_part h1 {
+    font-size: 1.2rem;
+  }
 }

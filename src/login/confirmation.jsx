@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
-import medblog from "../assets/logo-02.png";
+
 import bigImage from "../assets/signup-second.png";
 import { useServiceProviderValue } from "../ServiceProvider";
+import newlogo from "../assets/newlogo2.png"
 
 const Confirmation = () => {
   const navigate = useNavigate();
@@ -50,7 +51,7 @@ const Confirmation = () => {
         <div className="sign-up-container">
           <div className="signup-form length">
             <div>
-              <img src={medblog} alt="medblog" />
+              <img src={newlogo} alt="medblog" />
             </div>
             <h2>Get Started</h2>
             <p>

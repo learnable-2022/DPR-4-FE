@@ -28,12 +28,24 @@ import drug4 from "../assets/drug4.svg";
 import notification from "../assets/Notification.svg";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiArrowDropDownFill } from "react-icons/ri";
-import axios from "axios";
 
 import { Link, useNavigate } from "react-router-dom";
 import StateContext from "../stateProvider/stateprovider";
 import abi from "../abi.json";
 import { ethers } from 'ethers';
+// for nav bar
+import { RxDashboard } from "react-icons/rx";
+import { BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
+import { TfiWrite } from "react-icons/tfi";
+import { AiOutlineSetting } from "react-icons/ai";
+import { FiLogOut } from "react-icons/fi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import ourlogo from "../assets/ourlogo.png";
+import axios from "axios";
+import { AiOutlineClose } from "react-icons/ai";
+
+// end for nav bar
 
 export default function PatientDashboard() {
   let token = localStorage.getItem("patientToken");
@@ -41,16 +53,42 @@ export default function PatientDashboard() {
   const [patient_Name, setPatientName] = useState("");
   const [patient_Image, setPatientImage] = useState("");
   const [patient_Email, setPatientEmail] = useState("");
+  const [patient_gender, setPatientGender] = useState("");
+  const [patient_Age, setPatientAge] = useState("");
+  const [patient_Blood, setPatientBlood] = useState("");
+  const [patient_Geno, setPatientGeno] = useState("");
+  const [patient_Height, setPatientHeight] = useState("");
+  const [patient_Weight, setPatientWeight] = useState("");
+  const [patient_Alle, setPatientAlle] = useState("");
+  const [patient_WalletId, setPatientWallet] = useState("");
+
   const [data, setData] = useState(true);
   const drugs = [drug1, drug2, drug3, drug4];
   const [connectedWallet, setConnectedWallet] = useState(false);
   const diseases = [disease1, disease2, disease3];
   const mobileMenuRef = useRef();
-  const [navOpen, setIsOpen] = useState(false);
+  const mobileNavRef = useRef();
+  const [navOpen, setIsNavOpen] = useState(false);
   const checkEffectName = localStorage.getItem("patient_name");
   const checkEffectImage = localStorage.getItem("patient_image");
+  let checkEffectgender = localStorage.getItem("patient_gender");
+
+  let checkEffectDOB = localStorage.getItem("patient_DOB");
+
+  let checkEffectBlood = localStorage.getItem("patient_blood");
+
+  let checkEffectGeno = localStorage.getItem("patient_genotype");
+
+  let checkEffectHeight = localStorage.getItem("patient_height");
+
+  let checkEffectWeight = localStorage.getItem("patient_weight");
+
+  let checkEffectAlle = localStorage.getItem("patient_allergies");
+
+  let checkEffectwallet = localStorage.getItem("patient_walletId");
+
   const toggleNav = () => {
-    setIsOpen(!navOpen);
+    setIsNavOpen(!navOpen);
   };
 
 
@@ -202,13 +240,44 @@ useEffect(() => {
 
     [isDropOpen]
   );
-
+  const closeOpenNav = useCallback(
+    (e) => {
+      if (
+        mobileNavRef.current &&
+        navOpen === true &&
+        !mobileNavRef.current.contains(e.target)
+      ) {
+        setIsNavOpen(false);
+      }
+    },
+    [, navOpen]
+  );
   let id = localStorage.getItem("patient_ID");
 
   const handleDropButtonClick = () => {
     setIsDropOpen(!isDropOpen);
   };
-
+  //let patient_id = "64872c34b42f825762355d86";
+  // const deletePatient = async () => {
+  //   const response = await axios
+  //     ?.delete(
+  //       `https://medbloc-api.onrender.com/api/v1/patient/${patient_id}`,
+  //       {
+  //         headers: {
+  //           "x-auth-token": token,
+  //           Accept: "application/json",
+  //           "Content-Type": "application/json",
+  //           "Access-Control-Allow-Origin": "*",
+  //         },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       console.log("Patient successfully deleted");
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
   const getPatientDetails = async () => {
     let PatientEmail = localStorage.getItem("patient_email");
     console.log(PatientEmail);
@@ -222,6 +291,7 @@ useEffect(() => {
         },
       })
       .then((res) => {
+        console.log(res);
         const res1 = res?.data.find((item) => item.email === PatientEmail);
       
         localStorage.setItem("patient_image", res1?.image);
@@ -229,7 +299,20 @@ useEffect(() => {
         localStorage.setItem("patient_email", res1?.email);
         localStorage.setItem("patient_password", res1?.password);
         localStorage.setItem("patient_walletId", res1?.walletId);
+        localStorage.setItem("patient_genotype", res1?.genotype);
+        localStorage.setItem("patient_gender", res1?.gender);
+        localStorage.setItem("patient_DOB", res1?.dateOfBirth);
+        localStorage.setItem("patient_blood", res1?.bloodgroup);
         localStorage.setItem("patient_ID", res1?._id);
+        localStorage.setItem("patient_middle_name", res1?.middleName);
+        localStorage.setItem("patient_height", res1?.height);
+        localStorage.setItem("patient_allergies", res1?.allergies);
+        localStorage.setItem("patient_weight", res1?.weight);
+        localStorage.setItem("patient_address", res1?.address);
+        localStorage.setItem("patient_city", res1?.city);
+        localStorage.setItem("patient_country", res1?.country);
+        localStorage.setItem("patient_number", res1?.number);
+        localStorage.setItem("patient_state", res1?.state);
 
         let patient_Image = localStorage.getItem("patient_image");
         setPatientImage(patient_Image);
@@ -237,6 +320,23 @@ useEffect(() => {
         setPatientName(patient_Name);
         let patient_Email = localStorage.getItem("patient_email");
         setPatientEmail(patient_Email);
+        let patient_gender = localStorage.getItem("patient_gender");
+        setPatientGender(patient_gender);
+        let patient_DOB = localStorage.getItem("patient_DOB");
+        setPatientAge(patient_DOB);
+        let patient_Blood = localStorage.getItem("patient_blood");
+        setPatientBlood(patient_Blood);
+        let patient_Geno = localStorage.getItem("patient_genotype");
+        setPatientGeno(patient_Geno);
+        let patient_Height = localStorage.getItem("patient_height");
+        setPatientHeight(patient_Height);
+        let patient_Weight = localStorage.getItem("patient_weight");
+        setPatientWeight(patient_Weight);
+
+        let patient_Alle = localStorage.getItem("patient_allergies");
+        setPatientAlle(patient_Alle);
+        let patient_wallet = localStorage.getItem("patient_walletId");
+        setPatientWallet(patient_wallet);
       })
       .catch((error) => {
         console.error(error.message);
@@ -247,11 +347,26 @@ useEffect(() => {
     updateEthers();
     getPatientDetails();
     document.addEventListener("mousedown", closeOpenMenus);
+    document.addEventListener("mousedown", closeOpenNav);
 
     return () => {
       document.removeEventListener("mousedown", closeOpenMenus);
+      document.removeEventListener("mousedown", closeOpenNav);
     };
-  }, [checkEffectName]); 
+  }, [
+    closeOpenMenus,
+    checkEffectName,
+    closeOpenNav,
+    checkEffectAlle,
+    checkEffectBlood,
+    checkEffectDOB,
+    checkEffectGeno,
+    checkEffectHeight,
+    checkEffectImage,
+    checkEffectWeight,
+    checkEffectgender,
+    checkEffectwallet,
+  ]);
 
   useEffect(() => {
     localStorage.setItem('vitalSigns', JSON.stringify(vitalSigns));
@@ -274,6 +389,49 @@ useEffect(() => {
 
   return (
     <div className="patientdashboard">
+      <nav
+        className={navOpen ? "patient_dashboard_nav" : "closeNav"}
+        ref={mobileNavRef}
+      >
+        <div className="_sideBar">
+          <AiOutlineClose className="close_btn" onClick={toggleNav} />
+          <div className="_center-div">
+            <img src={ourlogo} alt="app-logo" />
+            <p>
+              Med<span>bloc</span>
+            </p>
+          </div>
+
+          <div className="_mid-section">
+            <Link to="/Dashboard" className="link">
+              <RxDashboard style={{ color: "white" }} />
+              <p>Dashboard</p>
+            </Link>
+            <Link to="/Records" className="link">
+              <BsReverseLayoutTextSidebarReverse style={{ color: "white" }} />
+              <p>Records</p>
+            </Link>
+            <Link to="/Billing" className="link">
+              <FontAwesomeIcon icon={faCoins} style={{ color: "white" }} />
+              <p>Billings</p>
+            </Link>
+          </div>
+          <div className="_lower-section">
+            <div
+              onClick={() => {
+                localStorage.removeItem("patientToken");
+                localStorage.removeItem("patientEmail");
+              }}
+            >
+              <Link to="/" className="link">
+                <FiLogOut style={{ color: "white" }} />
+                <p>logout</p>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+
       <header className="patientdashboard_header">
         <GiHamburgerMenu className="hamburger_icon" onClick={toggleNav} />
         <div className="left_side_header">
@@ -342,32 +500,56 @@ useEffect(() => {
               <div className="wrapper">
                 <div className="first_info_div">
                   <p className="key">
-                    Sex: <strong className="value">Female</strong>
+                    Sex:{" "}
+                    <strong className="value">
+                      {patient_gender ? patient_gender : checkEffectgender}
+                    </strong>
                   </p>
 
                   <p className="key">
-                    Age: <strong className="value">28</strong>
+                    Age:{" "}
+                    <strong className="value">
+                      {new Date().getFullYear() -
+                        parseInt(patient_Age.split("-")[0])}
+                    </strong>
                   </p>
 
                   <p className="key">
-                    BloodGroup: <strong className="value">Nil</strong>
+                    BloodGroup:{" "}
+                    <strong className="value">
+                      {patient_Blood ? patient_Blood : checkEffectBlood}
+                    </strong>
                   </p>
 
                   <p className="key">
-                    Genotype: <strong className="value">Nil</strong>
+                    Genotype:{" "}
+                    <strong className="value">
+                      {patient_Geno ? patient_Geno : checkEffectGeno}
+                    </strong>
                   </p>
                 </div>
                 <div className="second_info_div">
                   <p className="key">
-                    Height: <strong className="value">Nil</strong>
+                    Height:{" "}
+                    <strong className="value">
+                      {patient_Height ? patient_Height : checkEffectHeight}
+                    </strong>{" "}
+                    Metres
                   </p>
 
                   <p className="key">
-                    Weight: <strong className="value">Nil</strong>
+                    Weight:{" "}
+                    <strong className="value">
+                      {patient_Weight ? patient_Weight : checkEffectWeight}
+                    </strong>{" "}
+                    Kilogram
                   </p>
 
                   <p className="key">
-                    Allergies: <strong className="value">Nil</strong>
+                    Allergies:{" "}
+                    <strong className="value">
+                      {patient_Alle ? patient_Alle : checkEffectAlle}
+                    </strong>
                   </p>
                 </div>
               </div>

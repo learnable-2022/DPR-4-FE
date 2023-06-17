@@ -14,16 +14,31 @@ import axios from "axios";
 import { FaSpinner } from "react-icons/fa";
 
 function PatientsEditProfile() {
-  const inputRef = useRef(null);
-  let patient_Image = localStorage.getItem("patient_image");
   let patientID = localStorage.getItem("patient_ID");
   let token = localStorage.getItem("patientToken");
-  const [value, setValue] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState("");
   const [NoImage, setNoImageMsg] = useState("");
   const options = useMemo(() => countryList().getData(), []);
   const [data, setData] = useState();
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
+  const [selectedHeight, setSelectedHeight] = useState("");
+  const [selectedWeight, setSelectedWeight] = useState("");
+  const [selectedAlle, setSelectedAlle] = useState("");
+  const [selectedGeno, setSelectedGeno] = useState("");
+  const [selectedBlood, setSelectedBlood] = useState("");
+  const [selectedEmail, setSelectedEmail] = useState("");
+  const [selectedNumber, setSelectedNumber] = useState("");
+  const [selectedAddress, setSelectedAddress] = useState("");
+  const [selectedGender, setSelectedGender] = useState("");
+  const [selectedLastName, setSelectedLastName] = useState("");
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedMiddleName, setSelectedMiddleName] = useState("");
+  const [selectedFirstName, setSelectedFirstName] = useState("");
+  const [selectedWallet, setWallet] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
+  const [value, setValue] = useState("");
+
   const [year, setYear] = useState("");
   let thisYear = new Date().getFullYear();
   const [isLoading, setIsLoading] = useState(false);
@@ -31,21 +46,88 @@ function PatientsEditProfile() {
   let allYears = [];
   // handler to set the state of value of selected country
   const changeHandler = (value) => {
-    setValue(value);
+    setValue(value.label);
   };
+  console.log(value);
   //Handler function to set selected states
   const handleStateChange = (e) => {
     setSelectedState(e.target.value);
+  };
+  const handleFirstNameChange = (e) => {
+    setSelectedFirstName(e.target.value);
+  };
+  const handleMiddleNameChange = (e) => {
+    setSelectedMiddleName(e.target.value);
+  };
+  const handleDateChange = (e) => {
+    setSelectedDate(e.target.value);
+  };
+  const handleLastNameChange = (e) => {
+    setSelectedLastName(` ${e.target.value}`);
+  };
+  const handleGenderChange = (e) => {
+    setSelectedGender(e.target.value);
+  };
+  const handleAddressChange = (e) => {
+    setSelectedAddress(e.target.value);
+  };
+  const handleNumberChange = (e) => {
+    setSelectedNumber(e.target.value);
+  };
+  const handleEmailChange = (e) => {
+    setSelectedEmail(e.target.value);
+  };
+  const handleBloodChange = (e) => {
+    setSelectedBlood(e.target.value);
+  };
+  const handleGenoChange = (e) => {
+    setSelectedGeno(e.target.value);
+  };
+  const handleAlleChange = (e) => {
+    setSelectedAlle(e.target.value);
+  };
+  const handleWeigChange = (e) => {
+    setSelectedWeight(e.target.value);
+  };
+  const handleHeightChange = (e) => {
+    setSelectedHeight(e.target.value);
+  };
+  const handleWalletChange = (e) => {
+    setWallet(e.target.value);
   };
   // handler function to set selected state
   const handleSelectedCity = (e) => {
     setSelectedCity(e.target.value);
   };
+  const checkForValues = () => {
+    if (
+      data ||
+      selectedAddress ||
+      selectedAlle ||
+      selectedCity ||
+      selectedHeight ||
+      selectedGeno ||
+      selectedBlood ||
+      selectedEmail ||
+      selectedNumber ||
+      selectedDate ||
+      selectedGender ||
+      selectedMiddleName ||
+      selectedFirstName ||
+      selectedState ||
+      selectedWeight ||
+      selectedLastName
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
   const saveProfile = () => {
-    if (data) {
+    if (checkForValues()) {
       UpdatePatientDetails();
     } else {
-      setNoImageMsg("Please Select an Image before Saving");
+      setNoImageMsg("Please Enter details you wish to edit before saving");
       setTimeout(() => {
         setNoImageMsg("");
       }, 3000);
@@ -56,7 +138,27 @@ function PatientsEditProfile() {
   let password = localStorage.getItem("patient_password");
   let name = localStorage.getItem("patient_name");
   let walletId = localStorage.getItem("patient_walletId");
-  let gpassword = localStorage.getItem("patient_password");
+  let patient_Image = localStorage.getItem("patient_image");
+
+  let patient_gender = localStorage.getItem("patient_gender");
+
+  let patient_DOB = localStorage.getItem("patient_DOB");
+
+  let patient_Blood = localStorage.getItem("patient_blood");
+
+  let patient_Geno = localStorage.getItem("patient_genotype");
+
+  let patient_Height = localStorage.getItem("patient_height");
+
+  let patient_Weight = localStorage.getItem("patient_weight");
+  let patient_address = localStorage.getItem("patient_address");
+  let patient_city = localStorage.getItem("patient_city");
+  let patient_country = localStorage.getItem("patient_country");
+  let patient_number = localStorage.getItem("patient_number");
+  let patient_state = localStorage.getItem("patient_state");
+  let patient_Alle = localStorage.getItem("patient_allergies");
+  let formattedName = selectedFirstName + " " + selectedLastName;
+
   const UpdatePatientDetails = async () => {
     setIsLoading(true);
 
@@ -64,11 +166,22 @@ function PatientsEditProfile() {
       .put(
         `https://medbloc-api.onrender.com/api/v1/patient/${patientID}`,
         {
-          name: name,
-          email: email,
-          password: password,
-          walletId: walletId,
-          image: data,
+          name: formattedName || name,
+          email: selectedEmail || email,
+          // walletId: selectedWallet || walletId,
+          image: data || patient_Image,
+          height: selectedHeight || patient_Height,
+          genotype: selectedGeno || patient_Geno,
+          bloodgroup: selectedBlood || patient_Blood,
+          weight: selectedWeight || patient_Weight,
+          allergies: selectedAlle || patient_Alle,
+          gender: selectedGender || patient_gender,
+          dateOfBirth: selectedDate || patient_DOB,
+          city: selectedCity || patient_city,
+          country: selectedCountry || patient_country,
+          address: selectedAddress || patient_address,
+          phoneNumber: selectedNumber || patient_number,
+          state: selectedState || patient_state,
         },
         {
           headers: {
@@ -81,10 +194,15 @@ function PatientsEditProfile() {
       )
       .then((response) => {
         console.log(response);
-        localStorage.setItem("patient_image", response?.data.image);
-        localStorage.setItem("patient_name", response?.data.name);
-        console.log(localStorage.getItem("patient_image"));
-        console.log(localStorage.getItem("patient_name"));
+        // localStorage.setItem("patient_image", response?.data.image);
+        // localStorage.setItem("patient_name", response?.data.name);
+        // localStorage.setItem("patient_email", response?.data.email);
+        // localStorage.setItem("patient_name", response?.data.name);
+        setSuccessMsg("Details Saved Successfully");
+        setTimeout(() => {
+          setSuccessMsg("");
+        }, 3000);
+
         setIsLoading(false);
       })
       .catch((error) => {
@@ -98,10 +216,33 @@ function PatientsEditProfile() {
     const data = new FileReader();
 
     data.addEventListener("load", () => {
-      setData(data?.result);
+      const fileSize = data.size; // Size in bytes
+      const fileSizeInKB = Math.round(fileSize / 1024);
+      if (fileSizeInKB >= 120) {
+        setNoImageMsg("Please choose an image less than 120kb");
+        setTimeout(() => {
+          setNoImageMsg("");
+        }, 3000);
+
+        console.log(data);
+      } else {
+        setData(data?.result);
+      }
     });
     if (e.target.files[0]) {
-      data.readAsDataURL(e.target.files[0]);
+      const fileSize = e.target.files[0].size; // Size in bytes
+      const fileSizeInKB = Math.round(fileSize / 1024);
+      if (fileSizeInKB >= 120) {
+        e.target.value = null;
+        setNoImageMsg("Please choose an image less than 120kb");
+        setTimeout(() => {
+          setNoImageMsg("");
+        }, 3000);
+
+        console.log(e.target.files[0]);
+      } else {
+        data.readAsDataURL(e.target.files[0]);
+      }
     }
   };
   //function to handle year change selection
@@ -118,9 +259,7 @@ function PatientsEditProfile() {
       boxShadow: "none",
     }),
   };
-  useEffect(() => {
-    inputRef.current.focus();
-  });
+  useEffect(() => {});
 
   // function to set states for state and lga selection
 
@@ -157,8 +296,8 @@ function PatientsEditProfile() {
           </div>
 
           <div className="profile_details-">
-            <h2 className="name-">Dr. chukwuemeka James Eze</h2>
-            <p className="email-">Chukwuemekaeeze@gmail.com</p>
+            <h2 className="name-">{name}</h2>
+            <p className="email-">{email}</p>
             <button
               className="profile_btn-"
               onClick={saveProfile}
@@ -166,7 +305,16 @@ function PatientsEditProfile() {
             >
               {isLoading ? <FaSpinner className="spin" /> : "Save Changes"}
             </button>
-            {<p style={{ color: "red", fontSize: "12px" }}>{NoImage}</p>}
+            {
+              <p style={{ color: "red", fontSize: "12px", marginTop: "3px" }}>
+                {NoImage}
+              </p>
+            }
+            {
+              <p style={{ color: "green", fontSize: "12px", marginTop: "3px" }}>
+                {successMsg}
+              </p>
+            }
           </div>
         </div>
 
@@ -181,9 +329,10 @@ function PatientsEditProfile() {
               <div className="input_div-">
                 <p className="input_para-">
                   <input
-                    ref={inputRef}
                     className="p_input"
                     type="text "
+                    onChange={handleFirstNameChange}
+                    value={selectedFirstName}
                     placeholder="Enter First Name"
                   />
                 </p>
@@ -194,6 +343,8 @@ function PatientsEditProfile() {
                   <input
                     className="p_input"
                     type="text "
+                    onChange={handleMiddleNameChange}
+                    value={selectedMiddleName}
                     placeholder="Enter Middle Name"
                   />
                 </p>
@@ -204,6 +355,8 @@ function PatientsEditProfile() {
                   <input
                     className="p_input"
                     type="date"
+                    value={selectedDate}
+                    onChange={handleDateChange}
                     placeholder="Select Date of Birth"
                   />
                 </p>
@@ -218,6 +371,8 @@ function PatientsEditProfile() {
                 <p className="input_para-">
                   <input
                     className="p_input"
+                    onChange={handleLastNameChange}
+                    value={selectedLastName}
                     type="text "
                     placeholder="Enter Last Name"
                   />
@@ -229,20 +384,32 @@ function PatientsEditProfile() {
                   <select
                     className="select-"
                     name="gender"
+                    value={selectedGender}
+                    onChange={handleGenderChange}
                     id="gender" /*onChange={""}*/
                   >
-                    <option value={""}>Male</option>
-                    <option value={""}>Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
                   </select>
+                </p>
+              </div>
+              <h3 className="label-">Wallet Address</h3>
+              <div className="input_div-">
+                <p className="input_para-">
+                  <input
+                    className="p_input"
+                    onChange={handleWalletChange}
+                    value={selectedWallet}
+                    type="text "
+                    placeholder="Enter Wallet Address"
+                  />
                 </p>
               </div>
             </div>
             {/* END OF BOTTOM LEFT RIGHT SECTION */}
           </div>
         </div>
-        <p
-          style={{ marginTop: "1rem", marginLeft: "1rem", marginRight: "1rem" }}
-        >
+        <p className="warning_msg">
           Notice: If you have more than one account with the same email address
           on file, you will not be able to use that email address as a username
           to sign in.
@@ -262,7 +429,9 @@ function PatientsEditProfile() {
               <div className="input_div-">
                 <p className="input_para-">
                   <input
+                    onChange={handleAddressChange}
                     className="p_input"
+                    value={selectedAddress}
                     type="text "
                     placeholder="Enter Address"
                   />
@@ -294,7 +463,7 @@ function PatientsEditProfile() {
                 <p className="input_para-">
                   <Select
                     styles={style}
-                    className="react_select-"
+                    className="react_select"
                     options={options}
                     value={value}
                     onChange={changeHandler}
@@ -331,6 +500,8 @@ function PatientsEditProfile() {
                 <input
                   className="p_input"
                   type="number "
+                  value={selectedNumber}
+                  onChange={handleNumberChange}
                   placeholder="Enter Phone Number"
                 />
               </p>
@@ -340,7 +511,9 @@ function PatientsEditProfile() {
               <p className="input_para-">
                 <input
                   className="p_input"
+                  value={selectedEmail}
                   type="email"
+                  onChange={handleEmailChange}
                   placeholder="Enter Email Address"
                 />
               </p>
@@ -357,11 +530,24 @@ function PatientsEditProfile() {
               <h3 className="label-">Blood Group</h3>
               <div className="input_div-">
                 <p className="input_para-">
-                  <input
-                    className="p_input"
+                  <select
+                    className="select-"
                     type="text "
+                    value={selectedBlood}
+                    onChange={handleBloodChange}
                     placeholder="Enter Blood Group"
-                  />
+                  >
+                    <option disabled selected value="">
+                      Select Genotype
+                    </option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB">AB</option>
+                  </select>
                 </p>
               </div>
             </div>
@@ -369,22 +555,33 @@ function PatientsEditProfile() {
               <h3 className="label-">Genotype</h3>
               <div className="input_div-">
                 <p className="input_para-">
-                  <input
-                    className="p_input"
+                  <select
+                    className="select-"
                     type="text "
+                    onChange={handleGenoChange}
+                    value={selectedGeno}
                     placeholder="Enter Genotype"
-                  />
+                  >
+                    <option disabled selected value="">
+                      Select Genotype
+                    </option>
+                    <option value="AS">AS</option>
+                    <option value="AA">AA</option>
+                    <option value="SS">SS</option>
+                  </select>
                 </p>
               </div>
             </div>
           </div>
-          <h3 className="label-">Height(metres)</h3>
+          <h3 className="label-">Allergies</h3>
           <div className="input_div-">
             <p className="input_para-">
               <input
                 className="p_input"
-                type="number"
-                placeholder="Enter Height"
+                onChange={handleAlleChange}
+                value={selectedAlle}
+                type="text"
+                placeholder="Enter Allergies"
               />
             </p>
           </div>
@@ -397,34 +594,28 @@ function PatientsEditProfile() {
                   <input
                     className="p_input"
                     type="number"
-                    placeholder="Enter Weight"
+                    onChange={handleWeigChange}
+                    value={selectedWeight}
+                    placeholder="Enter Weight(kg)"
                   />
                 </p>
               </div>
             </div>
             <div className="expiry_year">
-              <h3 className="label-">Allergies</h3>
+              <h3 className="label-">Height(metres)</h3>
               <div className="input_div-">
                 <p className="input_para-">
                   <input
                     className="p_input"
-                    type="text "
-                    placeholder="Enter Allergies"
+                    type="number"
+                    value={selectedHeight}
+                    onChange={handleHeightChange}
+                    placeholder="Enter Height(m)"
                   />
                 </p>
               </div>
             </div>
           </div>
-          {/* <h3 className="label-"></h3>
-          <div className="input_div-">
-            <p className="input_para-">
-              <input
-                className="p_input"
-                type="number "
-                placeholder="Enter Wallet Address"
-              />
-            </p>
-          </div> */}
         </div>
       </div>
       {/* END OF RIGHT SIDE TOP SECTION */}

@@ -197,7 +197,7 @@
 .nav-container-left-reverse{
   display: none;
 }
-@media (max-width: 700px){
+@media (max-width: 926px){
   .container{
   
     padding-left: 0px;

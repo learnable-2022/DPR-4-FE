@@ -103,3 +103,81 @@ ion-icon {
   margin-left: 71%;
   margin-top: 1rem;
 }
+@media (max-width: 719px) {
+  .input_div {
+    width: 100%;
+  }
+  .left_vitals {
+    flex: 1;
+  }
+  .grant_access_div {
+    width: 100%;
+  }
+  .nav_title {
+    width: 90%;
+  }
+  .access_input {
+    flex: 0.8 1;
+  }
+  .access_input::placeholder {
+    font-size: 12px;
+  }
+  .holder_text {
+    font-size: 14px;
+  }
+  .navigation_section {
+    width: 90%;
+  }
+  .drafts_header_right_no_justify {
+    flex: 1;
+  }
+}
+@media (max-width: 516px) {
+  .drafts_header_left {
+    font-size: 23px;
+    width: 100%;
+    flex: 1;
+  }
+  .drafts_header_right_no_justify {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+  }
+  .drafts_header_right img,
+  .drafts_header_right_no_justify img {
+  }
+
+  .navigation_section {
+  }
+  .navigation_section {
+    margin-top: 6rem;
+  }
+}
+@media (max-width: 493px) {
+  .holder_text {
+    flex: 0.4;
+  }
+  .vital_value_div {
+    flex: 0.6;
+  }
+  .grant_access_div {
+    flex-direction: column;
+  }
+  .access_input {
+    width: 100%;
+  }
+}
+@media (max-width: 415px) {
+  .drafts_header_right_no_justify {
+    position: absolute;
+    right: 20px;
+    top: 45px;
+  }
+  .drafts_header_right_no_justify img {
+    height: 20px;
+    width: 20px;
+  }
+}

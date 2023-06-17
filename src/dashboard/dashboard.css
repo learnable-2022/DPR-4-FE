@@ -7,7 +7,7 @@
 .doctorsdashboard {
   width: 100%;
   padding: 2rem;
-
+  position: relative;
   height: 100vh;
 }
 
@@ -15,7 +15,7 @@
   position: absolute;
   bottom: 0;
   top: 6rem;
-  left: 160px;
+  left: 2rem;
   right: 2rem;
   overflow-y: hidden;
   padding-bottom: 2rem;
@@ -24,15 +24,32 @@
   justify-content: space-between;
   margin-top: 2rem;
 }
+.doctorsdashboard .hamburger_icon {
+  display: none;
+}
+.doctorsdashboard .doc_med_logo {
+  display: none;
+}
 .doctorsdashboard main .left-side {
   border-radius: 8px;
   box-shadow: 1px 2px 8px rgb(91, 91, 91);
   flex: 0.8;
   padding: 1rem;
   margin-left: 3.5rem;
-
+  margin-right: 1rem;
   height: 100%;
   align-self: flex-start;
+  overflow-y: scroll;
+}
+.doctorsdashboard main .left_side_wrapper {
+  border-radius: 10px;
+  padding-left: 10px;
+  margin-top: 1rem;
+  flex: 0.9;
+  height: 100%;
+  align-self: flex-start;
+  margin-right: 1.2rem;
+  padding: 1rem 0;
   overflow-y: scroll;
 }
 
@@ -124,6 +141,7 @@
 }
 .calendar-container {
   position: relative;
+  padding-top: 1rem;
 }
 .ken_class {
   position: absolute;
@@ -150,6 +168,10 @@
   height: 100%;
   margin-right: 2rem;
   overflow-y: scroll;
+}
+.doctorsdashboard .back_arrow {
+  display: none;
+  position: absolute;
 }
 .doctorsdashboard main .schedule_div {
   border-radius: 10px;
@@ -371,4 +393,144 @@ abbr {
 
 .react-calendar--selectRange .react-calendar__tile--hover {
   background-color: #e6e6e6;
+}
+@media (max-width: 1100px) {
+  .doctorsdashboard main {
+    flex-direction: column;
+    overflow-y: hidden;
+    margin-top: 1rem;
+    width: 100%;
+    position: relative;
+    left: 0;
+    top: 4.5rem;
+  }
+  .doctorsdashboard main .left-side {
+    margin-left: 0.4rem;
+    padding-left: 1rem;
+    margin-right: 0.4rem;
+  }
+  .doctorsdashboard .header_text_part p {
+    width: 100%;
+    text-align: center;
+    font-size: 1.3rem;
+  }
+  .doctorsdashboard .header_text_part h1 {
+  }
+  .doctorsdashboard main .right-side {
+    margin-right: 0.4rem;
+  }
+  .doctorsdashboard {
+    overflow-y: scroll;
+    height: 100vh;
+  }
+  .doctorsdashboard .header_text_part {
+    position: absolute;
+    top: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+  }
+  .doctorsdashboard main .left_side_wrapper {
+    height: 100%;
+    width: 100%;
+    margin-right: 0;
+    overflow-y: scroll;
+  }
+  .react-calendar,
+  .react-calendar *,
+  .react-calendar *:before,
+  .react-calendar *:after {
+    width: 100%;
+  }
+  .doctorsdashboard main .search_div input::placeholder {
+    font-size: 11px;
+  }
+  .doctorsdashboard main .search_div {
+    flex: 0.4;
+  }
+  .doctorsdashboard .doc_med_logo {
+    display: block;
+
+    margin-left: 40%;
+  }
+}
+@media (max-width: 926px) {
+  .doctorsdashboard .hamburger_icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+  }
+  .doctorsdashboard .doc_med_logo {
+    display: block;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .doctorsdashboard .header_text_part h1 {
+    font-size: 1.2rem;
+  }
+  .doctorsdashboard .header_text_part p {
+    font-size: 1.2rem;
+  }
+  .doctorsdashboard .header_text_part {
+    top: 4rem;
+  }
+  .doctorsdashboard main {
+    top: 6.5rem;
+  }
+}
+@media (max-width: 408px) {
+  .doctorsdashboard {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .doctorsdashboard .header_icon {
+    width: 1rem;
+    height: 1rem;
+  }
+  .doctorsdashboard .doc_med_logo {
+    width: 100px;
+  }
+  .doctorsdashboard .header_icon_part {
+    justify-content: end;
+    gap: 0.5rem;
+  }
+  .doctorsdashboard main {
+    top: 6rem;
+  }
+  .doctorsdashboard .header_text_part {
+    top: 4rem;
+  }
+  .doctorsdashboard main .header_div {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .doctorsdashboard main .search_div {
+    width: 100%;
+  }
+  .doctorsdashboard main .left-side {
+    padding: 0.2rem;
+  }
+  .doctorsdashboard .header_text_part h1 {
+    font-size: 1rem;
+  }
+  .doctorsdashboard .header_text_part p {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 340px) {
+}
+@media (max-width: 306px) {
+  .doctorsdashboard .doc_med_logo {
+    position: absolute;
+    top: 2rem;
+    left: 28%;
+  }
+  .doctorsdashboard {
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+  }
 }

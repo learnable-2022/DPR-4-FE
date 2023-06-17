@@ -150,6 +150,7 @@ function Finish({contract}) {
           <div className="service_charge_values_wrapper">
             <div className="all_service_charge_values_container">
               <div className="service_charge_values">
+                <p className="_hidden">Service Type</p>
                 <input
                   type="text"
                   onChange={(e) => handleChange(e, i)}
@@ -158,6 +159,7 @@ function Finish({contract}) {
                   className="service_type_input service_charge_inputs"
                   placeholder="-"
                 />
+                <p className="_hidden">Service Charge</p>
                 <input
                   type="number"
                   onChange={(e) => handleChange(e, i)}
@@ -166,6 +168,7 @@ function Finish({contract}) {
                   className="service_charge_input service_charge_inputs"
                   placeholder="-"
                 />
+                <p className="_hidden">Tax(NGN)</p>
                 <input
                   type="number"
                   className="service_tax_input service_charge_inputs"
@@ -174,6 +177,7 @@ function Finish({contract}) {
                   placeholder="-"
                   onChange={(e) => handleChange(e, i)}
                 />
+                <p className="_hidden">Subtotal(NGN)</p>
                 <input
                   type="number"
                   className="service_total_input service_charge_inputs"
