@@ -55,6 +55,7 @@
 }
 .patientdashboard .right_side_header .profile_img {
   height: 40px;
+  box-shadow: 1px 2px 4px rgb(224 222 222);
   width: 40px;
   border-radius: 50%;
   border: 1px solid rgb(255, 255, 255);
@@ -108,6 +109,7 @@
 .patientdashboard .patientsvital .image_div img {
   height: 120px;
   width: 120px;
+  box-shadow: 1px 2px 4px rgb(224 222 222);
   border: 1px solid rgb(255 255 255);
   border-radius: 50%;
 
@@ -428,6 +430,7 @@
   flex-direction: column;
   align-self: baseline;
 }
+
 .patientdashboard .card2 .diagnosis_container {
   display: flex;
   justify-content: space-between;
@@ -502,7 +505,6 @@
     font-size: small;
   }
   .patientdashboard_header {
-    
   }
   .patientdashboard .right_side_header {
     flex: 0.5;
@@ -704,7 +706,72 @@
     bottom: 14%;
   }
 }
+@media (max-width: 440px) {
+  .patientdashboard .card3 {
+    padding: 1rem 0.3rem 1rem 0.3rem;
 
+    margin: 0 0.3rem;
+  }
+  .patientdashboard .card2 {
+    padding: 1rem 0.3rem 2rem 0.3rem;
+  }
+  .patientdashboard .card2 {
+    align-self: normal;
+    margin: 1rem 0.3rem;
+  }
+  .patientdashboard .vitals_readings_cards .card1 {
+    margin: 0 0.3rem;
+  }
+  .patientdashboard_header {
+    padding: 0;
+  }
+  .patientdashboard .patientsvital {
+    margin-top: 3rem;
+    padding: 0 0.3rem;
+  }
+  .patientdashboard .share_btn {
+    top: 4.7rem;
+    right: 10px;
+  }
+  .patientdashboard .responsive_h1_header_title {
+    font-size: 1.5rem;
+  }
+  .patientdashboard .info_div .wrapper {
+    flex-direction: column;
+  }
+  .patientdashboard .card3 .med_div {
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+    padding: 1rem 1rem 1rem 1rem;
+  }
+  .patientdashboard .middle_section .middle_section_header {
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+    text-align: center;
+  }
+  .patientdashboard .card2 .diagnosis_container {
+    flex-direction: column-reverse;
+    gap: 4px;
+    align-items: center;
+  }
+  .patientdashboard .card2 .diagnosis_container .left {
+    text-align: center;
+  }
+  .patientdashboard .card2 .diagnosis_container {
+    padding-top: 0.7rem;
+  }
+  .patientdashboard .notifi_btn {
+    display: none;
+  }
+  .patientdashboard .right_side_header .profile_img {
+    display: none;
+  }
+  .relative::after {
+    display: none;
+  }
+}
 ._sideBar {
   width: 180px;
   height: 100vh;

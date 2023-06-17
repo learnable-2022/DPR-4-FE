@@ -33,6 +33,8 @@ function NavComponent({ name, image }) {
   let doctor_Image = localStorage.getItem("doctor_image");
 
   let doctor_Name = localStorage.getItem("doctor_name");
+  console.log(name);
+  console.log(doctor_Name);
   const closeOpenMenus = useCallback(
     (e) => {
       if (
@@ -116,10 +118,7 @@ function NavComponent({ name, image }) {
       <img className="doc_med_logo" src={medLogo} alt="med_logo" />
       <div className="header_text_part">
         <h1>
-          You are welcome{" "}
-          <span className="doc_name">
-            Dr. {name ? name : doctor_Name.split(" ")[0]}
-          </span>
+          You are welcome <span className="doc_name">Dr. {name}</span>
         </h1>
         <p>I trust you’re ready to save lives today...</p>
       </div>

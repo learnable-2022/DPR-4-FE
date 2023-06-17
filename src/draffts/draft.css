@@ -172,7 +172,7 @@
   color: white;
 }
 .draft_next {
-  padding: 1rem 2rem;
+  padding: 0.7rem 2rem;
   border: none;
   border-radius: 7px;
   background-color: #3399ff;
@@ -186,7 +186,7 @@
 .report_btn_style {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 8px;
   margin-top: 2rem;
 }

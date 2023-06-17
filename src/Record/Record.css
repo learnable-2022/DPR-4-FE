@@ -12,7 +12,7 @@
   height: 100vh;
   overflow-x: hidden;
 }
-.hamburger{
+.hamburger {
   display: none;
 }
 .nav-container {
@@ -92,6 +92,7 @@
 .second-image img {
   width: 120px;
   height: 120px;
+  box-shadow: 1px 2px 4px rgb(224 222 222);
 }
 .second-section-text {
   display: flex;
@@ -102,7 +103,7 @@
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 400;
-  color: #B3B3B3;
+  color: #b3b3b3;
   font-size: 16px;
   line-height: 28px;
 }
@@ -120,7 +121,7 @@
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 400;
-  color: #B3B3B3;
+  color: #b3b3b3;
   font-size: 16px;
   line-height: 28px;
 }
@@ -162,11 +163,10 @@
   list-style: none;
   color: #000000;
 }
-.third-section-link li a{
+.third-section-link li a {
   text-decoration: none;
- 
+
   color: #000000;
-  
 }
 .third-section-link li::after {
   content: "";
@@ -179,168 +179,157 @@
   transition: 0.2s all;
 }
 
-
 .navi-link p {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
 }
-.active{
- 
+.active {
 }
-.active p{
+.active p {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
-  color: #3399ff ;
+  color: #3399ff;
 }
-.nav-container-left-reverse{
+.nav-container-left-reverse {
   display: none;
 }
-@media (max-width: 700px){
-  .container{
-  
+@media (max-width: 700px) {
+  .container {
     padding-left: 0px;
   }
-  .hamburger{
+  .hamburger {
     display: block;
   }
-  .second-section-first{
+  .second-section-first {
     display: flex;
     flex-direction: column;
- 
+
     align-items: normal;
     flex-wrap: wrap;
   }
-  .nav-container-left{
+  .nav-container-left {
     display: none;
   }
-  .nav-container{
+  .nav-container {
     background: #f9f9f9;
     border: none;
     left: 0;
-   width: 100%;
+    width: 100%;
     padding: 10px;
-   
   }
-  .second-section-text p{
+  .second-section-text p {
     font-size: 12px;
   }
-  .second-section-second p{
+  .second-section-second p {
     font-size: 12px;
   }
-  .second-section{
+  .second-section {
     display: flex;
     flex-direction: column;
-    align-items:normal;
+    align-items: normal;
     flex-wrap: wrap;
     padding: 10px;
     width: 100%;
   }
-  .second-section-text{
+  .second-section-text {
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
-  
+
     flex-wrap: wrap;
     width: 100%;
   }
-  .second-section-second{
-  
+  .second-section-second {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
     width: 100%;
   }
-  .second-section-inner h2{
+  .second-section-inner h2 {
     text-align: center;
   }
   .second-image {
-   
     width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  .container{
+  .container {
     background: #f9f9f9;
   }
-  .third-section-link{
+  .third-section-link {
     display: none;
   }
-  .nav-container-left-reverse{
-    display:flex;
+  .nav-container-left-reverse {
+    display: flex;
     align-items: center;
     gap: 10px;
-
   }
-  .nav-container-left-reverse h2{
+  .nav-container-left-reverse h2 {
     font-size: small;
   }
 }
-@media (max-width: 500px){
-  .container{
-  
+@media (max-width: 500px) {
+  .container {
     padding-left: 0px;
   }
-  .hamburger{
+  .hamburger {
     display: block;
   }
-  .second-section-first{
+  .second-section-first {
     display: flex;
     flex-direction: column;
- 
+
     align-items: normal;
     flex-wrap: wrap;
   }
-  .nav-container-left{
+  .nav-container-left {
     display: none;
   }
-  .nav-container{
+  .nav-container {
     background: #f9f9f9;
     border: none;
     left: 0;
-   width: 100%;
+    width: 100%;
     padding: 10px;
-   
   }
-  .second-section{
+  .second-section {
     display: flex;
     flex-direction: column;
-    align-items:normal;
+    align-items: normal;
     flex-wrap: wrap;
     padding: 10px;
     width: 100%;
   }
-  .second-section-text{
+  .second-section-text {
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
-  
+
     flex-wrap: wrap;
     width: 100%;
   }
-  .second-section-second{
-  
+  .second-section-second {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
     width: 100%;
   }
-  .second-section-inner h2{
+  .second-section-inner h2 {
     text-align: center;
   }
   .second-image {
-   
     width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  .container{
+  .container {
     background: #f9f9f9;
   }
-  .third-section-link{
+  .third-section-link {
     display: none;
   }
 }

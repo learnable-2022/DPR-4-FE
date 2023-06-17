@@ -47,6 +47,8 @@ export default function DoctorsDashboard() {
   const [doctor_Age, setDoctorAge] = useState("");
   const [doctor_ID, setDoctorID] = useState("");
   const [doctor_License, setDoctorrLicense] = useState("");
+  const [doctor_First_Name, setDoctorFirstName] = useState("");
+  const [doctor_Last_Name, setDoctorLastName] = useState("");
   // const [doctor_Height, setDoctorHeight] = useState("");
   // const [doctor_Weight, setDoctorWeight] = useState("");
   // const [doctor_Alle, setDoctorAlle] = useState("");
@@ -90,6 +92,7 @@ export default function DoctorsDashboard() {
           },
         })
         .then((res) => {
+          console.log(res);
           const res1 = res?.data.find((item) => item.email === DoctorEmail);
           console.log(res1);
           localStorage.setItem("doctor_image", res1?.image);
@@ -105,20 +108,27 @@ export default function DoctorsDashboard() {
           localStorage.setItem("doctor_origin", res1?.stateOfOrigin);
           localStorage.setItem("doctor_residence", res1?.stateOfResidence);
           localStorage.setItem("doctor_wallet", res1?.walletId);
-          localStorage.setItem("doctor_hospital", res1?.Hospital);
+          localStorage.setItem("doctor_hospital", res1?.hospital);
+          localStorage.setItem("doctor_firstname", res1?.firstName);
+          localStorage.setItem("doctor_lastname", res1?.lastName);
 
+          let doctor_Last_Name = localStorage.getItem("doctor_lastname");
+          let doctor_FirstName = localStorage.getItem("doctor_firstname");
           let doctor_Image = localStorage.getItem("doctor_image");
-          setDoctorImage(doctor_Image);
           let doctor_Name = localStorage.getItem("doctor_name");
-          setDoctorName(doctor_Name);
           let doctor_Email = localStorage.getItem("doctor_email");
-          setDoctorEmail(doctor_Email);
           let doctor_gender = localStorage.getItem("doctor_gender");
-          setDoctorGender(doctor_gender);
           let doctor_DOB = localStorage.getItem("doctor_DOB");
-          setDoctorAge(doctor_DOB);
           let doctor_ID = localStorage.getItem("doctor_ID");
+
+          setDoctorLastName(doctor_Last_Name);
+          setDoctorFirstName(doctor_FirstName);
           setDoctorID(doctor_ID);
+          setDoctorAge(doctor_DOB);
+          setDoctorImage(doctor_Image);
+          setDoctorGender(doctor_gender);
+          setDoctorName(doctor_Name);
+          setDoctorEmail(doctor_Email);
 
           let doctor_license = localStorage.getItem("doctor_license");
           let doctor_number = localStorage.getItem("doctor_number");
@@ -156,7 +166,12 @@ export default function DoctorsDashboard() {
 
   return (
     <div className="doctorsdashboard">
-      <NavComponent name={doctor_Name?.split(" ")[0]} image={doctor_Image} />
+      <NavComponent
+        name={
+          doctor_First_Name ? doctor_First_Name : doctor_Name?.split(" ")[0]
+        }
+        image={doctor_Image}
+      />
 
       {connectedWallet ? (
         <main>
@@ -313,32 +328,32 @@ export default function DoctorsDashboard() {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="right-side">
+            <div className="calendar-container">
+              <Calendar
+                onClickDay={handleAddCargo}
+                onChange={setDate}
+                value={date}
+              />
+            </div>
+            <div className="schedule_div">
+              <div className="schedule_wrapper">
+                <div className="top">
+                  <Link to="/DocSchedule" className="link">
+                    <button>Schedule</button>
+                  </Link>
 
-            <div className="right-side">
-              <div className="calendar-container">
-                <Calendar
-                  onClickDay={handleAddCargo}
-                  onChange={setDate}
-                  value={date}
-                />
-              </div>
-              <div className="schedule_div">
-                <div className="schedule_wrapper">
-                  <div className="top">
-                    <Link to="/DocSchedule" className="link">
-                      <button>Schedule</button>
-                    </Link>
-
-                    <p>{date.toLocaleDateString("en-us", options)}</p>
-                  </div>
-                  <div className="middle">
-                    <p>{date.toLocaleDateString("en-us", options2)}</p>
-                  </div>
-                  <div className="appointment_brief">
-                    <p>Appointment with #2589 </p>
-                    <p>12pm - 2pm</p>
-                  </div>
-                  {/* <div className="appointment_brief">
+                  <p>{date.toLocaleDateString("en-us", options)}</p>
+                </div>
+                <div className="middle">
+                  <p>{date.toLocaleDateString("en-us", options2)}</p>
+                </div>
+                <div className="appointment_brief">
+                  <p>Appointment with #2589 </p>
+                  <p>12pm - 2pm</p>
+                </div>
+                {/* <div className="appointment_brief">
                 <p>Appointment with #2589 </p>
                 <p>12pm - 2pm</p>
               </div>
@@ -354,7 +369,6 @@ export default function DoctorsDashboard() {
                 <p>Appointment with #2589 </p>
                 <p>12pm - 2pm</p>
               </div> */}
-                </div>
               </div>
             </div>
           </div>

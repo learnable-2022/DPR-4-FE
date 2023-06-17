@@ -21,7 +21,10 @@ export default function PatientsBilling() {
   function handleClick(e) {
     navigate("/PatientPaymentHistory");
   }
-
+  let updatedFirstName = localStorage.getItem("patient_firstName");
+  let updatedLastName = localStorage.getItem("patient_lastName");
+  let existingName = localStorage.getItem("patient_name");
+  let patient_Image = localStorage.getItem("patient_image");
   function handlePress(e) {
     navigate("/PatientInvoice");
   }
@@ -33,7 +36,12 @@ export default function PatientsBilling() {
           <div className="billingNav">
             <div className="patientName">
               <h2>
-                Hello, Amaka <br /> Chibueze!
+                Hello,{" "}
+                {updatedFirstName
+                  ? updatedFirstName
+                  : existingName.split(" ")[0]}{" "}
+                <br />{" "}
+                {updatedLastName ? updatedLastName : existingName.split(" ")[1]}
               </h2>
             </div>
 
@@ -45,7 +53,11 @@ export default function PatientsBilling() {
 
               <div className="searchIcons">
                 <img src={Notification} alt="pics" />
-                <img src={PatientPics} alt="pics" />
+                <img
+                  style={{ boxShadow: "1px 2px 4px rgb(224 222 222)" }}
+                  src={patient_Image ? patient_Image : PatientPics}
+                  alt="pics"
+                />
               </div>
             </div>
           </div>

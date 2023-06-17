@@ -15,26 +15,55 @@ function PatientsProfile() {
   const [patient_Email, setPatientEmail] = useState("");
   const [patient_Alle, setPatientAlle] = useState("");
   const [patient_Wallet, setPatientWallet] = useState("");
+  const [patient_First_Name, setPatientFirstName] = useState("");
+  const [patient_Last_Name, setPatientLastName] = useState("");
+  const [patient_address, setPatientAddress] = useState("");
+  const [patient_city, setPatientCity] = useState("");
+  const [patient_country, setPatientCountry] = useState("");
+  const [patient_state, setPatientState] = useState("");
+  const [patient_number, setPatientNumber] = useState("");
 
   useEffect(() => {
     let pat_Image = localStorage.getItem("patient_image");
     let pat_Name = localStorage.getItem("patient_name");
     let pat_Email = localStorage.getItem("patient_email");
     let patient_gender = localStorage.getItem("patient_gender");
-    setPatientGender(patient_gender);
+    let patient_address = localStorage.getItem("patient_address");
+    let patient_city = localStorage.getItem("patient_city");
+    let patient_country = localStorage.getItem("patient_country");
+    let patient_number = localStorage.getItem("patient_number");
+    let patient_state = localStorage.getItem("patient_state");
     let patient_DOB = localStorage.getItem("patient_DOB");
-    setPatientAge(patient_DOB);
     let patient_Blood = localStorage.getItem("patient_blood");
-    setPatientBlood(patient_Blood);
     let patient_Geno = localStorage.getItem("patient_genotype");
-    setPatientGeno(patient_Geno);
     let patient_Height = localStorage.getItem("patient_height");
-    setPatientHeight(patient_Height);
     let patient_Weight = localStorage.getItem("patient_weight");
-    setPatientWeight(patient_Weight);
     let patient_Alle = localStorage.getItem("patient_allergies");
-    setPatientAlle(patient_Alle);
     let patient_wallet = localStorage.getItem("patient_walletId");
+    let patient_first_name = localStorage.getItem("patient_firstName");
+    let patient_last_name = localStorage.getItem("patient_lastName");
+
+    setPatientNumber(patient_number);
+    setPatientAddress(patient_address);
+    setPatientCity(patient_city);
+    setPatientCountry(patient_country);
+    setPatientGender(patient_gender);
+    setPatientState(patient_state);
+
+    setPatientAge(patient_DOB);
+
+    setPatientBlood(patient_Blood);
+
+    setPatientGeno(patient_Geno);
+
+    setPatientHeight(patient_Height);
+
+    setPatientWeight(patient_Weight);
+
+    setPatientAlle(patient_Alle);
+
+    setPatientFirstName(patient_first_name);
+    setPatientLastName(patient_last_name);
     setPatientWallet(patient_wallet);
     setPatientImage(pat_Image);
     setPatientName(pat_Name);
@@ -55,11 +84,19 @@ function PatientsProfile() {
             <div className="left_section">
               <h3>First name</h3>
               <div>
-                <p>{patient_Name.split("    ")[0]}</p>
+                <p>
+                  {patient_First_Name
+                    ? patient_First_Name
+                    : patient_Name.split(" ")[0]}
+                </p>
               </div>
               <h3>Middle name</h3>
               <div>
-                <p>{patient_Name.split("    ")[1]}</p>
+                <p>
+                  {patient_First_Name
+                    ? patient_First_Name
+                    : patient_Name.split(" ")[1]}
+                </p>
               </div>
               <h3>Date of birth</h3>
               <div>
@@ -69,7 +106,11 @@ function PatientsProfile() {
             <div className="right_section">
               <h3>Last name</h3>
               <div>
-                <p>{patient_Name.split("    ")[1]}</p>
+                <p>
+                  {patient_Last_Name
+                    ? patient_Last_Name
+                    : patient_Name.split(" ")[1]}
+                </p>
               </div>
               <h3>Gender</h3>
               <div>
@@ -90,28 +131,28 @@ function PatientsProfile() {
             <div className="left_section">
               <h3>Address</h3>
               <div>
-                <p>{"-"}</p>
+                <p>{patient_address ? patient_address : "-"}</p>
               </div>
               <h3>City</h3>
               <div>
-                <p>{"-"}</p>
+                <p>{patient_city ? patient_city : "-"}</p>
               </div>
             </div>
             <div className="right_section">
               <h3>Country</h3>
               <div>
-                <p>{"-"}</p>
+                <p>{patient_country ? patient_country : "-"}</p>
               </div>
               <h3>State</h3>
               <div>
-                <p>{"-"}</p>
+                <p>{patient_state ? patient_state : "-"}</p>
               </div>
             </div>
           </div>
           <div className="_down_part">
             <h3>Phone number</h3>
             <div>
-              <p>{"-"}</p>
+              <p>{patient_number ? patient_number : "-"}</p>
             </div>
             <h3>Email address</h3>
             <div>
