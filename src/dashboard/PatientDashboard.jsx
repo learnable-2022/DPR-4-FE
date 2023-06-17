@@ -157,7 +157,10 @@ const checkRecord = async () => {
           vitalSigns: record.vitalSigns,
           treatmentDetails: record.treatmentDetails,
           vaccine: record.vaccine,
-          prescription: record.prescription
+          prescription: record.prescription,
+          billing: record.billing,
+          service: record.service,
+          amount: record.amount
         };
       });
       setFormattedRecords(formattedRecords.reverse());
@@ -432,7 +435,7 @@ useEffect(() => {
                           <div className="readings_div">
                             <p className="heading">Blood Status</p>
                             <p>
-                              <strong className="value">{vitalSigns[0][4]}</strong>
+                              <strong className="value">{vitalSigns[vitalSigns.length - 1][4]}</strong>
                             </p>
                           </div>
                         </div>
@@ -451,7 +454,7 @@ useEffect(() => {
                           <div className="readings_div">
                             <p className="heading">Heart Rate</p>
                             <p>
-                              <strong className="value">{vitalSigns[0][1]}</strong>
+                              <strong className="value">{vitalSigns[vitalSigns.length - 1][1]}</strong>
                             </p>
                           </div>
                         </div>
@@ -469,7 +472,7 @@ useEffect(() => {
                               src={leftLine}
                               alt="line"
                             />
-                            {vitalSigns[0][4]}
+                            {vitalSigns[vitalSigns.length - 1][4]}
                             <br />
                             <span className="value_span">/70</span>
                             <img
@@ -491,7 +494,7 @@ useEffect(() => {
                               src={leftLine}
                               alt="line"
                             />
-                            {vitalSigns[0][1]}
+                            {vitalSigns[vitalSigns.length - 1][1]}
                             <br />
                             <span className="value_span1">bpm</span>
                             <img
@@ -517,7 +520,7 @@ useEffect(() => {
                           </div>
                           <div className="count_val_div">
                             <p>Blood Count</p>
-                            <p>{vitalSigns[0][5]}</p>
+                            <p>{vitalSigns[vitalSigns.length - 1][5]}</p>
                           </div>
                         </div>
                         <div className="middle2_right">
@@ -534,7 +537,7 @@ useEffect(() => {
                           </div>
                           <div className="count_val_div">
                             <p>Glucose Level</p>
-                            <p>{vitalSigns[0][6]}</p>
+                            <p>{vitalSigns[vitalSigns.length - 1][6]}</p>
                           </div>
                         </div>
                       </div>
@@ -548,7 +551,7 @@ useEffect(() => {
                             />
                             <div className="left_readings">
                               <img className="dot" src={dotIcon} alt="line" />
-                              {vitalSigns[0][5]}
+                              {vitalSigns[vitalSigns.length - 1][5]}
                               <br />
                               <span className="value_span">/90</span>
                             </div>
@@ -562,7 +565,7 @@ useEffect(() => {
                             alt="pics"
                           />
                           <div className="left_readings">
-                          {vitalSigns[0][6]}
+                          {vitalSigns[vitalSigns.length - 1][6]}
                             <br />
                             <span className="value_span1">ml</span>
                             <img
@@ -593,7 +596,7 @@ useEffect(() => {
                   {treatmentDetails.slice(0, 5).map((detail, index) => (
                     <div className="diagnosis_container" key={index}>
                       <div className="left">
-                        <p className="diagnose_name">{detail}</p>
+                        <p className="diagnose_name">{detail[1]}</p>
                         <p className="diagnose_status">Active</p>
                       </div>
                       <div className="right">
@@ -624,8 +627,8 @@ useEffect(() => {
                             <img src={drugs[index % drugs.length]} alt="drug" />
                           </div>
                           <div className="drug_name_div">
-                            <p className="drug_name">{medication}</p>
-                            <p className="dosage">1 Tab twice daily</p>
+                            <p className="drug_name">{medication[0]}</p>
+                            <p className="dosage">{medication[2]}</p>
                           </div>
                         </div>
                       ))}

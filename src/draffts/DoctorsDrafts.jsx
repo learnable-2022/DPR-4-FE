@@ -58,7 +58,7 @@ export default function DoctorsDrafts() {
    
      dispatch({type:"SET_PATIENT_ADDRESS", walletAddress:e.target.value})
   }
-
+// console.log(vaccineStatus);
   
   const saveRecords = async () => {
     try {
@@ -66,7 +66,7 @@ export default function DoctorsDrafts() {
         walletAddress,
         [temperature, heartRate, respRate, oxygen, bloodPressure, bloodCount, glucoseLevel],
         [complaints, comments, treatments],
-        [vaccineName, vaccineDate, 30],
+        [vaccineName, vaccineDate, vaccineStatus],
         [prescriptions[0].med, prescriptions[0].dur, prescriptions[0].dos],
         [billingDate, billingPatientName, billingProvider, billingLocation],
         [billings[0].serviceType, billings[0].serviceCharge, billings[0].subTotal, billings[0].tax],
