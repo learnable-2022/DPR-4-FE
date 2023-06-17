@@ -61,6 +61,8 @@ export default function PatientDashboard() {
   const [patient_Weight, setPatientWeight] = useState("");
   const [patient_Alle, setPatientAlle] = useState("");
   const [patient_WalletId, setPatientWallet] = useState("");
+  const [patient_First_Name, setPatientFirstName] = useState("");
+  const [patient_Last_Name, setPatientLastName] = useState("");
 
   const [data, setData] = useState(true);
   const drugs = [drug1, drug2, drug3, drug4];
@@ -86,6 +88,10 @@ export default function PatientDashboard() {
   let checkEffectAlle = localStorage.getItem("patient_allergies");
 
   let checkEffectwallet = localStorage.getItem("patient_walletId");
+
+  let checkEffectFirstName = localStorage.getItem("patient_firstName");
+
+  let checkEffectLastName = localStorage.getItem("patient_lastName");
 
   const toggleNav = () => {
     setIsNavOpen(!navOpen);
@@ -227,6 +233,15 @@ useEffect(() => {
 }, [defaultAccount]);
   
 
+  const shareReport = () => {
+    const options = {
+      scrollY: -window.scrollY,
+    };
+    // html2canvas(screenshotRef.current, options).then((canvas) => {
+    // const imageData = canvas.toDataURL();
+    //shareScreenshot(imageData);
+    // });
+  };
   const closeOpenMenus = useCallback(
     (e) => {
       if (
@@ -313,7 +328,13 @@ useEffect(() => {
         localStorage.setItem("patient_country", res1?.country);
         localStorage.setItem("patient_number", res1?.number);
         localStorage.setItem("patient_state", res1?.state);
+        localStorage.setItem("patient_firstName", res1?.firstName);
+        localStorage.setItem("patient_lastName", res1?.lastName);
 
+        let patient_First_Name = localStorage.getItem("patient_firstName");
+        setPatientFirstName(patient_First_Name);
+        let patient_Last_Name = localStorage.getItem("patient_lastName");
+        setPatientLastName(patient_Last_Name);
         let patient_Image = localStorage.getItem("patient_image");
         setPatientImage(patient_Image);
         let patient_Name = localStorage.getItem("patient_name");
@@ -437,14 +458,18 @@ useEffect(() => {
         <div className="left_side_header">
           <h1 className="h1_header_title">
             Welcome!{" "}
-            {patient_Name
-              ? patient_Name?.split(" ")[0]
-              : checkEffectName?.split(" ")[0]}
+            {patient_First_Name
+              ? patient_First_Name
+              : checkEffectFirstName || patient_Name.split(" ")[0]}
             ,
           </h1>
         </div>
         <div className="right_side_header">
-          <button className="share_btn">Share Report</button>
+          <Link to="/share" className="link">
+            <button className="share_btn" onClick={shareReport}>
+              Share Report
+            </button>
+          </Link>
           <img src={notification} alt="notification" className="notifi_btn" />
           {/* <GrNotification className="profile_notification" /> */}
 
@@ -479,9 +504,9 @@ useEffect(() => {
       <main className="patients_dashboard_main">
         <h1 className="responsive_h1_header_title">
           Welcome!{" "}
-          {patient_Name
-            ? patient_Name?.split(" ")[0]
-            : checkEffectName?.split(" ")[0]}
+          {patient_First_Name
+            ? patient_First_Name
+            : checkEffectFirstName || patient_Name.split(" ")[0]}
           ,
         </h1>
         <div className="patientsvital">

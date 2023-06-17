@@ -302,9 +302,7 @@ export default function DoctorsDrafts() {
       <Outlet className="draft_outlet" />
 
       <div className="report_btn_style">
-        <button className={shouldApplyStyle ? "no_btn" : "draft_save "}>
-          Save
-        </button>
+        
         <button
           onClick={handleNext}
           className={shouldApplyStyle ? "no_btn" : "draft_next"}

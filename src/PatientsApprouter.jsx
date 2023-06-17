@@ -50,6 +50,7 @@ import DoctorsOverview from "./doctorsPatientsRecord/subrecords/DoctorsOverview"
 import DoctorsLab from "./doctorsPatientsRecord/subrecords/DoctorsLab";
 import DoctorsVaccine from "./doctorsPatientsRecord/subrecords/DoctorsVaccine";
 import DoctorsPresciption from "./doctorsPatientsRecord/subrecords/DoctorsPresciption";
+import Share from "./sharePage/share";
 
 import abi from "./abi.json";
 import { ethers } from 'ethers';
@@ -195,7 +196,6 @@ function Approuter() {
           ) : (
             <Route path="PatientInvoice" element={<Landing />} />
           )}
- 
           {patientToken ? (
             <Route
               path="/lab/view-report"
@@ -222,6 +222,18 @@ function Approuter() {
           )}
           {patientToken ? (
             <Route
+              path="/share"
+              element={
+                <AuthUserLayout>
+                  <Share />
+                </AuthUserLayout>
+              }
+            />
+          ) : (
+            <Route path="/share" element={<Landing />} />
+          )}
+          {patientToken ? (
+            <Route
               path="/PatientInvoiceConfirmation"
               element={<PatientInvoiceConfirmation />}
             />
@@ -229,16 +241,16 @@ function Approuter() {
             <Route path="/PatientInvoiceConfirmation" element={<Landing />} />
           )}
           {patientToken ? (
-            <Route  
+            <Route
               path="Records"
               element={
                 <AuthUserLayout>
-                 {" "}
+                  {" "}
                   <PatientsRecord />{" "}
                 </AuthUserLayout>
               }
             >
-              <Route index="overview" element={<Overview/>} />
+              <Route index="overview" element={<Overview />} />
               <Route path="lab" element={<Lab />} />
               <Route path="vaccine" element={<Vaccine />} />
               <Route path="visit" element={<Visit />} />
@@ -248,19 +260,7 @@ function Approuter() {
             <Route path="Records" element={<Landing />} />
           )}
         </>
-
-
-
-
-
-                                 {/* {routes to doctors app and the sub components} */}
-     
-
-
-
-
-
-
+        {/* {routes to doctors app and the sub components} */}
         {doctorToken ? (
           <Route
             path="/DoctorPaymentHistory"
@@ -389,53 +389,31 @@ function Approuter() {
         ) : (
           <Route path="/DoctorInvoiceSent" element={<Landing />} />
         )}
-
-
-{doctorToken ? (
-            <Route  
-              path="DoctorsRecords"
-              element={
-                <AuthDocLayout>
-                 {" "}
-                  <DoctorsRecords />{" "}
-                </AuthDocLayout>
-              }
-            >
-              <Route path="doctorsoverview" element={<DoctorsOverview />} />
-              <Route path="doctorslab" element={<DoctorsLab />} />
-              <Route path="doctorsvaccine" element={<DoctorsVaccine />} />
-              <Route path="doctorsprescription" element={<DoctorsPresciption />} />
-            </Route>
-          ) : (
-            <Route path="DoctorsRecords" element={<Landing />} />
-          )}
-
-
-
-
-
-
-
+        {doctorToken ? (
+          <Route
+            path="DoctorsRecords"
+            element={
+              <AuthDocLayout>
+                {" "}
+                <DoctorsRecords />{" "}
+              </AuthDocLayout>
+            }
+          >
+            <Route path="doctorsoverview" element={<DoctorsOverview />} />
+            <Route path="doctorslab" element={<DoctorsLab />} />
+            <Route path="doctorsvaccine" element={<DoctorsVaccine />} />
+            <Route
+              path="doctorsprescription"
+              element={<DoctorsPresciption />}
+            />
+          </Route>
+        ) : (
+          <Route path="DoctorsRecords" element={<Landing />} />
+        )}
       </Routes>
     </Router>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const AuthUserLayout = ({ children }) => {
   return (
