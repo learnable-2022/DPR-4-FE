@@ -7,6 +7,7 @@ import { RiNumber1 } from "react-icons/ri";
 import { RiNumber2 } from "react-icons/ri";
 import { RiNumber3 } from "react-icons/ri";
 import { useServiceProviderValue } from "../ServiceProvider";
+import {contracts} from '../hooks/UseContract';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FiLogOut } from "react-icons/fi";
 import { AiOutlineSetting } from "react-icons/ai";
@@ -20,6 +21,9 @@ import ourlogo from "../assets/ourlogo.png";
 import { AiOutlineClose } from "react-icons/ai";
 
 export default function DoctorsDrafts() {
+  const {tempContract} = contracts();
+  console.log(tempContract)
+  
   const [{}, dispatch] = useServiceProviderValue();
   const mobileNavRef = useRef();
   const [navOpen, setIsNavOpen] = useState(false);
@@ -31,10 +35,67 @@ export default function DoctorsDrafts() {
   const shouldApplyStyle = location.pathname.includes("/finish");
   const report = location.pathname.includes("/report");
   const vitals = location.pathname.includes("/");
+  
 
   const handle = (e) => {
     navigate(+1);
   };
+   
+  const [
+    { 
+      walletAddress,
+      temperature,
+      bloodCount,
+      bloodPressure,
+      glucoseLevel,
+      heartRate,
+      oxygen,
+      respRate,
+      medication,
+      dosage,
+      duration,
+      complaints,
+      comments,
+      treatments,
+      vaccineName,
+      vaccineDate,
+      vaccineStatus,
+      prescriptions,
+      billingDate,
+      billingPatientName,
+      billingProvider,
+      billingLocation,
+      billings,
+      totalAmount,
+    }
+  ] = useServiceProviderValue();
+  console.log(walletAddress)
+  const handleWalletAddress = (e) =>{
+   
+     dispatch({type:"SET_PATIENT_ADDRESS", walletAddress:e.target.value})
+  }
+// console.log(vaccineStatus);
+  
+  const saveRecords = async () => {
+    try {
+      const updateRecord = await tempContract.addPatientRecord(
+        walletAddress,
+        [temperature, heartRate, respRate, oxygen, bloodPressure, bloodCount, glucoseLevel],
+        [complaints, comments, treatments],
+        [vaccineName, vaccineDate, vaccineStatus],
+        [prescriptions[0].med, prescriptions[0].dur, prescriptions[0].dos],
+        [billingDate, billingPatientName, billingProvider, billingLocation],
+        [billings[0].serviceType, billings[0].serviceCharge, billings[0].subTotal, billings[0].tax],
+        [totalAmount]
+      );
+      console.log(updateRecord);
+    } catch (error) {
+      console.error('Error executing addPatientRecord:', error);
+    }
+  };
+  
+
+
   const closeOpenNav = useCallback(
     (e) => {
       if (
@@ -178,7 +239,7 @@ export default function DoctorsDrafts() {
           }
         >
           {window.location.pathname === "/DocDraft/finish" && (
-            <button className="draft_update_btn">Update Patient Portal</button>
+            <button className="draft_update_btn" onClick={saveRecords}>Update Patient Portal</button>
           )}
           <img
             src={doctors_Image ? doctors_Image : emptyProfile}
@@ -227,11 +288,13 @@ export default function DoctorsDrafts() {
         <div className="grant_access_div_wrapper">
           <div className="grant_access_div">
             <input
+             onChange={handleWalletAddress}
               className="access_input"
               type="text"
+              value={walletAddress}
               placeholder="Enter Patients Wallet Address"
             />
-            <button className="access_btn">Grant Access</button>
+            {/* <button className="access_btn">Grant Access</button> */}
           </div>
         </div>
       )}
@@ -239,9 +302,7 @@ export default function DoctorsDrafts() {
       <Outlet className="draft_outlet" />
 
       <div className="report_btn_style">
-        <button className={shouldApplyStyle ? "no_btn" : "draft_save "}>
-          Save
-        </button>
+        
         <button
           onClick={handleNext}
           className={shouldApplyStyle ? "no_btn" : "draft_next"}

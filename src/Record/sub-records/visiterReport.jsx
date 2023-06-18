@@ -4,6 +4,13 @@ import Labvisitreport from '../../utilities/lab-visitreport';
 import "./sub-records.css";
 
 export default function VisiterReport() {
+
+let vitalSigns = JSON.parse(localStorage.getItem("vitalSigns"));
+let treatmentDetails = JSON.parse(localStorage.getItem('treatmentDetails'));
+let vaccine = JSON.parse(localStorage.getItem('vaccine'));
+let prescription = JSON.parse(localStorage.getItem('prescription'));
+
+
   return (
     <div  className='container'>
         <NavBar/>

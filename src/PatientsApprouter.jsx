@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import Landing from "./landing/landing";
 import Login from "./login/login";
@@ -50,7 +50,10 @@ import DoctorsOverview from "./doctorsPatientsRecord/subrecords/DoctorsOverview"
 import DoctorsLab from "./doctorsPatientsRecord/subrecords/DoctorsLab";
 import DoctorsVaccine from "./doctorsPatientsRecord/subrecords/DoctorsVaccine";
 import DoctorsPresciption from "./doctorsPatientsRecord/subrecords/DoctorsPresciption";
+import Share from "./sharePage/share";
 
+import abi from "./abi.json";
+import { ethers } from 'ethers';
 // note!!!
 // i have only created the router part for the signup , login and Landing page.
 // subsequent route path would follow suite.
@@ -60,6 +63,49 @@ function Approuter() {
   console.log(auth.patientToken);
   const patientToken = localStorage.getItem("patientToken");
   const doctorToken = localStorage.getItem("doctorToken");
+
+//   let contractAddress = "0xFFE09412B070bC1880D5FBD2BeD09639E367061A";
+  
+//   const [errorMessage, setErrorMessage] = useState(null);
+// 	const [defaultAccount, setDefaultAccount] = useState(null);
+	
+
+// 	const [provider, setProvider] = useState(null);
+// 	const [signer, setSigner] = useState(null);
+// 	const [contract, setContract] = useState(null);
+//   const [getForm , setGetForm] = useState('');
+
+
+
+// const updateEthers = async () => {
+//   try {
+//     if (window.ethereum && window.ethereum.isMetaMask) {
+//       let tempProvider = new ethers.providers.Web3Provider(window.ethereum);
+//   setProvider(tempProvider);
+  
+
+//   let tempSigner = tempProvider.getSigner();
+//   setSigner(tempSigner);
+//   console.log(tempSigner);
+//   let tempContract = new ethers.Contract(contractAddress, abi, tempSigner);
+//   setContract(tempContract);
+//   console.log(tempContract);
+
+      
+//     } else {
+//       console.error('Please install MetaMask or use a compatible Ethereum browser extension.');
+//     }
+//   } catch (error) {
+//     console.error('Error updating Ethers:', error);
+//   }
+// };
+
+
+// const accountChangedHandler = (newAccount) => {
+// setDefaultAccount(newAccount);
+// };
+
+
   return (
     <Router>
       <Routes>
@@ -150,7 +196,6 @@ function Approuter() {
           ) : (
             <Route path="PatientInvoice" element={<Landing />} />
           )}
- 
           {patientToken ? (
             <Route
               path="/lab/view-report"
@@ -177,6 +222,18 @@ function Approuter() {
           )}
           {patientToken ? (
             <Route
+              path="/share"
+              element={
+                <AuthUserLayout>
+                  <Share />
+                </AuthUserLayout>
+              }
+            />
+          ) : (
+            <Route path="/share" element={<Landing />} />
+          )}
+          {patientToken ? (
+            <Route
               path="/PatientInvoiceConfirmation"
               element={<PatientInvoiceConfirmation />}
             />
@@ -184,16 +241,16 @@ function Approuter() {
             <Route path="/PatientInvoiceConfirmation" element={<Landing />} />
           )}
           {patientToken ? (
-            <Route  
+            <Route
               path="Records"
               element={
                 <AuthUserLayout>
-                 {" "}
+                  {" "}
                   <PatientsRecord />{" "}
                 </AuthUserLayout>
               }
             >
-              <Route index="overview" element={<Overview/>} />
+              <Route index="overview" element={<Overview />} />
               <Route path="lab" element={<Lab />} />
               <Route path="vaccine" element={<Vaccine />} />
               <Route path="visit" element={<Visit />} />
@@ -203,19 +260,7 @@ function Approuter() {
             <Route path="Records" element={<Landing />} />
           )}
         </>
-
-
-
-
-
-                                 {/* {routes to doctors app and the sub components} */}
-     
-
-
-
-
-
-
+        {/* {routes to doctors app and the sub components} */}
         {doctorToken ? (
           <Route
             path="/DoctorPaymentHistory"
@@ -371,26 +416,31 @@ function Approuter() {
 
 
 
+        {doctorToken ? (
+          <Route
+            path="DoctorsRecords"
+            element={
+              <AuthDocLayout>
+                {" "}
+                <DoctorsRecords />{" "}
+              </AuthDocLayout>
+            }
+          >
+            <Route path="doctorsoverview" element={<DoctorsOverview />} />
+            <Route path="doctorslab" element={<DoctorsLab />} />
+            <Route path="doctorsvaccine" element={<DoctorsVaccine />} />
+            <Route
+              path="doctorsprescription"
+              element={<DoctorsPresciption />}
+            />
+          </Route>
+        ) : (
+          <Route path="DoctorsRecords" element={<Landing />} />
+        )}
       </Routes>
     </Router>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const AuthUserLayout = ({ children }) => {
   return (

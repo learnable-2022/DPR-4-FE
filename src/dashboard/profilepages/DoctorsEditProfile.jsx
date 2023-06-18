@@ -15,9 +15,9 @@ import axios from "axios";
 function DoctorsEditProfile() {
   const [NoImage, setNoImageMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
-  const [value, setValue] = useState("");
+
   const [isLoading, setIsLoading] = useState(false);
-  const options = useMemo(() => countryList().getData(), []);
+
   const [data, setData] = useState();
   const [selectedAddress, setAddress] = useState("");
   const [selectedWallet, setWallet] = useState("");
@@ -31,6 +31,9 @@ function DoctorsEditProfile() {
   const [selectedDate, setDate] = useState("");
   const [selectedHospital, setHospitalName] = useState("");
   const [selectedFirstName, setFirstName] = useState("");
+  const [value, setValue] = useState("");
+
+  const options = useMemo(() => countryList().getData(), []);
 
   let doctors_DOB = localStorage.getItem("doctor_DOB");
 
@@ -52,6 +55,9 @@ function DoctorsEditProfile() {
   let doctors_residence = localStorage.getItem("doctor_residence");
   let doctors_wallet = localStorage.getItem("doctor_wallet");
   let doctors_hospital = localStorage.getItem("doctor_hospital");
+  console.log(selectedHospital);
+  let doctors_first_name = localStorage.getItem("doctor_firstname");
+  let doctors_last_name = localStorage.getItem("doctor_lastname");
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -111,7 +117,6 @@ function DoctorsEditProfile() {
     // }
   };
 
-  let formattedName = selectedFirstName + " " + selectedLastName;
   const checkForValues = () => {
     if (
       data ||
@@ -126,7 +131,11 @@ function DoctorsEditProfile() {
       selectedLastName ||
       selectedState ||
       selectedLicense ||
-      selectedNumber
+      selectedNumber ||
+      selectedDate ||
+      selectedFirstName ||
+      selectedLastName ||
+      value
     ) {
       return true;
     } else {
@@ -143,26 +152,31 @@ function DoctorsEditProfile() {
       }, 3000);
     }
   };
-
+  let formattedName = `${selectedFirstName || doctors_first_name} ${
+    selectedLastName || doctors_last_name
+  }`;
   const UpdateDoctorsDetails = async () => {
     setIsLoading(true);
 
     const response = await axios
+
       .put(
         `https://medbloc-api.onrender.com/api/v1/doctor/${doctors_ID}`,
         {
           name: formattedName || doctors_Name,
+          firstName: selectedFirstName || doctors_first_name,
+          lastName: selectedLastName || doctors_last_name,
           email: selectedEmail || doctors_Email,
           address: selectedAddress || doctors_address,
           image: data || doctors_Image,
-          Hospital: selectedHospital || doctors_hospital,
+          hospital: selectedHospital || doctors_hospital,
           license: selectedLicense || doctors_License,
           phoneNumber: selectedNumber || doctors_number,
           stateOfResidence: selectedResidence || doctors_residence,
           country: value || doctors_country,
           stateOfOrigin: selectedState || doctors_origin,
           gender: selectedGender || doctors_Gender,
-          walletId: selectedWallet || doctors_wallet,
+          walletId: "restpoint", //selectedWallet || doctors_wallet,
           dateOfBirth: selectedDate || doctors_DOB,
         },
         {
@@ -417,7 +431,7 @@ function DoctorsEditProfile() {
                   styles={style}
                   className="react_select"
                   options={options}
-                  value={value}
+                  value={value.label}
                   onChange={changeHandler}
                 />
               </p>
@@ -450,7 +464,7 @@ function DoctorsEditProfile() {
                 onChange={handleWalletChange}
                 value={selectedWallet}
                 type="text "
-                placeholder="Enter Middle Name"
+                placeholder="Enter Wallet Address"
               />
             </p>
           </div>
@@ -474,7 +488,7 @@ function DoctorsEditProfile() {
                 onChange={handleHospitalChange}
                 value={selectedHospital}
                 type="text"
-                placeholder="Enter Email Address"
+                placeholder="Enter Hospital Name"
               />
             </p>
           </div>

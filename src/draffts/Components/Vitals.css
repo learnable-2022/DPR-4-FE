@@ -181,3 +181,16 @@ ion-icon {
     width: 20px;
   }
 }
+@media (max-width: 290px) {
+  .drafts_header_left {
+    font-size: 17px;
+  }
+  .holder_text {
+    font-size: 10px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .doctorsdraft {
+    padding: 0.4rem;
+  }
+}
