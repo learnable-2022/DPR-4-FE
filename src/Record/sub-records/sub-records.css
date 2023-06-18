@@ -686,6 +686,7 @@ tr:nth-child(odd){
   .disappear{
     display: flex;
   }
+
 }
 .disappear{
   display:none;

@@ -315,7 +315,7 @@ export default function DoctorsDashboard() {
                 </div>
               </div>
             </div>
-
+            </div>
             <div className="right-side">
               <div className="calendar-container">
                 <Calendar
@@ -359,7 +359,7 @@ export default function DoctorsDashboard() {
                 </div>
               </div>
             </div>
-          </div>
+         
         </main>
       ) : (
         <div className="doc_connect_div">

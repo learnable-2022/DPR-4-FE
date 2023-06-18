@@ -245,15 +245,17 @@
     flex-wrap: wrap;
     width: 100%;
   }
-  .second-section-second{
+  /* .second-section-second{
   
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
     width: 100%;
-  }
+  } */
+ 
   .second-section-inner h2{
     text-align: center;
+   
   }
   .second-image {
    
@@ -320,13 +322,13 @@
     flex-wrap: wrap;
     width: 100%;
   }
-  .second-section-second{
+  /* .second-section-second{
   
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
     width: 100%;
-  }
+  } */
   .second-section-inner h2{
     text-align: center;
   }

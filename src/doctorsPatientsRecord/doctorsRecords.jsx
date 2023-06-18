@@ -60,7 +60,7 @@ const handle=()=>{
             alt="bigpics"
           />
         </div>
-        <div>
+        <div className='second-section-inner'>
           <h2>patient name</h2>
           <div className="second-section-text">
             <div>
@@ -110,7 +110,7 @@ const handle=()=>{
     </div>
     <div className="third-section-link">
       <li>
-        <NavLink exact activeClassName="active" to="doctorsoverview">
+        <NavLink exact activeClassName="active" to="">
           <p>Overview</p>
         </NavLink>
       </li>
