@@ -49,16 +49,16 @@ export default function Overview() {
                     <img src={picture9} className="img-love" alt="pic9" />
                     <p>
                       Blood Status <br />
-                      {vitalSigns[0][5]}
-                    <span style={{color:"#000"}}>  116/70</span>
+                     
+                    <span style={{color:"#000"}}>  {vitalSigns[vitalSigns.length - 1][4]}</span>
                     </p>
                   </div>
                   <div className="over-1-first-son">
                     <img src={picture10} className="img-love" alt="pic10" />
                     <p>
                       Heart Rate <br />
-                      {vitalSigns[0][1]}
-                     <span style={{color:"#000"}}> 120bpm</span>
+                      
+                     <span style={{color:"#000"}}>{vitalSigns[vitalSigns.length - 1][1]} bpm</span>
                     </p>
                   </div>
                 </div>
@@ -79,16 +79,16 @@ export default function Overview() {
                     <img src={picture11} className="img-love" alt="pic9" />
                     <p>
                       Blood Count <br />
-                      {vitalSigns[0][6]}-90
-                     <span style={{color:"#000"}}> 80-90</span>
+                      
+                     <span style={{color:"#000"}}> {vitalSigns[vitalSigns.length - 1][5]}-90</span>
                     </p>
                   </div>
                   <div className="over-1-first-son">
                     <img src={picture12} className="img-love" alt="pic10" />
                     <p>
                       Glucose Level <br />
-                      {vitalSigns[0][6]}ml
-                     <span style={{color:"#000", fontWeight:"bold",}}> 240ml</span>
+                      
+                     <span style={{color:"#000", fontWeight:"bold",}}>{vitalSigns[vitalSigns.length - 1][6]}ml</span>
                     </p>
                   </div>
                 </div>
@@ -116,7 +116,7 @@ export default function Overview() {
               <div className="two" key={index}>
                 
                 <div>
-                  <h2>{detail}</h2>
+                  <h2>{detail[1]}</h2>
                   <p>Active</p>
                 </div>
                 <div>
@@ -140,8 +140,8 @@ export default function Overview() {
                 <img src={picture7} alt="overview" />
               </div>
               <div>
-                <h4>{medication}</h4>
-                <p>1 Tab twice daily</p>
+                <h4>{medication[0]}</h4>
+                <p>{medication[2]}</p>
               </div>
             </div>
             ))}

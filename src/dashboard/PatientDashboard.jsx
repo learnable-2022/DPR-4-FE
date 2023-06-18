@@ -113,6 +113,9 @@ export default function PatientDashboard() {
   const [treatmentDetails, setTreatmentDetails] = useState([]);
   const [vaccine, setVaccine] = useState([]);
   const [prescription, setPrescription] = useState([]);
+  const [billing, setPatientBilling] = useState([]);
+  const [service, setPatientService] = useState([]);
+  const [amount, setPatientAmount] = useState([]);
 
   const connectWalletHandler = () =>{
 
@@ -208,16 +211,22 @@ const checkRecord = async () => {
         };
       });
       setFormattedRecords(formattedRecords.reverse());
-   console.log(formattedRecords);
+      console.log(formattedRecords);
       setVitalSigns(formattedRecords.map((record) => record.vitalSigns));
       setTreatmentDetails(formattedRecords.map((record) => record.treatmentDetails));
       setVaccine(formattedRecords.map((record) => record.vaccine));
       setPrescription(formattedRecords.map((record) => record.prescription));
+      setPatientBilling(formattedRecords.map((record) => record.billing));
+      setPatientService(formattedRecords.map((record) => record.service));
+      setPatientAmount(formattedRecords.map((record) => record.amount));
       
       localStorage.setItem('vitalSigns', JSON.stringify(vitalSigns));
       localStorage.setItem('treatmentDetails', JSON.stringify(treatmentDetails));
       localStorage.setItem('vaccine', JSON.stringify(vaccine));
       localStorage.setItem('prescription', JSON.stringify(prescription));
+      localStorage.setItem('billing', JSON.stringify(billing));
+      localStorage.setItem('service', JSON.stringify(service));
+      localStorage.setItem('amount', JSON.stringify(amount));
     } else {
       console.error('Contract is not available');
     };
@@ -404,6 +413,18 @@ useEffect(() => {
   useEffect(() => {
     localStorage.setItem('prescription', JSON.stringify(prescription));
   }, [prescription]);
+
+  useEffect(() => {
+    localStorage.setItem('billing', JSON.stringify(billing));
+  }, [billing]);
+
+  useEffect(() => {
+    localStorage.setItem('service', JSON.stringify(service));
+  }, [service]);
+
+  useEffect(() => {
+    localStorage.setItem('amount', JSON.stringify(amount));
+  }, [amount]);
 
 
 // checkRecord();

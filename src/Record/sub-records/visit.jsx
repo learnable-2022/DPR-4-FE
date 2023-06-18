@@ -22,6 +22,8 @@ let vitalSigns = JSON.parse(localStorage.getItem("vitalSigns"));
 let treatmentDetails = JSON.parse(localStorage.getItem('treatmentDetails'));
 let vaccine = JSON.parse(localStorage.getItem('vaccine'));
 let prescription = JSON.parse(localStorage.getItem('prescription'));
+let billing = JSON.parse(localStorage.getItem("patientBilling"));
+let service = JSON.parse(localStorage.getItem("patientService"));
 
   const dummyData= [
     {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine",date:"02/05/2023",Time:"13:00 PM" ,complaint:"malariaX2",Report:"view-report"},

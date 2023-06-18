@@ -9,37 +9,23 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Vaccine() {
 
-  const [vitalSigns, setVitalSigns] = useState([]);
-  const [treatmentDetails, setTreatmentDetails] = useState([]);
-  const [vaccine, setVaccine] = useState([]);
-  const [prescription, setPrescription] = useState([]);
+  let vitalSigns = JSON.parse(localStorage.getItem("vitalSigns"));
+  let treatmentDetails = JSON.parse(localStorage.getItem('treatmentDetails'));
+  let vaccine = JSON.parse(localStorage.getItem('vaccine'));
+  let prescription = JSON.parse(localStorage.getItem('prescription'));
+  let billing = JSON.parse(localStorage.getItem("billing"));
 
-  useEffect(() => {
-    const fetchDataFromLocalStorage = () => {
-      let storedVitalSigns = JSON.parse(localStorage.getItem("vitalSigns"));
-      let storedTreatmentDetails = JSON.parse(localStorage.getItem('treatmentDetails'));
-      let storedVaccine = JSON.parse(localStorage.getItem('vaccine'));
-      let storedPrescription = JSON.parse(localStorage.getItem('prescription'));
-
-      setVitalSigns(storedVitalSigns || []);
-      setTreatmentDetails(storedTreatmentDetails || []);
-      setVaccine(storedVaccine || []);
-      setPrescription(storedPrescription || []);
-    };
-
-    fetchDataFromLocalStorage();
-  }, []);
-
-
+  
+console.log(billing);
   const navigate = useNavigate();
   const dummyData= [
-    {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)",Date:"02/05/2023",Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3"},
-    {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)", Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3",Date:"02/05/2023"},
-    {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)", Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3",Date:"02/05/2023"},
-    {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)", Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3",Date:"02/05/2023"},
-    {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)", Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3" ,Date:"02/05/2023"},
-    {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)", Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3",Date:"02/05/2023"},
     
+    {hosiptalName:billing[0]?.[3] || "",
+    name:billing[0]?.[2] || "", 
+    Time:"14:00" ,
+    Remark:"complete",
+    vaccine: vaccine[0]?.[2] || "",
+    Date:"02/05/2023"},
   ]
   const COCA_COLA =[
     {
@@ -79,19 +65,17 @@ export default function Vaccine() {
   
 ];
   const columns = useMemo(()=> COCA_COLA,[]);
-  const data = useMemo(() => vaccine || [], [vaccine]);
+  const data = useMemo(() => dummyData || [], [dummyData]);
 
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     rows,
-    state,
-    setGlobalFilter,
     prepareRow,
-}= useTable({columns, data}, useGlobalFilter);
+}= useTable({columns, data});
 
-const { globalFilter } = state;
+// const { globalFilter } = state;
   return (
     <div className='overview-container'>
       <div className='visit-navigation'>
@@ -103,9 +87,9 @@ const { globalFilter } = state;
           <CiSearch/>
           <input 
            type="text" 
-           value={globalFilter || ''}
+           value={''}
            placeholder='search'
-           onChange={(e) => setGlobalFilter(e.target.value)}
+           onChange={(e) => (e.target.value)}
            />
 
           <BiFilter className='icon'/>
@@ -122,7 +106,7 @@ const { globalFilter } = state;
       </div>
       <div className='table'>
       <div className='table-display'>
-      <Table columns={columns} data={data}  getTableProps={ getTableProps}    getTableBodyProps={  getTableBodyProps} headerGroups={headerGroups} rows={rows} state={state} setGlobalFilter={ setGlobalFilter} prepareRow={  prepareRow} />
+      <Table columns={columns} data={data}  getTableProps={ getTableProps}    getTableBodyProps={  getTableBodyProps} headerGroups={headerGroups} rows={rows} prepareRow={  prepareRow} />
       </div>
 
         
