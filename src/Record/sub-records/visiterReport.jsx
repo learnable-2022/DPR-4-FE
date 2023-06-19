@@ -1,15 +1,14 @@
 import React from 'react';
 import NavBar from '../../utilities/NavBar';
+import { useParams } from 'react-router-dom';
 import Labvisitreport from '../../utilities/lab-visitreport';
 import "./sub-records.css";
 
 export default function VisiterReport() {
-
-let vitalSigns = JSON.parse(localStorage.getItem("vitalSigns"));
-let treatmentDetails = JSON.parse(localStorage.getItem('treatmentDetails'));
-let vaccine = JSON.parse(localStorage.getItem('vaccine'));
-let prescription = JSON.parse(localStorage.getItem('prescription'));
-
+  let getFormattedRecords = JSON.parse(localStorage.getItem("getFormattedRecords"));
+  const { id } = useParams();
+  const record = getFormattedRecords[id];
+  console.log(id);
 
   return (
     <div  className='container'>
@@ -25,21 +24,16 @@ let prescription = JSON.parse(localStorage.getItem('prescription'));
                 <p  className=' bolder'>Remarks/Treatments</p>
               </div>
               <div className='third-lab-report-second'>
-              <p>General Hospital, Enugu Town, Enugu</p>
-              <p>Dr. Ada General medicine</p>
-              <p>Fever, Body pain, Sore Taste</p>
-              <p>Ref: Widal Test, Malaria parasite Test, Full blood count Test</p>
-              <p>Salm spp80
-                  p. falciparum  
-                  Blood count within normal range
-                </p>
-              <p>Artemether Lumefantrine 80/480mg
-                    Ciprofloxacin
-                    Ceftriaxone injection 5 days</p>
+              <p>{record.billing[3]}</p>
+              <p>{record.billing[2]}</p>
+              <p>{record.treatmentDetails[0]}</p>
+              <p>{record.treatmentDetails[1]}</p>
+           
+              <p>{record.treatmentDetails[2]}</p>
               </div>
               <div className='third-lab-report-third'>
-              <p>Date:<span>02/05/2023</span></p>
-              <p>Time:<span>11:59am</span></p>
+              <p>Date: <span>{record.vaccine[1]}</span></p>
+              {/* <p>Time:<span>11:59am</span></p> */}
               </div>
             </div>
           </div>

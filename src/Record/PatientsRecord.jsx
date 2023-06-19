@@ -203,12 +203,12 @@ export default function PatientsRecord() {
             <p>Visits</p>
           </NavLink>
         </li>
-        <li>
+        {/* <li>
           {" "}
           <NavLink activeClassName="active" to="lab">
             <p>Labs</p>
           </NavLink>
-        </li>
+        </li> */}
         <li>
           {" "}
           <NavLink activeClassName="active" to="vaccine">

@@ -14,7 +14,7 @@ export default function Lab() {
   const  link = "/lab/view-report";
 
   let getFormattedRecords = JSON.parse(localStorage.getItem("getFormattedRecords"));
-console.log(getFormattedRecords);
+
 
 
     // const dummyData= [

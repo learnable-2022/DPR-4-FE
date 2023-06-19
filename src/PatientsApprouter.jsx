@@ -198,7 +198,7 @@ function Approuter() {
           )}
           {patientToken ? (
             <Route
-              path="/lab/view-report"
+              path="/lab/view-report/:id"
               element={
                 <AuthUserLayout>
                   <LabReport />
@@ -210,7 +210,7 @@ function Approuter() {
           )}
           {patientToken ? (
             <Route
-              path="/visit/visiterReport"
+              path="/visit/visiterReport/:id"
               element={
                 <AuthUserLayout>
                   <VisiterReport />

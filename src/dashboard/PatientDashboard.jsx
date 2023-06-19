@@ -524,7 +524,7 @@ useEffect(() => {
           <Link to="/Profile" className="link ">
             <p className="drop_content_item">View Profile</p>
           </Link>
-          <p className="drop_content_item">View Full Report</p>
+          {/* <p className="drop_content_item">View Full Report</p> */}
         </div>
       )}
 
@@ -645,7 +645,7 @@ useEffect(() => {
             </div>
             <div className="middle_section_header">
               <p>My Vitals</p>
-              <button className="report_btn">View Full Report</button>
+              {/* <button className="report_btn">View Full Report</button> */}
             </div>
             <div className="vitals_readings_cards">
               <div>

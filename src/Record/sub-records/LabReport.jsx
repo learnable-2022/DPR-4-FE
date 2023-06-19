@@ -1,11 +1,15 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import NavBar from '../../utilities/NavBar';
 import Labvisitreport from '../../utilities/lab-visitreport';
 
 
 
 export default function LabReport() {
-  
+  let getFormattedRecords = JSON.parse(localStorage.getItem("getFormattedRecords"));
+  const { id } = useParams();
+  const record = getFormattedRecords[id];
+  console.log(id);
   return (
     <div   className='container'>
         <NavBar/>
@@ -13,8 +17,8 @@ export default function LabReport() {
         <div className='first-visit-container'>
          <div className='intro'>
             <div>
-              <p> Name of Lab :</p>
-              <p> Doctor’s Name:</p>
+              <p> Name of Lab :{record.vaccine.join(', ')}</p>
+              <p> Doctor’s Name:</p>{record.amount}
                 </div>
                 <div className='all'>
                 <p>Alpha Diagnostics Laboratories, Enugu</p>
