@@ -219,6 +219,8 @@ const checkRecord = async () => {
       setPatientBilling(formattedRecords.map((record) => record.billing));
       setPatientService(formattedRecords.map((record) => record.service));
       setPatientAmount(formattedRecords.map((record) => record.amount));
+
+      localStorage.setItem('getFormattedRecords', JSON.stringify(getFormattedRecords));
       
       localStorage.setItem('vitalSigns', JSON.stringify(vitalSigns));
       localStorage.setItem('treatmentDetails', JSON.stringify(treatmentDetails));
@@ -397,6 +399,10 @@ useEffect(() => {
     checkEffectgender,
     checkEffectwallet,
   ]);
+
+  useEffect(() =>{
+    localStorage.setItem('getFormattedRecords', JSON.stringify(getFormattedRecords));
+  },[getFormattedRecords]);
 
   useEffect(() => {
     localStorage.setItem('vitalSigns', JSON.stringify(vitalSigns));

@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React from 'react';
 import {BiFilter} from "react-icons/bi";
 import {CiSearch} from "react-icons/ci";
 import { useGlobalFilter } from 'react-table';
@@ -8,25 +8,31 @@ import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function Vaccine() {
-
-  let vitalSigns = JSON.parse(localStorage.getItem("vitalSigns"));
-  let treatmentDetails = JSON.parse(localStorage.getItem('treatmentDetails'));
-  let vaccine = JSON.parse(localStorage.getItem('vaccine'));
-  let prescription = JSON.parse(localStorage.getItem('prescription'));
-  let billing = JSON.parse(localStorage.getItem("billing"));
-
-  
-console.log(billing);
   const navigate = useNavigate();
-  const dummyData= [
+  let getFormattedRecords = JSON.parse(localStorage.getItem("getFormattedRecords"));
+console.log(getFormattedRecords);
+
+
+  // const dummyData= [
+  //   {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)",Date:"02/05/2023",Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3"},
+  //   {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)", Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3",Date:"02/05/2023"},
+  //   {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)", Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3",Date:"02/05/2023"},
+  //   {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)", Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3",Date:"02/05/2023"},
+  //   {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)", Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3" ,Date:"02/05/2023"},
+  //   {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)", Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3",Date:"02/05/2023"},
     
-    {hosiptalName:billing[0]?.[3] || "",
-    name:billing[0]?.[2] || "", 
-    Time:"14:00" ,
-    Remark:"complete",
-    vaccine: vaccine[0]?.[2] || "",
-    Date:"02/05/2023"},
-  ]
+  // ]
+
+  const dummyData = getFormattedRecords.map((item, index) => ({
+    hosiptalName:item.billing[3],
+    name:item.billing[3], 
+    Time:"14:00",
+    Remark:item.treatmentDetails[2],
+    vaccine:item.vaccine[0],
+    Date:item.vaccine[1],
+    index: index // Add the index as a property
+  }));
+
   const COCA_COLA =[
     {
         Headers: "Hospital/laboratory",
@@ -46,14 +52,14 @@ console.log(billing);
         accessor:"vaccine",
     },
     {
-        Headers: "Date/time",
+        Headers: "Date",
         accessor:"Time",
         Cell: ({ cell: { row } }) => {
           return (
             <div>
              <span style={{fontSize:"13px"}}> {row.original.Date}</span>
               <br/>
-             <span> {row.original.Time}</span>
+             {/* <span> {row.original.Time}</span> */}
             </div>
           );
         },
@@ -65,17 +71,19 @@ console.log(billing);
   
 ];
   const columns = useMemo(()=> COCA_COLA,[]);
-  const data = useMemo(() => dummyData || [], [dummyData]);
+  const data = useMemo(()=> dummyData,[])
 
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     rows,
+    state,
+    setGlobalFilter,
     prepareRow,
-}= useTable({columns, data});
+}= useTable({columns, data}, useGlobalFilter);
 
-// const { globalFilter } = state;
+const { globalFilter } = state;
   return (
     <div className='overview-container'>
       <div className='visit-navigation'>
@@ -87,9 +95,9 @@ console.log(billing);
           <CiSearch/>
           <input 
            type="text" 
-           value={''}
+           value={globalFilter || ''}
            placeholder='search'
-           onChange={(e) => (e.target.value)}
+           onChange={(e) => setGlobalFilter(e.target.value)}
            />
 
           <BiFilter className='icon'/>
@@ -106,7 +114,7 @@ console.log(billing);
       </div>
       <div className='table'>
       <div className='table-display'>
-      <Table columns={columns} data={data}  getTableProps={ getTableProps}    getTableBodyProps={  getTableBodyProps} headerGroups={headerGroups} rows={rows} prepareRow={  prepareRow} />
+      <Table columns={columns} data={data}  getTableProps={ getTableProps}    getTableBodyProps={  getTableBodyProps} headerGroups={headerGroups} rows={rows} state={state} setGlobalFilter={ setGlobalFilter} prepareRow={  prepareRow} />
       </div>
 
         
