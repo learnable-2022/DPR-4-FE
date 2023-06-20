@@ -11,9 +11,13 @@ import { Link, useNavigate } from "react-router-dom";
 
 import axios from "axios";
 import { useServiceProviderValue } from "../ServiceProvider";
+import abi from "../abi.json";
+import { ethers } from "ethers";
 
 //rescue kenneth
 export default function DoctorsDashboard() {
+  const navigator = useNavigate();
+
   // const {auth} = useContext(StateContext);
   // const navigator = useNavigate();
 
@@ -27,8 +31,6 @@ export default function DoctorsDashboard() {
   //   return navigator("./landing");
   // }
 
-  const navigator = useNavigate();
-
   const [{ allpatients }, dispatch] = useServiceProviderValue();
   let token = localStorage.getItem("doctorToken");
   let doctorID = localStorage.getItem("doctor_id");
@@ -38,10 +40,87 @@ export default function DoctorsDashboard() {
     Array.from({ length: patients.length }, () => false)
   );
   const [open2, setOpen2] = useState(false);
-  const [connectedWallet, setConnectedWallet] = useState(true);
+  const [connectedWallet, setConnectedWallet] = useState(false);
   const options = { month: "short", year: "numeric" };
   const options2 = { day: "numeric", weekday: "long" };
   const mobileMenuRef = useRef();
+  const [connButtonText, setConnButtonText] = useState("Connect to Metamask!");
+  const [errorMessage, setErrorMessage] = useState(null);
+  let contractAddress = "0xFFE09412B070bC1880D5FBD2BeD09639E367061A";
+  const [defaultAccount, setDefaultAccount] = useState(null);
+
+  const [provider, setProvider] = useState(null);
+  const [signer, setSigner] = useState(null);
+  const [contract, setContract] = useState(null);
+  const [getForm, setGetForm] = useState("");
+
+  const connectWalletHandler = () => {
+    if (window.ethereum && window.ethereum.isMetaMask) {
+      window.ethereum
+        .request({ method: "eth_requestAccounts" })
+        .then((result) => {
+          accountChangedHandler(result[0]);
+          setConnectedWallet(true);
+          console.log(defaultAccount);
+          updateEthers();
+          // setConnButtonText('Wallet Connected');
+        })
+        .catch((error) => {
+          setErrorMessage(error.message);
+        });
+    } else {
+      console.log("Need to install MetaMask");
+      setErrorMessage("Please install MetaMask browser extension to interact");
+    }
+  };
+
+  const updateEthers = async () => {
+    try {
+      if (window.ethereum && window.ethereum.isMetaMask) {
+        const tempProvider = new ethers.providers.Web3Provider(window.ethereum);
+        setProvider(tempProvider);
+
+        const tempSigner = tempProvider.getSigner();
+        setSigner(tempSigner);
+
+        const tempContract = new ethers.Contract(
+          contractAddress,
+          abi,
+          tempSigner
+        );
+        // console.log(tempContract);
+        if (tempContract) {
+          // Store necessary information from the contract
+          const contractInfo = {
+            address: contractAddress,
+            abi: abi,
+          };
+
+          // Store the contract information in local storage
+
+          setContract(tempContract);
+        }
+      } else {
+        console.error(
+          "Please install MetaMask or use a compatible Ethereum browser extension."
+        );
+      }
+    } catch (error) {
+      console.error("Error updating Ethers:", error);
+    }
+  };
+
+  const accountChangedHandler = (newAccount) => {
+    setDefaultAccount(newAccount);
+    updateEthers();
+  };
+
+  useEffect(() => {
+    updateEthers();
+    connectWalletHandler();
+  }, []);
+
+  localStorage.setItem("contract", contract);
   const [doctor_Name, setDoctorName] = useState("");
   const [doctor_Image, setDoctorImage] = useState("");
   const [doctor_Email, setDoctorEmail] = useState("");
@@ -195,6 +274,8 @@ export default function DoctorsDashboard() {
       // const res = response?.data.find((item) => item._ === doctorEmail);
       // console.log(res);
     };
+    // connectWalletHandler();
+    // updateEthers();
     getDoctorsDetails();
 
     // document.addEventListener("mousedown", closeOpenMenus);
@@ -279,6 +360,33 @@ export default function DoctorsDashboard() {
               </div>
             </div>
           </div>
+
+          <div className="right-side">
+            <div className="calendar-container">
+              <Calendar
+                onClickDay={handleAddCargo}
+                onChange={setDate}
+                value={date}
+              />
+            </div>
+            <div className="schedule_div">
+              <div className="schedule_wrapper">
+                <div className="top">
+                  <Link to="/DocSchedule" className="link">
+                    <button>Schedule</button>
+                  </Link>
+
+                  <p>{date.toLocaleDateString("en-us", options)}</p>
+                </div>
+                <div className="middle">
+                  <p>{date.toLocaleDateString("en-us", options2)}</p>
+                </div>
+                <div className="appointment_brief">
+                  <p>Appointment with #2589 </p>
+                  <p>12pm - 2pm</p>
+                </div>
+                {/* <div className="appointment_brief">
+          </div>
           <div className="right-side">
             <div className="calendar-container">
               <Calendar
@@ -326,9 +434,12 @@ export default function DoctorsDashboard() {
       ) : (
         <div className="doc_connect_div">
           <p>You are not yet connected, Please click to the button connect</p>
-          <button className="doc_connect_btn">Connect to Metamask</button>
+          <button className="doc_connect_btn" onClick={connectWalletHandler}>
+            {connButtonText}
+          </button>
         </div>
       )}
+      {/* <Finish contract={contract}/> */}
     </div>
   );
 }

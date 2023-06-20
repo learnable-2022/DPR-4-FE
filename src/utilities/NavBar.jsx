@@ -5,7 +5,8 @@ import { BsArrowLeft } from "react-icons/bs";
 import smallLogo from "../assets/small.png";
 import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from "react-router";
-export default function NavBar() {
+
+export default function NavBar({ lab }) {
   const navigation = useNavigate();
   const returnHandler = () => {
     navigation(-1);
@@ -15,12 +16,13 @@ export default function NavBar() {
   return (
     <>
       <nav className="nav-container">
+        <BsArrowLeft className="smallscreen" />
         <div className="nav-container-left">
           <BsArrowLeft onClick={returnHandler} style={{ cursor: "pointer" }} />
           <h2 className="Nav-labreport">
             Medical Record
             <IoIosArrowForward />
-            Hospital Visit
+            {lab}
             <IoIosArrowForward /> View Report
           </h2>
         </div>

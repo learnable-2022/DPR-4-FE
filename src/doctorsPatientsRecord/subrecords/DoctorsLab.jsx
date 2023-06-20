@@ -11,7 +11,7 @@ import { useGlobalFilter } from 'react-table';
 
 export default function DoctorsLab() {
 
-  const  link = "/lab/view-report";
+  const  link = "/doctorslab/doctorslabreport";
 
 
 

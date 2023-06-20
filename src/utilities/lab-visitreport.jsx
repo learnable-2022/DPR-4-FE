@@ -23,7 +23,7 @@ export default function Labvisitreport() {
           <div className="second-image">
             <img src={patient_Image} alt="bigpics" />
           </div>
-          <div>
+          <div className='second-section-inner'>
             <h2>{patient_Name}</h2>
             <div className="second-section-text">
               <div>

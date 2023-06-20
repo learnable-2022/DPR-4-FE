@@ -12,8 +12,10 @@ export const initialState = {
   bloodPressure: null,
   glucoseLevel: null,
   heartRate: null,
+  walletAddress:null,
   oxygen: null,
   respRate: null,
+  totalAmount:null,
   billingDate: null,
   billingPatientName: null,
   billingProvider: null,
@@ -32,6 +34,11 @@ const reducer = (state, action) => {
         ...state,
         token: action.token,
       };
+      case "SET_TOTAL_AMOUNT":
+        return{
+          ...state,
+          totalAmount:action.totalAmount
+        }
     case "SET_USER_DETAILS":
       return {
         ...state,
@@ -156,7 +163,12 @@ const reducer = (state, action) => {
         ...state,
         billingLocation: action.billingLocation,
       };
-
+      
+      case "SET_PATIENT_ADDRESS":
+        return {
+          ...state,
+          walletAddress : action.walletAddress
+        }
     default:
       return state;
   }

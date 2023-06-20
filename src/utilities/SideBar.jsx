@@ -6,6 +6,7 @@ import { FiLogOut } from "react-icons/fi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import ourlogo from "../assets/ourlogo.png";
+import newlogo1 from "../assets/newlogo1.png";
 import { useNavigate } from "react-router-dom";
 // import logo1 from "../assets/logo-03.png";
 import logo1 from "../assets/images/logo-03.png";
@@ -22,8 +23,8 @@ export default function SideBar() {
     <>
       <div className="sideBar">
         <div className="center-div">
-          <img src={ourlogo} alt="app-logo" onClick={returnHomeHandler} style={{cursor:"pointer"}}/>
-          <p>Med<span>bloc</span></p>
+          <img src={newlogo1} alt="app-logo" onClick={returnHomeHandler} style={{cursor:"pointer",width:"70px",height:"70px"}}/>
+          {/* <p>Med<span>bloc</span></p> */}
         </div>
 
         <div className="mid-section">
