@@ -17,7 +17,7 @@ import Calendar from "../assets/images/Calendar.png";
 import BlockIconResize from "../assets/images/BlockIconResize.png";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import url from "../api/BillingApi";
+import url from "../api/BillingApi.jsx";
 import { useState } from "react";
 import {GiHamburgerMenu} from "react-icons/gi";
 

@@ -5,7 +5,7 @@ import PatientPics from "../assets/images/PatientPics.png";
 import { useNavigate } from "react-router-dom";
 import {GiHamburgerMenu} from "react-icons/gi";
 import { useState } from "react";
-import url from "../api/BillingApi"
+import url from "../api/BillingApi.jsx";
 
 export default function DoctorsBilling() {
   const [transactionArray, setTransactionArray] = useState([])
