@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 .patientdashboard {
   width: 100%;
   padding: 1.3rem 0;
@@ -10,6 +13,9 @@
   padding-right: 5rem;
   display: flex;
   flex-direction: column;
+}
+.patients_dashboard_main {
+  margin-top: 3rem;
 }
 .open_nav {
   display: none;
@@ -32,7 +38,12 @@
 }
 .patientdashboard_header {
   display: flex;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 140px;
+  right: 0;
+  background-color: white;
+  z-index: 7000;
   justify-content: space-between;
   align-items: center;
   border-bottom: solid 1px #d6ebff;
@@ -87,6 +98,7 @@
   padding: 0.5rem 1rem;
   border-radius: 10px;
   color: white;
+  font-size: 16px;
 }
 .patientdashboard .share_btn:hover {
   cursor: pointer;
@@ -99,6 +111,9 @@
   font-weight: 400;
   font-size: 14px;
   margin-left: -11px;
+}
+.hide_btn {
+  display: none;
 }
 .patientdashboard .patientsvital {
   display: flex;
@@ -160,7 +175,7 @@
   border-radius: 10px;
   padding: 1rem 2px 0.5rem 2px;
   background-color: rgb(247, 246, 246);
-  z-index: 120;
+  z-index: 1200;
   box-shadow: 0.5px 0.5px 0.5px 1px #d2d2d2;
 }
 
@@ -638,6 +653,9 @@
     left: -4px;
     z-index: -1;
   }
+  .patientdashboard_header {
+    left: 0;
+  }
 }
 
 @media (max-width: 679px) {
@@ -665,6 +683,7 @@
   .patientdashboard .share_btn {
     position: absolute;
     top: 3.5rem;
+    right: 10px;
   }
   .patientdashboard .middle1 {
     flex-direction: column;
@@ -712,6 +731,7 @@
 
     margin: 0 0.3rem;
   }
+
   .patientdashboard .card2 {
     padding: 1rem 0.3rem 2rem 0.3rem;
   }
@@ -732,9 +752,12 @@
   .patientdashboard .share_btn {
     top: 4.7rem;
     right: 10px;
+    font-size: 9px;
   }
   .patientdashboard .responsive_h1_header_title {
     font-size: 1.5rem;
+    top: 2rem;
+    position: absolute;
   }
   .patientdashboard .info_div .wrapper {
     flex-direction: column;
@@ -771,6 +794,9 @@
   .relative::after {
     display: none;
   }
+  .patientdashboard .left_patient_vitals {
+    margin-top: 3rem;
+  }
 }
 ._sideBar {
   width: 180px;
@@ -787,7 +813,7 @@
   transition: all 2s;
   overflow: hidden;
   position: fixed;
-  z-index: 7000;
+  z-index: 700000;
   animation: slideIn 0.3s ease-in-out;
 }
 @keyframes slideIn {
@@ -888,6 +914,4 @@
 .closeNav {
   display: none;
   animation: slideOut 0.3s ease-out;
-  
- 
 }

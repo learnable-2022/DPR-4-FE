@@ -90,9 +90,12 @@
   align-items: center;
 }
 .second-image img {
-  width: 120px;
   height: 120px;
+  width: 120px;
   box-shadow: 1px 2px 4px rgb(224 222 222);
+  border: 1px solid rgb(255 255 255);
+  border-radius: 50%;
+  object-fit: fill;
 }
 .second-section-text {
   display: flex;

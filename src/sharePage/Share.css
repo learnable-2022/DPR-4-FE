@@ -1,0 +1,104 @@
+.share {
+  width: 100%;
+  padding: 1.3rem 0;
+  position: relative;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.share_header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.3rem 2rem 1rem 2rem;
+  border-bottom: 1px solid #d6ebff;
+  padding-bottom: 1rem;
+}
+.share .flexed_div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+}
+.left_side_share_header {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.left_side_share_header p {
+  color: #2b80d4;
+  font-weight: 600;
+}
+.right_side_share_header {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.share .prof_img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.right_side_share_header .name {
+  font-weight: 600;
+}
+.screenshot_preview {
+  width: 50%;
+  height: 50%;
+
+  border: 2px solid #3399ff;
+  margin-top: 2rem;
+  margin-left: 4rem;
+  border-radius: 20px;
+}
+.share .group {
+  border-bottom: 1px solid #d6ebff;
+  display: flex;
+  justify-content: center;
+}
+.dim-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  opacity: 0.4;
+}
+.share .wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+  padding: 1rem;
+}
+.share .wrapper :nth-child(1) {
+  color: #555555;
+}
+.share .gmail_icon {
+  width: 20px;
+  height: 20px;
+}
+.share .wrapper {
+}
+.share .image_div {
+  position: relative;
+  margin-bottom: 2rem;
+}
+.remove_display {
+  display: none;
+}
+.share .cancel_img {
+  position: absolute;
+  top: 20px;
+  left: 57%;
+  z-index: 500;
+}
+.share .cancel_img:hover {
+  cursor: pointer;
+}
+.share .group:hover {
+  cursor: pointer;
+}

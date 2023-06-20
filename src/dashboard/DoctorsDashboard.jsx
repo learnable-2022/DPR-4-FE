@@ -10,6 +10,7 @@ import NavComponent from "./components/navComponent";
 import { Link, useNavigate } from "react-router-dom";
 
 import axios from "axios";
+import { useServiceProviderValue } from "../ServiceProvider";
 
 //rescue kenneth
 export default function DoctorsDashboard() {
@@ -27,14 +28,15 @@ export default function DoctorsDashboard() {
   // }
 
   const navigator = useNavigate();
-  const handleAction = () => {
-    navigator("/DoctorsRecords");
-  };
 
+  const [{ allpatients }, dispatch] = useServiceProviderValue();
   let token = localStorage.getItem("doctorToken");
   let doctorID = localStorage.getItem("doctor_id");
   const [date, setDate] = useState(new Date());
-  const [open, setOpen] = useState(false);
+  const [patients, setPatients] = useState([]);
+  const [open, setOpen] = useState(
+    Array.from({ length: patients.length }, () => false)
+  );
   const [open2, setOpen2] = useState(false);
   const [connectedWallet, setConnectedWallet] = useState(true);
   const options = { month: "short", year: "numeric" };
@@ -49,6 +51,8 @@ export default function DoctorsDashboard() {
   const [doctor_License, setDoctorrLicense] = useState("");
   const [doctor_First_Name, setDoctorFirstName] = useState("");
   const [doctor_Last_Name, setDoctorLastName] = useState("");
+  const [getPatientsList, setPatientList] = useState([]);
+
   // const [doctor_Height, setDoctorHeight] = useState("");
   // const [doctor_Weight, setDoctorWeight] = useState("");
   // const [doctor_Alle, setDoctorAlle] = useState("");
@@ -64,27 +68,75 @@ export default function DoctorsDashboard() {
   let checkEffectImage = localStorage.getItem("doctor_image");
 
   let checkEffectName = localStorage.getItem("doctor_name");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredNames, setFilteredNames] = useState([]);
 
   // let checkEffectwallet = localStorage.getItem("doctor_walletId");
-  const closeOpenMenus = useCallback(
-    (e) => {
-      if (
-        mobileMenuRef.current &&
-        open &&
-        !mobileMenuRef.current.contains(e.target)
-      ) {
-        setOpen(false);
-      }
-    },
-    [open]
-  );
+  // const closeOpenMenus = useCallback(
+  //   (e) => {
+  //     if (
+  //       mobileMenuRef.current &&
+  //       open &&
+  //       !mobileMenuRef.current.contains(e.target)
+  //     ) {
+  //       setOpen(false);
+  //     }
+  //   },
+  //   [open]
+  // );
+  const handleAction = (index) => {
+    navigator("/DoctorsRecords");
+    dispatch({ type: "SET_CLICKED_INDEX", index: index });
+  };
 
+  const getAllPatients = async () => {
+    const response = await axios
+      .get(`https://medbloc-api.onrender.com/api/v1/patient/`, {
+        headers: {
+          "x-auth-token": token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
+      .then((res) => {
+        const patientsData = res.data;
+        localStorage.setItem("patient_list", JSON.stringify(patientsData));
+        //setPatientList(patientsData);
+
+        setPatients(res.data);
+        // dispatch({ type: "SET_ALL_PATIENTS", allpatients: res.data });
+        // console.log(allpatients);
+      })
+      .catch((error) => {});
+  };
+  // useEffect(() => {
+  //   // setPatientList(filtered);
+  //   if (searchTerm === "") {
+  //     const storedPatientList = localStorage.getItem("patient_list");
+  //     const parsedPatientList = JSON.parse(storedPatientList);
+  //     setPatientList(parsedPatientList);
+  //   } else {
+  //     const filtered = getPatientsList.filter((name) =>
+  //       name?.name.toLowerCase().includes(searchTerm.toLowerCase())
+  //     );
+  //     setPatientList(filtered);
+  //   }
+  //   //
+  // }, [searchTerm, getPatientsList]);
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
   useEffect(() => {
+    getAllPatients();
+    const storedPatientList = localStorage.getItem("patient_list");
+    const parsedPatientList = JSON.parse(storedPatientList);
+    setPatientList(parsedPatientList);
+
     const getDoctorsDetails = async () => {
       let DoctorEmail = localStorage.getItem("doctorEmail");
       const response = await axios
         .get(`https://medbloc-api.onrender.com/api/v1/doctor/`, {
-
           headers: {
             "x-auth-token": token,
             Accept: "application/json",
@@ -145,9 +197,10 @@ export default function DoctorsDashboard() {
     };
     getDoctorsDetails();
 
-    document.addEventListener("mousedown", closeOpenMenus);
+    // document.addEventListener("mousedown", closeOpenMenus);
   }, [
-    closeOpenMenus,
+    //closeOpenMenus,
+
     checkEffectDOB,
     checkEffectEmail,
     checkEffectGender,
@@ -155,17 +208,20 @@ export default function DoctorsDashboard() {
     checkEffectLicense,
     checkEffectName,
   ]);
-
-  const handleButtonClick = () => {
-    setOpen(!open);
+  {
+    console.log(getPatientsList);
+  }
+  const handleButtonClick = (index) => {
+    const updatedOpenStates = [...open];
+    updatedOpenStates[index] = !updatedOpenStates[index];
+    setOpen(updatedOpenStates);
   };
   const handleButtonClick2 = () => {
     setOpen2(!open2);
   };
 
   const handleAddCargo = (e) => {};
-  
-
+  console.log(patients);
   return (
     <div className="doctorsdashboard">
       <NavComponent
@@ -185,149 +241,41 @@ export default function DoctorsDashboard() {
                   <input
                     className="doc_search"
                     type="text"
+                    onChange={handleSearch}
+                    value={searchTerm}
                     placeholder="Search"
                   />
                   <CiSearch className="search_icon" />
                 </div>
               </div>
-
               <div className="title_div">
                 <p>File no.</p>
                 <p>Patient Name</p>
                 <p></p>
               </div>
+
               <div className="patients_div">
-                <div className="patients_info">
-                  <p>#2451</p>
-                  <p>Omengbeoji Ifeanyichukwu</p>
-                  <CiCircleMore
-                    className="circle_more"
-                    onClick={handleButtonClick}
-                  />
-                  {open && (
-                    <div class="dropdown" ref={mobileMenuRef}>
-                      <ul>
-                        <li onClick={handleAction}>Patients medical record</li>
-                      </ul>
+                {getPatientsList?.map((patient, index) => {
+                  return (
+                    <div className="patients_info" key={index}>
+                      <p>#{index}</p>
+                      <p>{patient?.name}</p>
+                      <CiCircleMore
+                        className="circle_more"
+                        onClick={() => handleButtonClick(index)}
+                      />
+                      {open[index] && (
+                        <div class="dropdown" ref={mobileMenuRef}>
+                          <ul>
+                            <li onClick={() => handleAction(index)}>
+                              Patients medical record
+                            </li>
+                          </ul>
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-                <div className="patients_div">
-                  <div className="patients_info">
-                    <p>#2451</p>
-                    <p>Omengbeoji Ifeanyichukwu</p>
-                    <CiCircleMore
-                      className="circle_more"
-                      onClick={handleButtonClick}
-                    />
-                  </div>
-                  <div className="patients_info">
-                    <p>#2451</p>
-                    <p>Omengbeoji Ifeanyichukwu</p>
-                    <CiCircleMore className="circle_more" />
-                    {/* <div class="dropdown">
-                <ul>
-                  <li>Patients Profile</li>
-                  <li>Request Access</li>
-                </ul>
-              </div> */}
-                  </div>
-                  <div className="patients_info">
-                    <p>#2451</p>
-                    <p>Omengbeoji Ifeanyichukwu</p>
-                    <CiCircleMore className="circle_more" />
-                    {/* <div class="dropdown">
-                <ul>
-                  <li>Patients Profile</li>
-                  <li>Request Access</li>
-                </ul>
-              </div> */}
-                  </div>
-
-                  <div className="patients_info">
-                    <p>#2451</p>
-                    <p>Omengbeoji Ifeanyichukwu</p>
-                    <CiCircleMore className="circle_more" />
-                    {/* <div class="dropdown">
-                <ul>
-                  <li>Patients Profile</li>
-                  <li>Request Access</li>
-                </ul>
-              </div> */}
-                  </div>
-                  <div className="patients_info">
-                    <p>#2451</p>
-                    <p>Omengbeoji Ifeanyichukwu</p>
-                    <CiCircleMore className="circle_more" />
-                    {/* <div class="dropdown">
-                <ul>
-                  <li>Patients Profile</li>
-                  <li>Request Access</li>
-                </ul>
-              </div> */}
-                  </div>
-                  <div className="patients_info">
-                    <p>#2451</p>
-                    <p>Omengbeoji Ifeanyichukwu</p>
-                    <CiCircleMore className="circle_more" />
-                    {/* <div class="dropdown">
-                <ul>
-                  <li>Patients Profile</li>
-                  <li>Request Access</li>
-                </ul>
-              </div> */}
-                  </div>
-                  <div className="patients_info">
-                    <p>#2451</p>
-                    <p>Omengbeoji Ifeanyichukwu</p>
-                    <CiCircleMore className="circle_more" />
-                    {/* <div class="dropdown">
-                <ul>
-                  <li>Patients Profile</li>
-                  <li>Request Access</li>
-                </ul>
-              </div> */}
-                  </div>
-                  <div className="patients_info">
-                    <p>#2451</p>
-                    <p>Omengbeoji Ifeanyichukwu</p>
-                    <CiCircleMore className="circle_more" />
-                    {/* <div class="dropdown">
-                <ul>
-                  <li>Patients Profile</li>
-                  <li>Request Access</li>
-                </ul>
-              </div> */}
-                  </div>
-                  <div className="patients_info">
-                    <p>#2451</p>
-                    <p>Omengbeoji Ifeanyichukwu</p>
-                    <CiCircleMore className="circle_more" />
-                    {/* <div class="dropdown">
-                <ul>
-                  <li>Patients Profile</li>
-                  <li>Request Access</li>
-                </ul>
-              </div> */}
-                  </div>
-
-                  <div className="patients_info">
-                    <p>#2451</p>
-                    <p>Omengbeoji Ifeanyichukwu</p>
-                    <CiCircleMore
-                      className="circle_more"
-                      onClick={handleButtonClick2}
-                    />
-                    {open2 && (
-                      <div class="dropdown">
-                        <ul>
-                          <li>Patients Profile</li>
-                          <li>Patients medical record</li>
-                        </ul>
-                      </div>
-                    )}
-                  </div>
-                </div>
+                  );
+                })}
               </div>
             </div>
           </div>

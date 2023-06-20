@@ -5,7 +5,7 @@ import React, {
   useCallback,
   useEffect,
 } from "react";
-
+import html2canvas from "html2canvas";
 import "./PatientsDashboard.css";
 import emptyProfile from "../assets/ava3.png";
 import bpIcon from "../assets/bp_icon.svg";
@@ -31,7 +31,7 @@ import { RiArrowDropDownFill } from "react-icons/ri";
 
 // for nav bar
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
 import { BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
 import { TfiWrite } from "react-icons/tfi";
@@ -42,10 +42,12 @@ import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import ourlogo from "../assets/ourlogo.png";
 import axios from "axios";
 import { AiOutlineClose } from "react-icons/ai";
+import { useServiceProviderValue } from "../ServiceProvider";
 
 // end for nav bar
 
 export default function PatientDashboard() {
+  const navigate = useNavigate();
   let token = localStorage.getItem("patientToken");
   const [isDropOpen, setIsDropOpen] = useState(false);
   const [patient_Name, setPatientName] = useState("");
@@ -61,7 +63,7 @@ export default function PatientDashboard() {
   const [patient_WalletId, setPatientWallet] = useState("");
   const [patient_First_Name, setPatientFirstName] = useState("");
   const [patient_Last_Name, setPatientLastName] = useState("");
-
+  const screenshotRef = useRef(null);
   const [data, setData] = useState(true);
   const drugs = [drug1, drug2, drug3, drug4];
   const [connectedWallet, setConnectedWallet] = useState(true);
@@ -91,19 +93,32 @@ export default function PatientDashboard() {
 
   let checkEffectLastName = localStorage.getItem("patient_lastName");
 
+  const [{}, dispatch] = useServiceProviderValue();
   const toggleNav = () => {
     setIsNavOpen(!navOpen);
   };
 
   const shareReport = () => {
-    const options = {
-      scrollY: -window.scrollY,
-    };
-    // html2canvas(screenshotRef.current, options).then((canvas) => {
-    // const imageData = canvas.toDataURL();
-    //shareScreenshot(imageData);
-    // });
+    if (screenshotRef.current) {
+      html2canvas(document.documentElement)
+        .then((canvas) => {
+          const imageDataURL = canvas.toDataURL();
+
+          // const link = document.createElement("a");
+          // link.href = canvas.toDataURL();
+          // link.download = "screenshot.png";
+          // link.click();
+
+          dispatch({ type: "SET_SCREENSHOT", screenshot: imageDataURL });
+
+          navigate("/share");
+        })
+        .catch((error) => {
+          console.error("Error capturing screenshot:", error);
+        });
+    }
   };
+
   const closeOpenMenus = useCallback(
     (e) => {
       if (
@@ -188,11 +203,11 @@ export default function PatientDashboard() {
         localStorage.setItem("patient_address", res1?.address);
         localStorage.setItem("patient_city", res1?.city);
         localStorage.setItem("patient_country", res1?.country);
-        localStorage.setItem("patient_number", res1?.number);
+        localStorage.setItem("patient_number", res1?.phoneNumber);
         localStorage.setItem("patient_state", res1?.state);
         localStorage.setItem("patient_firstName", res1?.firstName);
         localStorage.setItem("patient_lastName", res1?.lastName);
-
+        console.log(res1.phoneNumber);
         let patient_First_Name = localStorage.getItem("patient_firstName");
         setPatientFirstName(patient_First_Name);
         let patient_Last_Name = localStorage.getItem("patient_lastName");
@@ -252,10 +267,7 @@ export default function PatientDashboard() {
 
   return (
     <div className="patientdashboard">
-      <nav
-        className={navOpen ? "patient_dashboard_nav" : "closeNav"}
-        ref={mobileNavRef}
-      >
+      <nav className={navOpen ? "patient_dashboard_nav" : "closeNav"}>
         <div className="_sideBar">
           <AiOutlineClose className="close_btn" onClick={toggleNav} />
           <div className="_center-div">
@@ -307,11 +319,10 @@ export default function PatientDashboard() {
           </h1>
         </div>
         <div className="right_side_header">
-          <Link to="/share" className="link">
-            <button className="share_btn" onClick={shareReport}>
-              Share Report
-            </button>
-          </Link>
+          <button className="share_btn" onClick={shareReport}>
+            Share Report
+          </button>
+
           <img src={notification} alt="notification" className="notifi_btn" />
           {/* <GrNotification className="profile_notification" /> */}
 
@@ -335,7 +346,7 @@ export default function PatientDashboard() {
         </div>
       </header>
       {isDropOpen && (
-        <div className="drop_content" ref={mobileMenuRef}>
+        <div className="drop_content" ref={(mobileMenuRef, mobileNavRef)}>
           <Link to="/Profile" className="link ">
             <p className="drop_content_item">View Profile</p>
           </Link>
@@ -343,7 +354,7 @@ export default function PatientDashboard() {
         </div>
       )}
 
-      <main className="patients_dashboard_main">
+      <main className="patients_dashboard_main" ref={screenshotRef}>
         <h1 className="responsive_h1_header_title">
           Welcome!{" "}
           {patient_First_Name

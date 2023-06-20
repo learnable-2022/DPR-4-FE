@@ -6,18 +6,17 @@ import smallLogo from "../assets/small.png";
 import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from "react-router";
 export default function NavBar() {
-
-const navigation = useNavigate();
-const returnHandler =()=>{
-  navigation(-1);
-}
-let patient_Image = localStorage.getItem("patient_image");
-let patient_Name = localStorage.getItem("patient_name");
+  const navigation = useNavigate();
+  const returnHandler = () => {
+    navigation(-1);
+  };
+  let patient_Image = localStorage.getItem("patient_image");
+  let patient_Name = localStorage.getItem("patient_name");
   return (
     <>
       <nav className="nav-container">
         <div className="nav-container-left">
-          <BsArrowLeft onClick={returnHandler} style={{cursor:"pointer"}}/>
+          <BsArrowLeft onClick={returnHandler} style={{ cursor: "pointer" }} />
           <h2 className="Nav-labreport">
             Medical Record
             <IoIosArrowForward />
@@ -34,7 +33,7 @@ let patient_Name = localStorage.getItem("patient_name");
           </div>
           <div className="nav-short">
             <img
-             src={patient_Image ? patient_Image : smallLogo}
+              src={patient_Image ? patient_Image : smallLogo}
               style={{
                 width: "60px",
                 height: "60px",
