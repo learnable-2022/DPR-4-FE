@@ -5,7 +5,7 @@ import React, {
   useCallback,
   useEffect,
 } from "react";
-
+import html2canvas from "html2canvas";
 import "./PatientsDashboard.css";
 import emptyProfile from "../assets/ava3.png";
 import bpIcon from "../assets/bp_icon.svg";
@@ -32,8 +32,10 @@ import { RiArrowDropDownFill } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import StateContext from "../stateProvider/stateprovider";
 import abi from "../abi.json";
-import { ethers } from 'ethers';
+import { ethers } from "ethers";
 // for nav bar
+
+import { Link, useNavigate } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
 import { BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
 import { TfiWrite } from "react-icons/tfi";
@@ -44,10 +46,12 @@ import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import ourlogo from "../assets/ourlogo.png";
 import axios from "axios";
 import { AiOutlineClose } from "react-icons/ai";
+import { useServiceProviderValue } from "../ServiceProvider";
 
 // end for nav bar
 
 export default function PatientDashboard() {
+  const navigate = useNavigate();
   let token = localStorage.getItem("patientToken");
   const [isDropOpen, setIsDropOpen] = useState(false);
   const [patient_Name, setPatientName] = useState("");
@@ -63,7 +67,7 @@ export default function PatientDashboard() {
   const [patient_WalletId, setPatientWallet] = useState("");
   const [patient_First_Name, setPatientFirstName] = useState("");
   const [patient_Last_Name, setPatientLastName] = useState("");
-
+  const screenshotRef = useRef(null);
   const [data, setData] = useState(true);
   const drugs = [drug1, drug2, drug3, drug4];
   const [connectedWallet, setConnectedWallet] = useState(true);
@@ -93,22 +97,21 @@ export default function PatientDashboard() {
 
   let checkEffectLastName = localStorage.getItem("patient_lastName");
 
+  const [{}, dispatch] = useServiceProviderValue();
   const toggleNav = () => {
     setIsNavOpen(!navOpen);
   };
 
-
-
   let contractAddress = "0xFFE09412B070bC1880D5FBD2BeD09639E367061A";
   const [errorMessage, setErrorMessage] = useState(null);
-	const [defaultAccount, setDefaultAccount] = useState(null);
-	const [connButtonText, setConnButtonText] = useState('Connect to Metamask!');
+  const [defaultAccount, setDefaultAccount] = useState(null);
+  const [connButtonText, setConnButtonText] = useState("Connect to Metamask!");
 
-	const [provider, setProvider] = useState(null);
-	const [signer, setSigner] = useState(null);
-	const [contract, setContract] = useState(null);
-  const [getForm , setGetForm] = useState('');
-  const [getFormattedRecords , setFormattedRecords] = useState([]);
+  const [provider, setProvider] = useState(null);
+  const [signer, setSigner] = useState(null);
+  const [contract, setContract] = useState(null);
+  const [getForm, setGetForm] = useState("");
+  const [getFormattedRecords, setFormattedRecords] = useState([]);
   const [vitalSigns, setVitalSigns] = useState([]);
   const [treatmentDetails, setTreatmentDetails] = useState([]);
   const [vaccine, setVaccine] = useState([]);
@@ -117,140 +120,147 @@ export default function PatientDashboard() {
   const [service, setPatientService] = useState([]);
   const [amount, setPatientAmount] = useState([]);
 
-  const connectWalletHandler = () =>{
-
+  const connectWalletHandler = () => {
     if (window.ethereum && window.ethereum.isMetaMask) {
+      window.ethereum
+        .request({ method: "eth_requestAccounts" })
+        .then((result) => {
+          accountChangedHandler(result[0]);
+          setConnectedWallet(true);
+          console.log(defaultAccount);
 
-  window.ethereum.request({ method: 'eth_requestAccounts'})
-  .then(result => {
-    accountChangedHandler(result[0]);
-    setConnectedWallet(true);
-    console.log(defaultAccount);
-  
-    // setConnButtonText('Wallet Connected');
-  })
-  .catch(error => {
-    setErrorMessage(error.message);
-  
-  });
-
-} else {
-  console.log('Need to install MetaMask');
-  setErrorMessage('Please install MetaMask browser extension to interact');
-}
-};
-
-const updateEthers = async () => {
-  try {
-    if (window.ethereum && window.ethereum.isMetaMask) {
-      let tempProvider = new ethers.providers.Web3Provider(window.ethereum);
-  setProvider(tempProvider);
-  
-
-  let tempSigner = tempProvider.getSigner();
-  setSigner(tempSigner);
-  console.log(tempSigner);
-  let tempContract = new ethers.Contract(contractAddress, abi, tempSigner);
-  setContract(tempContract);
-  
-      
+          // setConnButtonText('Wallet Connected');
+        })
+        .catch((error) => {
+          setErrorMessage(error.message);
+        });
     } else {
-      console.error('Please install MetaMask or use a compatible Ethereum browser extension.');
+      console.log("Need to install MetaMask");
+      setErrorMessage("Please install MetaMask browser extension to interact");
     }
-  } catch (error) {
-    console.error('Error updating Ethers:', error);
-  }
-};
+  };
 
+  const updateEthers = async () => {
+    try {
+      if (window.ethereum && window.ethereum.isMetaMask) {
+        let tempProvider = new ethers.providers.Web3Provider(window.ethereum);
+        setProvider(tempProvider);
 
-const accountChangedHandler = (newAccount) => {
-setDefaultAccount(newAccount);
-};
-console.log(contract);
+        let tempSigner = tempProvider.getSigner();
+        setSigner(tempSigner);
+        console.log(tempSigner);
+        let tempContract = new ethers.Contract(
+          contractAddress,
+          abi,
+          tempSigner
+        );
+        setContract(tempContract);
+      } else {
+        console.error(
+          "Please install MetaMask or use a compatible Ethereum browser extension."
+        );
+      }
+    } catch (error) {
+      console.error("Error updating Ethers:", error);
+    }
+  };
 
-const grantDoctorAccess = async (e) => {
+  const accountChangedHandler = (newAccount) => {
+    setDefaultAccount(newAccount);
+  };
+  console.log(contract);
 
-  try{
-      if(defaultAccount == null && getForm == '')return ;
-      let access = await contract.grantAccess( getForm,defaultAccount);
+  const grantDoctorAccess = async (e) => {
+    try {
+      if (defaultAccount == null && getForm == "") return;
+      let access = await contract.grantAccess(getForm, defaultAccount);
       console.log("Access Granted");
-  }catch(err){
+    } catch (err) {}
+  };
 
-  }
- 
-};
-
-const revokeDoctorAccess = async (e) => {
-
-  try{
-      if(defaultAccount == null && getForm == '')return ;
-      let access = await contract.revokeAccess( getForm,defaultAccount);
+  const revokeDoctorAccess = async (e) => {
+    try {
+      if (defaultAccount == null && getForm == "") return;
+      let access = await contract.revokeAccess(getForm, defaultAccount);
       console.log("Access Granted");
-  }catch(err){
+    } catch (err) {}
+  };
 
-  }
- 
-};
+  // console.log(defaultAccount);
 
-// console.log(defaultAccount);
+  const checkRecord = async () => {
+    try {
+      if (contract) {
+        let record = await contract.getPatientRecord(defaultAccount);
 
-const checkRecord = async () => {
-  try {
-    if (contract) {
-      let record = await contract.getPatientRecord(defaultAccount);
-      
-      const formattedRecords = record.map(record => {
-        return {
-          vitalSigns: record.vitalSigns,
-          treatmentDetails: record.treatmentDetails,
-          vaccine: record.vaccine,
-          prescription: record.prescription,
-          billing: record.billing,
-          service: record.service,
-          amount: record.amount
-        };
-      });
-      setFormattedRecords(formattedRecords.reverse());
-      console.log(formattedRecords);
-      setVitalSigns(formattedRecords.map((record) => record.vitalSigns));
-      setTreatmentDetails(formattedRecords.map((record) => record.treatmentDetails));
-      setVaccine(formattedRecords.map((record) => record.vaccine));
-      setPrescription(formattedRecords.map((record) => record.prescription));
-      setPatientBilling(formattedRecords.map((record) => record.billing));
-      setPatientService(formattedRecords.map((record) => record.service));
-      setPatientAmount(formattedRecords.map((record) => record.amount));
-      
-      localStorage.setItem('vitalSigns', JSON.stringify(vitalSigns));
-      localStorage.setItem('treatmentDetails', JSON.stringify(treatmentDetails));
-      localStorage.setItem('vaccine', JSON.stringify(vaccine));
-      localStorage.setItem('prescription', JSON.stringify(prescription));
-      localStorage.setItem('billing', JSON.stringify(billing));
-      localStorage.setItem('service', JSON.stringify(service));
-      localStorage.setItem('amount', JSON.stringify(amount));
-    } else {
-      console.error('Contract is not available');
-    };
-  } catch (error) {
-    console.error('Error checking record:', error);
-  }
-};
+        const formattedRecords = record.map((record) => {
+          return {
+            vitalSigns: record.vitalSigns,
+            treatmentDetails: record.treatmentDetails,
+            vaccine: record.vaccine,
+            prescription: record.prescription,
+            billing: record.billing,
+            service: record.service,
+            amount: record.amount,
+          };
+        });
+        setFormattedRecords(formattedRecords.reverse());
+        console.log(formattedRecords);
+        setVitalSigns(formattedRecords.map((record) => record.vitalSigns));
+        setTreatmentDetails(
+          formattedRecords.map((record) => record.treatmentDetails)
+        );
+        setVaccine(formattedRecords.map((record) => record.vaccine));
+        setPrescription(formattedRecords.map((record) => record.prescription));
+        setPatientBilling(formattedRecords.map((record) => record.billing));
+        setPatientService(formattedRecords.map((record) => record.service));
+        setPatientAmount(formattedRecords.map((record) => record.amount));
 
-useEffect(() => {
-  if (defaultAccount) {
-    checkRecord();
-  }
-}, [defaultAccount]);
-  
+        localStorage.setItem("vitalSigns", JSON.stringify(vitalSigns));
+        localStorage.setItem(
+          "treatmentDetails",
+          JSON.stringify(treatmentDetails)
+        );
+        localStorage.setItem("vaccine", JSON.stringify(vaccine));
+        localStorage.setItem("prescription", JSON.stringify(prescription));
+        localStorage.setItem("billing", JSON.stringify(billing));
+        localStorage.setItem("service", JSON.stringify(service));
+        localStorage.setItem("amount", JSON.stringify(amount));
+      } else {
+        console.error("Contract is not available");
+      }
+    } catch (error) {
+      console.error("Error checking record:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (defaultAccount) {
+      checkRecord();
+    }
+  }, [defaultAccount]);
 
   const shareReport = () => {
-    const options = {
-      scrollY: -window.scrollY,
-    };
-    // html2canvas(screenshotRef.current, options).then((canvas) => {
-    // const imageData = canvas.toDataURL();
-    //shareScreenshot(imageData);
-    // });
+    if (screenshotRef.current) {
+      html2canvas(document.documentElement)
+        .then((canvas) => {
+          const imageDataURL = canvas.toDataURL();
+
+          // const link = document.createElement("a");
+          // link.href = canvas.toDataURL();
+          // link.download = "screenshot.png";
+          // link.click();
+
+          dispatch({ type: "SET_SCREENSHOT", screenshot: imageDataURL });
+
+          navigate("/share");
+        })
+        .catch((error) => {
+          console.error("Error capturing screenshot:", error);
+        });
+    }
   };
+
   const closeOpenMenus = useCallback(
     (e) => {
       if (
@@ -317,7 +327,7 @@ useEffect(() => {
       .then((res) => {
         console.log(res);
         const res1 = res?.data.find((item) => item.email === PatientEmail);
-      
+
         localStorage.setItem("patient_image", res1?.image);
         localStorage.setItem("patient_name", res1?.name);
         localStorage.setItem("patient_email", res1?.email);
@@ -335,11 +345,11 @@ useEffect(() => {
         localStorage.setItem("patient_address", res1?.address);
         localStorage.setItem("patient_city", res1?.city);
         localStorage.setItem("patient_country", res1?.country);
-        localStorage.setItem("patient_number", res1?.number);
+        localStorage.setItem("patient_number", res1?.phoneNumber);
         localStorage.setItem("patient_state", res1?.state);
         localStorage.setItem("patient_firstName", res1?.firstName);
         localStorage.setItem("patient_lastName", res1?.lastName);
-
+        console.log(res1.phoneNumber);
         let patient_First_Name = localStorage.getItem("patient_firstName");
         setPatientFirstName(patient_First_Name);
         let patient_Last_Name = localStorage.getItem("patient_lastName");
@@ -399,42 +409,38 @@ useEffect(() => {
   ]);
 
   useEffect(() => {
-    localStorage.setItem('vitalSigns', JSON.stringify(vitalSigns));
+    localStorage.setItem("vitalSigns", JSON.stringify(vitalSigns));
   }, [vitalSigns]);
 
   useEffect(() => {
-    localStorage.setItem('treatmentDetails', JSON.stringify(treatmentDetails));
+    localStorage.setItem("treatmentDetails", JSON.stringify(treatmentDetails));
   }, [treatmentDetails]);
 
   useEffect(() => {
-    localStorage.setItem('vaccine', JSON.stringify(vaccine));
+    localStorage.setItem("vaccine", JSON.stringify(vaccine));
   }, [vaccine]);
 
   useEffect(() => {
-    localStorage.setItem('prescription', JSON.stringify(prescription));
+    localStorage.setItem("prescription", JSON.stringify(prescription));
   }, [prescription]);
 
   useEffect(() => {
-    localStorage.setItem('billing', JSON.stringify(billing));
+    localStorage.setItem("billing", JSON.stringify(billing));
   }, [billing]);
 
   useEffect(() => {
-    localStorage.setItem('service', JSON.stringify(service));
+    localStorage.setItem("service", JSON.stringify(service));
   }, [service]);
 
   useEffect(() => {
-    localStorage.setItem('amount', JSON.stringify(amount));
+    localStorage.setItem("amount", JSON.stringify(amount));
   }, [amount]);
 
-
-// checkRecord();
+  // checkRecord();
 
   return (
     <div className="patientdashboard">
-      <nav
-        className={navOpen ? "patient_dashboard_nav" : "closeNav"}
-        ref={mobileNavRef}
-      >
+      <nav className={navOpen ? "patient_dashboard_nav" : "closeNav"}>
         <div className="_sideBar">
           <AiOutlineClose className="close_btn" onClick={toggleNav} />
           <div className="_center-div">
@@ -486,11 +492,10 @@ useEffect(() => {
           </h1>
         </div>
         <div className="right_side_header">
-          <Link to="/share" className="link">
-            <button className="share_btn" onClick={shareReport}>
-              Share Report
-            </button>
-          </Link>
+          <button className="share_btn" onClick={shareReport}>
+            Share Report
+          </button>
+
           <img src={notification} alt="notification" className="notifi_btn" />
           {/* <GrNotification className="profile_notification" /> */}
 
@@ -514,7 +519,7 @@ useEffect(() => {
         </div>
       </header>
       {isDropOpen && (
-        <div className="drop_content" ref={mobileMenuRef}>
+        <div className="drop_content" ref={(mobileMenuRef, mobileNavRef)}>
           <Link to="/Profile" className="link ">
             <p className="drop_content_item">View Profile</p>
           </Link>
@@ -522,7 +527,7 @@ useEffect(() => {
         </div>
       )}
 
-      <main className="patients_dashboard_main">
+      <main className="patients_dashboard_main" ref={screenshotRef}>
         <h1 className="responsive_h1_header_title">
           Welcome!{" "}
           {patient_First_Name
@@ -617,24 +622,33 @@ useEffect(() => {
         {connectedWallet ? (
           <div className="middle_section">
             <div className="grant_access_div">
-    
               <div className="access_div">
                 <input
                   className="grant_access_input"
                   type="text"
-                  onChange={(e)=>setGetForm(e.target.value)}
+                  onChange={(e) => setGetForm(e.target.value)}
                   placeholder="Enter Doctor's Wallet Address to grant access"
                 />
-                <button onClick={()=>grantDoctorAccess()} className="grant_access_btn">Grant Access</button>
+                <button
+                  onClick={() => grantDoctorAccess()}
+                  className="grant_access_btn"
+                >
+                  Grant Access
+                </button>
               </div>
               <div className="revoke_div">
                 <input
                   className="grant_access_input"
                   type="text"
-                  onChange={(e)=>setGetForm(e.target.value)}
+                  onChange={(e) => setGetForm(e.target.value)}
                   placeholder="Enter Doctor's Wallet Address to revoke access"
                 />
-                <button onClick={()=>revokeDoctorAccess()} className="revoke_access_btn">Revoke Access</button>
+                <button
+                  onClick={() => revokeDoctorAccess()}
+                  className="revoke_access_btn"
+                >
+                  Revoke Access
+                </button>
               </div>
             </div>
             <div className="middle_section_header">
@@ -663,7 +677,9 @@ useEffect(() => {
                           <div className="readings_div">
                             <p className="heading">Blood Status</p>
                             <p>
-                              <strong className="value">{vitalSigns[vitalSigns.length - 1][4]}</strong>
+                              <strong className="value">
+                                {vitalSigns[vitalSigns.length - 1][4]}
+                              </strong>
                             </p>
                           </div>
                         </div>
@@ -682,7 +698,9 @@ useEffect(() => {
                           <div className="readings_div">
                             <p className="heading">Heart Rate</p>
                             <p>
-                              <strong className="value">{vitalSigns[vitalSigns.length - 1][1]}</strong>
+                              <strong className="value">
+                                {vitalSigns[vitalSigns.length - 1][1]}
+                              </strong>
                             </p>
                           </div>
                         </div>
@@ -793,7 +811,7 @@ useEffect(() => {
                             alt="pics"
                           />
                           <div className="left_readings">
-                          {vitalSigns[vitalSigns.length - 1][6]}
+                            {vitalSigns[vitalSigns.length - 1][6]}
                             <br />
                             <span className="value_span1">ml</span>
                             <img
@@ -820,60 +838,62 @@ useEffect(() => {
               <div className="card2">
                 <h4 className="card2_header">Recent Diagnosis</h4>
                 {treatmentDetails.length > 0 ? (
-                <div>
-                  {treatmentDetails.slice(0, 5).map((detail, index) => (
-                    <div className="diagnosis_container" key={index}>
-                      <div className="left">
-                        <p className="diagnose_name">{detail[1]}</p>
-                        <p className="diagnose_status">Active</p>
+                  <div>
+                    {treatmentDetails.slice(0, 5).map((detail, index) => (
+                      <div className="diagnosis_container" key={index}>
+                        <div className="left">
+                          <p className="diagnose_name">{detail[1]}</p>
+                          <p className="diagnose_status">Active</p>
+                        </div>
+                        <div className="right">
+                          <img
+                            src={diseases[index % diseases.length]}
+                            alt="diagnose_image"
+                          />
+                        </div>
                       </div>
-                      <div className="right">
-                        <img src={diseases[index % diseases.length]} alt="diagnose_image" />
-                      </div>
-                    </div>
-                  ))}
+                    ))}
                   </div>
                 ) : (
                   <EmptyCard />
                 )}
               </div>
-              
+
               <div className="card3">
                 <h4 className="card3_header">Active Medication</h4>
                 {prescription.length > 0 ? (
-                    <div>
-                      {prescription.slice(0, 5).map((medication, index) => (
-                        <div className="med_div" key={index}>
-                          <div
-                            className="drug_icon_div"
-                            style={{
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                            }}
-                          >
-                            <img src={drugs[index % drugs.length]} alt="drug" />
-                          </div>
-                          <div className="drug_name_div">
-                            <p className="drug_name">{medication[0]}</p>
-                            <p className="dosage">{medication[2]}</p>
-                          </div>
+                  <div>
+                    {prescription.slice(0, 5).map((medication, index) => (
+                      <div className="med_div" key={index}>
+                        <div
+                          className="drug_icon_div"
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }}
+                        >
+                          <img src={drugs[index % drugs.length]} alt="drug" />
                         </div>
-                      ))}
-    
-                    
-                    
+                        <div className="drug_name_div">
+                          <p className="drug_name">{medication[0]}</p>
+                          <p className="dosage">{medication[2]}</p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                  ) : (
-                     <EmptyCard />
-                )}               
+                ) : (
+                  <EmptyCard />
+                )}
               </div>
             </div>
           </div>
         ) : (
           <div style={{ textAlign: "center", marginTop: "20%" }}>
             <p>You are not yet connected, Please click to the button connect</p>
-            <button className="connect_meta" onClick={connectWalletHandler}>{connButtonText}</button>
+            <button className="connect_meta" onClick={connectWalletHandler}>
+              {connButtonText}
+            </button>
           </div>
         )}
       </main>
