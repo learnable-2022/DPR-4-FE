@@ -10,19 +10,14 @@ import NavComponent from "./components/navComponent";
 import { Link, useNavigate } from "react-router-dom";
 
 import axios from "axios";
+import { useServiceProviderValue } from "../ServiceProvider";
 import abi from "../abi.json";
-import { ethers } from 'ethers';
-
+import { ethers } from "ethers";
 
 //rescue kenneth
 export default function DoctorsDashboard() {
-
- 
   const navigator = useNavigate();
-  const  handleAction=()=> {
-    navigator("/DoctorsRecords")
-  }
-  
+
   // const {auth} = useContext(StateContext);
   // const navigator = useNavigate();
 
@@ -36,92 +31,96 @@ export default function DoctorsDashboard() {
   //   return navigator("./landing");
   // }
 
+  const [{ allpatients }, dispatch] = useServiceProviderValue();
   let token = localStorage.getItem("doctorToken");
   let doctorID = localStorage.getItem("doctor_id");
   const [date, setDate] = useState(new Date());
-  const [open, setOpen] = useState(false);
+  const [patients, setPatients] = useState([]);
+  const [open, setOpen] = useState(
+    Array.from({ length: patients.length }, () => false)
+  );
   const [open2, setOpen2] = useState(false);
   const [connectedWallet, setConnectedWallet] = useState(false);
   const options = { month: "short", year: "numeric" };
   const options2 = { day: "numeric", weekday: "long" };
   const mobileMenuRef = useRef();
-  const [connButtonText, setConnButtonText] = useState('Connect to Metamask!');
+  const [connButtonText, setConnButtonText] = useState("Connect to Metamask!");
   const [errorMessage, setErrorMessage] = useState(null);
   let contractAddress = "0xFFE09412B070bC1880D5FBD2BeD09639E367061A";
-	const [defaultAccount, setDefaultAccount] = useState(null);
+  const [defaultAccount, setDefaultAccount] = useState(null);
 
+  const [provider, setProvider] = useState(null);
+  const [signer, setSigner] = useState(null);
+  const [contract, setContract] = useState(null);
+  const [getForm, setGetForm] = useState("");
 
-	const [provider, setProvider] = useState(null);
-	const [signer, setSigner] = useState(null);
-	const [contract, setContract] = useState(null);
-  const [getForm , setGetForm] = useState('');
-
-  const connectWalletHandler = () =>{
-
+  const connectWalletHandler = () => {
     if (window.ethereum && window.ethereum.isMetaMask) {
-
-  window.ethereum.request({ method: 'eth_requestAccounts'})
-  .then(result => {
-    accountChangedHandler(result[0]);
-    setConnectedWallet(true);
-    console.log(defaultAccount);
-    updateEthers(); 
-    // setConnButtonText('Wallet Connected');
-  })
-  .catch(error => {
-    setErrorMessage(error.message);
-  
-  });
-
-} else {
-  console.log('Need to install MetaMask');
-  setErrorMessage('Please install MetaMask browser extension to interact');
-}
-};
-
-
-const updateEthers = async () => {
-  try {
-    if (window.ethereum && window.ethereum.isMetaMask) {
-      const tempProvider = new ethers.providers.Web3Provider(window.ethereum);
-      setProvider(tempProvider);
-
-      const tempSigner = tempProvider.getSigner();
-      setSigner(tempSigner);
-      
-      const tempContract = new ethers.Contract(contractAddress, abi, tempSigner);
-      // console.log(tempContract);
-      if (tempContract) {
-        // Store necessary information from the contract
-        const contractInfo = {
-          address: contractAddress,
-          abi: abi,
-        };
-
-        // Store the contract information in local storage
-        
-        
-        setContract(tempContract);
-      }
+      window.ethereum
+        .request({ method: "eth_requestAccounts" })
+        .then((result) => {
+          accountChangedHandler(result[0]);
+          setConnectedWallet(true);
+          console.log(defaultAccount);
+          updateEthers();
+          // setConnButtonText('Wallet Connected');
+        })
+        .catch((error) => {
+          setErrorMessage(error.message);
+        });
     } else {
-      console.error('Please install MetaMask or use a compatible Ethereum browser extension.');
+      console.log("Need to install MetaMask");
+      setErrorMessage("Please install MetaMask browser extension to interact");
     }
-  } catch (error) {
-    console.error('Error updating Ethers:', error);
-  }
-};
+  };
 
-const accountChangedHandler = (newAccount) => {
-setDefaultAccount(newAccount);
-updateEthers();
-};
+  const updateEthers = async () => {
+    try {
+      if (window.ethereum && window.ethereum.isMetaMask) {
+        const tempProvider = new ethers.providers.Web3Provider(window.ethereum);
+        setProvider(tempProvider);
 
-useEffect(() => {
-  updateEthers();
-  connectWalletHandler();
-}, []);
+        const tempSigner = tempProvider.getSigner();
+        setSigner(tempSigner);
 
-localStorage.setItem('contract', contract);
+        const tempContract = new ethers.Contract(
+          contractAddress,
+          abi,
+          tempSigner
+        );
+        // console.log(tempContract);
+        if (tempContract) {
+          // Store necessary information from the contract
+          const contractInfo = {
+            address: contractAddress,
+            abi: abi,
+          };
+
+          // Store the contract information in local storage
+
+          setContract(tempContract);
+        }
+      } else {
+        console.error(
+          "Please install MetaMask or use a compatible Ethereum browser extension."
+        );
+      }
+    } catch (error) {
+      console.error("Error updating Ethers:", error);
+    }
+  };
+
+  const accountChangedHandler = (newAccount) => {
+    setDefaultAccount(newAccount);
+    updateEthers();
+  };
+
+  useEffect(() => {
+    updateEthers();
+    connectWalletHandler();
+  }, []);
+
+  localStorage.setItem("contract", contract);
   const [doctor_Name, setDoctorName] = useState("");
   const [doctor_Image, setDoctorImage] = useState("");
   const [doctor_Email, setDoctorEmail] = useState("");
@@ -131,6 +130,8 @@ localStorage.setItem('contract', contract);
   const [doctor_License, setDoctorrLicense] = useState("");
   const [doctor_First_Name, setDoctorFirstName] = useState("");
   const [doctor_Last_Name, setDoctorLastName] = useState("");
+  const [getPatientsList, setPatientList] = useState([]);
+
   // const [doctor_Height, setDoctorHeight] = useState("");
   // const [doctor_Weight, setDoctorWeight] = useState("");
   // const [doctor_Alle, setDoctorAlle] = useState("");
@@ -146,27 +147,75 @@ localStorage.setItem('contract', contract);
   let checkEffectImage = localStorage.getItem("doctor_image");
 
   let checkEffectName = localStorage.getItem("doctor_name");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredNames, setFilteredNames] = useState([]);
 
   // let checkEffectwallet = localStorage.getItem("doctor_walletId");
-  const closeOpenMenus = useCallback(
-    (e) => {
-      if (
-        mobileMenuRef.current &&
-        open &&
-        !mobileMenuRef.current.contains(e.target)
-      ) {
-        setOpen(false);
-      }
-    },
-    [open]
-  );
+  // const closeOpenMenus = useCallback(
+  //   (e) => {
+  //     if (
+  //       mobileMenuRef.current &&
+  //       open &&
+  //       !mobileMenuRef.current.contains(e.target)
+  //     ) {
+  //       setOpen(false);
+  //     }
+  //   },
+  //   [open]
+  // );
+  const handleAction = (index) => {
+    navigator("/DoctorsRecords");
+    dispatch({ type: "SET_CLICKED_INDEX", index: index });
+  };
 
+  const getAllPatients = async () => {
+    const response = await axios
+      .get(`https://medbloc-api.onrender.com/api/v1/patient/`, {
+        headers: {
+          "x-auth-token": token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
+      .then((res) => {
+        const patientsData = res.data;
+        localStorage.setItem("patient_list", JSON.stringify(patientsData));
+        //setPatientList(patientsData);
+
+        setPatients(res.data);
+        // dispatch({ type: "SET_ALL_PATIENTS", allpatients: res.data });
+        // console.log(allpatients);
+      })
+      .catch((error) => {});
+  };
+  // useEffect(() => {
+  //   // setPatientList(filtered);
+  //   if (searchTerm === "") {
+  //     const storedPatientList = localStorage.getItem("patient_list");
+  //     const parsedPatientList = JSON.parse(storedPatientList);
+  //     setPatientList(parsedPatientList);
+  //   } else {
+  //     const filtered = getPatientsList.filter((name) =>
+  //       name?.name.toLowerCase().includes(searchTerm.toLowerCase())
+  //     );
+  //     setPatientList(filtered);
+  //   }
+  //   //
+  // }, [searchTerm, getPatientsList]);
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
   useEffect(() => {
+    getAllPatients();
+    const storedPatientList = localStorage.getItem("patient_list");
+    const parsedPatientList = JSON.parse(storedPatientList);
+    setPatientList(parsedPatientList);
+
     const getDoctorsDetails = async () => {
       let DoctorEmail = localStorage.getItem("doctorEmail");
       const response = await axios
         .get(`https://medbloc-api.onrender.com/api/v1/doctor/`, {
-
           headers: {
             "x-auth-token": token,
             Accept: "application/json",
@@ -229,9 +278,10 @@ localStorage.setItem('contract', contract);
     // updateEthers();
     getDoctorsDetails();
 
-    document.addEventListener("mousedown", closeOpenMenus);
+    // document.addEventListener("mousedown", closeOpenMenus);
   }, [
-    closeOpenMenus,
+    //closeOpenMenus,
+
     checkEffectDOB,
     checkEffectEmail,
     checkEffectGender,
@@ -239,17 +289,20 @@ localStorage.setItem('contract', contract);
     checkEffectLicense,
     checkEffectName,
   ]);
-
-  const handleButtonClick = () => {
-    setOpen(!open);
+  {
+    console.log(getPatientsList);
+  }
+  const handleButtonClick = (index) => {
+    const updatedOpenStates = [...open];
+    updatedOpenStates[index] = !updatedOpenStates[index];
+    setOpen(updatedOpenStates);
   };
   const handleButtonClick2 = () => {
     setOpen2(!open2);
   };
 
   const handleAddCargo = (e) => {};
-  
-
+  console.log(patients);
   return (
     <div className="doctorsdashboard">
       <NavComponent
@@ -269,151 +322,70 @@ localStorage.setItem('contract', contract);
                   <input
                     className="doc_search"
                     type="text"
+                    onChange={handleSearch}
+                    value={searchTerm}
                     placeholder="Search"
                   />
                   <CiSearch className="search_icon" />
                 </div>
               </div>
-
               <div className="title_div">
                 <p>File no.</p>
                 <p>Patient Name</p>
                 <p></p>
               </div>
+
               <div className="patients_div">
-                <div className="patients_info">
-                  <p>#2451</p>
-                  <p>Omengbeoji Ifeanyichukwu</p>
-                  <CiCircleMore
-                    className="circle_more"
-                    onClick={handleButtonClick}
-                  />
-                  {open && (
-                    <div class="dropdown" ref={mobileMenuRef}>
-                      <ul>
-                        <li onClick={handleAction}>Patients medical record</li>
-                      </ul>
+                {getPatientsList?.map((patient, index) => {
+                  return (
+                    <div className="patients_info" key={index}>
+                      <p>#{index}</p>
+                      <p>{patient?.name}</p>
+                      <CiCircleMore
+                        className="circle_more"
+                        onClick={() => handleButtonClick(index)}
+                      />
+                      {open[index] && (
+                        <div class="dropdown" ref={mobileMenuRef}>
+                          <ul>
+                            <li onClick={() => handleAction(index)}>
+                              Patients medical record
+                            </li>
+                          </ul>
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-                <div className="patients_div">
-                  <div className="patients_info">
-                    <p>#2451</p>
-                    <p>Omengbeoji Ifeanyichukwu</p>
-                    <CiCircleMore
-                      className="circle_more"
-                      onClick={handleButtonClick}
-                    />
-                  </div>
-                  <div className="patients_info">
-                    <p>#2451</p>
-                    <p>Omengbeoji Ifeanyichukwu</p>
-                    <CiCircleMore className="circle_more" />
-                    {/* <div class="dropdown">
-                <ul>
-                  <li>Patients Profile</li>
-                  <li>Request Access</li>
-                </ul>
-              </div> */}
-                  </div>
-                  <div className="patients_info">
-                    <p>#2451</p>
-                    <p>Omengbeoji Ifeanyichukwu</p>
-                    <CiCircleMore className="circle_more" />
-                    {/* <div class="dropdown">
-                <ul>
-                  <li>Patients Profile</li>
-                  <li>Request Access</li>
-                </ul>
-              </div> */}
-                  </div>
-
-                  <div className="patients_info">
-                    <p>#2451</p>
-                    <p>Omengbeoji Ifeanyichukwu</p>
-                    <CiCircleMore className="circle_more" />
-                    {/* <div class="dropdown">
-                <ul>
-                  <li>Patients Profile</li>
-                  <li>Request Access</li>
-                </ul>
-              </div> */}
-                  </div>
-                  <div className="patients_info">
-                    <p>#2451</p>
-                    <p>Omengbeoji Ifeanyichukwu</p>
-                    <CiCircleMore className="circle_more" />
-                    {/* <div class="dropdown">
-                <ul>
-                  <li>Patients Profile</li>
-                  <li>Request Access</li>
-                </ul>
-              </div> */}
-                  </div>
-                  <div className="patients_info">
-                    <p>#2451</p>
-                    <p>Omengbeoji Ifeanyichukwu</p>
-                    <CiCircleMore className="circle_more" />
-                    {/* <div class="dropdown">
-                <ul>
-                  <li>Patients Profile</li>
-                  <li>Request Access</li>
-                </ul>
-              </div> */}
-                  </div>
-                  <div className="patients_info">
-                    <p>#2451</p>
-                    <p>Omengbeoji Ifeanyichukwu</p>
-                    <CiCircleMore className="circle_more" />
-                    {/* <div class="dropdown">
-                <ul>
-                  <li>Patients Profile</li>
-                  <li>Request Access</li>
-                </ul>
-              </div> */}
-                  </div>
-                  <div className="patients_info">
-                    <p>#2451</p>
-                    <p>Omengbeoji Ifeanyichukwu</p>
-                    <CiCircleMore className="circle_more" />
-                    {/* <div class="dropdown">
-                <ul>
-                  <li>Patients Profile</li>
-                  <li>Request Access</li>
-                </ul>
-              </div> */}
-                  </div>
-                  <div className="patients_info">
-                    <p>#2451</p>
-                    <p>Omengbeoji Ifeanyichukwu</p>
-                    <CiCircleMore className="circle_more" />
-                    {/* <div class="dropdown">
-                <ul>
-                  <li>Patients Profile</li>
-                  <li>Request Access</li>
-                </ul>
-              </div> */}
-                  </div>
-
-                  <div className="patients_info">
-                    <p>#2451</p>
-                    <p>Omengbeoji Ifeanyichukwu</p>
-                    <CiCircleMore
-                      className="circle_more"
-                      onClick={handleButtonClick2}
-                    />
-                    {open2 && (
-                      <div class="dropdown">
-                        <ul>
-                          <li>Patients Profile</li>
-                          <li>Patients medical record</li>
-                        </ul>
-                      </div>
-                    )}
-                  </div>
-                </div>
+                  );
+                })}
               </div>
             </div>
+          </div>
+
+          <div className="right-side">
+            <div className="calendar-container">
+              <Calendar
+                onClickDay={handleAddCargo}
+                onChange={setDate}
+                value={date}
+              />
+            </div>
+            <div className="schedule_div">
+              <div className="schedule_wrapper">
+                <div className="top">
+                  <Link to="/DocSchedule" className="link">
+                    <button>Schedule</button>
+                  </Link>
+
+                  <p>{date.toLocaleDateString("en-us", options)}</p>
+                </div>
+                <div className="middle">
+                  <p>{date.toLocaleDateString("en-us", options2)}</p>
+                </div>
+                <div className="appointment_brief">
+                  <p>Appointment with #2589 </p>
+                  <p>12pm - 2pm</p>
+                </div>
+                {/* <div className="appointment_brief">
           </div>
           <div className="right-side">
             <div className="calendar-container">
@@ -462,7 +434,9 @@ localStorage.setItem('contract', contract);
       ) : (
         <div className="doc_connect_div">
           <p>You are not yet connected, Please click to the button connect</p>
-          <button className="doc_connect_btn" onClick={connectWalletHandler}>{connButtonText}</button>
+          <button className="doc_connect_btn" onClick={connectWalletHandler}>
+            {connButtonText}
+          </button>
         </div>
       )}
       {/* <Finish contract={contract}/> */}

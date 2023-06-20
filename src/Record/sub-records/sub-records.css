@@ -563,14 +563,21 @@ tr:nth-child(odd){
     display:flex;
     
   }
+  .sp-p{
+    margin-right: 190px;
+  }
+  .nav-container .smallscreen{
+    display: block;
+  }
   .select-folder select{
     padding: 10px;
     border: none;
     background: #f9f9f9;
   }
   .select-folder select option{
-    font-family:"open sas";
-    font-size: small;
+    font-family:"poppins";
+    font-size: 15px;
+
   }
   .visit-navigation{
     display: flex;
@@ -686,7 +693,11 @@ tr:nth-child(odd){
   .disappear{
     display: flex;
   }
+
 }
 .disappear{
   display:none;
+}
+.nav-container .smallscreen{
+  display: none;
 }

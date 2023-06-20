@@ -13,7 +13,7 @@ import { useRequestProcessor } from "../api/requestProcessor";
 import { Link } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
 import { BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
-
+import notification from "../assets/Notification.svg";
 import { FiLogOut } from "react-icons/fi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
@@ -99,14 +99,14 @@ export default function PatientsRecord() {
         <GiHamburgerMenu className="hamburger" onClick={toggleNav} />
         <div className="nav-container-left">
           <BsArrowLeft onClick={handle} style={{ cursor: "pointer" }} />
-          <h2>Medical Record</h2>
+          <h1>Medical Record</h1>
         </div>
         <div className="nav-container-right">
           <div>
             <button style={{ cursor: "pointer" }}>share report</button>
           </div>
           <div>
-            <IoIosNotificationsOutline />
+          <img src={notification} alt="notification" className="notifi_btn" />
           </div>
           <div className="nav-short">
             <img
@@ -116,6 +116,9 @@ export default function PatientsRecord() {
                 height: "40px",
                 borderRadius: "50%",
                 boxShadow: "1px 2px 4px rgb(224 222 222)",
+                 border:"1px solid rgb(255 255 255)",
+                  borderRadius:" 50%",
+                  objectFit: "fill",
               }}
               alt="frame"
             />

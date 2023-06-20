@@ -3,6 +3,7 @@ import { RxDashboard } from "react-icons/rx";
 import { TfiWrite } from "react-icons/tfi";
 import { FiLogOut } from "react-icons/fi";
 import ourlogo from "../assets/ourlogo.png";
+import newlogo1 from "../assets/newlogo1.png";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
@@ -26,8 +27,8 @@ export default function SideBarDoc() {
   return (
     <div className="sideBar">
       <div className="center-div">
-        <img src={ourlogo} alt="pics" onClick={returnHomeHandler}  style={{cursor:"pointer"}}/>
-        <p>Med<span>loc</span></p>
+        <img src={newlogo1} alt="pics" onClick={returnHomeHandler}  style={{cursor:"pointer",width:"70px",height:"70px"}}/>
+        {/* <p>Med<span>loc</span></p> */}
       </div>
       <div className="mid-section">
         <Link to="/DocDashboard" className="link">

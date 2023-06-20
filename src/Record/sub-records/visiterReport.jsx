@@ -10,9 +10,16 @@ export default function VisiterReport() {
   const record = getFormattedRecords[id];
   console.log(id);
 
+
+let vitalSigns = JSON.parse(localStorage.getItem("vitalSigns"));
+let treatmentDetails = JSON.parse(localStorage.getItem('treatmentDetails'));
+let vaccine = JSON.parse(localStorage.getItem('vaccine'));
+let prescription = JSON.parse(localStorage.getItem('prescription'));
+
+const lab = "visit-report"
   return (
     <div  className='container'>
-        <NavBar/>
+        <NavBar lab={lab}/>
         <Labvisitreport/>
           <div className='third-container'>
                   <div className='third-lab-report'>

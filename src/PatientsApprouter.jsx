@@ -33,6 +33,7 @@ import Signingup from "./login/signingup";
 import PatientInvoiceConfirmation from "./billings/PatientInvoiceConfirmation";
 import ApprovedPage from "./billings/ApprovedPage";
 import DoctorInvoiceSent from "./billings/DoctorInvoiceSent";
+import DoctorsLabReport from "./doctorsPatientsRecord/subrecords/DoctorsLabReport"
 
 import Vitals from "./draffts/Components/Vitals";
 import Finish from "./draffts/Components/Finish";
@@ -389,27 +390,41 @@ function Approuter() {
         ) : (
           <Route path="/DoctorInvoiceSent" element={<Landing />} />
         )}
-        {doctorToken ? (
+
+         {doctorToken ? (
           <Route
-            path="DoctorsRecords"
+            path="/doctorslab/doctorslabreport"
             element={
               <AuthDocLayout>
                 {" "}
-                <DoctorsRecords />{" "}
+                <DoctorsLabReport />
               </AuthDocLayout>
             }
-          >
-            <Route path="doctorsoverview" element={<DoctorsOverview />} />
-            <Route path="doctorslab" element={<DoctorsLab />} />
-            <Route path="doctorsvaccine" element={<DoctorsVaccine />} />
-            <Route
-              path="doctorsprescription"
-              element={<DoctorsPresciption />}
-            />
-          </Route>
+          />
         ) : (
-          <Route path="DoctorsRecords" element={<Landing />} />
+          <Route path="/doctorslab/doctorslabreport" element={<Landing />} />
         )}
+
+
+{doctorToken ? (
+            <Route  
+              path="DoctorsRecords"
+              element={
+                <AuthDocLayout>
+                 {" "}
+                  <DoctorsRecords />{" "}
+                </AuthDocLayout>
+              }
+            >
+              <Route index="doctorsoverview" element={<DoctorsOverview />} />
+              <Route path="doctorslab" element={<DoctorsLab />} />
+              <Route path="doctorsvaccine" element={<DoctorsVaccine />} />
+              <Route path="doctorsprescription" element={<DoctorsPresciption />} />
+            </Route>
+          ) : (
+            <Route path="DoctorsRecords" element={<Landing />} />
+          )}
+
       </Routes>
     </Router>
   );
