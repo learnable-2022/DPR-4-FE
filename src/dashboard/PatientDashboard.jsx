@@ -66,7 +66,7 @@ export default function PatientDashboard() {
 
   const [data, setData] = useState(true);
   const drugs = [drug1, drug2, drug3, drug4];
-  const [connectedWallet, setConnectedWallet] = useState(false);
+  const [connectedWallet, setConnectedWallet] = useState(true);
   const diseases = [disease1, disease2, disease3];
   const mobileMenuRef = useRef();
   const mobileNavRef = useRef();

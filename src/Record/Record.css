@@ -36,12 +36,12 @@
   align-items: center !important;
   gap: 20px;
 }
-.nav-container-left h2 {
+.nav-container-left h1 {
   color: #2b80d5;
-  font-family: "Open Sans";
+ 
   font-style: normal;
   font-weight: 700;
-  font-size: 24px;
+ 
   line-height: 36px;
 }
 .nav-container-right {
@@ -80,8 +80,8 @@
   align-items: center;
 
   width: 100%;
-  padding: 20px 60px 20px 20px;
-  margin-top: 100px;
+  padding: 20px 10px 20px 10px;
+  margin-top: 80px;
   margin-bottom: 100px;
 }
 
@@ -93,6 +93,9 @@
   width: 120px;
   height: 120px;
   box-shadow: 1px 2px 4px rgb(224 222 222);
+    border: 1px solid rgb(255 255 255);
+    border-radius: 50%;
+    object-fit: fill;
 }
 .second-section-text {
   display: flex;
@@ -102,7 +105,7 @@
 .second-section-text p {
   font-family: "Open Sans";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   color: #b3b3b3;
   font-size: 16px;
   line-height: 28px;
@@ -120,13 +123,14 @@
 .second-section-second p {
   font-family: "Open Sans";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   color: #b3b3b3;
   font-size: 16px;
   line-height: 28px;
 }
 .second-section-second p span {
   font-weight: 800;
+  color: #000000;
 }
 .patient {
   margin-left: 190px;
@@ -195,12 +199,19 @@
 .nav-container-left-reverse {
   display: none;
 }
+.second-section-inner h2{
+  color: #222222;
+    font-weight: 600;
+}
 @media (max-width: 926px) {
   .container {
     padding-left: 0px;
   }
   .hamburger {
     display: block;
+  }
+  .second-section-inner h2{
+    text-align: center;
   }
   .second-section-first {
     display: flex;
@@ -233,6 +244,11 @@
     padding: 10px;
     width: 100%;
   }
+  .patient{
+    margin-left: 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
   .second-section-text {
     display: flex;
     justify-content: space-between;
@@ -242,13 +258,13 @@
     width: 100%;
   }
   
-  .second-section-second {
+  /* .second-section-second {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
     width: 100%;
   } */
- 
+  
 
   .second-section-inner h2 {
     text-align: center;
@@ -306,6 +322,11 @@
     flex-wrap: wrap;
     padding: 10px;
     width: 100%;
+  }
+  .patient{
+    margin-left: 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
   .second-section-text {
     display: flex;
