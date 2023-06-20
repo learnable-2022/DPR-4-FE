@@ -12,12 +12,13 @@ import RadioButton from "../assets/images/RadioButton.png";
 import pay from "../assets/images/pay.png";
 import PayPal from "../assets/images/PayPal.png";
 import VISA from "../assets/images/VISA.png";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 function PatientInvoice() {
   const navigate = useNavigate();
 
   function handleClick(e) {
-    navigate("/PatientsBilling");
+    navigate("/PatientPaymentHistory");
   }
 
   function onPress(e) {
@@ -27,6 +28,41 @@ function PatientInvoice() {
   return (
     <>
       <div className="Right">
+              {/* =========================== */}
+              <div className="smallScreenInvoiceIconsContainer">
+          <GiHamburgerMenu  className="hamburger" />
+          <div className="smallScreenInvoiceIcons">
+            <img src={Notification} alt="pics" />
+            <img src={PatientPics} alt="pics" />
+          </div>
+          </div>
+
+          <div className="smallScreenBIllingNavHistory">
+          <div className="navFlex">
+            <div>
+              <h1>Billing</h1>
+              <div className="Consultation">
+                <div className="Bill">
+                  <h6>Invoice Statement </h6>
+                  <img src={ArrowRight2} className="ArrowHistory" alt="pics" />
+                </div>
+
+                <div className="Bill">
+                  <h6 onClick={handleClick}>Payment History</h6>
+                  <img src={ArrowRight2} className="ArrowHistory" alt="pics" />
+                </div>
+              </div>
+            </div>
+
+            <div className="invoiceIcons">
+              <img src={Notification} alt="pics" />
+              <img src={PatientPics} alt="pics" />
+            </div>
+          </div>
+        </div>
+        {/* </div> */}
+        {/* =========================== */}
+
         <div className="billingNavHistory">
           <div className="navFlex">
             <div>
@@ -83,11 +119,6 @@ function PatientInvoice() {
               </p>
             </div>
           </div>
-
-          <div className="editProfile">
-            <p>EDIT PROFILE</p>
-            <img src={ArrowDownColoured} alt="pics" />
-          </div>
         </div>
 
         <div className="billingStatement">
@@ -95,10 +126,6 @@ function PatientInvoice() {
             <p>
               Payments /<span className="invoice">Invoice 00319</span>
             </p>
-            <div className="PrinterSide">
-              <img src={printer} alt="pics" />
-              <p>Print</p>
-            </div>
           </div>
           <hr className="billingStatementNavUnderline"></hr>
 
@@ -153,22 +180,30 @@ function PatientInvoice() {
 
             <div className="billPreview">
               <div>
+                <div className="billMoney">
                 <div className="medicalTools">
                   <img src={Heart} alt="pics" />
                   <p>ECG Test</p>
                 </div>
+                <p>USD 10,000</p>
+                </div>
+                <div className="billMoney">
                 <div className="medicalTools">
                   <img src={Syring} alt="pics" />
                   <p>Blood Test</p>
                 </div>
+                <p>USD 10,000</p>
+                </div>
+               <div className="billMoney">
+                 <div className="medicalTools">
                 <p>Total Amount (Including Tax)</p>
+                <p className="hiddenAmount">Total Amount <br/>(Including Tax)</p>
+                </div>
+                <p>USD 20,000</p>
+                </div>
+              
               </div>
 
-              <div>
-                <p>USD 10,000</p>
-                <p>USD 10,000</p>
-                <p>USD 10,000</p>
-              </div>
             </div>
           </div>
           <div className="paymentDetails">
