@@ -3,6 +3,7 @@ import "./billing.css";
 import ArrowRight2 from "../../src/assets/images/ArrowRight2.png";
 import Calendar from "../../src/assets/images/Calendar.png";
 import { useNavigate } from "react-router-dom";
+import {IoIosArrowDown} from "react-icons/io";
 
 function DoctorPaymentHistory() {
   const navigate = useNavigate();
@@ -18,17 +19,23 @@ function DoctorPaymentHistory() {
   return (
     <>
       <div className="Right">
+         {/* -------------------------------- */}
+         <div className="ResponsivenessBillingNavHistory">
+          <h1>Billing</h1>
+            <div className="Bill">
+              <h6>Payment History</h6>
+              <IoIosArrowDown className="ArrowHistory"/>
+            </div>
+        </div>
+        {/* --------------------------------- */}
         <div className="billingNavHistory">
           <h1>Billing</h1>
           <div className="Consultation">
-            <div className="Bill" onClick={handlePress}>
-              <h6 onClick={handlePress}>Consultation Bill </h6>
-              <img src={ArrowRight2} className="ArrowHistory" alt="pics" />
-            </div>
+
 
             <div className="Bill">
               <h6>Payment History</h6>
-              <img src={ArrowRight2} className="ArrowHistory" alt="pics" />
+              <IoIosArrowDown className="ArrowHistory" alt="pics"/>
             </div>
           </div>
         </div>
@@ -55,7 +62,7 @@ function DoctorPaymentHistory() {
                 <li>Amaka</li>
                 <li>8:00am </li>
                 <li>ECG, Blood Test</li>
-                <li className="">Successful</li>
+                <li className="Successful">Paid</li>
                 <li>USD 22,000 </li>
               </ul>
               <hr className="underline"></hr>
@@ -64,7 +71,7 @@ function DoctorPaymentHistory() {
                 <li>Chris</li>
                 <li>8:00am </li>
                 <li>Dental care</li>
-                <li className="Declined">Paid</li>
+                <li className="Successful">Paid</li>
                 <li>USD 22,000 </li>
               </ul>
               <hr className="underline"></hr>
@@ -82,7 +89,7 @@ function DoctorPaymentHistory() {
                 <li> Kemi</li>
                 <li>8:00am </li>
                 <li>CT Scan</li>
-                <li className="Declined">Paid</li>
+                <li className="Successful">Paid</li>
                 <li>USD 22,000 </li>
               </ul>
               <hr className="underline"></hr>
@@ -100,7 +107,7 @@ function DoctorPaymentHistory() {
                 <li>Obed</li>
                 <li>8:00am </li>
                 <li>ECG, Blood Test</li>
-                <li className="Declined">Paid</li>
+                <li className="Successful">Paid</li>
                 <li>USD 22,000 </li>
               </ul>
               <hr className="underline"></hr>
@@ -119,7 +126,7 @@ function DoctorPaymentHistory() {
                   <li>Ada</li>
                   <li>8:00am </li>
                   <li>ECG, Blood Test</li>
-                  <li className="">Paid</li>
+                  <li className="Successful">Paid</li>
                   <li>USD 22,000 </li>
                 </ul>
                 <hr className="underline"></hr>
@@ -128,7 +135,7 @@ function DoctorPaymentHistory() {
                   <li>Chris</li>
                   <li>8:00am </li>
                   <li>Dental care</li>
-                  <li className="Declined">Paid</li>
+                  <li className="Successful">Paid</li>
                   <li>USD 22,000 </li>
                 </ul>
                 <hr className="underline"></hr>
@@ -137,7 +144,7 @@ function DoctorPaymentHistory() {
                   <li>Tim</li>
                   <li>8:00am </li>
                   <li>MRI</li>
-                  <li className="Declined">Unpaid</li>
+                  <li className="Declined">UnPaid</li>
                   <li>USD 22,000 </li>
                 </ul>
                 <hr className="underline"></hr>
@@ -146,7 +153,34 @@ function DoctorPaymentHistory() {
                   <li>Saint</li>
                   <li>8:00am </li>
                   <li>CT Scan</li>
-                  <li className="Declined">Paid</li>
+                  <li className="Successful">Paid</li>
+                  <li>USD 22,000 </li>
+                </ul>
+                <hr className="underline"></hr>
+
+                <ul className="ulContent">
+                  <li>Saint</li>
+                  <li>8:00am </li>
+                  <li>CT Scan</li>
+                  <li className="Successful">Paid</li>
+                  <li>USD 22,000 </li>
+                </ul>
+                <hr className="underline"></hr>
+
+                <ul className="ulContent">
+                  <li>Chris</li>
+                  <li>8:00am </li>
+                  <li>Dental care</li>
+                  <li className="Successful">Paid</li>
+                  <li>USD 22,000 </li>
+                </ul>
+                <hr className="underline"></hr>
+
+                <ul className="ulContent">
+                  <li>Chris</li>
+                  <li>8:00am </li>
+                  <li>Dental care</li>
+                  <li className="Successful">Paid</li>
                   <li>USD 22,000 </li>
                 </ul>
                 <hr className="underline"></hr>
@@ -155,10 +189,10 @@ function DoctorPaymentHistory() {
                   <li>Tobi</li>
                   <li>8:00am </li>
                   <li>ECG, Blood Test</li>
-                  <li className="Declined">Paid</li>
+                  <li className="Successful">Paid</li>
                   <li>USD 22,000 </li>
                 </ul>
-                <hr></hr>
+                {/* <hr></hr> */}
               </div>
             </div>
           </div>

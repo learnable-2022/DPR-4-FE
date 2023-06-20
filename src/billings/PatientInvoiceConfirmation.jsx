@@ -7,7 +7,7 @@ function PatientInvoiceConfirmation() {
       <div className="Confirmation">
         <img src={DangerCircle} alt="pics" />
         <p>
-          You will be required to pay with your ATM Card or <br />. Bank Account
+          You will be required to pay with your ATM Card or <br/>. Bank Account
           information. Payment is processed by
           <br />
           Paystack’s secure payment system. Be rest assured

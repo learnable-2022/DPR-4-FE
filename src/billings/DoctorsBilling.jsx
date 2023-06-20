@@ -1,10 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CiSearch } from "react-icons/ci";
 import Notification from "../assets/images/Notification.png";
 import PatientPics from "../assets/images/PatientPics.png";
 import { useNavigate } from "react-router-dom";
+import {GiHamburgerMenu} from "react-icons/gi";
+import { useState } from "react";
+import url from "../api/BillingApi"
 
 export default function DoctorsBilling() {
+  const [transactionArray, setTransactionArray] = useState([])
+
+useEffect(()=>{
+    const fetchdata = async()=>{
+      try{
+        const response = await url.get('/transactions');
+        console.log('response::  ',response);
+        setTransactionArray(response.data.transactions);
+
+        console.log('trans :: ',response.data.transactions);
+      }catch(err){
+        console.log('err:: ',err);
+      }
+    }
+    fetchdata();
+}, [])
+
+
+
   const navigate = useNavigate();
 
   function handleClick(e) {
@@ -41,6 +63,31 @@ export default function DoctorsBilling() {
           </div>
         </div>
 
+        {/* =========================================== */}
+        <div className="smallScreenNav">
+        <div className="searchParent">
+          <div>
+            <GiHamburgerMenu/>
+          </div>
+              <div className="searchBox">
+                <CiSearch />
+                <input type="text" placeholder="Search.." />
+              </div>
+
+              <div className="searchIcons">
+                <img src={Notification} alt="pics" />
+                <img src={PatientPics} alt="pics" />
+              </div>
+            </div>
+
+            <div className="smallScreenNavName">
+              <p>Hello, Dr Ada!</p>
+            </div>
+            </div>
+
+        {/* ============================================= */}
+
+
         <div className="Dashboard">
           <div className="patientDashboardHeading">
             <p>Payment History</p>
@@ -54,28 +101,28 @@ export default function DoctorsBilling() {
               </ul>
             </div>
 
-            <div className="PatientEntities" onClick={handleClick}>
-              <ul>
+            <div className="PatientEntities">
+              <ul >
                 <li>Amaka</li>
-                <li className="Successful">Paid</li>
+                <li className="successful">Paid</li>
                 <li>USD 22,000 </li>
               </ul>
               <hr className="PatientUnderline"></hr>
               <ul>
                 <li>Timothy</li>
-                <li className="Declined">Unpaid</li>
+                <li className="declined">Unpaid</li>
                 <li>USD 5,000 </li>
               </ul>
               <hr className="PatientUnderline"></hr>
               <ul>
                 <li>Chris</li>
-                <li className="Successful">Paid</li>
+                <li className="successful">Paid</li>
                 <li>USD 50,000 </li>
               </ul>
               <hr className="PatientUnderline"></hr>
               <ul>
                 <li>Tobi</li>
-                <li className="Successful">Paid</li>
+                <li className="successful">Paid</li>
                 <li>USD 150,000 </li>
               </ul>
             </div>
@@ -86,8 +133,9 @@ export default function DoctorsBilling() {
           </div>
         </div>
 
+
         {/* /////////////////////////down////////////////////////////// */}
-        <div className="Dashboard">
+        {/* <div className="Dashboard">
           <div className="patientDashboardHeading">
             <p>Patient Consultation Billing</p>
           </div>
@@ -95,7 +143,7 @@ export default function DoctorsBilling() {
             <div className="ConsultationBillingNav">
               <ul>
                 <li>Name</li>
-                {/* <li>Status</li> */}
+                <li>Status</li>
                 <li>Amount </li>
               </ul>
             </div>
@@ -103,35 +151,39 @@ export default function DoctorsBilling() {
             <div className="ConsultationBilling">
               <ul>
                 <li>Amaka</li>
-                {/* <li className="Successful">Paid</li> */}
+                <li className="Successful">Paid</li>
                 <li>USD 22,000 </li>
               </ul>
               <hr className="doctorUnderline"></hr>
               <ul>
                 <li>Timothy</li>
-                {/* <li className="Declined">Unpaid</li> */}
-                <li>USD 5,000 </li>
+                <li className="Declined">Unpaid</li>
+                <li>USD 5,000   </li>
               </ul>
               <hr className="doctorUnderline"></hr>
               <ul>
                 <li>Chris </li>
-                {/* <li className="Successful">Paid</li> */}
-                <li>USD 50,000 </li>
+                <li className="Successful">Paid</li>
+                <li>USD 50,000  </li>
               </ul>
               <hr className="doctorUnderline"></hr>
               <ul>
                 <li>Tobi</li>
-                {/* <li className="Successful">Paid</li> */}
-                <li>USD 150,000 </li>
+                <li className="Successful">Paid</li>
+                <li>USD 150,000   </li>
               </ul>
             </div>
           </div>
 
           <div className="doctorViewAll" onClick={handleClick}>
-            <p>View all</p>
-          </div>
+              <p>View all</p>
+          </div> 
+
+        </div>  */}
         </div>
-      </div>
+
+        
+    
     </>
   );
 }
