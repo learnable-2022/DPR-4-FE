@@ -4,9 +4,15 @@ import { useServiceProviderValue } from "../../ServiceProvider";
 import addButton from "../../assets/add-circle.svg";
 import { useLocation } from "react-router-dom";
 
-function Finish() {
+function Finish({contract}) {
+ const [total, setTotalAmount]=useState("")
+  const handleTotalAmount = (e) =>{
+    setTotalAmount(e.target.value)
+     dispatch({type:"SET_TOTAL_AMOUNT", totalAmount: e.target.value})
+  }
   const [
-    {
+    { 
+      walletAddress,
       temperature,
       bloodCount,
       bloodPressure,
@@ -34,6 +40,7 @@ function Finish() {
   ] = useServiceProviderValue();
   const location = useLocation();
   const shouldApplyStyle = location.pathname.includes("/finish");
+  
 
   const [val, setVal] = useState([
     { serviceType: "", serviceCharge: "", tax: "", subTotal: "" },
@@ -41,7 +48,7 @@ function Finish() {
   function addComponent() {
     setVal([
       ...val,
-
+      
       { serviceType: "", serviceCharge: "", tax: "", subTotal: "" },
     ]);
   }
@@ -206,7 +213,7 @@ function Finish() {
 
           <p className="total_display">
             Total Amount : NGN{" "}
-            <input type="number" className="total_val_input" />
+            <input type="number" value={total} onChange={handleTotalAmount} className="total_val_input" />
           </p>
         </div>
       </div>

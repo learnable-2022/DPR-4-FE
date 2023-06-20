@@ -2,15 +2,15 @@ import React from 'react';
 import NavBar from '../../utilities/NavBar';
 import Labvisitreport from '../../utilities/lab-visitreport';
 
+function DoctorsLabReport() {
 
+  const   label= "doctor-lab";
 
-export default function LabReport() {
-  const lab = "lab"
   return (
-    <div   className='container'>
-        <NavBar lab={lab}/>
-        <Labvisitreport/>
-        <div className='first-visit-container'>
+    <div  className='container'>
+      <NavBar lab = {label}/>
+      <Labvisitreport/>
+      <div className='first-visit-container'>
          <div className='intro'>
             <div>
               <p> Name of Lab :</p>
@@ -48,3 +48,5 @@ export default function LabReport() {
     </div>
   )
 }
+
+export default DoctorsLabReport

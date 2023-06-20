@@ -232,6 +232,17 @@
   background-color: #eb4866;
   cursor: pointer;
 }
+.grant_access_div .revoke_access_btn {
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background-color: red;
+  color: white;
+}
+.grant_access_div .revoke_access_btn:hover {
+  cursor: pointer;
+}
+
 .grant_access_input::placeholder {
   padding-left: 1rem;
 }

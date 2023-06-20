@@ -17,7 +17,7 @@ export default function Labvisitreport() {
               alt="bigpics"
             />
           </div>
-          <div>
+          <div className='second-section-inner'>
             <h2>{patient_Name}</h2>
             <div className="second-section-text">
               <div>
