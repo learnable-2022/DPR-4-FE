@@ -117,6 +117,7 @@ function PatientsEditProfile() {
       selectedState ||
       selectedWeight ||
       selectedLastName ||
+      selectedWallet ||
       value
     ) {
       return true;
@@ -174,7 +175,7 @@ function PatientsEditProfile() {
         {
           name: formattedName || name,
           email: selectedEmail || email,
-          // walletId: selectedWallet || walletId,
+          walletId: selectedWallet || walletId,
           image: data || patient_Image,
           height: selectedHeight || patient_Height,
           genotype: selectedGeno || patient_Geno,

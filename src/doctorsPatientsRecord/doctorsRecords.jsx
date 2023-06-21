@@ -129,7 +129,7 @@ function DoctorsRecords() {
       </div>
       <div className="third-section-link">
         <li>
-          <NavLink exact activeClassName="active" to="doctorsoverview">
+          <NavLink activeClassName="active" to="">
             <p>Overview</p>
           </NavLink>
         </li>
@@ -153,7 +153,8 @@ function DoctorsRecords() {
         </li>
       </div>
       <div>
-        <Outlet />
+        {" "}
+        <Outlet />{" "}
       </div>
     </div>
   );

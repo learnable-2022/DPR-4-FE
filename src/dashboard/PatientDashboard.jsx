@@ -29,7 +29,6 @@ import notification from "../assets/Notification.svg";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiArrowDropDownFill } from "react-icons/ri";
 
-import { Link, useNavigate } from "react-router-dom";
 import StateContext from "../stateProvider/stateprovider";
 import abi from "../abi.json";
 import { ethers } from "ethers";
@@ -75,6 +74,7 @@ export default function PatientDashboard() {
   const mobileMenuRef = useRef();
   const mobileNavRef = useRef();
   const [navOpen, setIsNavOpen] = useState(false);
+  const [NotificationMsg, setNotificationMsg] = useState("");
   const checkEffectName = localStorage.getItem("patient_name");
   const checkEffectImage = localStorage.getItem("patient_image");
   let checkEffectgender = localStorage.getItem("patient_gender");
@@ -101,7 +101,8 @@ export default function PatientDashboard() {
   const toggleNav = () => {
     setIsNavOpen(!navOpen);
   };
-
+  const [open, setOpen] = useState(false);
+  const [isThereNotification, setisThereNotification] = useState(false);
   let contractAddress = "0xFFE09412B070bC1880D5FBD2BeD09639E367061A";
   const [errorMessage, setErrorMessage] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null);
@@ -119,7 +120,9 @@ export default function PatientDashboard() {
   const [billing, setPatientBilling] = useState([]);
   const [service, setPatientService] = useState([]);
   const [amount, setPatientAmount] = useState([]);
-
+  const handleButtonClick = () => {
+    setOpen(!open);
+  };
   const connectWalletHandler = () => {
     if (window.ethereum && window.ethereum.isMetaMask) {
       window.ethereum
@@ -139,7 +142,9 @@ export default function PatientDashboard() {
       setErrorMessage("Please install MetaMask browser extension to interact");
     }
   };
-
+  const handleMarkRead = () => {
+    setisThereNotification(false);
+  };
   const updateEthers = async () => {
     try {
       if (window.ethereum && window.ethereum.isMetaMask) {
@@ -174,6 +179,10 @@ export default function PatientDashboard() {
     try {
       if (defaultAccount == null && getForm == "") return;
       let access = await contract.grantAccess(getForm, defaultAccount);
+      setNotificationMsg(
+        `You granted access to user with wallet address ${getForm}`
+      );
+      setisThereNotification(true);
       console.log("Access Granted");
     } catch (err) {}
   };
@@ -242,7 +251,34 @@ export default function PatientDashboard() {
 
   const shareReport = () => {
     if (screenshotRef.current) {
-      html2canvas(document.documentElement)
+      const body = document.body;
+      const html = document.documentElement;
+      const documentHeight = Math.max(
+        body.scrollHeight,
+        body.offsetHeight,
+        html.clientHeight,
+        html.scrollHeight,
+        html.offsetHeight
+      );
+      const windowWidth =
+        window.innerWidth ||
+        document.documentElement.clientWidth ||
+        document.body.clientWidth;
+      const windowHeight =
+        window.innerHeight ||
+        document.documentElement.clientHeight ||
+        document.body.clientHeight;
+
+      window.scrollTo(0, 0); // Scroll to the top of the page
+
+      html2canvas(document.documentElement, {
+        width: windowWidth,
+        height: documentHeight,
+        scrollX: window.scrollX,
+        scrollY: window.scrollY,
+        windowWidth,
+        windowHeight,
+      })
         .then((canvas) => {
           const imageDataURL = canvas.toDataURL();
 
@@ -493,12 +529,65 @@ export default function PatientDashboard() {
         </div>
         <div className="right_side_header">
           <button className="share_btn" onClick={shareReport}>
-            Share Report
+            Download Report
           </button>
 
-          <img src={notification} alt="notification" className="notifi_btn" />
+          <img
+            src={notification}
+            alt="notification"
+            className="notifi_btn"
+            onClick={handleButtonClick}
+          />
           {/* <GrNotification className="profile_notification" /> */}
-
+          {open &&
+            (isThereNotification ? (
+              <div className="_notification_drop" ref={mobileMenuRef}>
+                <header
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: ".3rem",
+                  }}
+                >
+                  <p>Notification</p>
+                  <p style={{ color: "#3399FF" }} onClick={handleMarkRead}>
+                    Mark as read
+                  </p>
+                </header>
+                <hr />
+                <div className="_not_card">
+                  <img
+                    style={{
+                      width: "70px",
+                      height: "70px",
+                      borderRadius: "50%",
+                    }}
+                    src={emptyProfile}
+                    alt="profile_img"
+                  />
+                  <div className="_not_text_div">
+                    <p>{NotificationMsg}</p>
+                    <div>
+                      <p className="view_profile_btn"></p>
+                      <p className="time">5min. ago</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="_notification_drop">
+                <header>
+                  <p>Notification</p>
+                </header>
+                <hr />
+                <div className="not_card" style={{ display: "block" }}>
+                  <p style={{ textAlign: "center", fontWeight: "bold" }}>
+                    There are no notificatons
+                  </p>
+                </div>
+              </div>
+            ))}
           <Link to="/Profile" className="link ">
             <div className="relative">
               <img
