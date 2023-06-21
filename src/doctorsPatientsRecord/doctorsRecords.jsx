@@ -6,8 +6,11 @@ import { BsArrowLeft } from "react-icons/bs";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useServiceProviderValue } from "../ServiceProvider";
+import { contracts } from "../hooks/UseContract";
 
 function DoctorsRecords() {
+  const {tempContract} = contracts();
+
   const [{ index }, dispatch] = useServiceProviderValue();
   let patient_Image = localStorage.getItem("patient_image");
   let patient_Name = localStorage.getItem("patient_name");
@@ -29,6 +32,114 @@ function DoctorsRecords() {
   let patientWeight = patientList[index]?.weight;
   let patientAllergies = patientList[index]?.allergies;
   let patientWalletId = patientList[index]?.walletId;
+  let defaultAccount = JSON.parse(localStorage.getItem("defaultAccount"));
+
+  const [getFormattedRecords, setFormattedRecords] = useState([]);
+  const [vitalSigns, setVitalSigns] = useState([]);
+  const [treatmentDetails, setTreatmentDetails] = useState([]);
+  const [vaccine, setVaccine] = useState([]);
+  const [prescription, setPrescription] = useState([]);
+  const [billing, setPatientBilling] = useState([]);
+  const [service, setPatientService] = useState([]);
+  const [amount, setPatientAmount] = useState([]);
+  const [noAccessMsg, setNoAccessMsg] = useState("");
+  const [hasAccess, setHasAccess] = useState(false);
+
+  console.log(patientWalletId);
+  console.log(defaultAccount);
+
+  const hasAccessFunc = async () => {
+    try {
+      const checkAccess = await tempContract.hasAccess(defaultAccount,patientWalletId);
+      setHasAccess(checkAccess);
+      console.log(checkAccess);
+      return checkAccess; // Return the result
+    } catch (error) {
+      console.error('Error executing has access:', error);
+      return false; // Return false in case of an error
+    }
+  };
+
+  const checkRecord = async () => {
+    try {
+      if (tempContract) {
+        let record = await tempContract.getPatientRecord(patientWalletId);
+        
+        const formattedRecords = record.map(record => {
+          return {
+            vitalSigns: record.vitalSigns,
+            treatmentDetails: record.treatmentDetails,
+            vaccine: record.vaccine,
+            prescription: record.prescription,
+            billing: record.billing,
+            service: record.service,
+            amount: record.amount
+          };
+        });
+        setFormattedRecords(formattedRecords.reverse());
+        console.log(formattedRecords);
+        setVitalSigns(formattedRecords.map((record) => record.vitalSigns));
+        setTreatmentDetails(formattedRecords.map((record) => record.treatmentDetails));
+        setVaccine(formattedRecords.map((record) => record.vaccine));
+        setPrescription(formattedRecords.map((record) => record.prescription));
+        setPatientBilling(formattedRecords.map((record) => record.billing));
+        setPatientService(formattedRecords.map((record) => record.service));
+        setPatientAmount(formattedRecords.map((record) => record.amount));
+  
+        localStorage.setItem('getFormattedRecords', JSON.stringify(getFormattedRecords));
+        
+        localStorage.setItem('vitalSigns', JSON.stringify(vitalSigns));
+        localStorage.setItem('treatmentDetails', JSON.stringify(treatmentDetails));
+        localStorage.setItem('vaccine', JSON.stringify(vaccine));
+        localStorage.setItem('prescription', JSON.stringify(prescription));
+        localStorage.setItem('billing', JSON.stringify(billing));
+        localStorage.setItem('service', JSON.stringify(service));
+        localStorage.setItem('amount', JSON.stringify(amount));
+      } else {
+        console.error('Contract is not available');
+      };
+    } catch (error) {
+      console.error('Error checking record:', error);
+    }
+  };
+
+
+  useEffect(() => {
+  if (defaultAccount) {
+    hasAccessFunc() // Call the async function
+      .then((access) => {
+        if (access) {
+          checkRecord();
+        } else {
+          setNoAccessMsg("Don't Have access to view");
+        }
+      })
+      .catch((error) => {
+        console.error('Error checking access:', error);
+        setNoAccessMsg("An error occurred while checking access");
+      });
+  }
+  console.log(index);
+  console.log(patientWalletId);
+}, [index, patientWalletId, defaultAccount]);
+
+// useEffect(() => {
+//   console.log(typeof defaultAccount);
+//   console.log(typeof patientWalletId);
+  
+//   if (defaultAccount) {
+//     if( hasAccessFunc()){
+      
+//       checkRecord();
+//     }else{
+//       setNoAccessMsg("Don't Have access to view") 
+      
+//     }
+   
+//   }
+//   console.log(index);
+//   console.log(patientWalletId);
+// }, [index, patientWalletId, defaultAccount]);
 
   useEffect(() => {
     const storedPatientList = localStorage.getItem("patient_list");
@@ -127,9 +238,11 @@ function DoctorsRecords() {
           </p>
         </div>
       </div>
+      
       <div className="third-section-link">
+        
         <li>
-          <NavLink exact activeClassName="active" to="doctorsoverview">
+          <NavLink exact activeClassName="active" to="">
             <p>Overview</p>
           </NavLink>
         </li>
@@ -151,10 +264,14 @@ function DoctorsRecords() {
             <p>Prescription</p>
           </NavLink>
         </li>
+
       </div>
+    
       <div>
-        <Outlet />
+         {hasAccess?        <Outlet />:<p>No access yet </p>
+}
       </div>
+
     </div>
   );
 }

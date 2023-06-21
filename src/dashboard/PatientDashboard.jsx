@@ -35,7 +35,6 @@ import abi from "../abi.json";
 import { ethers } from "ethers";
 // for nav bar
 
-import { Link, useNavigate } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
 import { BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
 import { TfiWrite } from "react-icons/tfi";
@@ -102,7 +101,7 @@ export default function PatientDashboard() {
     setIsNavOpen(!navOpen);
   };
 
-  let contractAddress = "0xFFE09412B070bC1880D5FBD2BeD09639E367061A";
+  let contractAddress = "0xB8f1ed9Adca8c6863B3da364B1b332B51462BA06";
   const [errorMessage, setErrorMessage] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null);
   const [connButtonText, setConnButtonText] = useState("Connect to Metamask!");
@@ -188,11 +187,6 @@ export default function PatientDashboard() {
 
   // console.log(defaultAccount);
 
-  const checkRecord = async () => {
-    try {
-      if (contract) {
-        let record = await contract.getPatientRecord(defaultAccount);
-
 const checkRecord = async () => {
   try {
     if (contract) {
@@ -236,24 +230,7 @@ const checkRecord = async () => {
   }
 };
 
-        localStorage.setItem("vitalSigns", JSON.stringify(vitalSigns));
-        localStorage.setItem(
-          "treatmentDetails",
-          JSON.stringify(treatmentDetails)
-        );
-        localStorage.setItem("vaccine", JSON.stringify(vaccine));
-        localStorage.setItem("prescription", JSON.stringify(prescription));
-        localStorage.setItem("billing", JSON.stringify(billing));
-        localStorage.setItem("service", JSON.stringify(service));
-        localStorage.setItem("amount", JSON.stringify(amount));
-      } else {
-        console.error("Contract is not available");
-      }
-    } catch (error) {
-      console.error("Error checking record:", error);
-    }
-  };
-
+        
   useEffect(() => {
     if (defaultAccount) {
       checkRecord();
