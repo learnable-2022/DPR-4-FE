@@ -46,7 +46,7 @@ export default function DoctorsDashboard() {
   const mobileMenuRef = useRef();
   const [connButtonText, setConnButtonText] = useState("Connect to Metamask!");
   const [errorMessage, setErrorMessage] = useState(null);
-  let contractAddress = "0xFFE09412B070bC1880D5FBD2BeD09639E367061A";
+  let contractAddress = "0xB8f1ed9Adca8c6863B3da364B1b332B51462BA06";
   const [defaultAccount, setDefaultAccount] = useState(null);
 
   const [provider, setProvider] = useState(null);
@@ -62,6 +62,7 @@ export default function DoctorsDashboard() {
           accountChangedHandler(result[0]);
           setConnectedWallet(true);
           console.log(defaultAccount);
+          localStorage.setItem('defaultAccount', JSON.stringify(defaultAccount));
           updateEthers();
           // setConnButtonText('Wallet Connected');
         })
@@ -150,6 +151,11 @@ export default function DoctorsDashboard() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredNames, setFilteredNames] = useState([]);
 
+  useEffect(() => {
+    localStorage.setItem('defaultAccount', JSON.stringify(defaultAccount));
+  }, [defaultAccount]);
+
+  
   // let checkEffectwallet = localStorage.getItem("doctor_walletId");
   // const closeOpenMenus = useCallback(
   //   (e) => {
@@ -164,8 +170,8 @@ export default function DoctorsDashboard() {
   //   [open]
   // );
   const handleAction = (index) => {
-    navigator("/DoctorsRecords");
     dispatch({ type: "SET_CLICKED_INDEX", index: index });
+    navigator("/DoctorsRecords");
   };
 
   const getAllPatients = async () => {

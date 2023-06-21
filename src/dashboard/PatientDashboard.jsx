@@ -34,7 +34,6 @@ import abi from "../abi.json";
 import { ethers } from "ethers";
 // for nav bar
 
-import { Link, useNavigate } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
 import { BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
 import { TfiWrite } from "react-icons/tfi";
@@ -46,6 +45,7 @@ import ourlogo from "../assets/ourlogo.png";
 import axios from "axios";
 import { AiOutlineClose } from "react-icons/ai";
 import { useServiceProviderValue } from "../ServiceProvider";
+import { Link, useNavigate } from "react-router-dom";
 
 // end for nav bar
 
@@ -101,9 +101,10 @@ export default function PatientDashboard() {
   const toggleNav = () => {
     setIsNavOpen(!navOpen);
   };
+
+  let contractAddress = "0xB8f1ed9Adca8c6863B3da364B1b332B51462BA06";
   const [open, setOpen] = useState(false);
   const [isThereNotification, setisThereNotification] = useState(false);
-  let contractAddress = "0xFFE09412B070bC1880D5FBD2BeD09639E367061A";
   const [errorMessage, setErrorMessage] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null);
   const [connButtonText, setConnButtonText] = useState("Connect to Metamask!");
@@ -197,52 +198,50 @@ export default function PatientDashboard() {
 
   // console.log(defaultAccount);
 
-  const checkRecord = async () => {
-    try {
-      if (contract) {
-        let record = await contract.getPatientRecord(defaultAccount);
+const checkRecord = async () => {
+  try {
+    if (contract) {
+      let record = await contract.getPatientRecord(defaultAccount);
+      
+      const formattedRecords = record.map(record => {
+        return {
+          vitalSigns: record.vitalSigns,
+          treatmentDetails: record.treatmentDetails,
+          vaccine: record.vaccine,
+          prescription: record.prescription,
+          billing: record.billing,
+          service: record.service,
+          amount: record.amount
+        };
+      });
+      setFormattedRecords(formattedRecords.reverse());
+      console.log(formattedRecords);
+      setVitalSigns(formattedRecords.map((record) => record.vitalSigns));
+      setTreatmentDetails(formattedRecords.map((record) => record.treatmentDetails));
+      setVaccine(formattedRecords.map((record) => record.vaccine));
+      setPrescription(formattedRecords.map((record) => record.prescription));
+      setPatientBilling(formattedRecords.map((record) => record.billing));
+      setPatientService(formattedRecords.map((record) => record.service));
+      setPatientAmount(formattedRecords.map((record) => record.amount));
 
-        const formattedRecords = record.map((record) => {
-          return {
-            vitalSigns: record.vitalSigns,
-            treatmentDetails: record.treatmentDetails,
-            vaccine: record.vaccine,
-            prescription: record.prescription,
-            billing: record.billing,
-            service: record.service,
-            amount: record.amount,
-          };
-        });
-        setFormattedRecords(formattedRecords.reverse());
-        console.log(formattedRecords);
-        setVitalSigns(formattedRecords.map((record) => record.vitalSigns));
-        setTreatmentDetails(
-          formattedRecords.map((record) => record.treatmentDetails)
-        );
-        setVaccine(formattedRecords.map((record) => record.vaccine));
-        setPrescription(formattedRecords.map((record) => record.prescription));
-        setPatientBilling(formattedRecords.map((record) => record.billing));
-        setPatientService(formattedRecords.map((record) => record.service));
-        setPatientAmount(formattedRecords.map((record) => record.amount));
+      localStorage.setItem('getFormattedRecords', JSON.stringify(getFormattedRecords));
+      
+      localStorage.setItem('vitalSigns', JSON.stringify(vitalSigns));
+      localStorage.setItem('treatmentDetails', JSON.stringify(treatmentDetails));
+      localStorage.setItem('vaccine', JSON.stringify(vaccine));
+      localStorage.setItem('prescription', JSON.stringify(prescription));
+      localStorage.setItem('billing', JSON.stringify(billing));
+      localStorage.setItem('service', JSON.stringify(service));
+      localStorage.setItem('amount', JSON.stringify(amount));
+    } else {
+      console.error('Contract is not available');
+    };
+  } catch (error) {
+    console.error('Error checking record:', error);
+  }
+};
 
-        localStorage.setItem("vitalSigns", JSON.stringify(vitalSigns));
-        localStorage.setItem(
-          "treatmentDetails",
-          JSON.stringify(treatmentDetails)
-        );
-        localStorage.setItem("vaccine", JSON.stringify(vaccine));
-        localStorage.setItem("prescription", JSON.stringify(prescription));
-        localStorage.setItem("billing", JSON.stringify(billing));
-        localStorage.setItem("service", JSON.stringify(service));
-        localStorage.setItem("amount", JSON.stringify(amount));
-      } else {
-        console.error("Contract is not available");
-      }
-    } catch (error) {
-      console.error("Error checking record:", error);
-    }
-  };
-
+        
   useEffect(() => {
     if (defaultAccount) {
       checkRecord();
@@ -444,6 +443,10 @@ export default function PatientDashboard() {
     checkEffectwallet,
   ]);
 
+  useEffect(() =>{
+    localStorage.setItem('getFormattedRecords', JSON.stringify(getFormattedRecords));
+  },[getFormattedRecords]);
+
   useEffect(() => {
     localStorage.setItem("vitalSigns", JSON.stringify(vitalSigns));
   }, [vitalSigns]);
@@ -612,7 +615,7 @@ export default function PatientDashboard() {
           <Link to="/Profile" className="link ">
             <p className="drop_content_item">View Profile</p>
           </Link>
-          <p className="drop_content_item">View Full Report</p>
+          {/* <p className="drop_content_item">View Full Report</p> */}
         </div>
       )}
 
@@ -742,7 +745,7 @@ export default function PatientDashboard() {
             </div>
             <div className="middle_section_header">
               <p>My Vitals</p>
-              <button className="report_btn">View Full Report</button>
+              {/* <button className="report_btn">View Full Report</button> */}
             </div>
             <div className="vitals_readings_cards">
               <div>
