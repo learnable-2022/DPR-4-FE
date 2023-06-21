@@ -12,8 +12,10 @@ export const initialState = {
   bloodPressure: null,
   glucoseLevel: null,
   heartRate: null,
+  walletAddress:null,
   oxygen: null,
   respRate: null,
+  totalAmount:null,
   billingDate: null,
   billingPatientName: null,
   billingProvider: null,
@@ -21,6 +23,9 @@ export const initialState = {
   prescriptions: [],
   billings: [],
   user_details: null,
+  screenshot: null,
+  allpatients: null,
+  index: null,
 };
 const reducer = (state, action) => {
   switch (action.type) {
@@ -29,6 +34,11 @@ const reducer = (state, action) => {
         ...state,
         token: action.token,
       };
+      case "SET_TOTAL_AMOUNT":
+        return{
+          ...state,
+          totalAmount:action.totalAmount
+        }
     case "SET_USER_DETAILS":
       return {
         ...state,
@@ -38,6 +48,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         user: action.user,
+      };
+    case "SET_SCREENSHOT":
+      return {
+        ...state,
+        screenshot: action.screenshot,
       };
     case "SET_TREATMENT":
       return {
@@ -74,8 +89,17 @@ const reducer = (state, action) => {
         ...state,
         prescriptions: action.prescriptions,
       };
+    case "SET_ALL_PATIENTS":
+      return {
+        ...state,
+        allpatients: action.allpatients,
+      };
     //end of store for report details
-
+    case "SET_CLICKED_INDEX":
+      return {
+        ...state,
+        index: action.index,
+      };
     case "SET_TEMPERATURE":
       return {
         ...state,
@@ -139,7 +163,12 @@ const reducer = (state, action) => {
         ...state,
         billingLocation: action.billingLocation,
       };
-
+      
+      case "SET_PATIENT_ADDRESS":
+        return {
+          ...state,
+          walletAddress : action.walletAddress
+        }
     default:
       return state;
   }

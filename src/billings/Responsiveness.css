@@ -1,0 +1,222 @@
+@media screen and (max-width: 992px) {
+    .billingNav {
+      display: none;
+    }
+    .PatientEntities {
+      width: 80%;
+    }
+  
+    .smallScreenNav {
+      display: block;
+    }
+  
+    .smallScreenNavName {
+      margin-left: 40px;
+      margin-top: 20px;
+      font-size: 20px;
+      color: #000000;
+      font-weight: 600;
+    }
+  
+    .searchParent {
+      width: 380px;
+      margin-top: 30px;
+      margin-left: 40px;
+    }
+  
+    .searchBox {
+      width: 280px;
+    }
+  
+    .searchBox ::placeholder {
+      font-size: 15px;
+      color: #666666;
+    }
+  
+    .patientDashboardHeading p {
+      font-size: 18px;
+      font-weight: 500;
+    }
+  
+    .patientNav {
+      width: 80%;
+    }
+  
+    .PatientEntities ul {
+      width: 100%;
+    }
+  
+    .PatientUnderline {
+      width: 450px;
+      color: red;
+    }
+  
+    .ViewAll {
+      margin-right: 110px;
+    }
+  
+    .billingNavHistory {
+      display: none;
+      border: 1px solid black;
+    }
+  
+    .billingNavHistory h1 {
+      font-size: 18px;
+      font-weight: 500;
+    }
+    .coincoin {
+      width: 35%;
+    }
+  
+    .ulHead li {
+      width: 8%;
+      margin-right: 10px;
+      font-size: 16px;
+    }
+  
+    .ulContent li {
+      color: #666666;
+      margin-top: 25px;
+      font-size: 14px;
+    }
+  
+    .smallScreenInvoiceIconsContainer {
+      width: 48%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-left: 20px;
+      margin-top: 40px;
+    }
+  
+    .hamburger {
+      font-size: 25px;
+    }
+  
+    .invoiceIcons {
+      display: none;
+    }
+  
+    .smallScreenInvoiceIcons {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      width: 90px;
+      height: 50px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+  
+    .smallScreenBIllingNavHistory {
+      display: flex;
+      width: 48% !important;
+      height: 100px;
+      background-color: #d6ebff;
+      margin-left: 20px;
+      margin-top: 40px;
+      align-items: center;
+      padding: 8px;
+      border-radius: 10px;
+    }
+  
+    .invoiceHero {
+      width: 48%;
+    }
+  
+    .invoiceHero {
+      padding: 40px;
+      margin-top: 50px;
+      margin-left: 20px;
+      border-radius: 8px;
+      box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    }
+  
+    .invoiceProfile {
+      display: block;
+    }
+  
+    .billingStatement {
+      width: 48%;
+      padding: 40px;
+      margin-top: 50px;
+      margin-left: 20px;
+      border-radius: 8px;
+      box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    }
+  
+    .billingPatientDetails {
+      width: 300px;
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      margin-top: 30px;
+    }
+  
+    .demarcation {
+      width: 250px;
+      margin-left: -1px;
+    }
+  
+    .PatientDetails {
+      margin-top: 30px;
+    }
+  
+    .PatientDetails h3 {
+      font-size: 15px;
+    }
+  
+    .billItemNav {
+      display: flex;
+      padding: 15px;
+    }
+  
+    .billItem {
+      margin-top: 180px;
+      background-color: #ffffff;
+    }
+  
+    .billMoney {
+      width: 300px;
+      display: flex;
+    }
+  
+    .paymentOptionsNav {
+      padding: 12px;
+      background-color: #d6ebff;
+    }
+  
+    .paymentOptionsNav p {
+      font-size: 15px;
+    }
+  
+    .paymentOptions {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  
+    .paymentImage {
+      width: 100%;
+    }
+  
+    .visa {
+      margin-left: 15px;
+    }
+  
+    .Paypal {
+      margin-left: 25px;
+    }
+  
+    .Pay {
+      margin-left: 15px;
+    }
+  
+    .ResponsivenessBillingNavHistory { 
+      display: block;
+      width: 35%;
+      padding: 10px;
+    }
+  }
+  

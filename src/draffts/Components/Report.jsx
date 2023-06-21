@@ -70,6 +70,7 @@ function Report() {
     // setVaccineStatus(e.target.value);
     dispatch({ type: "SET_STATUS", vaccineStatus: e.target.value });
   };
+  console.log(vaccineStatus);
   const handleSetComment = (e) => {
     // setComment(e.target.value);
     dispatch({ type: "SET_COMMENT", comment: e.target.value });
@@ -253,13 +254,13 @@ function Report() {
                   onChange={(e) => handleChange(e, i)}
                   placeholder="Enter Dosage"
                 />
-                {
+                {/* {
                   <img
                     className="presc_delete_btn"
                     src={Delete}
                     onClick={() => handleDelete(i)}
                   />
-                }
+                } */}
               </div>
             );
           })}
@@ -269,7 +270,7 @@ function Report() {
       </div>
       <div className="bottom_action_wrapper">
         <div className="bottom_action_div">
-          <div className="add_more">
+          {/* <div className="add_more">
             <p>Add Another Medication</p>
             <img
               src={AddButton}
@@ -277,7 +278,7 @@ function Report() {
               onClick={addComponent}
               name="add-circle-outline"
             />
-          </div>
+          </div> */}
           {/* <div className="report_action_btn">
             <button className="report_save ">Save </button>
             <button className="report_next">Next</button>

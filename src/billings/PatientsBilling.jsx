@@ -1,6 +1,7 @@
 import React from "react";
 import SideBar from "../utilities/SideBar";
 import "./billing.css";
+import "./Responsiveness.css";
 import "../App.css";
 import { CiSearch } from "react-icons/ci";
 import Notification from "../assets/images/Notification.png";
@@ -15,8 +16,36 @@ import ArrowSlant from "../assets/images/ArrowSlant.png";
 import Calendar from "../assets/images/Calendar.png";
 import BlockIconResize from "../assets/images/BlockIconResize.png";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import url from "../api/BillingApi.jsx";
+import { useState } from "react";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 export default function PatientsBilling() {
+  const [transactionArray, setTransactionArray] = useState([]);
+  const [patientId, setPatientId] = useState([]);
+  let patient_Image = localStorage.getItem("patient_image");
+  let patient_Name = localStorage.getItem("patient_name");
+
+  useEffect(() => {
+    const fetchdata = async () => {
+      try {
+        const response = await url.get("/transactions");
+        console.log("response::  ", response);
+        setTransactionArray(response.data.transactions);
+
+        setPatientId(response.data.transactions._id);
+
+        console.log("trans :: ", response.data.transactions);
+      } catch (err) {
+        console.log("err:: ", err);
+      }
+    };
+    fetchdata();
+  }, []);
+
+  console.log("patientId", patientId);
+
   const navigate = useNavigate();
   function handleClick(e) {
     navigate("/PatientPaymentHistory");
@@ -33,7 +62,8 @@ export default function PatientsBilling() {
           <div className="billingNav">
             <div className="patientName">
               <h2>
-                Hello, Amaka <br /> Chibueze!
+                Hello, {patient_Name.split(" ")[0]} <br />{" "}
+                {patient_Name.split(" ")[1]}!
               </h2>
             </div>
 
@@ -45,61 +75,34 @@ export default function PatientsBilling() {
 
               <div className="searchIcons">
                 <img src={Notification} alt="pics" />
-                <img src={PatientPics} alt="pics" />
+                <img src={patient_Image} alt="pics" />
               </div>
             </div>
           </div>
         </div>
-
-        <div className="Hero">
-          <div className="HeroLeft">
-            <div className="paymentCard">
-              <div className="cardDetails">
-                <div className="MoneyOptionLeft">
-                  <div className="portfolio">
-                    <p>Portfolio Balance</p>
-                    <img src={Show} alt="pics" />
-                  </div>
-                  <div className="Money">
-                    <img src={Dollar} alt="pics" />
-                    <h3>200,000</h3>
-                  </div>
-                </div>
-                <div className="MoneyOptionRight">
-                  <p>USD</p>
-                  <img src={ArrowDown2} alt="pics" />
-                </div>
-              </div>
+        {/* =========================================== */}
+        <div className="smallScreenNav">
+          <div className="searchParent">
+            <div>
+              <GiHamburgerMenu />
             </div>
-            <div className="BillingCards">
-              <div className="BillingCard">
-                <div className="BillingCardContent1">
-                  <img src={ArrowDown} alt="pics" />
-                  <p>Deposit</p>
-                </div>
-              </div>
+            <div className="searchBox">
+              <CiSearch />
+              <input type="text" placeholder="Search.." />
+            </div>
 
-              <div className="BillingCard">
-                <div className="BillingCardContent1">
-                  <img src={ArrowUp} alt="pics" />
-                  <p>Withdraw</p>
-                </div>
-              </div>
-
-              <div className="BillingCard">
-                <div className="BillingCardContent1">
-                  <img src={ArrowSlant} alt="pics" />
-                  <p>Send</p>
-                </div>
-              </div>
+            <div className="searchIcons">
+              <img src={Notification} alt="pics" />
+              <img src={PatientPics} alt="pics" />
             </div>
           </div>
 
-          <div className="HeroRight">
-            <img src={BlockIcon} alt="pics" />
-            {/* <img src={BlockIconResize} alt/> */}
+          <div className="smallScreenNavName">
+            <p>Hello,{patient_Name}!</p>
           </div>
         </div>
+
+        {/* ============================================= */}
 
         <div className="Dashboard">
           <div className="patientDashboardHeading">
@@ -114,35 +117,56 @@ export default function PatientsBilling() {
               </ul>
             </div>
 
-            <div className="PatientEntities" onClick={handleClick}>
-              <ul>
+            <div className="PatientEntities">
+              {transactionArray.length > 0 &&
+                transactionArray.map((transaction, index) => {
+                  // display: grid;
+                  // grid-template-columns: 1fr 1fr 1fr;
+                  return (
+                    <div key={transaction._id}>
+                      <ul>
+                        <li>{transaction.healthcareProvider}</li>
+                        <li className={`${transaction.status}`}>
+                          {transaction.status}
+                        </li>
+                        <li>USD {transaction.amount} </li>
+                      </ul>
+                      <hr
+                        className="PatientUnderline"
+                        key={`${index}-${transaction._id}`}
+                      />
+                    </div>
+                  );
+                })}
+              {/* <ul >
                 <li>Dr. Ada</li>
                 <li className="Successful">Successful</li>
                 <li>USD 22,000 </li>
               </ul>
-              <hr className="PatientUnderline"></hr>
-              <ul>
+              <hr className="PatientUnderline"></hr> */}
+              {/* <ul>
                 <li>Dr. Charl</li>
                 <li className="Declined">Declined</li>
                 <li>USD 22,000 </li>
               </ul>
-              <hr className="PatientUnderline"></hr>
-              <ul>
+              <hr className="PatientUnderline"></hr> */}
+              {/* <ul>
                 <li>Dr. Chris</li>
                 <li className="Successful">Successful</li>
                 <li>USD 22,000 </li>
               </ul>
-              <hr className="PatientUnderline"></hr>
-              <ul>
+              <hr className="PatientUnderline"></hr> */}
+              {/* <ul>
                 <li>Dr. Kemisola</li>
                 <li className="Successful">Successful</li>
                 <li>USD 22,000 </li>
-              </ul>
+              </ul> */}
             </div>
           </div>
           <div className="ViewAll">
             <p onClick={handleClick}>View all</p>
           </div>
+
           {/* /////////////////////////down////////////////////////////// */}
           <div className="patientDashboardHeading">
             <p>Invoice Statement</p>
@@ -159,32 +183,28 @@ export default function PatientsBilling() {
             <div className="PatientEntities" onClick={handlePress}>
               <ul>
                 <li>Dr. Ada</li>
-                <li className="Successful">Paid</li>
+                <li className="successful">Paid</li>
                 <li>USD 22,000 </li>
               </ul>
               <hr className="PatientUnderline"></hr>
               <ul>
                 <li>Dr. Charl</li>
-                <li className="Declined">Declined</li>
+                <li className="declined">Declined</li>
                 <li>USD 22,000 </li>
               </ul>
               <hr className="PatientUnderline"></hr>
               <ul>
                 <li>Dr. Chris</li>
-                <li className="Successful">Paid</li>
+                <li className="successful">Paid</li>
                 <li>USD 22,000 </li>
               </ul>
               <hr className="PatientUnderline"></hr>
               <ul>
                 <li>Dr. Kemisola</li>
-                <li className="Successful">Paid</li>
+                <li className="successful">Paid</li>
                 <li>USD 22,000 </li>
               </ul>
             </div>
-          </div>
-
-          <div className="ViewAll">
-            <p onClick={handlePress}>View all</p>
           </div>
         </div>
       </div>

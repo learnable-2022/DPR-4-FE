@@ -1,27 +1,29 @@
 import React from "react";
-import ArrowRight2 from "../../src/assets/images/ArrowRight2.png";
 import Calender from "../../src/assets/images/Calendar.png";
+import {IoIosArrowDown} from "react-icons/io";
+
 import "./billing.css";
 
 function PatientPaymentHistory() {
   return (
     <>
       <div className="Right">
-        <div className="billingNavHistory">
+        {/* -------------------------------- */}
+        <div className="ResponsivenessBillingNavHistory">
           <h1>Billing</h1>
-          <div className="Consultation">
-            <div className="Bill">
-              <h6>Consultation Bill </h6>
-              <img src={ArrowRight2} className="ArrowHistory" alt="pics" />
-            </div>
-
             <div className="Bill">
               <h6>Payment History</h6>
-              <img src={ArrowRight2} className="ArrowHistory" alt="pics" />
+              <IoIosArrowDown className="ArrowHistory"/>
             </div>
-          </div>
         </div>
-
+        {/* --------------------------------- */}
+        <div className="billingNavHistory">
+          <h1>Billing</h1>
+            <div className="Bill">
+              <h6>Payment History</h6>
+              <IoIosArrowDown className="ArrowHistory"/>
+            </div>
+        </div>
         <div className="coincoin">
           <div className="Details">
             <div className="Name">
@@ -44,16 +46,16 @@ function PatientPaymentHistory() {
                 <li>Dr. Ada</li>
                 <li>8:00am </li>
                 <li>ECG, Blood Test</li>
-                <li className="">Successful</li>
+                <li className="Successful">Successful</li>
                 <li>USD 22,000 </li>
               </ul>
               <hr className="underline"></hr>
 
               <ul className="ulContent">
-                <li>Dr. Chris</li>
+                <li>Dr. Ada</li>
                 <li>8:00am </li>
                 <li>Dental care</li>
-                <li className="shitty">Successful</li>
+                <li className="Successful">Successful</li>
                 <li>USD 22,000 </li>
               </ul>
               <hr className="underline"></hr>
@@ -62,34 +64,34 @@ function PatientPaymentHistory() {
                 <li>Dr. Tim</li>
                 <li>8:00am </li>
                 <li>MRI</li>
-                <li className="Declined">Successful</li>
+                <li className="Declined">Declined</li>
                 <li>USD 22,000 </li>
               </ul>
               <hr className="underline"></hr>
 
               <ul className="ulContent">
-                <li>Dr. Kemi</li>
+                <li>Dr. Kem</li>
                 <li>8:00am </li>
                 <li>CT Scan</li>
-                <li className="Declined">Successful</li>
+                <li className="Successful">Successful</li>
                 <li>USD 22,000 </li>
               </ul>
               <hr className="underline"></hr>
 
               <ul className="ulContent">
-                <li>Dr. Kemi</li>
+                <li>Dr. Kem</li>
                 <li>8:00am </li>
                 <li>CT Scan</li>
-                <li className="Declined">Successful</li>
+                <li className="Successful">Successful</li>
                 <li>USD 22,000 </li>
               </ul>
               <hr className="underline"></hr>
 
               <ul className="ulContent">
-                <li>Dr. Saint</li>
+                <li>Dr. Pat</li>
                 <li>8:00am </li>
                 <li>ECG, Blood Test</li>
-                <li className="Declined">Successful</li>
+                <li className="Declined">Declined</li>
                 <li>USD 22,000 </li>
               </ul>
               <hr className="underline"></hr>
@@ -98,7 +100,7 @@ function PatientPaymentHistory() {
                 <li>Dr. Alice</li>
                 <li>8:00am </li>
                 <li>ECG, Blood Test</li>
-                <li className="Declined">Successful</li>
+                <li className="Successful">Successful</li>
                 <li>USD 22,000 </li>
               </ul>
               <hr></hr>
@@ -117,7 +119,7 @@ function PatientPaymentHistory() {
                   <li>Dr. Ada</li>
                   <li>8:00am </li>
                   <li>ECG, Blood Test</li>
-                  <li className="">Successful</li>
+                  <li className="Successful">Successful</li>
                   <li>USD 22,000 </li>
                 </ul>
                 <hr className="underline"></hr>
@@ -126,7 +128,7 @@ function PatientPaymentHistory() {
                   <li>Dr. Chris</li>
                   <li>8:00am </li>
                   <li>Dental care</li>
-                  <li className="Declined">Successful</li>
+                  <li className="Successful">Successful</li>
                   <li>USD 22,000 </li>
                 </ul>
                 <hr className="underline"></hr>
@@ -135,7 +137,7 @@ function PatientPaymentHistory() {
                   <li>Dr. Tim</li>
                   <li>8:00am </li>
                   <li>MRI</li>
-                  <li className="Declined">Successful</li>
+                  <li className="Declined">Declined</li>
                   <li>USD 22,000 </li>
                 </ul>
                 <hr className="underline"></hr>
@@ -144,7 +146,7 @@ function PatientPaymentHistory() {
                   <li>Dr. Saint</li>
                   <li>8:00am </li>
                   <li>CT Scan</li>
-                  <li className="Declined">Successful</li>
+                  <li className="Successful">Successful</li>
                   <li>USD 22,000 </li>
                 </ul>
                 <hr className="underline"></hr>
@@ -153,10 +155,9 @@ function PatientPaymentHistory() {
                   <li>Dr. Alice</li>
                   <li>8:00am </li>
                   <li>ECG, Blood Test</li>
-                  <li className="Declined">Successful</li>
+                  <li className="Successful">Successful</li>
                   <li>USD 22,000 </li>
                 </ul>
-                <hr></hr>
               </div>
             </div>
           </div>

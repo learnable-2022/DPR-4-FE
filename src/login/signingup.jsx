@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./login.css";
-import medblog from "../assets/logo-02.png";
 import bigImage from "../assets/signup-second.png";
 import {
   faCheck,
@@ -12,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axioscall from "../api/secondApi";
 import { useServiceProviderValue } from "../ServiceProvider";
+import newlogo from "../assets/newlogo2.png";
 // import { useRequestProcessor } from '../api/requestProcessor';
 
 const USER_REGEX = /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/;
@@ -156,7 +156,7 @@ export default function Signingup() {
       <div className="sign-up-container">
         <div className="signup-form ">
           <div>
-            <img src={medblog} alt="medblog" />
+            <img src={newlogo} alt="medblog" />
           </div>
           <h2>Sign up</h2>
           <p>Create your account</p>

@@ -5,7 +5,7 @@ import React, {
   useCallback,
   useEffect,
 } from "react";
-
+import html2canvas from "html2canvas";
 import "./PatientsDashboard.css";
 import emptyProfile from "../assets/ava3.png";
 import bpIcon from "../assets/bp_icon.svg";
@@ -29,9 +29,11 @@ import notification from "../assets/Notification.svg";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiArrowDropDownFill } from "react-icons/ri";
 
+import StateContext from "../stateProvider/stateprovider";
+import abi from "../abi.json";
+import { ethers } from "ethers";
 // for nav bar
 
-import { Link } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
 import { BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
 import { TfiWrite } from "react-icons/tfi";
@@ -42,10 +44,13 @@ import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import ourlogo from "../assets/ourlogo.png";
 import axios from "axios";
 import { AiOutlineClose } from "react-icons/ai";
+import { useServiceProviderValue } from "../ServiceProvider";
+import { Link, useNavigate } from "react-router-dom";
 
 // end for nav bar
 
 export default function PatientDashboard() {
+  const navigate = useNavigate();
   let token = localStorage.getItem("patientToken");
   const [isDropOpen, setIsDropOpen] = useState(false);
   const [patient_Name, setPatientName] = useState("");
@@ -59,7 +64,9 @@ export default function PatientDashboard() {
   const [patient_Weight, setPatientWeight] = useState("");
   const [patient_Alle, setPatientAlle] = useState("");
   const [patient_WalletId, setPatientWallet] = useState("");
-
+  const [patient_First_Name, setPatientFirstName] = useState("");
+  const [patient_Last_Name, setPatientLastName] = useState("");
+  const screenshotRef = useRef(null);
   const [data, setData] = useState(true);
   const drugs = [drug1, drug2, drug3, drug4];
   const [connectedWallet, setConnectedWallet] = useState(true);
@@ -67,6 +74,7 @@ export default function PatientDashboard() {
   const mobileMenuRef = useRef();
   const mobileNavRef = useRef();
   const [navOpen, setIsNavOpen] = useState(false);
+  const [NotificationMsg, setNotificationMsg] = useState("");
   const checkEffectName = localStorage.getItem("patient_name");
   const checkEffectImage = localStorage.getItem("patient_image");
   let checkEffectgender = localStorage.getItem("patient_gender");
@@ -85,8 +93,207 @@ export default function PatientDashboard() {
 
   let checkEffectwallet = localStorage.getItem("patient_walletId");
 
+  let checkEffectFirstName = localStorage.getItem("patient_firstName");
+
+  let checkEffectLastName = localStorage.getItem("patient_lastName");
+
+  const [{}, dispatch] = useServiceProviderValue();
   const toggleNav = () => {
     setIsNavOpen(!navOpen);
+  };
+
+  let contractAddress = "0xB8f1ed9Adca8c6863B3da364B1b332B51462BA06";
+  const [open, setOpen] = useState(false);
+  const [isThereNotification, setisThereNotification] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [defaultAccount, setDefaultAccount] = useState(null);
+  const [connButtonText, setConnButtonText] = useState("Connect to Metamask!");
+
+  const [provider, setProvider] = useState(null);
+  const [signer, setSigner] = useState(null);
+  const [contract, setContract] = useState(null);
+  const [getForm, setGetForm] = useState("");
+  const [getFormattedRecords, setFormattedRecords] = useState([]);
+  const [vitalSigns, setVitalSigns] = useState([]);
+  const [treatmentDetails, setTreatmentDetails] = useState([]);
+  const [vaccine, setVaccine] = useState([]);
+  const [prescription, setPrescription] = useState([]);
+  const [billing, setPatientBilling] = useState([]);
+  const [service, setPatientService] = useState([]);
+  const [amount, setPatientAmount] = useState([]);
+  const handleButtonClick = () => {
+    setOpen(!open);
+  };
+  const connectWalletHandler = () => {
+    if (window.ethereum && window.ethereum.isMetaMask) {
+      window.ethereum
+        .request({ method: "eth_requestAccounts" })
+        .then((result) => {
+          accountChangedHandler(result[0]);
+          setConnectedWallet(true);
+          console.log(defaultAccount);
+
+          // setConnButtonText('Wallet Connected');
+        })
+        .catch((error) => {
+          setErrorMessage(error.message);
+        });
+    } else {
+      console.log("Need to install MetaMask");
+      setErrorMessage("Please install MetaMask browser extension to interact");
+    }
+  };
+  const handleMarkRead = () => {
+    setisThereNotification(false);
+  };
+  const updateEthers = async () => {
+    try {
+      if (window.ethereum && window.ethereum.isMetaMask) {
+        let tempProvider = new ethers.providers.Web3Provider(window.ethereum);
+        setProvider(tempProvider);
+
+        let tempSigner = tempProvider.getSigner();
+        setSigner(tempSigner);
+        console.log(tempSigner);
+        let tempContract = new ethers.Contract(
+          contractAddress,
+          abi,
+          tempSigner
+        );
+        setContract(tempContract);
+      } else {
+        console.error(
+          "Please install MetaMask or use a compatible Ethereum browser extension."
+        );
+      }
+    } catch (error) {
+      console.error("Error updating Ethers:", error);
+    }
+  };
+
+  const accountChangedHandler = (newAccount) => {
+    setDefaultAccount(newAccount);
+  };
+  console.log(contract);
+
+  const grantDoctorAccess = async (e) => {
+    try {
+      if (defaultAccount == null && getForm == "") return;
+      let access = await contract.grantAccess(getForm, defaultAccount);
+      setNotificationMsg(
+        `You granted access to user with wallet address ${getForm}`
+      );
+      setisThereNotification(true);
+      console.log("Access Granted");
+    } catch (err) {}
+  };
+
+  const revokeDoctorAccess = async (e) => {
+    try {
+      if (defaultAccount == null && getForm == "") return;
+      let access = await contract.revokeAccess(getForm, defaultAccount);
+      console.log("Access Granted");
+    } catch (err) {}
+  };
+
+  // console.log(defaultAccount);
+
+const checkRecord = async () => {
+  try {
+    if (contract) {
+      let record = await contract.getPatientRecord(defaultAccount);
+      
+      const formattedRecords = record.map(record => {
+        return {
+          vitalSigns: record.vitalSigns,
+          treatmentDetails: record.treatmentDetails,
+          vaccine: record.vaccine,
+          prescription: record.prescription,
+          billing: record.billing,
+          service: record.service,
+          amount: record.amount
+        };
+      });
+      setFormattedRecords(formattedRecords.reverse());
+      console.log(formattedRecords);
+      setVitalSigns(formattedRecords.map((record) => record.vitalSigns));
+      setTreatmentDetails(formattedRecords.map((record) => record.treatmentDetails));
+      setVaccine(formattedRecords.map((record) => record.vaccine));
+      setPrescription(formattedRecords.map((record) => record.prescription));
+      setPatientBilling(formattedRecords.map((record) => record.billing));
+      setPatientService(formattedRecords.map((record) => record.service));
+      setPatientAmount(formattedRecords.map((record) => record.amount));
+
+      localStorage.setItem('getFormattedRecords', JSON.stringify(getFormattedRecords));
+      
+      localStorage.setItem('vitalSigns', JSON.stringify(vitalSigns));
+      localStorage.setItem('treatmentDetails', JSON.stringify(treatmentDetails));
+      localStorage.setItem('vaccine', JSON.stringify(vaccine));
+      localStorage.setItem('prescription', JSON.stringify(prescription));
+      localStorage.setItem('billing', JSON.stringify(billing));
+      localStorage.setItem('service', JSON.stringify(service));
+      localStorage.setItem('amount', JSON.stringify(amount));
+    } else {
+      console.error('Contract is not available');
+    };
+  } catch (error) {
+    console.error('Error checking record:', error);
+  }
+};
+
+        
+  useEffect(() => {
+    if (defaultAccount) {
+      checkRecord();
+    }
+  }, [defaultAccount]);
+
+  const shareReport = () => {
+    if (screenshotRef.current) {
+      const body = document.body;
+      const html = document.documentElement;
+      const documentHeight = Math.max(
+        body.scrollHeight,
+        body.offsetHeight,
+        html.clientHeight,
+        html.scrollHeight,
+        html.offsetHeight
+      );
+      const windowWidth =
+        window.innerWidth ||
+        document.documentElement.clientWidth ||
+        document.body.clientWidth;
+      const windowHeight =
+        window.innerHeight ||
+        document.documentElement.clientHeight ||
+        document.body.clientHeight;
+
+      window.scrollTo(0, 0); // Scroll to the top of the page
+
+      html2canvas(document.documentElement, {
+        width: windowWidth,
+        height: documentHeight,
+        scrollX: window.scrollX,
+        scrollY: window.scrollY,
+        windowWidth,
+        windowHeight,
+      })
+        .then((canvas) => {
+          const imageDataURL = canvas.toDataURL();
+
+          // const link = document.createElement("a");
+          // link.href = canvas.toDataURL();
+          // link.download = "screenshot.png";
+          // link.click();
+
+          dispatch({ type: "SET_SCREENSHOT", screenshot: imageDataURL });
+
+          navigate("/share");
+        })
+        .catch((error) => {
+          console.error("Error capturing screenshot:", error);
+        });
+    }
   };
 
   const closeOpenMenus = useCallback(
@@ -155,7 +362,7 @@ export default function PatientDashboard() {
       .then((res) => {
         console.log(res);
         const res1 = res?.data.find((item) => item.email === PatientEmail);
-        console.log(res1);
+
         localStorage.setItem("patient_image", res1?.image);
         localStorage.setItem("patient_name", res1?.name);
         localStorage.setItem("patient_email", res1?.email);
@@ -173,9 +380,15 @@ export default function PatientDashboard() {
         localStorage.setItem("patient_address", res1?.address);
         localStorage.setItem("patient_city", res1?.city);
         localStorage.setItem("patient_country", res1?.country);
-        localStorage.setItem("patient_number", res1?.number);
+        localStorage.setItem("patient_number", res1?.phoneNumber);
         localStorage.setItem("patient_state", res1?.state);
-
+        localStorage.setItem("patient_firstName", res1?.firstName);
+        localStorage.setItem("patient_lastName", res1?.lastName);
+        console.log(res1.phoneNumber);
+        let patient_First_Name = localStorage.getItem("patient_firstName");
+        setPatientFirstName(patient_First_Name);
+        let patient_Last_Name = localStorage.getItem("patient_lastName");
+        setPatientLastName(patient_Last_Name);
         let patient_Image = localStorage.getItem("patient_image");
         setPatientImage(patient_Image);
         let patient_Name = localStorage.getItem("patient_name");
@@ -205,8 +418,9 @@ export default function PatientDashboard() {
       });
   };
   useEffect(() => {
+    connectWalletHandler();
+    updateEthers();
     getPatientDetails();
-
     document.addEventListener("mousedown", closeOpenMenus);
     document.addEventListener("mousedown", closeOpenNav);
 
@@ -227,14 +441,45 @@ export default function PatientDashboard() {
     checkEffectWeight,
     checkEffectgender,
     checkEffectwallet,
-  ]); //]);
+  ]);
+
+  useEffect(() =>{
+    localStorage.setItem('getFormattedRecords', JSON.stringify(getFormattedRecords));
+  },[getFormattedRecords]);
+
+  useEffect(() => {
+    localStorage.setItem("vitalSigns", JSON.stringify(vitalSigns));
+  }, [vitalSigns]);
+
+  useEffect(() => {
+    localStorage.setItem("treatmentDetails", JSON.stringify(treatmentDetails));
+  }, [treatmentDetails]);
+
+  useEffect(() => {
+    localStorage.setItem("vaccine", JSON.stringify(vaccine));
+  }, [vaccine]);
+
+  useEffect(() => {
+    localStorage.setItem("prescription", JSON.stringify(prescription));
+  }, [prescription]);
+
+  useEffect(() => {
+    localStorage.setItem("billing", JSON.stringify(billing));
+  }, [billing]);
+
+  useEffect(() => {
+    localStorage.setItem("service", JSON.stringify(service));
+  }, [service]);
+
+  useEffect(() => {
+    localStorage.setItem("amount", JSON.stringify(amount));
+  }, [amount]);
+
+  // checkRecord();
 
   return (
     <div className="patientdashboard">
-      <nav
-        className={navOpen ? "patient_dashboard_nav" : "closeNav"}
-        ref={mobileNavRef}
-      >
+      <nav className={navOpen ? "patient_dashboard_nav" : "closeNav"}>
         <div className="_sideBar">
           <AiOutlineClose className="close_btn" onClick={toggleNav} />
           <div className="_center-div">
@@ -259,10 +504,6 @@ export default function PatientDashboard() {
             </Link>
           </div>
           <div className="_lower-section">
-            <Link to="*" className="link">
-              <AiOutlineSetting style={{ color: "white" }} />
-              <p>settings</p>
-            </Link>
             <div
               onClick={() => {
                 localStorage.removeItem("patientToken");
@@ -283,17 +524,73 @@ export default function PatientDashboard() {
         <div className="left_side_header">
           <h1 className="h1_header_title">
             Welcome!{" "}
-            {patient_Name
-              ? patient_Name?.split(" ")[0]
-              : checkEffectName?.split(" ")[0]}
+            {patient_First_Name
+              ? patient_First_Name
+              : checkEffectFirstName || patient_Name.split(" ")[0]}
             ,
           </h1>
         </div>
         <div className="right_side_header">
-          <button className="share_btn">Share Report</button>
-          <img src={notification} alt="notification" className="notifi_btn" />
-          {/* <GrNotification className="profile_notification" /> */}
+          <button className="share_btn" onClick={shareReport}>
+            Download Report
+          </button>
 
+          <img
+            src={notification}
+            alt="notification"
+            className="notifi_btn"
+            onClick={handleButtonClick}
+          />
+          {/* <GrNotification className="profile_notification" /> */}
+          {open &&
+            (isThereNotification ? (
+              <div className="_notification_drop" ref={mobileMenuRef}>
+                <header
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: ".3rem",
+                  }}
+                >
+                  <p>Notification</p>
+                  <p style={{ color: "#3399FF" }} onClick={handleMarkRead}>
+                    Mark as read
+                  </p>
+                </header>
+                <hr />
+                <div className="_not_card">
+                  <img
+                    style={{
+                      width: "70px",
+                      height: "70px",
+                      borderRadius: "50%",
+                    }}
+                    src={emptyProfile}
+                    alt="profile_img"
+                  />
+                  <div className="_not_text_div">
+                    <p>{NotificationMsg}</p>
+                    <div>
+                      <p className="view_profile_btn"></p>
+                      <p className="time">5min. ago</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="_notification_drop">
+                <header>
+                  <p>Notification</p>
+                </header>
+                <hr />
+                <div className="not_card" style={{ display: "block" }}>
+                  <p style={{ textAlign: "center", fontWeight: "bold" }}>
+                    There are no notificatons
+                  </p>
+                </div>
+              </div>
+            ))}
           <Link to="/Profile" className="link ">
             <div className="relative">
               <img
@@ -314,20 +611,20 @@ export default function PatientDashboard() {
         </div>
       </header>
       {isDropOpen && (
-        <div className="drop_content" ref={mobileMenuRef}>
+        <div className="drop_content" ref={(mobileMenuRef, mobileNavRef)}>
           <Link to="/Profile" className="link ">
             <p className="drop_content_item">View Profile</p>
           </Link>
-          <p className="drop_content_item">View Full Report</p>
+          {/* <p className="drop_content_item">View Full Report</p> */}
         </div>
       )}
 
-      <main className="patients_dashboard_main">
+      <main className="patients_dashboard_main" ref={screenshotRef}>
         <h1 className="responsive_h1_header_title">
           Welcome!{" "}
-          {patient_Name
-            ? patient_Name?.split(" ")[0]
-            : checkEffectName?.split(" ")[0]}
+          {patient_First_Name
+            ? patient_First_Name
+            : checkEffectFirstName || patient_Name.split(" ")[0]}
           ,
         </h1>
         <div className="patientsvital">
@@ -421,29 +718,41 @@ export default function PatientDashboard() {
                 <input
                   className="grant_access_input"
                   type="text"
+                  onChange={(e) => setGetForm(e.target.value)}
                   placeholder="Enter Doctor's Wallet Address to grant access"
                 />
-                <button className="grant_access_btn">Grant Access</button>
+                <button
+                  onClick={() => grantDoctorAccess()}
+                  className="grant_access_btn"
+                >
+                  Grant Access
+                </button>
               </div>
               <div className="revoke_div">
                 <input
                   className="grant_access_input"
                   type="text"
-                  placeholder="Enter Doctor's Wallet Address to grant access"
+                  onChange={(e) => setGetForm(e.target.value)}
+                  placeholder="Enter Doctor's Wallet Address to revoke access"
                 />
-                <button className="revoke_access_btn">Revoke Access</button>
+                <button
+                  onClick={() => revokeDoctorAccess()}
+                  className="revoke_access_btn"
+                >
+                  Revoke Access
+                </button>
               </div>
             </div>
             <div className="middle_section_header">
               <p>My Vitals</p>
-              <button className="report_btn">View Full Report</button>
+              {/* <button className="report_btn">View Full Report</button> */}
             </div>
             <div className="vitals_readings_cards">
               <div>
                 <div className="card1">
                   <h4 className="card1_header">My Heart Condition</h4>
-                  {data ? (
-                    <div className="display_div">
+                  {vitalSigns.length > 0 ? (
+                    <div>
                       <div className="top">
                         <div className="left_div">
                           <div
@@ -460,7 +769,9 @@ export default function PatientDashboard() {
                           <div className="readings_div">
                             <p className="heading">Blood Status</p>
                             <p>
-                              <strong className="value">116/70</strong>
+                              <strong className="value">
+                                {vitalSigns[vitalSigns.length - 1][4]}
+                              </strong>
                             </p>
                           </div>
                         </div>
@@ -479,7 +790,9 @@ export default function PatientDashboard() {
                           <div className="readings_div">
                             <p className="heading">Heart Rate</p>
                             <p>
-                              <strong className="value">120bpm</strong>
+                              <strong className="value">
+                                {vitalSigns[vitalSigns.length - 1][1]}
+                              </strong>
                             </p>
                           </div>
                         </div>
@@ -497,7 +810,7 @@ export default function PatientDashboard() {
                               src={leftLine}
                               alt="line"
                             />
-                            116
+                            {vitalSigns[vitalSigns.length - 1][4]}
                             <br />
                             <span className="value_span">/70</span>
                             <img
@@ -519,7 +832,7 @@ export default function PatientDashboard() {
                               src={leftLine}
                               alt="line"
                             />
-                            120
+                            {vitalSigns[vitalSigns.length - 1][1]}
                             <br />
                             <span className="value_span1">bpm</span>
                             <img
@@ -545,7 +858,7 @@ export default function PatientDashboard() {
                           </div>
                           <div className="count_val_div">
                             <p>Blood Count</p>
-                            <p>80/90</p>
+                            <p>{vitalSigns[vitalSigns.length - 1][5]}</p>
                           </div>
                         </div>
                         <div className="middle2_right">
@@ -562,7 +875,7 @@ export default function PatientDashboard() {
                           </div>
                           <div className="count_val_div">
                             <p>Glucose Level</p>
-                            <p>240ml</p>
+                            <p>{vitalSigns[vitalSigns.length - 1][6]}</p>
                           </div>
                         </div>
                       </div>
@@ -576,7 +889,7 @@ export default function PatientDashboard() {
                             />
                             <div className="left_readings">
                               <img className="dot" src={dotIcon} alt="line" />
-                              80
+                              {vitalSigns[vitalSigns.length - 1][5]}
                               <br />
                               <span className="value_span">/90</span>
                             </div>
@@ -590,7 +903,7 @@ export default function PatientDashboard() {
                             alt="pics"
                           />
                           <div className="left_readings">
-                            240
+                            {vitalSigns[vitalSigns.length - 1][6]}
                             <br />
                             <span className="value_span1">ml</span>
                             <img
@@ -616,164 +929,50 @@ export default function PatientDashboard() {
 
               <div className="card2">
                 <h4 className="card2_header">Recent Diagnosis</h4>
-                {data ? (
+                {treatmentDetails.length > 0 ? (
                   <div>
-                    <div className="diagnosis_container">
-                      <div className="left">
-                        <p className="diagnose_name">Malaria & Typoid</p>
-                        <p className="diagnose_status">Active</p>
+                    {treatmentDetails.slice(0, 5).map((detail, index) => (
+                      <div className="diagnosis_container" key={index}>
+                        <div className="left">
+                          <p className="diagnose_name">{detail[1]}</p>
+                          <p className="diagnose_status">Active</p>
+                        </div>
+                        <div className="right">
+                          <img
+                            src={diseases[index % diseases.length]}
+                            alt="diagnose_image"
+                          />
+                        </div>
                       </div>
-                      <div className="right">
-                        <img src={diseases[0]} alt="diagnose_image" />
-                      </div>
-                    </div>
-                    <div className="diagnosis_container">
-                      <div className="left">
-                        <p className="diagnose_name">Malaria & Typoid</p>
-                        <p className="diagnose_status">Active</p>
-                      </div>
-                      <div className="right">
-                        <img src={diseases[1]} alt="diagnose_image" />
-                      </div>
-                    </div>
-                    <div className="diagnosis_container">
-                      <div className="left">
-                        <p className="diagnose_name">Malaria & Typoid</p>
-                        <p className="diagnose_status">Active</p>
-                      </div>
-                      <div className="right">
-                        <img src={diseases[2]} alt="diagnose_image" />
-                      </div>
-                    </div>
-
-                    <div className="diagnosis_container">
-                      <div className="left">
-                        <p className="diagnose_name">Malaria & Typoid</p>
-                        <p className="diagnose_status">Active</p>
-                      </div>
-                      <div className="right">
-                        <img src={diseases[1]} alt="diagnose_image" />
-                      </div>
-                    </div>
-                    <div className="diagnosis_container">
-                      <div className="left">
-                        <p className="diagnose_name">Malaria & Typoid</p>
-                        <p className="diagnose_status">Active</p>
-                      </div>
-                      <div className="right">
-                        <img src={diseases[0]} alt="diagnose_image" />
-                      </div>
-                    </div>
-                    <div className="diagnosis_container">
-                      <div className="left">
-                        <p className="diagnose_name">Malaria & Typoid</p>
-                        <p className="diagnose_status">Active</p>
-                      </div>
-                      <div className="right">
-                        <img src={diseases[2]} alt="diagnose_image" />
-                      </div>
-                    </div>
-
-                    <div className="diagnosis_container">
-                      <div className="left">
-                        <p className="diagnose_name">Malaria & Typoid</p>
-                        <p className="diagnose_status">Active</p>
-                      </div>
-                      <div className="right">
-                        <img src={diseases[0]} alt="diagnose_image" />
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 ) : (
                   <EmptyCard />
                 )}
               </div>
+
               <div className="card3">
                 <h4 className="card3_header">Active Medication</h4>
-                {data ? (
+                {prescription.length > 0 ? (
                   <div>
-                    <div className="med_div">
-                      <div
-                        className="drug_icon_div"
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        <img src={drugs[0]} alt="drug" />
+                    {prescription.slice(0, 5).map((medication, index) => (
+                      <div className="med_div" key={index}>
+                        <div
+                          className="drug_icon_div"
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }}
+                        >
+                          <img src={drugs[index % drugs.length]} alt="drug" />
+                        </div>
+                        <div className="drug_name_div">
+                          <p className="drug_name">{medication[0]}</p>
+                          <p className="dosage">{medication[2]}</p>
+                        </div>
                       </div>
-                      <div className="drug_name_div">
-                        <p className="drug_name">Ciprofloxacin</p>
-                        <p className="dosage">1 Tab twice daily</p>
-                      </div>
-                    </div>
-                    <div className="med_div">
-                      <div
-                        className="drug_icon_div"
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        <img src={drugs[1]} alt="drug" />
-                      </div>
-                      <div className="drug_name_div">
-                        <p className="drug_name">Ciprofloxacin</p>
-                        <p className="dosage">1 Tab twice daily</p>
-                      </div>
-                    </div>
-
-                    <div className="med_div">
-                      <div
-                        className="drug_icon_div"
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        <img src={drugs[2]} alt="drug" />
-                      </div>
-                      <div className="drug_name_div">
-                        <p className="drug_name">Ciprofloxacin</p>
-                        <p className="dosage">1 Tab twice daily</p>
-                      </div>
-                    </div>
-
-                    <div className="med_div">
-                      <div
-                        className="drug_icon_div"
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        <img src={drugs[3]} alt="drug" />
-                      </div>
-                      <div className="drug_name_div">
-                        <p className="drug_name">Ciprofloxacin</p>
-                        <p className="dosage">1 Tab twice daily</p>
-                      </div>
-                    </div>
-                    <div className="med_div">
-                      <div
-                        className="drug_icon_div"
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        <img src={drugs[0]} alt="drug" />
-                      </div>
-                      <div className="drug_name_div">
-                        <p className="drug_name">Ciprofloxacin</p>
-                        <p className="dosage">1 Tab twice daily</p>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 ) : (
                   <EmptyCard />
@@ -784,7 +983,9 @@ export default function PatientDashboard() {
         ) : (
           <div style={{ textAlign: "center", marginTop: "20%" }}>
             <p>You are not yet connected, Please click to the button connect</p>
-            <button className="connect_meta">Connect to Metamask!</button>
+            <button className="connect_meta" onClick={connectWalletHandler}>
+              {connButtonText}
+            </button>
           </div>
         )}
       </main>

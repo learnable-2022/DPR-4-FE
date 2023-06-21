@@ -6,6 +6,7 @@ import heart from "../landing/Images/heart.png";
 import pill from "../landing/Images/pill.png";
 import "../landing/landing.css";
 import { Link } from "react-router-dom";
+import newlogo from "../assets/newlogo3.png"
 
 
 export default function Landing() {
@@ -23,7 +24,7 @@ export default function Landing() {
       {/* nav section */}
       <div className="nav-section">
         <div className="nav1">
-          <img src={logo} alt="medbloc-logo" id="logo" />
+          <img src={newlogo} alt="medbloc-logo" id="logo" />
         </div>
         <i class="ri-menu-line" onClick={navOpen}></i>
         {/* {isNavOpen ? <div className="nav2bg"></div> : ""} */}
@@ -193,7 +194,7 @@ export default function Landing() {
       {/* footer-section */}
       <div className="footer-section">
         <div className="footer-section-a">
-          <img src={logo} alt="medbloc-logo" id="logo" />
+          <img src={newlogo} alt="medbloc-logo" id="logo" />
           <p>
             Have a safe and decentralized medical record with us and access
             expert medical opinion from one of our world renowned specialist so

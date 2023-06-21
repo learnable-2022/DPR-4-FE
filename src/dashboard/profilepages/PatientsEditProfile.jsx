@@ -63,7 +63,7 @@ function PatientsEditProfile() {
     setSelectedDate(e.target.value);
   };
   const handleLastNameChange = (e) => {
-    setSelectedLastName(` ${e.target.value}`);
+    setSelectedLastName(e.target.value);
   };
   const handleGenderChange = (e) => {
     setSelectedGender(e.target.value);
@@ -116,7 +116,9 @@ function PatientsEditProfile() {
       selectedFirstName ||
       selectedState ||
       selectedWeight ||
-      selectedLastName
+      selectedLastName ||
+      selectedWallet ||
+      value
     ) {
       return true;
     } else {
@@ -157,7 +159,12 @@ function PatientsEditProfile() {
   let patient_number = localStorage.getItem("patient_number");
   let patient_state = localStorage.getItem("patient_state");
   let patient_Alle = localStorage.getItem("patient_allergies");
-  let formattedName = selectedFirstName + " " + selectedLastName;
+  let patient_First_Name = localStorage.getItem("patient_firstName");
+  let patient_Last_Name = localStorage.getItem("patient_lastName");
+  let patient_Middle_Name = localStorage.getItem("patient_middle_name");
+  let formattedName = `${selectedFirstName || patient_First_Name} ${
+    selectedLastName || patient_Last_Name
+  }`;
 
   const UpdatePatientDetails = async () => {
     setIsLoading(true);
@@ -168,7 +175,7 @@ function PatientsEditProfile() {
         {
           name: formattedName || name,
           email: selectedEmail || email,
-          // walletId: selectedWallet || walletId,
+          walletId: selectedWallet || walletId,
           image: data || patient_Image,
           height: selectedHeight || patient_Height,
           genotype: selectedGeno || patient_Geno,
@@ -178,10 +185,13 @@ function PatientsEditProfile() {
           gender: selectedGender || patient_gender,
           dateOfBirth: selectedDate || patient_DOB,
           city: selectedCity || patient_city,
-          country: selectedCountry || patient_country,
+          country: value || patient_country,
           address: selectedAddress || patient_address,
           phoneNumber: selectedNumber || patient_number,
           state: selectedState || patient_state,
+          firstName: selectedFirstName || patient_First_Name,
+          lastName: selectedLastName || patient_Last_Name,
+          middleName: selectedMiddleName || patient_Middle_Name,
         },
         {
           headers: {
@@ -465,7 +475,7 @@ function PatientsEditProfile() {
                     styles={style}
                     className="react_select"
                     options={options}
-                    value={value}
+                    value={value.label}
                     onChange={changeHandler}
                   />
                 </p>

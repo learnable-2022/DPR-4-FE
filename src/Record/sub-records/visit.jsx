@@ -17,25 +17,39 @@ const takeme =()=>{
   return navigate("/visit/visiterReport")
 }
 
-  const dummyData= [
-    {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine",date:"02/05/2023",Time:"13:00 PM" ,complaint:"malariaX2",Report:"view-report"},
-    {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine", date:"02/05/2023",Time:"13:00 PM" ,complaint:"malariaX2",Report:"view-report"},
-    {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine", date:"02/05/2023",Time:"13:00 PM" ,complaint:"malariaX2",Report:"view-report"},
-    {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine", date:"02/05/2023",Time:"13:00 PM" ,complaint:"malariaX2",Report:"view-report"},
-    {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine", date:"02/05/2023",Time:"13:00 PM" ,complaint:"malariaX2",Report:"view-report"},
+
+let getFormattedRecords = JSON.parse(localStorage.getItem("getFormattedRecords"));
+console.log(getFormattedRecords);
+
+  // const dummyData= [
+  //   {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine",date:"02/05/2023",Time:"13:00 PM" ,complaint:"malariaX2",Report:"view-report"},
+  //   {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine", date:"02/05/2023",Time:"13:00 PM" ,complaint:"malariaX2",Report:"view-report"},
+  //   {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine", date:"02/05/2023",Time:"13:00 PM" ,complaint:"malariaX2",Report:"view-report"},
+  //   {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine", date:"02/05/2023",Time:"13:00 PM" ,complaint:"malariaX2",Report:"view-report"},
+  //   {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine", date:"02/05/2023",Time:"13:00 PM" ,complaint:"malariaX2",Report:"view-report"},
   
-  ]
+  // ]
+  const dummyData = getFormattedRecords.map((item, index) => ({
+    hospitalName: item.billing[3],
+    name: item.billing[3],
+    date: item.billing[0],
+    time: '13:00 PM',
+    complaint: item.treatmentDetails[0],
+    Report: 'view-report',
+    index: index // Add the index as a property
+  }));
+
   const link ="/visit/visiterReport"
   const CALA =[
     {
         Headers: "Hospital/laboratory",
-        accessor:"hosiptalName",
+        accessor:"hospitalName",
         Cell: ({ cell: { row } }) => {
           return (
             <div>
-             <span style={{fontSize:"13px"}}> {row.original.hosiptalName}</span>
+             <span style={{fontSize:"13px"}}> {row.original.hospitalName}</span>
               <br/>
-             <span > {row.original.name}</ span>
+             <span > {row.original.name}</span>
             </div>
           );
         },
@@ -43,7 +57,7 @@ const takeme =()=>{
     },
     
     {
-        Headers: "Data/time",
+        Headers: "Date",
         accessor:"date",
         Cell: ({ cell: { row } }) => {
           return (
@@ -65,7 +79,7 @@ const takeme =()=>{
         Cell: ({ cell: { row } }) => (
           <>
          <div className='view-report-button'>
-         <Link to={link} style={{color:"#fff", textDecoration:"none",}}>
+         <Link to={`${link}/${row.original.index}`} style={{color:"#fff", textDecoration:"none",}}>
          {row.original.Report}  
           </Link>
          </div>

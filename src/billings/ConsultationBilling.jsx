@@ -20,6 +20,10 @@ function ConsultationBilling() {
     navigate("/DoctorInvoiceSent");
   }
 
+  function onPress (e){
+    navigate("/DoctorPaymentHistory")
+  }
+
   return (
     <>
       <div className="Right">
@@ -33,7 +37,7 @@ function ConsultationBilling() {
                   <img src={ArrowRight2} className="ArrowHistory" alt="pics" />
                 </div>
 
-                <div className="Bill">
+                <div onClick={onPress} className="Bill">
                   <h6>Payment History</h6>
                   <img src={ArrowRight2} className="ArrowHistory" alt="pics" />
                 </div>
