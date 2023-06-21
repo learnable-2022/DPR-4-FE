@@ -58,6 +58,9 @@
   padding: 5px 10px;
   color: #fff;
 }
+.nav-container-right button:hover {
+  cursor: pointer;
+}
 .nav-short {
   display: flex;
   flex-direction: row;

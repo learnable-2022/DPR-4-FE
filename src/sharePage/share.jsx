@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useHistory } from "react";
 import profileImage from "../assets/Ellipse1.png";
 import { BiArrowBack } from "react-icons/bi";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import pdfIcon from "../assets/pdf_icon.svg";
 import whatsappIcon from "../assets/whatsapp_icon.svg";
 import gmailIcon from "../assets/gmail_icon.svg";
 import { ImCancelCircle } from "react-icons/im";
 import preview from "../assets/preview.png";
+import { GrDownload } from "react-icons/gr";
 import "./Share.css";
 import { useServiceProviderValue } from "../ServiceProvider";
 
@@ -14,7 +15,9 @@ function Share() {
   const [screenshotData, setScreenShotData] = useState("");
   const [previewDisplay, setPreviewDisplay] = useState(true);
   const [{ screenshot }, dispatch] = useServiceProviderValue();
-
+  const patientsName = localStorage.getItem("patient_name");
+  const patientsImage = localStorage.getItem("patient_image");
+  const navigate = useNavigate();
   useEffect(() => {
     setScreenShotData(screenshot);
   }, []);
@@ -55,27 +58,28 @@ function Share() {
     const file = event.target.files[0];
     setSelectedImage(file);
   };
+  const moveBack = () => {
+    navigate(-1);
+  };
 
   const shareMail = () => {
-    const emailSubject = encodeURIComponent("Subject of the email");
-    const emailBody = encodeURIComponent("Here is the image I want to share.");
-
-    const emailLink = `mailto:?subject=${emailSubject}&body=${emailBody}&attach=${profileImage}`;
-
-    window.location.href = emailLink;
+    const link = document.createElement("a");
+    link.href = screenshot;
+    link.download = "report";
+    link.click();
   };
+
   return (
     <div className="share">
       <header className="share_header">
         <div className="left_side_share_header">
-          <Link to="/Dashboard" className="link">
-            <BiArrowBack className="back_arrow" />
-          </Link>
+          <BiArrowBack className="back_arrow" onClick={moveBack} />
+
           <p>Back</p>
         </div>
         <div className="right_side_share_header">
-          <img className="prof_img" src={profileImage} alt="profileImage" />
-          <p className="name"> Mrs. Doe Roseline</p>
+          <img className="prof_img" src={patientsImage} alt="profileImage" />
+          <p className="name"> {patientsName}</p>
         </div>
       </header>
 
@@ -99,12 +103,13 @@ function Share() {
         <div className="share_platforms">
           <div className="group email_share" onClick={shareMail}>
             <div className="wrapper">
-              <p>Share via mail</p>
-              <img src={gmailIcon} className="gmail_icon" alt="share_icon" />
+              <p>Download Report</p>
+              <GrDownload />
+              {/* <img src={gmailIcon} className="gmail_icon" alt="share_icon" /> */}
             </div>
           </div>
 
-          <div className="group whatsapp_share" onClick={shareWhatsapp}>
+          {/* <div className="group whatsapp_share" onClick={shareWhatsapp}>
             <div className="wrapper">
               <p>Share via whatsapp</p>
               <img src={whatsappIcon} alt="share_icon" />
@@ -116,7 +121,7 @@ function Share() {
               <p>Share via PDF</p>
               <img src={pdfIcon} alt="share_icon" />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

@@ -19,36 +19,32 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import url from "../api/BillingApi.jsx";
 import { useState } from "react";
-import {GiHamburgerMenu} from "react-icons/gi";
-
-
-
+import { GiHamburgerMenu } from "react-icons/gi";
 
 export default function PatientsBilling() {
-
   const [transactionArray, setTransactionArray] = useState([]);
   const [patientId, setPatientId] = useState([]);
+  let patient_Image = localStorage.getItem("patient_image");
+  let patient_Name = localStorage.getItem("patient_name");
 
-
-useEffect(()=>{
-    const fetchdata = async()=>{
-      try{
-        const response = await url.get('/transactions');
-        console.log('response::  ',response);
+  useEffect(() => {
+    const fetchdata = async () => {
+      try {
+        const response = await url.get("/transactions");
+        console.log("response::  ", response);
         setTransactionArray(response.data.transactions);
 
         setPatientId(response.data.transactions._id);
 
-        console.log('trans :: ',response.data.transactions);
-      }catch(err){
-        console.log('err:: ',err);
+        console.log("trans :: ", response.data.transactions);
+      } catch (err) {
+        console.log("err:: ", err);
       }
-
-    }
+    };
     fetchdata();
-}, [])
+  }, []);
 
-console.log("patientId", patientId)
+  console.log("patientId", patientId);
 
   const navigate = useNavigate();
   function handleClick(e) {
@@ -66,7 +62,8 @@ console.log("patientId", patientId)
           <div className="billingNav">
             <div className="patientName">
               <h2>
-                Hello, Amaka <br /> Chibueze!
+                Hello, {patient_Name.split(" ")[0]} <br />{" "}
+                {patient_Name.split(" ")[1]}!
               </h2>
             </div>
 
@@ -78,32 +75,32 @@ console.log("patientId", patientId)
 
               <div className="searchIcons">
                 <img src={Notification} alt="pics" />
-                <img src={PatientPics} alt="pics" />
+                <img src={patient_Image} alt="pics" />
               </div>
             </div>
           </div>
         </div>
         {/* =========================================== */}
         <div className="smallScreenNav">
-        <div className="searchParent">
-          <div>
-            <GiHamburgerMenu/>
+          <div className="searchParent">
+            <div>
+              <GiHamburgerMenu />
+            </div>
+            <div className="searchBox">
+              <CiSearch />
+              <input type="text" placeholder="Search.." />
+            </div>
+
+            <div className="searchIcons">
+              <img src={Notification} alt="pics" />
+              <img src={PatientPics} alt="pics" />
+            </div>
           </div>
-              <div className="searchBox">
-                <CiSearch />
-                <input type="text" placeholder="Search.." />
-              </div>
 
-              <div className="searchIcons">
-                <img src={Notification} alt="pics" />
-                <img src={PatientPics} alt="pics" />
-              </div>
-            </div>
-
-            <div className="smallScreenNavName">
-              <p>Hello, Amaka Chibueze!</p>
-            </div>
-            </div>
+          <div className="smallScreenNavName">
+            <p>Hello,{patient_Name}!</p>
+          </div>
+        </div>
 
         {/* ============================================= */}
 
@@ -121,21 +118,26 @@ console.log("patientId", patientId)
             </div>
 
             <div className="PatientEntities">
-              {transactionArray.length > 0 && transactionArray.map((transaction,index)=>{
-                    // display: grid;
-                    // grid-template-columns: 1fr 1fr 1fr;
-                return(
-               <div key={transaction._id}>
-                  <ul>
-                    <li>{transaction.healthcareProvider}</li>
-                  <li className={`${transaction.status}`}>{transaction.status}</li>
-                  <li>USD {transaction.amount} </li> 
-                 
-                </ul>
-                <hr className="PatientUnderline" key={`${index}-${transaction._id}`}/>
-                 </div>
-                )
-              })}
+              {transactionArray.length > 0 &&
+                transactionArray.map((transaction, index) => {
+                  // display: grid;
+                  // grid-template-columns: 1fr 1fr 1fr;
+                  return (
+                    <div key={transaction._id}>
+                      <ul>
+                        <li>{transaction.healthcareProvider}</li>
+                        <li className={`${transaction.status}`}>
+                          {transaction.status}
+                        </li>
+                        <li>USD {transaction.amount} </li>
+                      </ul>
+                      <hr
+                        className="PatientUnderline"
+                        key={`${index}-${transaction._id}`}
+                      />
+                    </div>
+                  );
+                })}
               {/* <ul >
                 <li>Dr. Ada</li>
                 <li className="Successful">Successful</li>
@@ -162,9 +164,8 @@ console.log("patientId", patientId)
             </div>
           </div>
           <div className="ViewAll">
-              <p onClick={handleClick}>View all</p>
-          </div> 
-
+            <p onClick={handleClick}>View all</p>
+          </div>
 
           {/* /////////////////////////down////////////////////////////// */}
           <div className="patientDashboardHeading">
@@ -205,7 +206,6 @@ console.log("patientId", patientId)
               </ul>
             </div>
           </div>
-
         </div>
       </div>
     </>
