@@ -6,7 +6,7 @@ import smallLogo from "../assets/small.png";
 import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from "react-router";
 
-export default function NavBar({ lab }) {
+export default function NavBar({ lab, onClick }) {
   const navigation = useNavigate();
   const returnHandler = () => {
     navigation(-1);
@@ -28,7 +28,7 @@ export default function NavBar({ lab }) {
         </div>
         <div className="nav-container-right">
           <div>
-            <button>share report</button>
+            <button onClick={onClick}>download report</button>
           </div>
           <div>
             <IoIosNotificationsOutline />
