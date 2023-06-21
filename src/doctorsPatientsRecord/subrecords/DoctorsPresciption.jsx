@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 export default function DoctorsPresciption() {
   const navigate =useNavigate();
+
+  let prescription = JSON.parse(localStorage.getItem('prescription'));
+
   return (
     <div className="overview-container">
      <div className="pres-flex">
@@ -17,22 +20,26 @@ export default function DoctorsPresciption() {
           </select>
         </div>
      </div>
+      {prescription.length > 0 ? (
+      prescription.map((detail, index) => (
       <div className="pres-component">
         <div className="first-pres-component">
           <div>
             <img src={drugpic1} className="img" alt="pics" />
           </div>
           <div>
-            <p>Ciprofloxacin</p> <p>1 Tab twice daily</p>
+            <p>{detail[0]}</p> <p>{detail[2]}</p>
           </div>
         </div>
         <div>
           <p>One off</p>
         </div>
         <div>
-          <p>No Refill Required</p>
+          <p>{detail[1]}</p>
         </div>
       </div>
+        ))
+      ): null}
     </div>
   );
 }

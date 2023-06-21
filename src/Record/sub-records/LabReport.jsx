@@ -18,11 +18,11 @@ export default function LabReport() {
         <div className='first-visit-container'>
          <div className='intro'>
             <div>
-              <p> Name of Lab :{record.vaccine.join(', ')}</p>
-              <p> Doctor’s Name:</p>{record.amount}
+              <p> Name of Lab :</p>
+              <p> Doctor’s Name:</p>
                 </div>
                 <div className='all'>
-                <p>Alpha Diagnostics Laboratories, Enugu</p>
+                <p>{record.vaccine.join(', ')}</p>
                 <p>None, None</p>
               </div>
          </div>

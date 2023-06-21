@@ -393,7 +393,7 @@ function Approuter() {
 
          {doctorToken ? (
           <Route
-            path="/doctorslab/doctorslabreport"
+            path="/doctorslab/doctorslabreport/:id"
             element={
               <AuthDocLayout>
                 {" "}

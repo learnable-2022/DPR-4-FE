@@ -45,10 +45,9 @@ function DoctorsRecords() {
   const [noAccessMsg, setNoAccessMsg] = useState("");
   const [hasAccess, setHasAccess] = useState(false);
 
-  console.log(patientWalletId);
-  console.log(defaultAccount);
-
+  
   const hasAccessFunc = async () => {
+    
     try {
       const checkAccess = await tempContract.hasAccess(defaultAccount,patientWalletId);
       setHasAccess(checkAccess);
@@ -61,6 +60,8 @@ function DoctorsRecords() {
   };
 
   const checkRecord = async () => {
+    
+
     try {
       if (tempContract) {
         let record = await tempContract.getPatientRecord(patientWalletId);
@@ -103,8 +104,47 @@ function DoctorsRecords() {
     }
   };
 
+  useEffect(() =>{
+    hasAccessFunc();
+  },[]);
+
+
+  useEffect(() =>{
+    localStorage.setItem('getFormattedRecords', JSON.stringify(getFormattedRecords));
+  },[getFormattedRecords]);
 
   useEffect(() => {
+    localStorage.setItem("vitalSigns", JSON.stringify(vitalSigns));
+  }, [vitalSigns]);
+
+  useEffect(() => {
+    localStorage.setItem("treatmentDetails", JSON.stringify(treatmentDetails));
+  }, [treatmentDetails]);
+
+  useEffect(() => {
+    localStorage.setItem("vaccine", JSON.stringify(vaccine));
+  }, [vaccine]);
+
+  useEffect(() => {
+    localStorage.setItem("prescription", JSON.stringify(prescription));
+  }, [prescription]);
+
+  useEffect(() => {
+    localStorage.setItem("billing", JSON.stringify(billing));
+  }, [billing]);
+
+  useEffect(() => {
+    localStorage.setItem("service", JSON.stringify(service));
+  }, [service]);
+
+  useEffect(() => {
+    localStorage.setItem("amount", JSON.stringify(amount));
+  }, [amount]);
+
+
+
+  useEffect(() => {
+   
   if (defaultAccount) {
     hasAccessFunc() // Call the async function
       .then((access) => {
@@ -146,6 +186,8 @@ function DoctorsRecords() {
     const parsedPatientList = JSON.parse(storedPatientList);
     setPatientList(parsedPatientList);
   }, []);
+
+
 
   return (
     <div className="container">
