@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom';
 import Labvisitreport from '../../utilities/lab-visitreport';
 import React, { useRef } from "react";
 import NavBar from "../../utilities/NavBar";
-import Labvisitreport from "../../utilities/lab-visitreport";
 import "./sub-records.css";
 import html2canvas from "html2canvas";
 import { useServiceProviderValue } from "../../ServiceProvider";
