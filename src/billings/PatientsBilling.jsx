@@ -97,16 +97,10 @@ export default function PatientsBilling() {
             </div>
           </div>
 
-              <div className="searchIcons">
-                {/* <img src={Notification} alt="pics" /> */}
-                <img src={PatientPics} alt="pics" />
-              </div>
-            </div>
-
-            <div className="smallScreenNavName">
-              <p>Hello, Amaka Chibueze!</p>
-            </div>
-            </div>
+          <div className="smallScreenNavName">
+            <p>Hello,{patient_Name}!</p>
+          </div>
+        </div>
 
         {/* ============================================= */}
 
@@ -211,6 +205,7 @@ export default function PatientsBilling() {
             </div>
           </div>
         </div>
+      </div>
     </>
   );
 }
