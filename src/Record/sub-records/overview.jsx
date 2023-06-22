@@ -50,7 +50,7 @@ export default function Overview() {
                     <p>
                       Blood Status <br />
                      
-                    <span style={{color:"#000"}}>  {vitalSigns[vitalSigns.length - 1][4]}</span>
+                    <span style={{color:"#000"}}>{vitalSigns[vitalSigns.length - 1][4]}/70</span>
                     </p>
                   </div>
                   <div className="over-1-first-son">
@@ -80,7 +80,7 @@ export default function Overview() {
                     <p>
                       Blood Count <br />
                       
-                     <span style={{color:"#000"}}> {vitalSigns[vitalSigns.length - 1][5]}-90</span>
+                     <span style={{color:"#000"}}>{vitalSigns[vitalSigns.length - 1][5]}-90</span>
                     </p>
                   </div>
                   <div className="over-1-first-son">

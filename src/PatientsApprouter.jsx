@@ -33,7 +33,7 @@ import Signingup from "./login/signingup";
 import PatientInvoiceConfirmation from "./billings/PatientInvoiceConfirmation";
 import ApprovedPage from "./billings/ApprovedPage";
 import DoctorInvoiceSent from "./billings/DoctorInvoiceSent";
-import DoctorsLabReport from "./doctorsPatientsRecord/subrecords/DoctorsLabReport"
+import DoctorsLabReport from "./doctorsPatientsRecord/subrecords/DoctorsLabReport";
 
 import Vitals from "./draffts/Components/Vitals";
 import Finish from "./draffts/Components/Finish";
@@ -53,8 +53,6 @@ import DoctorsVaccine from "./doctorsPatientsRecord/subrecords/DoctorsVaccine";
 import DoctorsPresciption from "./doctorsPatientsRecord/subrecords/DoctorsPresciption";
 import Share from "./sharePage/share";
 
-import abi from "./abi.json";
-import { ethers } from 'ethers';
 // note!!!
 // i have only created the router part for the signup , login and Landing page.
 // subsequent route path would follow suite.
@@ -65,47 +63,40 @@ function Approuter() {
   const patientToken = localStorage.getItem("patientToken");
   const doctorToken = localStorage.getItem("doctorToken");
 
-//   let contractAddress = "0xFFE09412B070bC1880D5FBD2BeD09639E367061A";
-  
-//   const [errorMessage, setErrorMessage] = useState(null);
-// 	const [defaultAccount, setDefaultAccount] = useState(null);
-	
+  //   let contractAddress = "0xFFE09412B070bC1880D5FBD2BeD09639E367061A";
 
-// 	const [provider, setProvider] = useState(null);
-// 	const [signer, setSigner] = useState(null);
-// 	const [contract, setContract] = useState(null);
-//   const [getForm , setGetForm] = useState('');
+  //   const [errorMessage, setErrorMessage] = useState(null);
+  // 	const [defaultAccount, setDefaultAccount] = useState(null);
 
+  // 	const [provider, setProvider] = useState(null);
+  // 	const [signer, setSigner] = useState(null);
+  // 	const [contract, setContract] = useState(null);
+  //   const [getForm , setGetForm] = useState('');
 
+  // const updateEthers = async () => {
+  //   try {
+  //     if (window.ethereum && window.ethereum.isMetaMask) {
+  //       let tempProvider = new ethers.providers.Web3Provider(window.ethereum);
+  //   setProvider(tempProvider);
 
-// const updateEthers = async () => {
-//   try {
-//     if (window.ethereum && window.ethereum.isMetaMask) {
-//       let tempProvider = new ethers.providers.Web3Provider(window.ethereum);
-//   setProvider(tempProvider);
-  
+  //   let tempSigner = tempProvider.getSigner();
+  //   setSigner(tempSigner);
+  //   console.log(tempSigner);
+  //   let tempContract = new ethers.Contract(contractAddress, abi, tempSigner);
+  //   setContract(tempContract);
+  //   console.log(tempContract);
 
-//   let tempSigner = tempProvider.getSigner();
-//   setSigner(tempSigner);
-//   console.log(tempSigner);
-//   let tempContract = new ethers.Contract(contractAddress, abi, tempSigner);
-//   setContract(tempContract);
-//   console.log(tempContract);
+  //     } else {
+  //       console.error('Please install MetaMask or use a compatible Ethereum browser extension.');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error updating Ethers:', error);
+  //   }
+  // };
 
-      
-//     } else {
-//       console.error('Please install MetaMask or use a compatible Ethereum browser extension.');
-//     }
-//   } catch (error) {
-//     console.error('Error updating Ethers:', error);
-//   }
-// };
-
-
-// const accountChangedHandler = (newAccount) => {
-// setDefaultAccount(newAccount);
-// };
-
+  // const accountChangedHandler = (newAccount) => {
+  // setDefaultAccount(newAccount);
+  // };
 
   return (
     <Router>
@@ -199,7 +190,7 @@ function Approuter() {
           )}
           {patientToken ? (
             <Route
-              path="/lab/view-report"
+              path="/lab/view-report/:id"
               element={
                 <AuthUserLayout>
                   <LabReport />
@@ -211,7 +202,7 @@ function Approuter() {
           )}
           {patientToken ? (
             <Route
-              path="/visit/visiterReport"
+              path="/visit/visiterReport/:id"
               element={
                 <AuthUserLayout>
                   <VisiterReport />
@@ -390,10 +381,9 @@ function Approuter() {
         ) : (
           <Route path="/DoctorInvoiceSent" element={<Landing />} />
         )}
-
-         {doctorToken ? (
+        {doctorToken ? (
           <Route
-            path="/doctorslab/doctorslabreport"
+            path="/doctorslab/doctorslabreport/:id"
             element={
               <AuthDocLayout>
                 {" "}
@@ -404,27 +394,27 @@ function Approuter() {
         ) : (
           <Route path="/doctorslab/doctorslabreport" element={<Landing />} />
         )}
-
-
-{doctorToken ? (
-            <Route  
-              path="DoctorsRecords"
-              element={
-                <AuthDocLayout>
-                 {" "}
-                  <DoctorsRecords />{" "}
-                </AuthDocLayout>
-              }
-            >
-              <Route index="doctorsoverview" element={<DoctorsOverview />} />
-              <Route path="doctorslab" element={<DoctorsLab />} />
-              <Route path="doctorsvaccine" element={<DoctorsVaccine />} />
-              <Route path="doctorsprescription" element={<DoctorsPresciption />} />
-            </Route>
-          ) : (
-            <Route path="DoctorsRecords" element={<Landing />} />
-          )}
-
+        {doctorToken ? (
+          <Route
+            path="DoctorsRecords"
+            element={
+              <AuthDocLayout>
+                {" "}
+                <DoctorsRecords />{" "}
+              </AuthDocLayout>
+            }
+          >
+            <Route index="doctorsoverview" element={<DoctorsOverview />} />
+            <Route path="doctorslab" element={<DoctorsLab />} />
+            <Route path="doctorsvaccine" element={<DoctorsVaccine />} />
+            <Route
+              path="doctorsprescription"
+              element={<DoctorsPresciption />}
+            />
+          </Route>
+        ) : (
+          <Route path="DoctorsRecords" element={<Landing />} />
+        )}
       </Routes>
     </Router>
   );

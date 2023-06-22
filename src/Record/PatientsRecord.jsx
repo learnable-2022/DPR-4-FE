@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useEffect } from "react";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { BsArrowLeft } from "react-icons/bs";
 import smallLogo from "../assets/small.png";
 import { GiHamburgerMenu } from "react-icons/gi";
-
+import html2canvas from "html2canvas";
 import "./Record.css";
 import { Outlet, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -19,8 +19,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import ourlogo from "../assets/ourlogo.png";
 import { AiOutlineClose } from "react-icons/ai";
+import { useServiceProviderValue } from "../ServiceProvider";
 
 export default function PatientsRecord() {
+  const [{}, dispatch] = useServiceProviderValue();
   let patient_Image = localStorage.getItem("patient_image");
   let patient_Name = localStorage.getItem("patient_name");
   let patient_gender = localStorage.getItem("patient_gender");
@@ -36,7 +38,7 @@ export default function PatientsRecord() {
   let patient_Alle = localStorage.getItem("patient_allergies");
 
   let patient_wallet = localStorage.getItem("patient_walletId");
-
+  const screenshotRef = useRef(null);
   const { makeRequest } = useRequestProcessor();
   const { response, error } = makeRequest({ url: "/patient/", method: "GET" });
   console.log("response:", response, "error:", error);
@@ -46,13 +48,59 @@ export default function PatientsRecord() {
     navigate(-1);
   };
   useEffect(() => {}, []);
+  const shareReport = () => {
+    if (screenshotRef.current) {
+      const body = document.body;
+      const html = document.documentElement;
+      const documentHeight = Math.max(
+        body.scrollHeight,
+        body.offsetHeight,
+        html.clientHeight,
+        html.scrollHeight,
+        html.offsetHeight
+      );
+      const windowWidth =
+        window.innerWidth ||
+        document.documentElement.clientWidth ||
+        document.body.clientWidth;
+      const windowHeight =
+        window.innerHeight ||
+        document.documentElement.clientHeight ||
+        document.body.clientHeight;
 
+      window.scrollTo(0, 0); // Scroll to the top of the page
+
+      html2canvas(document.documentElement, {
+        width: windowWidth,
+        height: documentHeight,
+        scrollX: window.scrollX,
+        scrollY: window.scrollY,
+        windowWidth,
+        windowHeight,
+      })
+        .then((canvas) => {
+          const imageDataURL = canvas.toDataURL();
+
+          // const link = document.createElement("a");
+          // link.href = canvas.toDataURL();
+          // link.download = "screenshot.png";
+          // link.click();
+
+          dispatch({ type: "SET_SCREENSHOT", screenshot: imageDataURL });
+
+          navigate("/share");
+        })
+        .catch((error) => {
+          console.error("Error capturing screenshot:", error);
+        });
+    }
+  };
   const [navOpen, setIsNavOpen] = useState(false);
   const toggleNav = () => {
     setIsNavOpen(!navOpen);
   };
   return (
-    <div className="container">
+    <div className="container" ref={screenshotRef}>
       <div
         className={navOpen ? "patient_dashboard_nav" : "closeNav"}
         // ref={mobileNavRef}
@@ -103,10 +151,12 @@ export default function PatientsRecord() {
         </div>
         <div className="nav-container-right">
           <div>
-            <button style={{ cursor: "pointer" }}>share report</button>
+            <button style={{ cursor: "pointer" }} onClick={shareReport}>
+              download report
+            </button>
           </div>
           <div>
-          <img src={notification} alt="notification" className="notifi_btn" />
+            <img src={notification} alt="notification" className="notifi_btn" />
           </div>
           <div className="nav-short">
             <img
@@ -116,9 +166,9 @@ export default function PatientsRecord() {
                 height: "40px",
                 borderRadius: "50%",
                 boxShadow: "1px 2px 4px rgb(224 222 222)",
-                 border:"1px solid rgb(255 255 255)",
-                  borderRadius:" 50%",
-                  objectFit: "fill",
+                border: "1px solid rgb(255 255 255)",
+                borderRadius: " 50%",
+                objectFit: "fill",
               }}
               alt="frame"
             />
@@ -206,12 +256,12 @@ export default function PatientsRecord() {
             <p>Visits</p>
           </NavLink>
         </li>
-        <li>
+        {/* <li>
           {" "}
           <NavLink activeClassName="active" to="lab">
             <p>Labs</p>
           </NavLink>
-        </li>
+        </li> */}
         <li>
           {" "}
           <NavLink activeClassName="active" to="vaccine">
