@@ -77,7 +77,7 @@ console.log("patientId", patientId)
               </div>
 
               <div className="searchIcons">
-                <img src={Notification} alt="pics" />
+                {/* <img src={Notification} alt="pics" /> */}
                 <img src={PatientPics} alt="pics" />
               </div>
             </div>
@@ -87,7 +87,7 @@ console.log("patientId", patientId)
         <div className="smallScreenNav">
         <div className="searchParent">
           <div>
-            <GiHamburgerMenu/>
+            <GiHamburgerMenu />
           </div>
               <div className="searchBox">
                 <CiSearch />
@@ -95,7 +95,7 @@ console.log("patientId", patientId)
               </div>
 
               <div className="searchIcons">
-                <img src={Notification} alt="pics" />
+                {/* <img src={Notification} alt="pics" /> */}
                 <img src={PatientPics} alt="pics" />
               </div>
             </div>
@@ -116,7 +116,7 @@ console.log("patientId", patientId)
               <ul>
                 <li>Name</li>
                 <li>Status</li>
-                <li>Amount </li>
+                <li className="patientNavAmount">Amount </li>
               </ul>
             </div>
 
@@ -136,6 +136,9 @@ console.log("patientId", patientId)
                  </div>
                 )
               })}
+
+
+              
               {/* <ul >
                 <li>Dr. Ada</li>
                 <li className="Successful">Successful</li>
@@ -175,7 +178,7 @@ console.log("patientId", patientId)
               <ul>
                 <li>Name</li>
                 <li>Status</li>
-                <li>Amount </li>
+                <li className="patientNavAmount">Amount </li>
               </ul>
             </div>
 

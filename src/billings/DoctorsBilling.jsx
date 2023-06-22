@@ -52,7 +52,7 @@ useEffect(()=>{
               </div>
 
               <div className="searchIcons">
-                <img src={Notification} alt="pics" />
+                {/* <img src={Notification} alt="pics" /> */}
                 <img
                   style={{ width: "20px", height: "20px", borderRadius: "50%" }}
                   src={doctors_Image ? doctors_Image : PatientPics}
@@ -75,7 +75,7 @@ useEffect(()=>{
               </div>
 
               <div className="searchIcons">
-                <img src={Notification} alt="pics" />
+                {/* <img src={Notification} alt="pics" /> */}
                 <img src={PatientPics} alt="pics" />
               </div>
             </div>
@@ -96,13 +96,26 @@ useEffect(()=>{
             <div className="patientNav">
               <ul>
                 <li>Name</li>
-                <li>Status</li>
-                <li>Amount </li>
+                <li className="patientNavStatus">Status</li>
+                <li className="patientNavAmount">Amount </li>
               </ul>
             </div>
 
             <div className="PatientEntities">
-              <ul >
+              {transactionArray.length > 0 && transactionArray.map((transaction,index)=>{
+                return (
+                  <div key={transaction._id}>
+                    <ul>
+                      <li>{transaction.name}</li>
+                      <li className={`${transaction.status}`}>{transaction.status}</li>
+                      <li>USD {transaction.amount}</li>
+                    </ul>
+                    <hr className="PatientUnderline"></hr>
+
+                  </div>
+                )
+              })}
+              {/* <ul >
                 <li>Amaka</li>
                 <li className="successful">Paid</li>
                 <li>USD 22,000 </li>
@@ -124,7 +137,7 @@ useEffect(()=>{
                 <li>Tobi</li>
                 <li className="successful">Paid</li>
                 <li>USD 150,000 </li>
-              </ul>
+              </ul> */}
             </div>
           </div>
 
