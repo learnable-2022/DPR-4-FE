@@ -191,6 +191,8 @@
   margin: 3rem 5rem;
   background-color: #f9f9f9;
   border-radius: 20px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.17), 4px 4px 6px rgba(0, 0, 0, 0.075),
+    10px 10px 20px rgba(0, 0, 0, 0.04);
 }
 
 #pill-img {
@@ -880,7 +882,7 @@
     width: 84%;
   }
   .section-one {
-    width: 80%;
+    /* width: 80%; */
   }
   .section-one-text {
     width: 380px;
