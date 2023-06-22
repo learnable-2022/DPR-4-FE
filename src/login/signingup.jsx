@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./login.css";
+import {BsArrowLeft} from "react-icons/bs"
 import bigImage from "../assets/signup-second.png";
 import {
   faCheck,
@@ -50,7 +51,9 @@ export default function Signingup() {
   const [isLoading, setIsLoading] = useState(false);
 
   // const { makeRequest } = useRequestProcessor();
-
+  const handle = () => {
+    navigate(-1);
+  };
   const toggle = () => {
     setPasswordVisible(!passwordVisible);
   };
@@ -155,6 +158,7 @@ export default function Signingup() {
     <div className="first-container confirmation">
       <div className="sign-up-container">
         <div className="signup-form ">
+        <BsArrowLeft onClick={handle} style={{ cursor: "pointer" }} />
           <div>
             <img src={newlogo} alt="medblog" />
           </div>

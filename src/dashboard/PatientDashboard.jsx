@@ -34,6 +34,7 @@ import abi from "../abi.json";
 import { ethers } from "ethers";
 // for nav bar
 
+
 import { RxDashboard } from "react-icons/rx";
 import { BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
 import { TfiWrite } from "react-icons/tfi";
