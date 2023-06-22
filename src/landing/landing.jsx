@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import femaleDoc from "../landing/Images/femalemama.jpg";
 import logo from "../landing/Images/logo.png";
 import male from "../landing/Images/maleDoc.png";
@@ -18,7 +18,14 @@ export default function Landing() {
   }
 
   console.log(isNavOpen)
+  const supportRef = useRef(null);
+  const manRef = useRef(null);
 
+const moveToSupport =(ref)=>{
+  if(ref.current  ){
+      ref.current.scrollIntoView()
+  } 
+}
   return (
     <div className="">
       {/* nav section */}
@@ -35,13 +42,13 @@ export default function Landing() {
             <Link className="link" id="nav-link" to="" style={{fontWeight:"600"}}>
             <li>Home</li>
             </Link>
-            <Link className="link" id="nav-link" to="" style={{fontWeight:"600"}}>
+            <Link className="link" id="nav-link" to="" onClick={()=>moveToSupport(manRef)} style={{fontWeight:"600"}}>
               <li>Features</li>
             </Link>
-            <Link className="link" id="nav-link" to="here" style={{fontWeight:"600"}}>
+            <Link className="link" id="nav-link" to=""  style={{fontWeight:"600"}}>
               <li>Pricing</li>
             </Link>
-            <Link className="link" id="nav-link" to="" style={{fontWeight:"600"}}>
+            <Link className="link" id="nav-link" to="" onClick={()=> moveToSupport(supportRef)} style={{fontWeight:"600"}}>
             <li>Support</li>
             </Link>
             <Link className="link" id="get-link" to="/confirmation">
@@ -119,7 +126,7 @@ export default function Landing() {
       </div>
 
       {/* section-two*/}
-      <div className="section-two">
+      <div className="section-two" ref={manRef}>
         <div className="section-two-a">
           <img src={male} alt="male-doctor" id="male-img" />
         </div>
@@ -201,7 +208,7 @@ export default function Landing() {
 
 
       {/* footer-section */}
-      <div className="footer-section">
+      <div className="footer-section" ref={supportRef}>
         <div className="footer-section-a">
           <img src={newlogo} alt="medbloc-logo" id="logo" />
           <p>
