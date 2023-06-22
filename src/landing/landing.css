@@ -18,7 +18,10 @@
 .nav-section i {
   display: none;
 }
-
+.hero-2{
+  object-fit: contain;
+  width: 542px;
+}
 .nav2 {
   width: 60%;
   display: flex;
@@ -1018,7 +1021,7 @@
     letter-spacing: 4px;
   }
   .link button{
-    width: 50%;
+    width: 40%;
   }
   .hero-text {
     width: 100%;
@@ -1061,7 +1064,7 @@
     margin: 1.2rem 0 0 0;
   }
   .section-2-list p {
-    font-size: 30px;
+    font-size: 20px;
   }
   .ri-checkbox-line {
     font-size: 30px;
@@ -1079,7 +1082,7 @@
   .section-three-text-b {
     width: 100%;
     font-size: 23px;
-    line-height: 30px;
+    line-height: 40px;
     margin: 0rem 0 1rem 0;
   }
   #heart-img {
@@ -1114,7 +1117,7 @@
     padding: 20px 1.5rem 1.5rem 1.5rem;
   }
   .link button{
-    width: 50%;
+    width: 40%;
   }
   .section-one-part-b{
     margin-bottom: 20px;
@@ -1123,10 +1126,11 @@
    
     display: flex;
     justify-content: flex-start;
+    padding: 10px;
     
   }
   .nobody button{
-    padding: 10px;
+    padding: 10px 20px;
     background: #d6ebff;
     color: #fff;
     border: none;
@@ -1172,6 +1176,8 @@
     color: #000;
     font-size: 16px;
     font-weight: 400;
+    font-family: "poppins";
+    line-height: 28px;
   }
 
   .section-one-part-btn {
@@ -1224,7 +1230,7 @@
     width: 530px;
   }
   .link button{
-    width: 50%;
+    width: 40%;
   }
 }
 
@@ -1240,7 +1246,7 @@
     line-height: 48px;
   }
   .link button{
-    width: 50%;
+    width: 40%;
   }
 }
 @media screen and (max-width: 451px) {
@@ -1248,7 +1254,7 @@
     width: 400px;
   }
   .link button{
-    width: 50%;
+    width: 40%;
   }
 }
 @media screen and (max-width: 403px) {
@@ -1262,7 +1268,7 @@
     width: 350px;
   }
   .link button{
-    width: 50%;
+    width: 40%;
   }
   #heart-img {
     width: 300px;
