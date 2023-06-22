@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 .patientdashboard {
   width: 100%;
   padding: 1.3rem 0;
@@ -10,6 +13,9 @@
   padding-right: 5rem;
   display: flex;
   flex-direction: column;
+}
+.patients_dashboard_main {
+  margin-top: 3rem;
 }
 .open_nav {
   display: none;
@@ -30,9 +36,46 @@
   cursor: pointer;
   background-color: #7db97d;
 }
+._notification_drop {
+  box-shadow: 1px 1px 4px rgb(142, 142, 142);
+  border-radius: 10px;
+  width: -moz-fit-content;
+  width: fit-content;
+  z-index: 50;
+  background-color: white;
+  position: absolute;
+  right: 10px;
+  top: 60px;
+  width: 40%;
+}
+._notification_drop ._not_card {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 2rem;
+  padding-left: 1rem;
+  padding-right: 1.5rem;
+  padding-bottom: 1rem;
+}
+._notification_drop ._not_text_div :nth-child(1) {
+  color: #444444;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 0.6rem;
+}
+._notification_drop ._not_text_div :nth-child(2) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .patientdashboard_header {
   display: flex;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 120px;
+  right: 0;
+  background-color: white;
+  z-index: 7000;
   justify-content: space-between;
   align-items: center;
   border-bottom: solid 1px #d6ebff;
@@ -82,11 +125,12 @@
   cursor: pointer;
 }
 .patientdashboard .share_btn {
-  background-color: #3399ff;
+  background: #3399ff;
+  border-radius: 5px;
+  outline: none;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  color: white;
+  padding: 5px 10px;
+  color: #fff;
 }
 .patientdashboard .share_btn:hover {
   cursor: pointer;
@@ -99,6 +143,9 @@
   font-weight: 400;
   font-size: 14px;
   margin-left: -11px;
+}
+.hide_btn {
+  display: none;
 }
 .patientdashboard .patientsvital {
   display: flex;
@@ -160,7 +207,7 @@
   border-radius: 10px;
   padding: 1rem 2px 0.5rem 2px;
   background-color: rgb(247, 246, 246);
-  z-index: 120;
+  z-index: 1200;
   box-shadow: 0.5px 0.5px 0.5px 1px #d2d2d2;
 }
 
@@ -649,6 +696,9 @@
     left: -4px;
     z-index: -1;
   }
+  .patientdashboard_header {
+    left: 0;
+  }
 }
 
 @media (max-width: 679px) {
@@ -676,6 +726,7 @@
   .patientdashboard .share_btn {
     position: absolute;
     top: 3.5rem;
+    right: 10px;
   }
   .patientdashboard .middle1 {
     flex-direction: column;
@@ -723,6 +774,7 @@
 
     margin: 0 0.3rem;
   }
+
   .patientdashboard .card2 {
     padding: 1rem 0.3rem 2rem 0.3rem;
   }
@@ -743,9 +795,12 @@
   .patientdashboard .share_btn {
     top: 4.7rem;
     right: 10px;
+    font-size: 9px;
   }
   .patientdashboard .responsive_h1_header_title {
     font-size: 1.5rem;
+    top: 2rem;
+    position: absolute;
   }
   .patientdashboard .info_div .wrapper {
     flex-direction: column;
@@ -782,6 +837,9 @@
   .relative::after {
     display: none;
   }
+  .patientdashboard .left_patient_vitals {
+    margin-top: 3rem;
+  }
 }
 ._sideBar {
   width: 180px;
@@ -798,7 +856,7 @@
   transition: all 2s;
   overflow: hidden;
   position: fixed;
-  z-index: 7000;
+  z-index: 700000;
   animation: slideIn 0.3s ease-in-out;
 }
 @keyframes slideIn {
@@ -899,6 +957,4 @@
 .closeNav {
   display: none;
   animation: slideOut 0.3s ease-out;
-  
- 
 }

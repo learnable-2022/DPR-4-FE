@@ -55,7 +55,7 @@ function DoctorsEditProfile() {
   let doctors_residence = localStorage.getItem("doctor_residence");
   let doctors_wallet = localStorage.getItem("doctor_wallet");
   let doctors_hospital = localStorage.getItem("doctor_hospital");
-  console.log(selectedHospital);
+
   let doctors_first_name = localStorage.getItem("doctor_firstname");
   let doctors_last_name = localStorage.getItem("doctor_lastname");
 
@@ -176,7 +176,7 @@ function DoctorsEditProfile() {
           country: value || doctors_country,
           stateOfOrigin: selectedState || doctors_origin,
           gender: selectedGender || doctors_Gender,
-          walletId: "restpoint", //selectedWallet || doctors_wallet,
+          walletId: selectedWallet || doctors_wallet,
           dateOfBirth: selectedDate || doctors_DOB,
         },
         {

@@ -19,36 +19,32 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import url from "../api/BillingApi.jsx";
 import { useState } from "react";
-import {GiHamburgerMenu} from "react-icons/gi";
-
-
-
+import { GiHamburgerMenu } from "react-icons/gi";
 
 export default function PatientsBilling() {
-
   const [transactionArray, setTransactionArray] = useState([]);
   const [patientId, setPatientId] = useState([]);
+  let patient_Image = localStorage.getItem("patient_image");
+  let patient_Name = localStorage.getItem("patient_name");
 
-
-useEffect(()=>{
-    const fetchdata = async()=>{
-      try{
-        const response = await url.get('/transactions');
-        console.log('response::  ',response);
+  useEffect(() => {
+    const fetchdata = async () => {
+      try {
+        const response = await url.get("/transactions");
+        console.log("response::  ", response);
         setTransactionArray(response.data.transactions);
 
         setPatientId(response.data.transactions._id);
 
-        console.log('trans :: ',response.data.transactions);
-      }catch(err){
-        console.log('err:: ',err);
+        console.log("trans :: ", response.data.transactions);
+      } catch (err) {
+        console.log("err:: ", err);
       }
-
-    }
+    };
     fetchdata();
-}, [])
+  }, []);
 
-console.log("patientId", patientId)
+  console.log("patientId", patientId);
 
   const navigate = useNavigate();
   function handleClick(e) {
@@ -66,7 +62,8 @@ console.log("patientId", patientId)
           <div className="billingNav">
             <div className="patientName">
               <h2>
-                Hello, Amaka <br /> Chibueze!
+                Hello, {patient_Name.split(" ")[0]} <br />{" "}
+                {patient_Name.split(" ")[1]}!
               </h2>
             </div>
 
@@ -85,14 +82,20 @@ console.log("patientId", patientId)
         </div>
         {/* =========================================== */}
         <div className="smallScreenNav">
-        <div className="searchParent">
-          <div>
-            <GiHamburgerMenu />
+          <div className="searchParent">
+            <div>
+              <GiHamburgerMenu />
+            </div>
+            <div className="searchBox">
+              <CiSearch />
+              <input type="text" placeholder="Search.." />
+            </div>
+
+            <div className="searchIcons">
+              {/* <img src={Notification} alt="pics" /> */}
+              <img src={PatientPics} alt="pics" />
+            </div>
           </div>
-              <div className="searchBox">
-                <CiSearch />
-                <input type="text" placeholder="Search.." />
-              </div>
 
               <div className="searchIcons">
                 {/* <img src={Notification} alt="pics" /> */}
@@ -165,9 +168,8 @@ console.log("patientId", patientId)
             </div>
           </div>
           <div className="ViewAll">
-              <p onClick={handleClick}>View all</p>
-          </div> 
-
+            <p onClick={handleClick}>View all</p>
+          </div>
 
           {/* /////////////////////////down////////////////////////////// */}
           <div className="patientDashboardHeading">
@@ -208,9 +210,7 @@ console.log("patientId", patientId)
               </ul>
             </div>
           </div>
-
         </div>
-      </div>
     </>
   );
 }

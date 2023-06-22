@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./login.css";
-
+import {BsArrowLeft} from "react-icons/bs"
 import bigImage from "../assets/signup-second.png";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -21,7 +21,9 @@ const PATIENT_LOGIN = "/patient/login";
 export default function Login() {
   const navigate = useNavigate();
   const { setAuth } = useContext(StateContext);
-
+  const handle = () => {
+    navigate(-1);
+  };
   const [{ user, login }, dispatch] = useServiceProviderValue();
 
   const { state } = useLocation();
@@ -196,6 +198,7 @@ export default function Login() {
     <div className="first-container confirmation">
       <div className="sign-up-container">
         <div className="signup-form length">
+        <BsArrowLeft onClick={handle} style={{ cursor: "pointer" }} />
           <div>
             <img src={newlogo} alt="medblog" />
           </div>

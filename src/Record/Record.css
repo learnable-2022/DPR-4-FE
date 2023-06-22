@@ -38,10 +38,10 @@
 }
 .nav-container-left h1 {
   color: #2b80d5;
- 
+
   font-style: normal;
   font-weight: 700;
- 
+
   line-height: 36px;
 }
 .nav-container-right {
@@ -57,6 +57,9 @@
   border: none;
   padding: 5px 10px;
   color: #fff;
+}
+.nav-container-right button:hover {
+  cursor: pointer;
 }
 .nav-short {
   display: flex;
@@ -90,12 +93,12 @@
   align-items: center;
 }
 .second-image img {
-  width: 120px;
   height: 120px;
+  width: 120px;
   box-shadow: 1px 2px 4px rgb(224 222 222);
-    border: 1px solid rgb(255 255 255);
-    border-radius: 50%;
-    object-fit: fill;
+  border: 1px solid rgb(255 255 255);
+  border-radius: 50%;
+  object-fit: fill;
 }
 .second-section-text {
   display: flex;
@@ -199,9 +202,9 @@
 .nav-container-left-reverse {
   display: none;
 }
-.second-section-inner h2{
+.second-section-inner h2 {
   color: #222222;
-    font-weight: 600;
+  font-weight: 600;
 }
 @media (max-width: 926px) {
   .container {
@@ -210,7 +213,7 @@
   .hamburger {
     display: block;
   }
-  .second-section-inner h2{
+  .second-section-inner h2 {
     text-align: center;
   }
   .second-section-first {
@@ -244,7 +247,7 @@
     padding: 10px;
     width: 100%;
   }
-  .patient{
+  .patient {
     margin-left: 0px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -257,18 +260,16 @@
     flex-wrap: wrap;
     width: 100%;
   }
-  
+
   /* .second-section-second {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
     width: 100%;
   } */
-  
 
   .second-section-inner h2 {
     text-align: center;
-   
   }
   .second-image {
     width: 100%;
@@ -323,7 +324,7 @@
     padding: 10px;
     width: 100%;
   }
-  .patient{
+  .patient {
     margin-left: 0px;
     margin-top: 10px;
     margin-bottom: 10px;
