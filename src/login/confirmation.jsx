@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
-
+import {BsArrowLeft} from "react-icons/bs"
 import bigImage from "../assets/signup-second.png";
 import { useServiceProviderValue } from "../ServiceProvider";
 import newlogo from "../assets/newlogo2.png"
@@ -11,6 +11,10 @@ const Confirmation = () => {
   const [{}, dispatch] = useServiceProviderValue();
   const [value, setValue] = useState("");
 
+  
+  const handle = () => {
+    navigate(-1);
+  };
   const toDoctor = () => {
     setValue("doctor");
     dispatch({ type: "SET_USER", user: "doctor" });
@@ -48,8 +52,10 @@ const Confirmation = () => {
       <button onClick={handleFunction}>To signup</button>
     </div> */}
       <div className="first-container confirmation">
+        
         <div className="sign-up-container">
           <div className="signup-form length">
+          <BsArrowLeft onClick={handle} style={{ cursor: "pointer" }} />
             <div>
               <img src={newlogo} alt="medblog" />
             </div>
