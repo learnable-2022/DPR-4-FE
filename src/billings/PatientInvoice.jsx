@@ -80,8 +80,9 @@ function PatientInvoice() {
               </div>
             </div>
 
+
             <div className="invoiceIcons">
-              <img src={Notification} alt="pics" />
+              {/* <img src={Notification} alt="pics" /> */}
               <img src={PatientPics} alt="pics" />
             </div>
           </div>
