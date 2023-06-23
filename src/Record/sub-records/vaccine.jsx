@@ -25,7 +25,7 @@ console.log(getFormattedRecords);
 
   const dummyData = getFormattedRecords.map((item, index) => ({
     hosiptalName:item.billing[3],
-    name:item.billing[3], 
+    name:item.billing[2], 
     Time:"14:00",
     Remark:item.treatmentDetails[2],
     vaccine:item.vaccine[0],
@@ -35,7 +35,7 @@ console.log(getFormattedRecords);
 
   const COCA_COLA =[
     {
-        Headers: "Hospital/laboratory",
+        Headers: "Hospital/healthprovider",
         accessor:"hosiptalName",
         Cell: ({ cell: { row } }) => {
           return (

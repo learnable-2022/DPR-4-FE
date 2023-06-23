@@ -21,17 +21,10 @@ const takeme =()=>{
 let getFormattedRecords = JSON.parse(localStorage.getItem("getFormattedRecords"));
 console.log(getFormattedRecords);
 
-  // const dummyData= [
-  //   {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine",date:"02/05/2023",Time:"13:00 PM" ,complaint:"malariaX2",Report:"view-report"},
-  //   {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine", date:"02/05/2023",Time:"13:00 PM" ,complaint:"malariaX2",Report:"view-report"},
-  //   {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine", date:"02/05/2023",Time:"13:00 PM" ,complaint:"malariaX2",Report:"view-report"},
-  //   {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine", date:"02/05/2023",Time:"13:00 PM" ,complaint:"malariaX2",Report:"view-report"},
-  //   {hosiptalName:"Gen. Hospital, Enugu Town", name:"Dr. Ada Gen. Medicine", date:"02/05/2023",Time:"13:00 PM" ,complaint:"malariaX2",Report:"view-report"},
-  
-  // ]
+ 
   const dummyData = getFormattedRecords.map((item, index) => ({
     hospitalName: item.billing[3],
-    name: item.billing[3],
+    name: item.billing[2],
     date: item.billing[0],
     time: '13:00 PM',
     complaint: item.treatmentDetails[0],
@@ -42,7 +35,7 @@ console.log(getFormattedRecords);
   const link ="/visit/visiterReport"
   const CALA =[
     {
-        Headers: "Hospital/laboratory",
+        Headers: "Hospital/healthprovider",
         accessor:"hospitalName",
         Cell: ({ cell: { row } }) => {
           return (

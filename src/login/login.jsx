@@ -198,7 +198,7 @@ export default function Login() {
     <div className="first-container confirmation">
       <div className="sign-up-container">
         <div className="signup-form length">
-        <BsArrowLeft onClick={handle} style={{ cursor: "pointer" }} />
+        {/* <BsArrowLeft onClick={handle} style={{ cursor: "pointer" }} /> */}
           <div>
             <img src={newlogo} alt="medblog" />
           </div>

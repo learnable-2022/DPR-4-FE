@@ -16,9 +16,9 @@ export default function Table({ getTableProps, getTableBodyProps,headerGroups,ro
            <thead>
                {headerGroups.map((headerGroup) => (
              
-                   <tr {...headerGroup.getHeaderGroupProps()}>
+                   <tr {...headerGroup.getHeaderGroupProps() } className='trow-head'>
                        {headerGroup.headers.map((column) => (
-                           <th {...column.getHeaderProps()}>
+                           <th {...column.getHeaderProps()} className='th-head'>
                                {column.render('Headers')}
                                {console.log("headerGroup", headerGroup)}
                            </th>

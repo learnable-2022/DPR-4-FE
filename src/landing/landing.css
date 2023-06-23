@@ -304,8 +304,8 @@
 }
 
 #heart-img {
-  width: 500px;
-  padding: 0 7rem 0 0;
+  /* width: 500px;
+  padding: 0 7rem 0 0; */
 }
 
 .section-three-text {
@@ -590,7 +590,7 @@
     width: 350px;
   }
   #heart-img {
-    width: 320px;
+    /* width: 320px; */
   }
 }
 
@@ -1216,6 +1216,7 @@
   .section-three {
     padding: 20px 1rem 1.5rem 1rem;
     margin: 20px 1rem 1.5rem 1rem;
+    align-items: normal;
   }
 }
 
