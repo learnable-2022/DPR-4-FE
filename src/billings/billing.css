@@ -7,8 +7,6 @@
   overflow: scroll;
 }
 
-/* test  */
-/* test  */
 .billingBoardDashboard {
   display: flex;
 }
@@ -108,6 +106,13 @@
   list-style: none;
   font-size: 15px;
 }
+
+
+
+.patientNavAmount {
+  margin-right: 20px;
+}
+
 .smallScreenNav {
   display: none;
 }
@@ -523,11 +528,11 @@ span {
 
 .doctorViewAll {
   text-align: end;
-  margin-top: 30px;
+  margin-top: 480px;
   color: #3399ff;
   font-weight: 600;
   cursor: pointer;
-  margin-right: 40px;
+  margin-right: 200px;
   padding: 40px;
 }
 
