@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 40px 0px 80px 0px;
+  padding: 50px 0px 80px 0px;
   height: 100%;
 }
 .confirmation {
@@ -80,6 +80,11 @@
   color: #666666;
   letter-spacing: 0.005em;
   margin-top: 20px;
+}
+.input p{
+  /* border: 1px solid firebrick; */
+  display: flex;
+  justify-content: flex-end;
 }
 .input input {
   background: #ffffff;

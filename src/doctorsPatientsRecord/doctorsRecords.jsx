@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useServiceProviderValue } from "../ServiceProvider";
 import { contracts } from "../hooks/UseContract";
 
+
 function DoctorsRecords() {
   const {tempContract} = contracts();
 
@@ -310,7 +311,18 @@ function DoctorsRecords() {
       </div>
     
       <div>
-         {hasAccess?        <Outlet />:<p>No access yet </p>
+         {hasAccess?        <Outlet />:
+         <p 
+         style={{
+          display:"flex",
+          justifyContent:"center",
+          alignItems: "center",
+          marginTop:"50px",
+          fontFamily:"open sans",
+          fontWeight:"600",
+          marginLeft:"10px",
+          marginRight:"10px",
+          }}>you don't have access, to view this page contact patient-user </p>
 }
       </div>
 
