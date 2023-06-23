@@ -28,7 +28,10 @@ import drug4 from "../assets/drug4.svg";
 import notification from "../assets/Notification.svg";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiArrowDropDownFill } from "react-icons/ri";
-
+import Dashboard from "../assets/Category.png";
+import logOutBro from "../assets/Logout.png";
+import record from "../assets/Document.png"
+import billinglogo from "../assets/streamline_money-cash-coins-stack-accounting-billing-payment-stack-cash-coins-currency-money-finance.png";
 import { Link, useNavigate } from "react-router-dom";
 import StateContext from "../stateProvider/stateprovider";
 import abi from "../abi.json";
@@ -41,7 +44,7 @@ import { AiOutlineSetting } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
-import ourlogo from "../assets/ourlogo.png";
+import ourlogo from "../assets/Frame 8.png";
 import axios from "axios";
 import { AiOutlineClose } from "react-icons/ai";
 
@@ -436,26 +439,23 @@ useEffect(() => {
         ref={mobileNavRef}
       >
         <div className="_sideBar">
-          <AiOutlineClose className="close_btn" onClick={toggleNav} />
+          <AiOutlineClose className="close_btn" onClick={toggleNav}  />
           <div className="_center-div">
-            <img src={ourlogo} alt="app-logo" />
-            <p>
-              Med<span>bloc</span>
-            </p>
+            <img src={ourlogo} alt="app-logo" style={{width:"100px", height:"70px"}} />
           </div>
 
           <div className="_mid-section">
             <Link to="/Dashboard" className="link">
-              <RxDashboard style={{ color: "white" }} />
-              <p>Dashboard</p>
+            <img src={Dashboard} alt="dash-logo"/>
+            <p style={{fontFamily:"poppins"}}>Dashboard</p>
             </Link>
             <Link to="/Records" className="link">
-              <BsReverseLayoutTextSidebarReverse style={{ color: "white" }} />
-              <p>Records</p>
+            <img src={record} alt="record-logo" />
+            <p style={{fontFamily:"poppins"}}>Records</p>
             </Link>
             <Link to="/Billing" className="link">
-              <FontAwesomeIcon icon={faCoins} style={{ color: "white" }} />
-              <p>Billings</p>
+            <img src={billinglogo} alt="billing-logo"/>
+            <p style={{fontFamily:"poppins"}}>Billings</p>
             </Link>
           </div>
           <div className="_lower-section">
@@ -466,8 +466,8 @@ useEffect(() => {
               }}
             >
               <Link to="/" className="link">
-                <FiLogOut style={{ color: "white" }} />
-                <p>logout</p>
+              <img src={logOutBro} alt="logout" />
+              <p style={{fontFamily:"poppins"}}>logout</p>
               </Link>
             </div>
           </div>

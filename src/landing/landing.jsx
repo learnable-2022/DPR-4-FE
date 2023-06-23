@@ -2,7 +2,7 @@ import React, {useRef, useState} from "react";
 import femaleDoc from "../landing/Images/femalemama.jpg";
 import logo from "../landing/Images/logo.png";
 import male from "../landing/Images/maleDoc.png";
-import heart from "../landing/Images/heart.png";
+import heart from "../landing/Images/heartbeat.png";
 import pill from "../landing/Images/pill.png";
 import "../landing/landing.css";
 import { Link } from "react-router-dom";
@@ -45,9 +45,9 @@ const moveToSupport =(ref)=>{
             <Link className="link" id="nav-link" to="" onClick={()=>moveToSupport(manRef)} style={{fontWeight:"600"}}>
               <li>Features</li>
             </Link>
-            <Link className="link" id="nav-link" to=""  style={{fontWeight:"600"}}>
+            {/* <Link className="link" id="nav-link" to=""  style={{t:"600"}}>
               <li>Pricing</li>
-            </Link>
+            </Link> */}
             <Link className="link" id="nav-link" to="" onClick={()=> moveToSupport(supportRef)} style={{fontWeight:"600"}}>
             <li>Support</li>
             </Link>
