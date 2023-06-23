@@ -45,9 +45,9 @@ const moveToSupport =(ref)=>{
             <Link className="link" id="nav-link" to="" onClick={()=>moveToSupport(manRef)} style={{fontWeight:"600"}}>
               <li>Features</li>
             </Link>
-            <Link className="link" id="nav-link" to=""  style={{fontWeight:"600"}}>
+            {/* <Link className="link" id="nav-link" to=""  style={{t:"600"}}>
               <li>Pricing</li>
-            </Link>
+            </Link> */}
             <Link className="link" id="nav-link" to="" onClick={()=> moveToSupport(supportRef)} style={{fontWeight:"600"}}>
             <li>Support</li>
             </Link>
