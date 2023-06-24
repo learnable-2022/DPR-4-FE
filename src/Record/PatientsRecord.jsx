@@ -9,15 +9,15 @@ import "./Record.css";
 import { Outlet, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useRequestProcessor } from "../api/requestProcessor";
-
+import Dashboard from "../assets/Category.png";
 import { Link } from "react-router-dom";
-import { RxDashboard } from "react-icons/rx";
-import { BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
+import record from "../assets/Document.png"
+import billinglogo from "../assets/streamline_money-cash-coins-stack-accounting-billing-payment-stack-cash-coins-currency-money-finance.png";
 import notification from "../assets/Notification.svg";
-import { FiLogOut } from "react-icons/fi";
+import logOut from "../assets/Logout.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
-import ourlogo from "../assets/ourlogo.png";
+import ourlogo from "../assets/Group 5.svg";
 import { AiOutlineClose } from "react-icons/ai";
 import { useServiceProviderValue } from "../ServiceProvider";
 
@@ -106,26 +106,23 @@ export default function PatientsRecord() {
         // ref={mobileNavRef}
       >
         <div className="_sideBar">
-          <AiOutlineClose className="close_btn" onClick={toggleNav} />
+          <AiOutlineClose className="close_btn" onClick={toggleNav}  />
           <div className="_center-div">
-            <img src={ourlogo} alt="app-logo" />
-            <p>
-              Med<span>bloc</span>
-            </p>
+            <img src={ourlogo} alt="app-logo" style={{width:"100px", height:"70px"}} />
           </div>
 
           <div className="_mid-section">
             <Link to="/Dashboard" className="link">
-              <RxDashboard style={{ color: "white" }} />
-              <p>Dashboard</p>
+            <img src={Dashboard} alt="dash-logo"/>
+            <p style={{fontFamily:"poppins"}}>Dashboard</p>
             </Link>
             <Link to="/Records" className="link">
-              <BsReverseLayoutTextSidebarReverse style={{ color: "white" }} />
-              <p>Records</p>
+            <img src={record} alt="record-logo" />
+            <p style={{fontFamily:"poppins"}}>Records</p>
             </Link>
             <Link to="/Billing" className="link">
-              <FontAwesomeIcon icon={faCoins} style={{ color: "white" }} />
-              <p>Billings</p>
+            <img src={billinglogo} alt="billing-logo"/>
+            <p style={{fontFamily:"poppins"}}>Billings</p>
             </Link>
           </div>
           <div className="_lower-section">
@@ -136,8 +133,8 @@ export default function PatientsRecord() {
               }}
             >
               <Link to="/" className="link">
-                <FiLogOut style={{ color: "white" }} />
-                <p>logout</p>
+              <img src={logOut} alt="logout" />
+              <p style={{fontFamily:"poppins"}}>logout</p>
               </Link>
             </div>
           </div>
@@ -156,7 +153,7 @@ export default function PatientsRecord() {
             </button>
           </div>
           <div>
-            <img src={notification} alt="notification" className="notifi_btn" />
+            {/* <img src={notification} alt="notification" className="notifi_btn" /> */}
           </div>
           <div className="nav-short">
             <img

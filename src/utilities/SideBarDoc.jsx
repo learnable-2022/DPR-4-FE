@@ -2,12 +2,15 @@ import React from "react";
 import { RxDashboard } from "react-icons/rx";
 import { TfiWrite } from "react-icons/tfi";
 import { FiLogOut } from "react-icons/fi";
-import ourlogo from "../assets/ourlogo.png";
-import newlogo1 from "../assets/newlogo1.png";
+import Dashboard from "../assets/Category.png";
+import newlogo1 from "../assets/Group 5.svg";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import billinglogo from "../assets/streamline_money-cash-coins-stack-accounting-billing-payment-stack-cash-coins-currency-money-finance.png";
+import logOut from "../assets/Logout.png";
+import draft from "../assets/Edit Square.png";
 
 export default function SideBarDoc() {
   const paths = [
@@ -20,29 +23,35 @@ export default function SideBarDoc() {
     { name: "DocDraft", route: "/DocDraft", icon: <TfiWrite /> },
     { name: "DocLogout", route: "/DocLogout", icon: <FiLogOut /> },
   ];
-  const navigate = useNavigate();
-  const returnHomeHandler =()=>{
-    navigate("/");
-  }
+  
+ 
   return (
     <div className="sideBar">
       <div className="center-div">
-        <img src={newlogo1} alt="pics" onClick={returnHomeHandler}  style={{cursor:"pointer",width:"70px",height:"70px"}}/>
-        {/* <p>Med<span>loc</span></p> */}
+        <img src={newlogo1} alt="pics"  
+        style={{
+        width: "120px",
+         height: "80px",
+          border:"none"
+          
+          }}/>
+     
       </div>
       <div className="mid-section">
         <Link to="/DocDashboard" className="link">
-          <RxDashboard style={{color:"white"}} />
-          <p>Dashboard</p>
+        <img src={Dashboard} alt="dash-logo"/>
+          <p style={{fontFamily:"poppins"}}>Dashboard</p>
         </Link>
 
         <Link to="/DocBillings" className="link">
-          <FontAwesomeIcon icon={faCoins}  style={{color:"white"}}/>
-          <p>Billings</p>
+     
+          <img src={billinglogo} alt="billing-logo"/>
+          < p style={{fontFamily:"poppins"}}>Billings</p>
         </Link>
         <Link to="/DocDraft" className="link">
-          <TfiWrite style={{color:"white"}} />
-          <p>Draft</p>
+     
+          <img src={draft} alt="draft" />
+          <p style={{fontFamily:"poppins"}}>Draft</p>
         </Link>
       </div>
       <div className="lower-section">
@@ -53,8 +62,9 @@ export default function SideBarDoc() {
           }}
         >
           <Link to="/" className="link">
-            <FiLogOut  style={{color:"white"}}/>
-            <p>logout</p>
+          <img src={logOut} alt="logout" />
+        
+            <p style={{fontFamily:"poppins"}}>logout</p>
           </Link>
         </div>
       </div>

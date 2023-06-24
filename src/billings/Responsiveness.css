@@ -41,18 +41,26 @@
     .patientNav {
       width: 80%;
     }
+
+    .patientNavAmount {
+      margin-right: 30px;
+    }
   
     .PatientEntities ul {
       width: 100%;
     }
   
     .PatientUnderline {
-      width: 450px;
+      width: 400px;
       color: red;
     }
   
     .ViewAll {
-      margin-right: 110px;
+      margin-right: 50px;
+    }
+
+    .doctorViewAll {
+      margin-right: 10px;
     }
   
     .billingNavHistory {
@@ -218,5 +226,7 @@
       width: 35%;
       padding: 10px;
     }
+
+ 
   }
   

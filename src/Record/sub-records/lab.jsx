@@ -17,15 +17,7 @@ export default function Lab() {
 
 
 
-    // const dummyData= [
-    //     {hosiptalName:"Alpha general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report" , status:"Approve",complaint:"malariaX2"},
-    //     {hosiptalName:"Beta general",OwnerName:"chuks", testResult:" chest x-ray",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
-    //     {hosiptalName:"omega general",OwnerName:"chuks", testResult:" condensation test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
-    //     {hosiptalName:"zootopia general",OwnerName:"chuks", testResult:" breast cancer test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
-    //     {hosiptalName:" kentuky general",OwnerName:"chuks", testResult:" stapyloccous test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
-    //     {hosiptalName:" paradise general",OwnerName:"chuks", testResult:"chicken-pox test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
-       
-    //   ];
+    
 
       const dummyData = getFormattedRecords.map((item, index) => ({
         hosiptalName:item.billing[3],
@@ -41,7 +33,7 @@ export default function Lab() {
 
       const COLA =[
         {
-            Headers: "Hospital/laboratory",
+            Headers: "Hospital/healthprovider",
             accessor:"hosiptalName",
             Cell: ({ cell: { row } }) => {
               return (
@@ -54,7 +46,7 @@ export default function Lab() {
             },
         },
         {
-            Headers: "Test-type",
+            Headers: "Test-type/treatments",
             accessor:"testResult",
         },
         {
@@ -152,8 +144,8 @@ const { globalFilter } = state;
                 return(
             <div className='table-2-vaccine'>
                   <ul>
-                  <h4>Hospital/ Laboratory</h4>
-                    <li>{items.hosiptalName} <br/>{items.name}</li>
+                  <h4>Hospital/ healthprovider</h4>
+                    <li>{items.hosiptalName} <br/>{items. OwnerName}</li>
                     <h4>Test-type</h4>
                     <li>{items.testResult}</li>
                     <h4>complaint</h4> 

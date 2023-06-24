@@ -6,7 +6,7 @@ export default function Prescription() {
   const navigate =useNavigate();
 
   let prescription = JSON.parse(localStorage.getItem('prescription'));
- console.log(prescription);
+ console.log("prescription:",prescription);
 
 
   return (
@@ -34,9 +34,9 @@ export default function Prescription() {
             <p>{detail[0]}</p> <p>{detail[2]}</p>
           </div>
         </div>
-        <div>
+        {/* <div>
           <p>One off</p>
-        </div>
+        </div> */}
         <div>
           <p>{detail[1]}</p>
         </div>

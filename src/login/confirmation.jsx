@@ -55,8 +55,8 @@ const Confirmation = () => {
         
         <div className="sign-up-container">
           <div className="signup-form length">
-          <BsArrowLeft onClick={handle} style={{ cursor: "pointer" }} />
             <div>
+            {/* <BsArrowLeft onClick={handle} style={{ cursor: "pointer" }} /> */}
               <img src={newlogo} alt="medblog" />
             </div>
             <h2>Get Started</h2>
