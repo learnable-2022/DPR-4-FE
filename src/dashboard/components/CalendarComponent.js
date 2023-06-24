@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./CalendarComponent.css";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import format from "date-fns/format";
@@ -7,10 +7,21 @@ import startOfWeek from "date-fns/startOfWeek";
 import getDay from "date-fns/getDay";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
+import { db } from "../../firebase";
+import {
+  collection,
+  getDocs,
+  doc,
+  addDoc,
+  query,
+  orderBy,
+  serverTimestamp,
+} from "firebase/firestore";
 
 import { useState } from "react";
 
 import moment from "moment";
+import { useServiceProviderValue } from "../../ServiceProvider";
 
 const locales = {
   "en-US": require("date-fns/locale/en-US"),
@@ -22,75 +33,63 @@ const localizer = dateFnsLocalizer({
   getDay,
   locales,
 });
-const events = [
-  {
-    start: moment("2023-05-28T10:00:00").toDate(),
-    end: moment("2023-05-28T12:00:00").toDate(),
-    title: "MRI Registration",
-  },
-  {
-    start: moment("2023-03-18T14:00:00").toDate(),
-    end: moment("2023-03-18T15:30:00").toDate(),
-    title: "ENT Appointment",
-  },
-];
+
 function CalendarComponent() {
-  //   const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
-  const [allEvents, setAllEvents] = useState(events);
+  const [{}, dispatch] = useServiceProviderValue();
+  const [retrievedData, setRetrievedData] = useState([]);
+  const [events, setEvents] = useState([]);
+  let doctor_Name = localStorage.getItem("doctor_name");
+  let doctor_Email = localStorage.getItem("doctor_email");
 
-  //   function handleAddEvent() {
-  //     for (let i = 0; i < allEvents.length; i++) {
-  //       const d1 = new Date(allEvents[i].start);
-  //       const d2 = new Date(newEvent.start);
-  //       const d3 = new Date(allEvents[i].end);
-  //       const d4 = new Date(newEvent.end);
-  //       /*
-  //           console.log(d1 <= d2);
-  //           console.log(d2 <= d3);
-  //           console.log(d1 <= d4);
-  //           console.log(d4 <= d3);
-  //             */
+  let event3 = [
+    retrievedData.map((item) => {
+      return {
+        start: moment(`${item.selectedDate}T${item.startTime}`).toDate(), //moment("2023-05-28T10:00:00").toDate(),
+        end: moment(`${item.selectedDate}T${item.endTime}`).toDate(),
+        title: item.title,
+      };
+    }),
+  ];
+  console.log(event3[0]);
 
-  //       if ((d1 <= d2 && d2 <= d3) || (d1 <= d4 && d4 <= d3)) {
-  //         alert("CLASH");
-  //         break;
-  //       }
-  //     }
+  // console.log(events2);
+  const [allEvents, setAllEvents] = useState(event3[0]);
+  console.log(allEvents);
+  const retrieveData = async () => {
+    try {
+      const userDocRef = doc(db, "Appointments", doctor_Email);
+      const userDataCollectionRef = collection(
+        userDocRef,
+        `${doctor_Name} Appointments`
+      );
 
-  //     setAllEvents([...allEvents, newEvent]);
-  //   }
+      const snapshot = await getDocs(userDataCollectionRef);
+
+      const userData = [];
+
+      snapshot.forEach((doc) => {
+        userData.push({ id: doc.id, ...doc.data() });
+      });
+      setRetrievedData(userData);
+
+      console.log("Retrieved data:", userData);
+    } catch (error) {
+      console.error("Error retrieving data:", error);
+    }
+  };
+
+  useEffect(() => {
+    retrieveData();
+  }, []);
 
   return (
     <div className="calendarcomponent">
       <h1>Schedule</h1>
-      {/* <h2>Add New Event</h2> */}
-      <div>
-        {/* <input
-          type="text"
-          placeholder="Add Title"
-          style={{ width: "20%", marginRight: "10px" }}
-          value={newEvent.title}
-          onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
-        />
-        <DatePicker
-          placeholderText="Start Date"
-          style={{ marginRight: "10px" }}
-          selected={newEvent.start}
-          onChange={(start) => setNewEvent({ ...newEvent, start })}
-        />
-        <DatePicker
-          placeholderText="End Date"
-          selected={newEvent.end}
-          onChange={(end) => setNewEvent({ ...newEvent, end })}
-        />
-        <button stlye={{ marginTop: "10px" }} onClick={handleAddEvent}>
-          Add Event
-        </button> */}
-      </div>
+      <div></div>
       <Calendar
         className="calendar"
         localizer={localizer}
-        events={allEvents}
+        events={event3[0]}
         startAccessor="start"
         endAccessor="end"
         style={{ height: 500, margin: "3.125rem", marginTop: "1.5rem" }}

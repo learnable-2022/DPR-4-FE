@@ -16,9 +16,10 @@
   flex: 0.9;
 }
 .holder_text {
-  text-align: center;
+  text-align: left;
   background-color: #bbddff;
   color: #808080;
+
   padding: 0.5rem 2rem;
   font-weight: 400;
   font-size: 24px;
@@ -134,7 +135,7 @@ ion-icon {
 }
 @media (max-width: 516px) {
   .drafts_header_left {
-    font-size: 23px;
+    font-size: 19px;
     width: 100%;
     flex: 1;
   }
@@ -174,7 +175,7 @@ ion-icon {
   .drafts_header_right_no_justify {
     position: absolute;
     right: 20px;
-    top: 45px;
+    top: 20px;
   }
   .drafts_header_right_no_justify img {
     height: 20px;

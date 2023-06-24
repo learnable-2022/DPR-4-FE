@@ -171,7 +171,7 @@ function PatientsProfile() {
               </div>
             </div>
             <div className="right_div">
-              <h3>Gentype</h3>
+              <h3>Genotype</h3>
               <div>
                 <p>{patient_Geno ? patient_Geno : "-"}</p>
               </div>

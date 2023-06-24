@@ -58,7 +58,7 @@
 }
 .bottom_profile_details .leftsection p {
   font-size: 11px;
-  font-weight: 400;
+  font-weight: 200;
 }
 .bottom_profile_details .rightsection div {
   border: solid 1px rgb(130, 130, 130);
@@ -74,7 +74,7 @@
 }
 .bottom_profile_details .rightsection p {
   font-size: 11px;
-  font-weight: 400;
+  font-weight: 200;
 }
 
 .rightside .header {
@@ -98,7 +98,7 @@
 }
 .rightside .down_part p {
   font-size: 11px;
-  font-weight: 400;
+  font-weight: 200;
 }
 .link {
   color: black;

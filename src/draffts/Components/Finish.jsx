@@ -4,14 +4,14 @@ import { useServiceProviderValue } from "../../ServiceProvider";
 import addButton from "../../assets/add-circle.svg";
 import { useLocation } from "react-router-dom";
 
-function Finish({contract}) {
- const [total, setTotalAmount]=useState("")
-  const handleTotalAmount = (e) =>{
-    setTotalAmount(e.target.value)
-     dispatch({type:"SET_TOTAL_AMOUNT", totalAmount: e.target.value})
-  }
+function Finish({ contract }) {
+  const [total, setTotalAmount] = useState("");
+  const handleTotalAmount = (e) => {
+    setTotalAmount(e.target.value);
+    dispatch({ type: "SET_TOTAL_AMOUNT", totalAmount: e.target.value });
+  };
   const [
-    { 
+    {
       walletAddress,
       temperature,
       bloodCount,
@@ -40,7 +40,6 @@ function Finish({contract}) {
   ] = useServiceProviderValue();
   const location = useLocation();
   const shouldApplyStyle = location.pathname.includes("/finish");
-  
 
   const [val, setVal] = useState([
     { serviceType: "", serviceCharge: "", tax: "", subTotal: "" },
@@ -48,7 +47,7 @@ function Finish({contract}) {
   function addComponent() {
     setVal([
       ...val,
-      
+
       { serviceType: "", serviceCharge: "", tax: "", subTotal: "" },
     ]);
   }
@@ -140,8 +139,8 @@ function Finish({contract}) {
         <div className="service_charge_header">
           <p className="service_type draft_service_header">Service Type</p>
           <p className="service_charge draft_service_header">Service Charge</p>
-          <p className="service_tax draft_service_header">Tax (NGN)</p>
-          <p className="service_total draft_service_header">Subtotal (NGN)</p>
+          <p className="service_tax draft_service_header">Tax (USD)</p>
+          <p className="service_total draft_service_header">Subtotal (USD)</p>
         </div>
       </div>
 
@@ -168,7 +167,7 @@ function Finish({contract}) {
                   className="service_charge_input service_charge_inputs"
                   placeholder="-"
                 />
-                <p className="_hidden">Tax(NGN)</p>
+                <p className="_hidden">Tax(USD)</p>
                 <input
                   type="number"
                   className="service_tax_input service_charge_inputs"
@@ -177,7 +176,7 @@ function Finish({contract}) {
                   placeholder="-"
                   onChange={(e) => handleChange(e, i)}
                 />
-                <p className="_hidden">Subtotal(NGN)</p>
+                <p className="_hidden">Subtotal(USD)</p>
                 <input
                   type="number"
                   className="service_total_input service_charge_inputs"
@@ -213,7 +212,12 @@ function Finish({contract}) {
 
           <p className="total_display">
             Total Amount : NGN{" "}
-            <input type="number" value={total} onChange={handleTotalAmount} className="total_val_input" />
+            <input
+              type="number"
+              value={total}
+              onChange={handleTotalAmount}
+              className="total_val_input"
+            />
           </p>
         </div>
       </div>

@@ -48,7 +48,7 @@
 }
 .patientsprofile ._bottom_profile_details .left_section p {
   font-size: 11px;
-  font-weight: 400;
+  font-weight: 200;
 }
 .patientsprofile ._bottom_profile_details .right_section div {
   border: solid 1px rgb(130, 130, 130);
@@ -64,7 +64,7 @@
 }
 .patientsprofile ._bottom_profile_details .right_section p {
   font-size: 11px;
-  font-weight: 400;
+  font-weight: 200;
 }
 .left_side .warning {
   margin-top: 2rem;
@@ -93,7 +93,7 @@
 }
 ._down_part p {
   font-size: 11px;
-  font-weight: 400;
+  font-weight: 200;
 }
 .bottom_right_side {
   box-shadow: 1px 2px 8px rgb(91, 91, 91);
@@ -125,7 +125,7 @@
 .card p,
 .wallet p {
   font-size: 11px;
-  font-weight: 400;
+  font-weight: 200;
 }
 .bottom_right_side .top_section {
   display: flex;

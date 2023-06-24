@@ -142,9 +142,8 @@ export default function PatientDashboard() {
       setErrorMessage("Please install MetaMask browser extension to interact");
     }
   };
-  const handleMarkRead = () => {
-    setisThereNotification(false);
-  };
+  console.log(defaultAccount);
+
   const updateEthers = async () => {
     try {
       if (window.ethereum && window.ethereum.isMetaMask) {
@@ -194,8 +193,6 @@ export default function PatientDashboard() {
       console.log("Access Granted");
     } catch (err) {}
   };
-
-  // console.log(defaultAccount);
 
   const checkRecord = async () => {
     try {
@@ -327,27 +324,7 @@ export default function PatientDashboard() {
   const handleDropButtonClick = () => {
     setIsDropOpen(!isDropOpen);
   };
-  //let patient_id = "64872c34b42f825762355d86";
-  // const deletePatient = async () => {
-  //   const response = await axios
-  //     ?.delete(
-  //       `https://medbloc-api.onrender.com/api/v1/patient/${patient_id}`,
-  //       {
-  //         headers: {
-  //           "x-auth-token": token,
-  //           Accept: "application/json",
-  //           "Content-Type": "application/json",
-  //           "Access-Control-Allow-Origin": "*",
-  //         },
-  //       }
-  //     )
-  //     .then((res) => {
-  //       console.log("Patient successfully deleted");
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+
   const getPatientDetails = async () => {
     let PatientEmail = localStorage.getItem("patient_email");
     console.log(PatientEmail);
@@ -363,7 +340,7 @@ export default function PatientDashboard() {
       .then((res) => {
         console.log(res);
         const res1 = res?.data.find((item) => item.email === PatientEmail);
-
+        console.log(res1);
         localStorage.setItem("patient_image", res1?.image);
         localStorage.setItem("patient_name", res1?.name);
         localStorage.setItem("patient_email", res1?.email);
@@ -528,66 +505,8 @@ export default function PatientDashboard() {
           </h1>
         </div>
         <div className="right_side_header">
-          <button className="share_btn" onClick={shareReport}>
-            Download Report
-          </button>
-
-          <img
-            src={notification}
-            alt="notification"
-            className="notifi_btn"
-            onClick={handleButtonClick}
-          />
           {/* <GrNotification className="profile_notification" /> */}
-          {open &&
-            (isThereNotification ? (
-              <div className="_notification_drop" ref={mobileMenuRef}>
-                <header
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    padding: ".3rem",
-                  }}
-                >
-                  <p>Notification</p>
-                  <p style={{ color: "#3399FF" }} onClick={handleMarkRead}>
-                    Mark as read
-                  </p>
-                </header>
-                <hr />
-                <div className="_not_card">
-                  <img
-                    style={{
-                      width: "70px",
-                      height: "70px",
-                      borderRadius: "50%",
-                    }}
-                    src={emptyProfile}
-                    alt="profile_img"
-                  />
-                  <div className="_not_text_div">
-                    <p>{NotificationMsg}</p>
-                    <div>
-                      <p className="view_profile_btn"></p>
-                      <p className="time">5min. ago</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="_notification_drop">
-                <header>
-                  <p>Notification</p>
-                </header>
-                <hr />
-                <div className="not_card" style={{ display: "block" }}>
-                  <p style={{ textAlign: "center", fontWeight: "bold" }}>
-                    There are no notificatons
-                  </p>
-                </div>
-              </div>
-            ))}
+
           <Link to="/Profile" className="link ">
             <div className="relative">
               <img
@@ -649,8 +568,11 @@ export default function PatientDashboard() {
                   <p className="key">
                     Age:{" "}
                     <strong className="value">
-                      {new Date().getFullYear() -
-                        parseInt(patient_Age.split("-")[0])}
+                      {patient_Age
+                        ? new Date().getFullYear() -
+                          parseInt(patient_Age.split("-")[0])
+                        : new Date().getFullYear() -
+                          parseInt(checkEffectDOB.split("-")[0])}
                     </strong>
                   </p>
 

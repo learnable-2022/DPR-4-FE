@@ -14,11 +14,13 @@ import logo1 from "../assets/images/logo-03.png";
 import "../App.css";
 
 export default function SideBar() {
-  const [activeItem, setActiveItem] = useState(null);
+  // const [selectedItem, setSelectedItem] = useState(null);
+  // const menuItemRefs = {
+  //   menuItem1: useRef(null),
+  //   menuItem2: useRef(null),
+  //   menuItem3: useRef(null)
+  // };
 
-  const handleItemClick = (itemId) => {
-    setActiveItem(itemId);
-  };
   const navigate = useNavigate();
   const returnHomeHandler = () => {
     navigate("/");
@@ -37,15 +39,19 @@ export default function SideBar() {
         </div>
 
         <div className="mid-section">
-          <Link to="/Dashboard" className="link">
+          {/* <div className="vertical-stroke" style={{ top: selectedItem && `${menuItemRefs[selectedItem].current.offsetTop}px` }}></div> */}
+          <Link
+            to="/Dashboard"
+            /*ref={menuItemRefs.menuItem1}*/ className="link"
+          >
             <RxDashboard style={{ color: "white" }} />
             <p>Dashboard</p>
           </Link>
-          <Link to="/Records" className="link">
+          <Link to="/Records" /*ref={menuItemRefs.menuItem2}*/ className="link">
             <BsReverseLayoutTextSidebarReverse style={{ color: "white" }} />
             <p>Records</p>
           </Link>
-          <Link to="/Billing" className="link">
+          <Link to="/Billing" /*ref={menuItemRefs.menuItem3}*/ className="link">
             <FontAwesomeIcon icon={faCoins} style={{ color: "white" }} />
             <p>Billings</p>
           </Link>
