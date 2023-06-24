@@ -74,8 +74,8 @@ export default function PatientsBilling() {
               </div>
 
               <div className="searchIcons">
-                <img src={Notification} alt="pics" />
-                <img src={patient_Image} alt="pics" />
+                {/* <img src={Notification} alt="pics" /> */}
+                <img src={PatientPics} alt="pics" />
               </div>
             </div>
           </div>
@@ -92,7 +92,7 @@ export default function PatientsBilling() {
             </div>
 
             <div className="searchIcons">
-              <img src={Notification} alt="pics" />
+              {/* <img src={Notification} alt="pics" /> */}
               <img src={PatientPics} alt="pics" />
             </div>
           </div>
@@ -113,31 +113,29 @@ export default function PatientsBilling() {
               <ul>
                 <li>Name</li>
                 <li>Status</li>
-                <li>Amount </li>
+                <li className="patientNavAmount">Amount </li>
               </ul>
             </div>
 
             <div className="PatientEntities">
-              {transactionArray.length > 0 &&
-                transactionArray.map((transaction, index) => {
-                  // display: grid;
-                  // grid-template-columns: 1fr 1fr 1fr;
-                  return (
-                    <div key={transaction._id}>
-                      <ul>
-                        <li>{transaction.healthcareProvider}</li>
-                        <li className={`${transaction.status}`}>
-                          {transaction.status}
-                        </li>
-                        <li>USD {transaction.amount} </li>
-                      </ul>
-                      <hr
-                        className="PatientUnderline"
-                        key={`${index}-${transaction._id}`}
-                      />
-                    </div>
-                  );
-                })}
+              {transactionArray.length > 0 && transactionArray.map((transaction,index)=>{
+                    // display: grid;
+                    // grid-template-columns: 1fr 1fr 1fr;
+                return(
+               <div key={transaction._id}>
+                  <ul>
+                    <li>{transaction.healthcareProvider}</li>
+                  <li className={`${transaction.status}`}>{transaction.status}</li>
+                  <li>USD {transaction.amount} </li> 
+                 
+                </ul>
+                <hr className="PatientUnderline" key={`${index}-${transaction._id}`}/>
+                 </div>
+                )
+              })}
+
+
+              
               {/* <ul >
                 <li>Dr. Ada</li>
                 <li className="Successful">Successful</li>
@@ -176,7 +174,7 @@ export default function PatientsBilling() {
               <ul>
                 <li>Name</li>
                 <li>Status</li>
-                <li>Amount </li>
+                <li className="patientNavAmount">Amount </li>
               </ul>
             </div>
 

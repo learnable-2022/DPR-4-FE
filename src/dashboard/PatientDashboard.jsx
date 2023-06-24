@@ -5,7 +5,7 @@ import React, {
   useCallback,
   useEffect,
 } from "react";
-import html2canvas from "html2canvas";
+
 import "./PatientsDashboard.css";
 import emptyProfile from "../assets/ava3.png";
 import bpIcon from "../assets/bp_icon.svg";
@@ -28,13 +28,15 @@ import drug4 from "../assets/drug4.svg";
 import notification from "../assets/Notification.svg";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiArrowDropDownFill } from "react-icons/ri";
-
+import Dashboard from "../assets/Category.png";
+import logOutBro from "../assets/Logout.png";
+import record from "../assets/Document.png";
+import billinglogo from "../assets/streamline_money-cash-coins-stack-accounting-billing-payment-stack-cash-coins-currency-money-finance.png";
+import { Link, useNavigate } from "react-router-dom";
 import StateContext from "../stateProvider/stateprovider";
 import abi from "../abi.json";
 import { ethers } from "ethers";
 // for nav bar
-
-import { Link, useNavigate } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
 import { BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
 import { TfiWrite } from "react-icons/tfi";
@@ -42,15 +44,13 @@ import { AiOutlineSetting } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
-import ourlogo from "../assets/ourlogo.png";
+import ourlogo from "../assets/Group 5.svg";
 import axios from "axios";
 import { AiOutlineClose } from "react-icons/ai";
-import { useServiceProviderValue } from "../ServiceProvider";
 
 // end for nav bar
 
 export default function PatientDashboard() {
-  const navigate = useNavigate();
   let token = localStorage.getItem("patientToken");
   const [isDropOpen, setIsDropOpen] = useState(false);
   const [patient_Name, setPatientName] = useState("");
@@ -66,7 +66,7 @@ export default function PatientDashboard() {
   const [patient_WalletId, setPatientWallet] = useState("");
   const [patient_First_Name, setPatientFirstName] = useState("");
   const [patient_Last_Name, setPatientLastName] = useState("");
-  const screenshotRef = useRef(null);
+
   const [data, setData] = useState(true);
   const drugs = [drug1, drug2, drug3, drug4];
   const [connectedWallet, setConnectedWallet] = useState(true);
@@ -74,7 +74,6 @@ export default function PatientDashboard() {
   const mobileMenuRef = useRef();
   const mobileNavRef = useRef();
   const [navOpen, setIsNavOpen] = useState(false);
-  const [NotificationMsg, setNotificationMsg] = useState("");
   const checkEffectName = localStorage.getItem("patient_name");
   const checkEffectImage = localStorage.getItem("patient_image");
   let checkEffectgender = localStorage.getItem("patient_gender");
@@ -97,12 +96,10 @@ export default function PatientDashboard() {
 
   let checkEffectLastName = localStorage.getItem("patient_lastName");
 
-  const [{}, dispatch] = useServiceProviderValue();
   const toggleNav = () => {
     setIsNavOpen(!navOpen);
   };
-  const [open, setOpen] = useState(false);
-  const [isThereNotification, setisThereNotification] = useState(false);
+
   let contractAddress = "0xFFE09412B070bC1880D5FBD2BeD09639E367061A";
   const [errorMessage, setErrorMessage] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null);
@@ -120,9 +117,7 @@ export default function PatientDashboard() {
   const [billing, setPatientBilling] = useState([]);
   const [service, setPatientService] = useState([]);
   const [amount, setPatientAmount] = useState([]);
-  const handleButtonClick = () => {
-    setOpen(!open);
-  };
+
   const connectWalletHandler = () => {
     if (window.ethereum && window.ethereum.isMetaMask) {
       window.ethereum
@@ -142,7 +137,6 @@ export default function PatientDashboard() {
       setErrorMessage("Please install MetaMask browser extension to interact");
     }
   };
-  console.log(defaultAccount);
 
   const updateEthers = async () => {
     try {
@@ -178,10 +172,6 @@ export default function PatientDashboard() {
     try {
       if (defaultAccount == null && getForm == "") return;
       let access = await contract.grantAccess(getForm, defaultAccount);
-      setNotificationMsg(
-        `You granted access to user with wallet address ${getForm}`
-      );
-      setisThereNotification(true);
       console.log("Access Granted");
     } catch (err) {}
   };
@@ -193,6 +183,8 @@ export default function PatientDashboard() {
       console.log("Access Granted");
     } catch (err) {}
   };
+
+  // console.log(defaultAccount);
 
   const checkRecord = async () => {
     try {
@@ -247,53 +239,14 @@ export default function PatientDashboard() {
   }, [defaultAccount]);
 
   const shareReport = () => {
-    if (screenshotRef.current) {
-      const body = document.body;
-      const html = document.documentElement;
-      const documentHeight = Math.max(
-        body.scrollHeight,
-        body.offsetHeight,
-        html.clientHeight,
-        html.scrollHeight,
-        html.offsetHeight
-      );
-      const windowWidth =
-        window.innerWidth ||
-        document.documentElement.clientWidth ||
-        document.body.clientWidth;
-      const windowHeight =
-        window.innerHeight ||
-        document.documentElement.clientHeight ||
-        document.body.clientHeight;
-
-      window.scrollTo(0, 0); // Scroll to the top of the page
-
-      html2canvas(document.documentElement, {
-        width: windowWidth,
-        height: documentHeight,
-        scrollX: window.scrollX,
-        scrollY: window.scrollY,
-        windowWidth,
-        windowHeight,
-      })
-        .then((canvas) => {
-          const imageDataURL = canvas.toDataURL();
-
-          // const link = document.createElement("a");
-          // link.href = canvas.toDataURL();
-          // link.download = "screenshot.png";
-          // link.click();
-
-          dispatch({ type: "SET_SCREENSHOT", screenshot: imageDataURL });
-
-          navigate("/share");
-        })
-        .catch((error) => {
-          console.error("Error capturing screenshot:", error);
-        });
-    }
+    const options = {
+      scrollY: -window.scrollY,
+    };
+    // html2canvas(screenshotRef.current, options).then((canvas) => {
+    // const imageData = canvas.toDataURL();
+    //shareScreenshot(imageData);
+    // });
   };
-
   const closeOpenMenus = useCallback(
     (e) => {
       if (
@@ -341,6 +294,7 @@ export default function PatientDashboard() {
         console.log(res);
         const res1 = res?.data.find((item) => item.email === PatientEmail);
         console.log(res1);
+
         localStorage.setItem("patient_image", res1?.image);
         localStorage.setItem("patient_name", res1?.name);
         localStorage.setItem("patient_email", res1?.email);
@@ -358,11 +312,11 @@ export default function PatientDashboard() {
         localStorage.setItem("patient_address", res1?.address);
         localStorage.setItem("patient_city", res1?.city);
         localStorage.setItem("patient_country", res1?.country);
-        localStorage.setItem("patient_number", res1?.phoneNumber);
+        localStorage.setItem("patient_number", res1?.number);
         localStorage.setItem("patient_state", res1?.state);
         localStorage.setItem("patient_firstName", res1?.firstName);
         localStorage.setItem("patient_lastName", res1?.lastName);
-        console.log(res1.phoneNumber);
+
         let patient_First_Name = localStorage.getItem("patient_firstName");
         setPatientFirstName(patient_First_Name);
         let patient_Last_Name = localStorage.getItem("patient_lastName");
@@ -453,28 +407,32 @@ export default function PatientDashboard() {
 
   return (
     <div className="patientdashboard">
-      <nav className={navOpen ? "patient_dashboard_nav" : "closeNav"}>
+      <nav
+        className={navOpen ? "patient_dashboard_nav" : "closeNav"}
+        ref={mobileNavRef}
+      >
         <div className="_sideBar">
           <AiOutlineClose className="close_btn" onClick={toggleNav} />
           <div className="_center-div">
-            <img src={ourlogo} alt="app-logo" />
-            <p>
-              Med<span>bloc</span>
-            </p>
+            <img
+              src={ourlogo}
+              alt="app-logo"
+              style={{ width: "100px", height: "70px" }}
+            />
           </div>
 
           <div className="_mid-section">
             <Link to="/Dashboard" className="link">
-              <RxDashboard style={{ color: "white" }} />
-              <p>Dashboard</p>
+              <img src={Dashboard} alt="dash-logo" />
+              <p style={{ fontFamily: "poppins" }}>Dashboard</p>
             </Link>
             <Link to="/Records" className="link">
-              <BsReverseLayoutTextSidebarReverse style={{ color: "white" }} />
-              <p>Records</p>
+              <img src={record} alt="record-logo" />
+              <p style={{ fontFamily: "poppins" }}>Records</p>
             </Link>
             <Link to="/Billing" className="link">
-              <FontAwesomeIcon icon={faCoins} style={{ color: "white" }} />
-              <p>Billings</p>
+              <img src={billinglogo} alt="billing-logo" />
+              <p style={{ fontFamily: "poppins" }}>Billings</p>
             </Link>
           </div>
           <div className="_lower-section">
@@ -485,8 +443,8 @@ export default function PatientDashboard() {
               }}
             >
               <Link to="/" className="link">
-                <FiLogOut style={{ color: "white" }} />
-                <p>logout</p>
+                <img src={logOutBro} alt="logout" />
+                <p style={{ fontFamily: "poppins" }}>logout</p>
               </Link>
             </div>
           </div>
@@ -527,7 +485,7 @@ export default function PatientDashboard() {
         </div>
       </header>
       {isDropOpen && (
-        <div className="drop_content" ref={(mobileMenuRef, mobileNavRef)}>
+        <div className="drop_content" ref={mobileMenuRef}>
           <Link to="/Profile" className="link ">
             <p className="drop_content_item">View Profile</p>
           </Link>
@@ -535,7 +493,7 @@ export default function PatientDashboard() {
         </div>
       )}
 
-      <main className="patients_dashboard_main" ref={screenshotRef}>
+      <main className="patients_dashboard_main">
         <h1 className="responsive_h1_header_title">
           Welcome!{" "}
           {patient_First_Name

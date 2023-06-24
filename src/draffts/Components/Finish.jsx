@@ -122,7 +122,7 @@ function Finish({ contract }) {
           </div>
           <div className="location_billing_info">
             <p className="billing_location_header draft_billing_header">
-              Location
+              Hospital Name
             </p>
             <input
               type="text"
@@ -201,13 +201,13 @@ function Finish({ contract }) {
               gap: "8px",
             }}
           >
-            <img
+            {/* <img
               src={addButton}
               alt="add button"
               onClick={addComponent}
               className="total_add_btn"
-            />
-            <p style={{ color: "#66CC66" }}>Add Another Service</p>
+            /> */}
+            {/* <p style={{ color: "#66CC66" }}>Add Another Service</p> */}
           </div>
 
           <p className="total_display">

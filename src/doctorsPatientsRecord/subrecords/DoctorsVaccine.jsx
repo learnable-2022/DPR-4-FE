@@ -9,18 +9,32 @@ import { useNavigate } from 'react-router-dom';
 
 export default function DoctorsVaccine() {
   const navigate = useNavigate();
-  const dummyData= [
-    {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)",Date:"02/05/2023",Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3"},
-    {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)", Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3",Date:"02/05/2023"},
-    {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)", Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3",Date:"02/05/2023"},
-    {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)", Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3",Date:"02/05/2023"},
-    {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)", Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3" ,Date:"02/05/2023"},
-    {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)", Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3",Date:"02/05/2023"},
+  let getFormattedRecords = JSON.parse(localStorage.getItem("getFormattedRecords"));
+
+  // const dummyData= [
+  //   {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)",Date:"02/05/2023",Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3"},
+  //   {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)", Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3",Date:"02/05/2023"},
+  //   {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)", Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3",Date:"02/05/2023"},
+  //   {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)", Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3",Date:"02/05/2023"},
+  //   {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)", Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3" ,Date:"02/05/2023"},
+  //   {hosiptalName:"Gen. Hospital, Enugu Town",name:"Dr. Ada (Gen. Medicine)", Time:"14:00" ,Remark:"complete",vaccine:"Covid Vaccine Shots 1,2,3",Date:"02/05/2023"},
     
-  ]
+  // ]
+
+  const dummyData = getFormattedRecords.map((item, index) => ({
+    hosiptalName:item.billing[3],
+    name:item.billing[2], 
+    Time:"14:00",
+    Remark:item.treatmentDetails[2],
+    vaccine:item.vaccine[0],
+    Date:item.vaccine[1],
+    index: index // Add the index as a property
+  }));
+
+
   const COCA_COLA =[
     {
-        Headers: "Hospital/laboratory",
+        Headers: "Hospital/healthprovider",
         accessor:"hosiptalName",
         Cell: ({ cell: { row } }) => {
           return (
@@ -44,7 +58,7 @@ export default function DoctorsVaccine() {
             <div>
              <span style={{fontSize:"13px"}}> {row.original.Date}</span>
               <br/>
-             <span> {row.original.Time}</span>
+             {/* <span> {row.original.Time}</span> */}
             </div>
           );
         },
@@ -115,7 +129,7 @@ const { globalFilter } = state;
                 return(
             <div className='table-2-vaccine'>
                   <ul>
-                  <h4>Hospital/ Laboratory</h4>
+                  <h4>Hospital/ healthprovider</h4>
                     <li>{items.hosiptalName} <br/>{items.name}</li>
                     <h4>Vaccines</h4>
                     <li>{items.vaccine}</li>

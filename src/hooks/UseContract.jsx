@@ -4,7 +4,7 @@ import { ethers } from 'ethers';
 
 
 export const contracts = ()=>{
-  const contractAddress = "0xFFE09412B070bC1880D5FBD2BeD09639E367061A";
+  const contractAddress = "0xB8f1ed9Adca8c6863B3da364B1b332B51462BA06";
     if (window.ethereum && window.ethereum.isMetaMask) {
         const tempProvider = new ethers.providers.Web3Provider(window.ethereum);
         // setProvider(tempProvider);

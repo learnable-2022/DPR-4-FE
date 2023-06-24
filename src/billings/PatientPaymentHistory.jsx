@@ -103,7 +103,7 @@ function PatientPaymentHistory() {
                 <li className="Successful">Successful</li>
                 <li>USD 22,000 </li>
               </ul>
-              <hr></hr>
+        
             </div>
           </div>
           {/* /////////////////////////down////////////////////////////// */}

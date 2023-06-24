@@ -13,22 +13,26 @@ export default function DoctorsLab() {
 
   const  link = "/doctorslab/doctorslabreport";
 
+  let getFormattedRecords = JSON.parse(localStorage.getItem("getFormattedRecords"));
 
 
+   
 
-    const dummyData= [
-        {hosiptalName:"Alpha general",OwnerName:"chuks", testResult:" Malaria Paracite Test",Time:"14:00" ,Remark:"complete",Report:"view-report" , status:"Approve",complaint:"malariaX2"},
-        {hosiptalName:"Beta general",OwnerName:"chuks", testResult:" chest x-ray",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
-        {hosiptalName:"omega general",OwnerName:"chuks", testResult:" condensation test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
-        {hosiptalName:"zootopia general",OwnerName:"chuks", testResult:" breast cancer test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
-        {hosiptalName:" kentuky general",OwnerName:"chuks", testResult:" stapyloccous test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
-        {hosiptalName:" paradise general",OwnerName:"chuks", testResult:"chicken-pox test",Time:"14:00" ,Remark:"complete",Report:"view-report",status:"Approve",complaint:"malariaX2"},
-       
-      ];
+    const dummyData = getFormattedRecords.map((item, index) => ({
+      hosiptalName:item.billing[3],
+      OwnerName:item.billing[2],
+      testResult:item.treatmentDetails[2],
+      Time:"14:00" ,
+      Remark:"complete",
+      Report:"view-report" , 
+      status:"Approve",
+      complaint:item.treatmentDetails[0],
+      index: index
+    }));
 
       const COLA =[
         {
-            Headers: "Hospital/laboratory",
+            Headers: "Hospital/healthprovider",
             accessor:"hosiptalName",
             Cell: ({ cell: { row } }) => {
               return (
@@ -41,32 +45,14 @@ export default function DoctorsLab() {
             },
         },
         {
-            Headers: "Test-type",
+            Headers: "Test-type/treatment",
             accessor:"testResult",
         },
         {
             Headers: "Complaint",
             accessor:"complaint",
         },
-        // {
-        //     Headers: "Status",
-        //     accessor:"status",
-        // },
-        {
-            Headers: "",
-            accessor:"him",
-            Cell: ({ cell: { row } }) => (
-              <>
-             <div className='view-report-button'>
-             <Link to={link} style={{color:"#fff", textDecoration:"none",}}>
-             {row.original.Report}  
-              </Link>
-             </div>
-            </>
-            ),
-           
-            
-        },
+      
     ];
 
 
@@ -136,15 +122,15 @@ const { globalFilter } = state;
              */}
             {dummyData.map((items)=>{
                 return(
-            <div className='table-2-vaccine'>
+                  <div className='table-2-vaccine'>
                   <ul>
-                  <h4>Hospital/ Laboratory</h4>
-                    <li>{items.hosiptalName} <br/>{items.name}</li>
+                  <h4>Hospital/ healthprovider</h4>
+                    <li>{items.hosiptalName} <br/>{items. OwnerName}</li>
                     <h4>Test-type</h4>
                     <li>{items.testResult}</li>
                     <h4>complaint</h4> 
                     <li>{items.complaint}</li>
-                    <li><button onClick={handleclick}>{items.Report}</button></li>
+                    {/* <li><button onClick={handleclick}>{items.Report}</button></li> */}
                   </ul>
             </div>
 

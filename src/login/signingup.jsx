@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./login.css";
+import {BsArrowLeft} from "react-icons/bs"
 import bigImage from "../assets/signup-second.png";
 import {
   faCheck,
@@ -50,7 +51,9 @@ export default function Signingup() {
   const [isLoading, setIsLoading] = useState(false);
 
   // const { makeRequest } = useRequestProcessor();
-
+  const handle = () => {
+    navigate(-1);
+  };
   const toggle = () => {
     setPasswordVisible(!passwordVisible);
   };
@@ -155,6 +158,7 @@ export default function Signingup() {
     <div className="first-container confirmation">
       <div className="sign-up-container">
         <div className="signup-form ">
+        {/* <BsArrowLeft onClick={handle} style={{ cursor: "pointer" }} /> */}
           <div>
             <img src={newlogo} alt="medblog" />
           </div>
@@ -276,6 +280,12 @@ export default function Signingup() {
 
             <div class="input">
               <label>Wallet I.d</label>
+              <p>
+              Don’t have a wallet I.D?{" "}
+              <Link to="https://metamask.io/" className="wallet-link2">
+                <span>Get wallet I.D</span>
+              </Link>
+            </p>
               <input
                 type="text"
                 placeholder="enter your metamask wallet"
@@ -302,12 +312,6 @@ export default function Signingup() {
               Already have an account?
               <Link to="/login" className="wallet-link2">
                 <span>Log in</span>
-              </Link>
-            </p>
-            <p>
-              Don’t have a wallet I.D?{" "}
-              <Link to="https://metamask.io/" className="wallet-link2">
-                <span>Get wallet I.D</span>
               </Link>
             </p>
           </div>
