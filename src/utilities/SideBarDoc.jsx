@@ -3,7 +3,7 @@ import { RxDashboard } from "react-icons/rx";
 import { TfiWrite } from "react-icons/tfi";
 import { FiLogOut } from "react-icons/fi";
 import Dashboard from "../assets/Category.png";
-import newlogo1 from "../assets/Frame 8.png";
+import newlogo1 from "../assets/Group 5.svg";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
@@ -23,15 +23,13 @@ export default function SideBarDoc() {
     { name: "DocDraft", route: "/DocDraft", icon: <TfiWrite /> },
     { name: "DocLogout", route: "/DocLogout", icon: <FiLogOut /> },
   ];
-  const navigate = useNavigate();
-  const returnHomeHandler =()=>{
-    navigate("/");
-  }
+  
+ 
   return (
     <div className="sideBar">
       <div className="center-div">
-        <img src={newlogo1} alt="pics" onClick={returnHomeHandler}  
-        style={{cursor:"pointer",
+        <img src={newlogo1} alt="pics"  
+        style={{
         width: "120px",
          height: "80px",
           border:"none"

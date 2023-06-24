@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import newlogo1 from "../assets/Frame 8.png";
+import newlogo1 from "../assets/Group 5.svg";
 import { useNavigate } from "react-router-dom";
 import logOut from "../assets/Logout.png";
 import Dashboard from "../assets/Category.png";
@@ -17,9 +17,7 @@ export default function SideBar() {
     setActiveItem(itemId);
   };
   const navigate = useNavigate();
-  const returnHomeHandler = () => {
-    navigate("/");
-  };
+
   return (
     <>
       <div className="sideBar">
@@ -27,8 +25,8 @@ export default function SideBar() {
           <img
             src={newlogo1}
             alt="app-logo"
-            onClick={returnHomeHandler}
-            style={{ cursor: "pointer", width: "120px", height: "80px", border:"none" }}
+          
+            style={{  width: "120px", height: "80px", border:"none" }}
           />
         </div>
 

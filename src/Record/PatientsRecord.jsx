@@ -17,7 +17,7 @@ import notification from "../assets/Notification.svg";
 import logOut from "../assets/Logout.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
-import ourlogo from "../assets/Frame 8.png";
+import ourlogo from "../assets/Group 5.svg";
 import { AiOutlineClose } from "react-icons/ai";
 import { useServiceProviderValue } from "../ServiceProvider";
 
