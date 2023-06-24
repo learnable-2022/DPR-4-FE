@@ -44,7 +44,7 @@ import { AiOutlineSetting } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
-import ourlogo from "../assets/Frame 8.png";
+import ourlogo from "../assets/Group 5.svg";
 import axios from "axios";
 import { AiOutlineClose } from "react-icons/ai";
 

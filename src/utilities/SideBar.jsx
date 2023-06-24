@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import newlogo1 from "../assets/Frame 8.png";
+import newlogo1 from "../assets/Group 5.svg";
 import { useNavigate } from "react-router-dom";
 import logOut from "../assets/Logout.png";
 import Dashboard from "../assets/Category.png";

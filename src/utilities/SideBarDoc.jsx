@@ -3,7 +3,7 @@ import { RxDashboard } from "react-icons/rx";
 import { TfiWrite } from "react-icons/tfi";
 import { FiLogOut } from "react-icons/fi";
 import Dashboard from "../assets/Category.png";
-import newlogo1 from "../assets/Frame 8.png";
+import newlogo1 from "../assets/Group 5.svg";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
