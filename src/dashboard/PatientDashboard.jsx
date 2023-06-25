@@ -214,7 +214,7 @@ const checkRecord = async () => {
         };
       });
       setFormattedRecords(formattedRecords.reverse());
-      console.log(formattedRecords);
+      console.log("state-formatted",formattedRecords);
       setVitalSigns(formattedRecords.map((record) => record.vitalSigns));
       setTreatmentDetails(formattedRecords.map((record) => record.treatmentDetails));
       setVaccine(formattedRecords.map((record) => record.vaccine));
@@ -222,11 +222,11 @@ const checkRecord = async () => {
       setPatientBilling(formattedRecords.map((record) => record.billing));
       setPatientService(formattedRecords.map((record) => record.service));
       setPatientAmount(formattedRecords.map((record) => record.amount));
-      
+     
       localStorage.setItem('vitalSigns', JSON.stringify(vitalSigns));
       localStorage.setItem('treatmentDetails', JSON.stringify(treatmentDetails));
       localStorage.setItem('vaccine', JSON.stringify(vaccine));
-      localStorage.setItem('pres', JSON.stringify(prescription));
+      localStorage.setItem('prescription', JSON.stringify(prescription));
       localStorage.setItem('billing', JSON.stringify(billing));
       localStorage.setItem('service', JSON.stringify(service));
       localStorage.setItem('amount', JSON.stringify(amount));

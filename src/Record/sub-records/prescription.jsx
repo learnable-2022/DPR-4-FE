@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 export default function Prescription() {
   const navigate =useNavigate();
 
-  let prescription = JSON.parse(localStorage.getItem('pres'));
- console.log("prescription:",prescription);
+  let prescription = JSON.parse(localStorage.getItem('prescription'));
+ console.log("pres:",prescription);
 
 
   return (

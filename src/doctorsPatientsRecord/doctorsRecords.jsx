@@ -186,8 +186,8 @@ function DoctorsRecords() {
     const storedPatientList = localStorage.getItem("patient_list");
     const parsedPatientList = JSON.parse(storedPatientList);
     setPatientList(parsedPatientList);
+    navigate("./")
   }, []);
-
 
 
   return (
