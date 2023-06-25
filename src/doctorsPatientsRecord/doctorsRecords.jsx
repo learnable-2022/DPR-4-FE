@@ -8,9 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { useServiceProviderValue } from "../ServiceProvider";
 import { contracts } from "../hooks/UseContract";
 
-
 function DoctorsRecords() {
-  const {tempContract} = contracts();
+  const { tempContract } = contracts();
 
   const [{ index }, dispatch] = useServiceProviderValue();
   let patient_Image = localStorage.getItem("patient_image");
@@ -46,28 +45,28 @@ function DoctorsRecords() {
   const [noAccessMsg, setNoAccessMsg] = useState("");
   const [hasAccess, setHasAccess] = useState(false);
 
-  
   const hasAccessFunc = async () => {
-    
     try {
-      const checkAccess = await tempContract.hasAccess(defaultAccount,patientWalletId);
+      const checkAccess = await tempContract.hasAccess(
+        defaultAccount,
+        patientWalletId
+      );
+      console.log(defaultAccount);
       setHasAccess(checkAccess);
       console.log(checkAccess);
       return checkAccess; // Return the result
     } catch (error) {
-      console.error('Error executing has access:', error);
+      console.error("Error executing has access:", error);
       return false; // Return false in case of an error
     }
   };
 
   const checkRecord = async () => {
-    
-
     try {
       if (tempContract) {
         let record = await tempContract.getPatientRecord(patientWalletId);
-        
-        const formattedRecords = record.map(record => {
+
+        const formattedRecords = record.map((record) => {
           return {
             vitalSigns: record.vitalSigns,
             treatmentDetails: record.treatmentDetails,
@@ -75,44 +74,54 @@ function DoctorsRecords() {
             prescription: record.prescription,
             billing: record.billing,
             service: record.service,
-            amount: record.amount
+            amount: record.amount,
           };
         });
         setFormattedRecords(formattedRecords.reverse());
         console.log(formattedRecords);
         setVitalSigns(formattedRecords.map((record) => record.vitalSigns));
-        setTreatmentDetails(formattedRecords.map((record) => record.treatmentDetails));
+        setTreatmentDetails(
+          formattedRecords.map((record) => record.treatmentDetails)
+        );
         setVaccine(formattedRecords.map((record) => record.vaccine));
         setPrescription(formattedRecords.map((record) => record.prescription));
         setPatientBilling(formattedRecords.map((record) => record.billing));
         setPatientService(formattedRecords.map((record) => record.service));
         setPatientAmount(formattedRecords.map((record) => record.amount));
-  
-        localStorage.setItem('getFormattedRecords', JSON.stringify(getFormattedRecords));
-        
-        localStorage.setItem('vitalSigns', JSON.stringify(vitalSigns));
-        localStorage.setItem('treatmentDetails', JSON.stringify(treatmentDetails));
-        localStorage.setItem('vaccine', JSON.stringify(vaccine));
-        localStorage.setItem('prescription', JSON.stringify(prescription));
-        localStorage.setItem('billing', JSON.stringify(billing));
-        localStorage.setItem('service', JSON.stringify(service));
-        localStorage.setItem('amount', JSON.stringify(amount));
+
+        localStorage.setItem(
+          "getFormattedRecords",
+          JSON.stringify(getFormattedRecords)
+        );
+
+        localStorage.setItem("vitalSigns", JSON.stringify(vitalSigns));
+        localStorage.setItem(
+          "treatmentDetails",
+          JSON.stringify(treatmentDetails)
+        );
+        localStorage.setItem("vaccine", JSON.stringify(vaccine));
+        localStorage.setItem("prescription", JSON.stringify(prescription));
+        localStorage.setItem("billing", JSON.stringify(billing));
+        localStorage.setItem("service", JSON.stringify(service));
+        localStorage.setItem("amount", JSON.stringify(amount));
       } else {
-        console.error('Contract is not available');
-      };
+        console.error("Contract is not available");
+      }
     } catch (error) {
-      console.error('Error checking record:', error);
+      console.error("Error checking record:", error);
     }
   };
 
-  useEffect(() =>{
+  useEffect(() => {
     hasAccessFunc();
-  },[]);
+  }, []);
 
-
-  useEffect(() =>{
-    localStorage.setItem('getFormattedRecords', JSON.stringify(getFormattedRecords));
-  },[getFormattedRecords]);
+  useEffect(() => {
+    localStorage.setItem(
+      "getFormattedRecords",
+      JSON.stringify(getFormattedRecords)
+    );
+  }, [getFormattedRecords]);
 
   useEffect(() => {
     localStorage.setItem("vitalSigns", JSON.stringify(vitalSigns));
@@ -142,45 +151,42 @@ function DoctorsRecords() {
     localStorage.setItem("amount", JSON.stringify(amount));
   }, [amount]);
 
-
-
   useEffect(() => {
-   
-  if (defaultAccount) {
-    hasAccessFunc() // Call the async function
-      .then((access) => {
-        if (access) {
-          checkRecord();
-        } else {
-          setNoAccessMsg("Don't Have access to view");
-        }
-      })
-      .catch((error) => {
-        console.error('Error checking access:', error);
-        setNoAccessMsg("An error occurred while checking access");
-      });
-  }
-  console.log(index);
-  console.log(patientWalletId);
-}, [index, patientWalletId, defaultAccount]);
+    if (defaultAccount) {
+      hasAccessFunc() // Call the async function
+        .then((access) => {
+          if (access) {
+            checkRecord();
+          } else {
+            setNoAccessMsg("Don't Have access to view");
+          }
+        })
+        .catch((error) => {
+          console.error("Error checking access:", error);
+          setNoAccessMsg("An error occurred while checking access");
+        });
+    }
 
-// useEffect(() => {
-//   console.log(typeof defaultAccount);
-//   console.log(typeof patientWalletId);
-  
-//   if (defaultAccount) {
-//     if( hasAccessFunc()){
-      
-//       checkRecord();
-//     }else{
-//       setNoAccessMsg("Don't Have access to view") 
-      
-//     }
-   
-//   }
-//   console.log(index);
-//   console.log(patientWalletId);
-// }, [index, patientWalletId, defaultAccount]);
+    console.log(patientWalletId);
+  }, [index, patientWalletId, defaultAccount]);
+
+  // useEffect(() => {
+  //   console.log(typeof defaultAccount);
+  //   console.log(typeof patientWalletId);
+
+  //   if (defaultAccount) {
+  //     if( hasAccessFunc()){
+
+  //       checkRecord();
+  //     }else{
+  //       setNoAccessMsg("Don't Have access to view")
+
+  //     }
+
+  //   }
+  //   console.log(index);
+  //   console.log(patientWalletId);
+  // }, [index, patientWalletId, defaultAccount]);
 
   useEffect(() => {
     const storedPatientList = localStorage.getItem("patient_list");
@@ -188,7 +194,6 @@ function DoctorsRecords() {
     setPatientList(parsedPatientList);
     navigate("./")
   }, []);
-
 
   return (
     <div className="container">
@@ -281,9 +286,8 @@ function DoctorsRecords() {
           </p>
         </div>
       </div>
-      
+
       <div className="third-section-link">
-        
         <li>
           <NavLink exact activeClassName="active" to="">
             <p>Overview</p>
@@ -307,25 +311,28 @@ function DoctorsRecords() {
             <p>Prescription</p>
           </NavLink>
         </li>
-
       </div>
-    
+
       <div>
-         {hasAccess?        <Outlet />:
-         <p 
-         style={{
-          display:"flex",
-          justifyContent:"center",
-          alignItems: "center",
-          marginTop:"50px",
-          fontFamily:"open sans",
-          fontWeight:"600",
-          marginLeft:"10px",
-          marginRight:"10px",
-          }}>you don't have access, to view this page contact patient-user </p>
-}
+        {hasAccess ? (
+          <Outlet />
+        ) : (
+          <p
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: "50px",
+              fontFamily: "open sans",
+              fontWeight: "600",
+              marginLeft: "10px",
+              marginRight: "10px",
+            }}
+          >
+            you don't have access, to view this page contact patient-user{" "}
+          </p>
+        )}
       </div>
-
     </div>
   );
 }

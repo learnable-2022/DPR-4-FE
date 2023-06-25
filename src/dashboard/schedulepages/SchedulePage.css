@@ -1,7 +1,9 @@
 .schedulepage {
   width: 100%;
+  height: 100vh;
   padding: 2rem;
   padding-bottom: 0;
+  overflow-y: scroll;
   position: relative;
 }
 .schedulepage main {
@@ -45,10 +47,12 @@
     width: 100%;
     text-align: center;
     font-size: 1.3rem;
+    margin-bottom: 1rem;
   }
   .schedulepage .doc_med_logo {
     display: block;
     margin-left: 40%;
+    width: 100px;
   }
 }
 @media (max-width: 926px) {
@@ -56,6 +60,12 @@
     display: block;
     width: 20px;
     height: 20px;
+  }
+  .header_icon_part {
+    margin-right: 1rem;
+  }
+  .schedulepage {
+    padding: 2rem 1rem;
   }
   .schedulepage main {
     left: 2rem;
@@ -100,6 +110,7 @@
     height: 600px;
     left: 1rem;
     right: 1rem;
+    top: 9.7rem;
   }
   .schedulepage .header_text_part {
     top: 4rem;
