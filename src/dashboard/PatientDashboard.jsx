@@ -103,7 +103,7 @@ export default function PatientDashboard() {
     setIsNavOpen(!navOpen);
   };
 
-  let contractAddress = "0xFFE09412B070bC1880D5FBD2BeD09639E367061A";
+  let contractAddress = "0xB8f1ed9Adca8c6863B3da364B1b332B51462BA06";
   const [errorMessage, setErrorMessage] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null);
   const [connButtonText, setConnButtonText] = useState("Connect to Metamask!");
@@ -181,6 +181,7 @@ export default function PatientDashboard() {
   };
 
   const grantDoctorAccess = async (e) => {
+    console.log(getForm);
     setIsLoading(true);
     try {
       if (defaultAccount == null && getForm == "") return;
@@ -556,9 +557,9 @@ export default function PatientDashboard() {
                     <strong className="value">
                       {patient_Age
                         ? new Date().getFullYear() -
-                          parseInt(patient_Age.split("-")[0])
+                          parseInt(patient_Age?.split("-")[0])
                         : new Date().getFullYear() -
-                          parseInt(checkEffectDOB.split("-")[0])}
+                          parseInt(checkEffectDOB?.split("-")[0])}
                     </strong>
                   </p>
 

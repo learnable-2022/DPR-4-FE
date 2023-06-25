@@ -193,7 +193,6 @@ function Report() {
             <p className="light">Medication</p>
             <p className="light">Duration</p>
             <p className="light">Dosage</p>
-            <p></p>
           </div>
 
           {val.map((data, i) => {
