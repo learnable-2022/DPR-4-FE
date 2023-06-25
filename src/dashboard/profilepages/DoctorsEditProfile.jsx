@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./DoctorsEditProfile.css";
 import emptyProfile from "../../assets/empty_profile.png";
 import States from "../data/states";
@@ -95,27 +95,7 @@ function DoctorsEditProfile() {
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);
   };
-  const setName = (FirstName, LastName, NameFromDb) => {
-    // if (FirstName === "") {
-    //   if (NameFromDb?.spilt(" ").length == 2) {
-    //     return NameFromDb?.split(" ")[0] + " " + LastName;
-    //   } else if (NameFromDb === "") {
-    //     return FirstName + " " + LastName;
-    //   } else {
-    //     return NameFromDb.spilt(" ")[0] + " " + FirstName;
-    //   }
-    // } else if (LastName === "") {
-    //   if (NameFromDb.spilt(" ")?.length == 2) {
-    //     return FirstName + " " + NameFromDb?.split(" ")[1];
-    //   } else if (NameFromDb === "") {
-    //     return FirstName + " " + LastName;
-    //   } else {
-    //     return FirstName + " " + NameFromDb.spilt(" ")[0];
-    //   }
-    // } else {
-    //   return FirstName + " " + LastName;
-    // }
-  };
+  const setName = (FirstName, LastName, NameFromDb) => {};
 
   const checkForValues = () => {
     if (
@@ -189,6 +169,26 @@ function DoctorsEditProfile() {
         }
       )
       .then((response) => {
+        localStorage.setItem("doctor_image", response?.data?.image);
+        localStorage.setItem("doctor_name", response?.data?.name);
+        localStorage.setItem("doctor_email", response?.data?.email);
+        localStorage.setItem("doctor_gender", response?.data?.gender);
+        localStorage.setItem("doctor_DOB", response?.data?.dateOfBirth);
+        localStorage.setItem("doctor_ID", response?.data?._id);
+        localStorage.setItem("doctor_address", response?.data?.address);
+        localStorage.setItem("doctor_license", response?.data?.license);
+        localStorage.setItem("doctor_country", response?.data?.country);
+        localStorage.setItem("doctor_number", response?.data?.phoneNumber);
+        localStorage.setItem("doctor_origin", response?.data?.stateOfOrigin);
+        localStorage.setItem(
+          "doctor_residence",
+          response?.data?.stateOfResidence
+        );
+        localStorage.setItem("doctor_wallet", response?.data?.walletId);
+        localStorage.setItem("doctor_hospital", response?.data?.hospital);
+        localStorage.setItem("doctor_firstname", response?.data?.firstName);
+        localStorage.setItem("doctor_lastname", response?.data?.lastName);
+
         console.log(response);
         setSuccessMsg("Details Saved Successfully");
         setTimeout(() => {
@@ -248,7 +248,37 @@ function DoctorsEditProfile() {
       boxShadow: "none",
     }),
   };
-
+  useEffect(() => {
+    let doctors_first_name = localStorage.getItem("doctor_firstname");
+    let doctors_DOB = localStorage.getItem("doctor_DOB");
+    let doctors_Gender = localStorage.getItem("doctor_gender");
+    let doctors_License = localStorage.getItem("doctor_license");
+    let doctors_Email = localStorage.getItem("doctor_email");
+    let doctors_Name = localStorage.getItem("doctor_name");
+    let doctors_ID = localStorage.getItem("doctor_ID");
+    let doctors_address = localStorage.getItem("doctor_address");
+    let doctors_country = localStorage.getItem("doctor_country");
+    let doctors_number = localStorage.getItem("doctor_number");
+    let doctors_origin = localStorage.getItem("doctor_origin");
+    let doctors_residence = localStorage.getItem("doctor_residence");
+    let doctors_wallet = localStorage.getItem("doctor_wallet");
+    let doctors_hospital = localStorage.getItem("doctor_hospital");
+    let doctors_last_name = localStorage.getItem("doctor_lastname");
+    setFirstName(doctors_first_name);
+    setLastName(doctors_last_name);
+    setHospitalName(doctors_hospital);
+    setWallet(doctors_wallet);
+    setResidence(doctors_residence);
+    setState(doctors_origin);
+    setNumber(doctors_number);
+    setValue(doctors_country);
+    setAddress(doctors_address);
+    setName(doctors_Name);
+    setEmail(doctors_Email);
+    setGender(doctors_Gender);
+    setDate(doctors_DOB);
+    setLicense(doctors_License);
+  }, []);
   return (
     <div className="doctorseditprofile">
       <div className="_left_side">
@@ -286,7 +316,7 @@ function DoctorsEditProfile() {
               {isLoading ? <FaSpinner className="spin" /> : "Save Changes"}
             </button>
             {
-              <p style={{ color: "red", fontSize: "12px", marginTop: "3px" }}>
+              <p style={{ color: "black", fontSize: "12px", marginTop: "3px" }}>
                 {NoImage}
               </p>
             }
@@ -362,6 +392,9 @@ function DoctorsEditProfile() {
                     onChange={handleGenderChange}
                     id="gender" /*onChange={""}*/
                   >
+                    <option disabled selected value="">
+                      Select Gender
+                    </option>
                     <option value={"Male"}>Male</option>
                     <option value={"Female"}>Female</option>
                   </select>
@@ -382,12 +415,10 @@ function DoctorsEditProfile() {
             </div>
           </div>
         </div>
-        <p
-          style={{ marginTop: "1rem", marginLeft: "1rem", marginRight: "1rem" }}
-        >
-          Notice: If you have more than one account with the same email address
-          on file, you will not be able to use that email address as a username
-          to sign in.
+        <p className="warning_msg">
+          <span style={{ color: "red" }}>Notice:</span> If you have more than
+          one account with the same email address on file, you will not be able
+          to use that email address as a username to sign in.
         </p>
       </div>
       <div className="_right_side">

@@ -204,10 +204,30 @@ function PatientsEditProfile() {
       )
       .then((response) => {
         console.log(response);
-        // localStorage.setItem("patient_image", response?.data.image);
-        // localStorage.setItem("patient_name", response?.data.name);
-        // localStorage.setItem("patient_email", response?.data.email);
-        // localStorage.setItem("patient_name", response?.data.name);
+        localStorage.setItem("patient_image", response?.data.image);
+        localStorage.setItem("patient_name", response?.data.name);
+        localStorage.setItem("patient_email", response?.data.email);
+        localStorage.setItem("patient_walletId", response?.data.walletId);
+
+        localStorage.setItem("patient_gender", response?.data.gender);
+        localStorage.setItem("patient_DOB", response?.data.dateOfBirth);
+        localStorage.setItem("patient_blood", response?.data.bloodgroup);
+
+        localStorage.setItem("patient_genotype", response?.data.genotype);
+        localStorage.setItem("patient_height", response?.data.height);
+        localStorage.setItem("patient_weight", response?.data.weight);
+        localStorage.setItem("patient_address", response?.data.address);
+        localStorage.setItem("patient_country", response?.data.country);
+        localStorage.setItem("patient_number", response?.data.phoneNumber);
+        localStorage.setItem("patient_city", response?.data.city);
+        localStorage.setItem("patient_state", response?.data.state);
+        localStorage.setItem("patient_allergies", response?.data.allergies);
+        localStorage.setItem("patient_name", response?.data.name);
+        localStorage.setItem("patient_email", response?.data.email);
+        localStorage.setItem("patient_firstName", response?.data.firstName);
+        localStorage.setItem("patient_lastName", response?.data.lastName);
+        localStorage.setItem("patient_middleName", response?.data.middleName);
+
         setSuccessMsg("Details Saved Successfully");
         setTimeout(() => {
           setSuccessMsg("");
@@ -269,7 +289,50 @@ function PatientsEditProfile() {
       boxShadow: "none",
     }),
   };
-  useEffect(() => {});
+  useEffect(() => {
+    let email = localStorage.getItem("patient_email");
+
+    let walletId = localStorage.getItem("patient_walletId");
+
+    let patient_gender = localStorage.getItem("patient_gender");
+
+    let patient_DOB = localStorage.getItem("patient_DOB");
+
+    let patient_Blood = localStorage.getItem("patient_blood");
+
+    let patient_Geno = localStorage.getItem("patient_genotype");
+
+    let patient_Height = localStorage.getItem("patient_height");
+
+    let patient_Weight = localStorage.getItem("patient_weight");
+    let patient_address = localStorage.getItem("patient_address");
+    let patient_city = localStorage.getItem("patient_city");
+    let patient_country = localStorage.getItem("patient_country");
+    let patient_number = localStorage.getItem("patient_number");
+    let patient_state = localStorage.getItem("patient_state");
+    let patient_Alle = localStorage.getItem("patient_allergies");
+    let patient_First_Name = localStorage.getItem("patient_firstName");
+    let patient_Last_Name = localStorage.getItem("patient_lastName");
+    let patient_Middle_Name = localStorage.getItem("patient_middle_name");
+    console.log(patient_First_Name);
+    setSelectedFirstName(patient_First_Name);
+    setSelectedAddress(patient_address);
+    setSelectedAlle(patient_Alle);
+    setSelectedBlood(patient_Blood);
+    setSelectedCity(patient_city);
+    setSelectedDate(patient_DOB);
+    setSelectedEmail(email);
+    setSelectedGender(patient_gender);
+    setSelectedGeno(patient_Geno);
+    setSelectedHeight(patient_Height);
+    setSelectedLastName(patient_Last_Name);
+    setSelectedMiddleName(patient_Middle_Name);
+    setSelectedState(patient_state);
+    setSelectedNumber(patient_number);
+    setSelectedWeight(patient_Weight);
+    setSelectedCountry(patient_country);
+    setWallet(walletId);
+  }, []);
 
   // function to set states for state and lga selection
 
@@ -398,6 +461,9 @@ function PatientsEditProfile() {
                     onChange={handleGenderChange}
                     id="gender" /*onChange={""}*/
                   >
+                    <option disabled selected value="">
+                      Select Gender
+                    </option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                   </select>
@@ -420,9 +486,9 @@ function PatientsEditProfile() {
           </div>
         </div>
         <p className="warning_msg">
-          Notice: If you have more than one account with the same email address
-          on file, you will not be able to use that email address as a username
-          to sign in.
+          <span style={{ color: "red" }}>Notice:</span> If you have more than
+          one account with the same email address on file, you will not be able
+          to use that email address as a username to sign in.
         </p>
         {/* END OF  LEFT SIDE BOTTOM LEFT */}
       </div>
@@ -548,7 +614,7 @@ function PatientsEditProfile() {
                     placeholder="Enter Blood Group"
                   >
                     <option disabled selected value="">
-                      Select Genotype
+                      Select BloodGroup
                     </option>
                     <option value="A+">A+</option>
                     <option value="A-">A-</option>

@@ -42,7 +42,7 @@ function PatientsProfile() {
     let patient_wallet = localStorage.getItem("patient_walletId");
     let patient_first_name = localStorage.getItem("patient_firstName");
     let patient_last_name = localStorage.getItem("patient_lastName");
-
+    console.log(patient_number);
     setPatientNumber(patient_number);
     setPatientAddress(patient_address);
     setPatientCity(patient_city);
@@ -171,7 +171,7 @@ function PatientsProfile() {
               </div>
             </div>
             <div className="right_div">
-              <h3>Gentype</h3>
+              <h3>Genotype</h3>
               <div>
                 <p>{patient_Geno ? patient_Geno : "-"}</p>
               </div>
