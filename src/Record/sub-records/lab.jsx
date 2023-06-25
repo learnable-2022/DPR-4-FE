@@ -30,7 +30,7 @@ export default function Lab() {
         complaint:item.treatmentDetails[0],
         index: index
       }));
-
+      console.log("labs-test", dummyData.complaint);
       const COLA =[
         {
             Headers: "Hospital/healthprovider",

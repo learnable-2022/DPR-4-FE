@@ -6,7 +6,7 @@ export default function Prescription() {
   const navigate =useNavigate();
 
   let prescription = JSON.parse(localStorage.getItem('prescription'));
- console.log("prescription:",prescription);
+ console.log("pres:",prescription);
 
 
   return (

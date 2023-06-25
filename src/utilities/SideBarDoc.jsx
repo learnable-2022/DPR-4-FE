@@ -115,6 +115,7 @@ export default function SideBarDoc() {
 
             <p style={{ fontFamily: "poppins" }}>logout</p>
           </Link>
+         
         </div>
       </div>
     </div>
