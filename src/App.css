@@ -98,3 +98,13 @@
 .center-div span {
   color: #fff;
 }
+.mid-section div:hover{
+  /* background: #fff; */
+
+  width:160px;
+  border-right:10px solid #fff;
+}
+.lower-section div:hover{
+  width:160px;
+  border-right:10px solid #fff;
+}

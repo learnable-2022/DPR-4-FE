@@ -32,17 +32,22 @@ export default function SideBar() {
 
         <div className="mid-section">
           <Link to="/Dashboard" className="link">
-        
-            <img src={Dashboard} alt="dash-logo"/>
+          <div>
+          <img src={Dashboard} alt="dash-logo"/>
             <p style={{fontFamily:"poppins"}}>Dashboard</p>
+          </div>
           </Link>
           <Link to="/Records" className="link">
-            <img src={record} alt="record-logo" />
+          <div>
+          <img src={record} alt="record-logo" />
             <p style={{fontFamily:"poppins"}}>Records</p>
+          </div>
           </Link>
           <Link to="/Billing" className="link">
-            <img src={billinglogo} alt="billing-logo"/>
+          <div>
+          <img src={billinglogo} alt="billing-logo"/>
             <p style={{fontFamily:"poppins"}}>Billings</p>
+          </div>
           </Link>
         </div>
         <div className="lower-section">
@@ -53,9 +58,10 @@ export default function SideBar() {
             }}
           >
             <Link to="/" className="link">
-          
-              <img src={logOut} alt="logout" />
+             <div>
+             <img src={logOut} alt="logout" />
               <p style={{fontFamily:"poppins"}}>logout</p>
+             </div>
             </Link>
           </div>
         </div>

@@ -546,10 +546,12 @@ td{
   font-weight: 600;
   padding: 10px;
   border: none;
+  font-family: "poppins";
 }
 .trow{
   border-bottom: 2px solid #d6ebff;
   background-color:#fff;
+  font-size: 14px;
  }
 
 

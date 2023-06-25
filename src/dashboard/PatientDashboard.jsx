@@ -226,7 +226,7 @@ const checkRecord = async () => {
       localStorage.setItem('vitalSigns', JSON.stringify(vitalSigns));
       localStorage.setItem('treatmentDetails', JSON.stringify(treatmentDetails));
       localStorage.setItem('vaccine', JSON.stringify(vaccine));
-      localStorage.setItem('prescription', JSON.stringify(prescription));
+      localStorage.setItem('pres', JSON.stringify(prescription));
       localStorage.setItem('billing', JSON.stringify(billing));
       localStorage.setItem('service', JSON.stringify(service));
       localStorage.setItem('amount', JSON.stringify(amount));

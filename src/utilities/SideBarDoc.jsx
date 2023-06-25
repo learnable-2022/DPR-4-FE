@@ -39,20 +39,26 @@ export default function SideBarDoc() {
       </div>
       <div className="mid-section">
         <Link to="/DocDashboard" className="link">
-        <img src={Dashboard} alt="dash-logo"/>
+        <div>
+          <img src={Dashboard} alt="dash-logo"/>
           <p style={{fontFamily:"poppins"}}>Dashboard</p>
+          </div>
         </Link>
-
+          
         <Link to="/DocBillings" className="link">
-     
-          <img src={billinglogo} alt="billing-logo"/>
+        <div>
+        <img src={billinglogo} alt="billing-logo"/>
           < p style={{fontFamily:"poppins"}}>Billings</p>
+        </div>
         </Link>
+       
         <Link to="/DocDraft" className="link">
-     
-          <img src={draft} alt="draft" />
+        <div>
+        <img src={draft} alt="draft" />
           <p style={{fontFamily:"poppins"}}>Draft</p>
+        </div>
         </Link>
+        
       </div>
       <div className="lower-section">
         <div
@@ -62,10 +68,12 @@ export default function SideBarDoc() {
           }}
         >
           <Link to="/" className="link">
+          <div>
           <img src={logOut} alt="logout" />
-        
             <p style={{fontFamily:"poppins"}}>logout</p>
+          </div>
           </Link>
+         
         </div>
       </div>
     </div>
