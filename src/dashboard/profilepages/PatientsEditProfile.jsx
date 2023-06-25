@@ -227,6 +227,7 @@ function PatientsEditProfile() {
         localStorage.setItem("patient_firstName", response?.data.firstName);
         localStorage.setItem("patient_lastName", response?.data.lastName);
         localStorage.setItem("patient_middleName", response?.data.middleName);
+
         setSuccessMsg("Details Saved Successfully");
         setTimeout(() => {
           setSuccessMsg("");
@@ -313,7 +314,7 @@ function PatientsEditProfile() {
     let patient_First_Name = localStorage.getItem("patient_firstName");
     let patient_Last_Name = localStorage.getItem("patient_lastName");
     let patient_Middle_Name = localStorage.getItem("patient_middle_name");
-
+    console.log(patient_First_Name);
     setSelectedFirstName(patient_First_Name);
     setSelectedAddress(patient_address);
     setSelectedAlle(patient_Alle);

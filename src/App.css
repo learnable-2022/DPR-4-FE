@@ -4,13 +4,17 @@
 .vertical-stroke {
   position: absolute;
   top: 0;
-  right: 0;
-  width: 4px;
-  height: 100%;
-  background-color: #fcfcfc;
+  right: 0px;
+  width: 6px;
+  height: 10%;
+  background-color: white;
+  z-index: 1;
   transition: top 0.3s ease;
 }
 
+.link.active {
+  font-weight: bold;
+}
 .sideBar {
   width: 160px;
   height: 100vh;
@@ -96,7 +100,7 @@
   flex-direction: column;
   align-items: center;
 }
-.center-div img{
+.center-div img {
   background: none;
   outline: none;
 }

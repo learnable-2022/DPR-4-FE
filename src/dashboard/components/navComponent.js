@@ -44,6 +44,7 @@ function NavComponent({ name, image, firstName }) {
   const [open, setOpen] = useState(false);
   const [successMsg, setSuccessMsg] = useState("");
   const [deleteMsg, setDeleteMsg] = useState("");
+  const [emptyMsg, setEmptyMsg] = useState("");
   const [isPromptOpen, setIsPromptOpen] = useState(false);
   const [isCreateAppointOpen, setIsCreateAppointOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
@@ -180,23 +181,27 @@ function NavComponent({ name, image, firstName }) {
     setIsLoading(true);
     try {
       const userDocRef = doc(db, "Appointments", doctor_Email);
-      const userDataCollectionRef = collection(
-        userDocRef,
-        `${doctor_Name} Appointments`
-      );
-
-      const docRef = await addDoc(userDataCollectionRef, {
-        title,
-        selectedDate,
-        startTime,
-        endTime,
-      });
-      console.log("Appointment successfully created");
-      setIsLoading(false);
-      setSuccessMsg("Appointment successfully created");
-      setTimeout(() => {
-        setSuccessMsg("");
-      }, 2000);
+      const userDataCollectionRef = collection(userDocRef, `My Appointments`);
+      if (title && selectedDate && startTime && endTime) {
+        const docRef = await addDoc(userDataCollectionRef, {
+          title,
+          selectedDate,
+          startTime,
+          endTime,
+        });
+        console.log("Appointment successfully created");
+        setIsLoading(false);
+        setSuccessMsg("Appointment successfully created");
+        setTimeout(() => {
+          setSuccessMsg("");
+        }, 2000);
+      } else {
+        setIsLoading(false);
+        setEmptyMsg("Please all fields are required");
+        setTimeout(() => {
+          setEmptyMsg("");
+        }, 2000);
+      }
     } catch (error) {
       console.error("Error saving notification:", error);
       setIsLoading(false);
@@ -397,7 +402,14 @@ function NavComponent({ name, image, firstName }) {
                 )}
               </button>
             </div>
-            <p style={{ textAlign: "center" }}>{successMsg || deleteMsg}</p>
+            <p
+              style={{ textAlign: "center", marginTop: "4px", color: "green" }}
+            >
+              {successMsg || deleteMsg}
+            </p>
+            <p style={{ textAlign: "center", marginTop: "4px", color: "red" }}>
+              {emptyMsg}
+            </p>
           </div>
         )}
       </div>

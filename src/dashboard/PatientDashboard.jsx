@@ -47,6 +47,9 @@ import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import ourlogo from "../assets/Group 5.svg";
 import axios from "axios";
 import { AiOutlineClose } from "react-icons/ai";
+import { FaSpinner } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // end for nav bar
 
@@ -109,6 +112,7 @@ export default function PatientDashboard() {
   const [signer, setSigner] = useState(null);
   const [contract, setContract] = useState(null);
   const [getForm, setGetForm] = useState("");
+  const [getForm2, setGetForm2] = useState("");
   const [getFormattedRecords, setFormattedRecords] = useState([]);
   const [vitalSigns, setVitalSigns] = useState([]);
   const [treatmentDetails, setTreatmentDetails] = useState([]);
@@ -117,6 +121,8 @@ export default function PatientDashboard() {
   const [billing, setPatientBilling] = useState([]);
   const [service, setPatientService] = useState([]);
   const [amount, setPatientAmount] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading2, setIsLoading2] = useState(false);
 
   const connectWalletHandler = () => {
     if (window.ethereum && window.ethereum.isMetaMask) {
@@ -167,21 +173,43 @@ export default function PatientDashboard() {
     setDefaultAccount(newAccount);
   };
   console.log(contract);
+  const handleSetGetForm = (e) => {
+    setGetForm(e.target.value);
+  };
+  const handleSetGetForm2 = (e) => {
+    setGetForm2(e.target.value);
+  };
 
   const grantDoctorAccess = async (e) => {
+    setIsLoading(true);
     try {
       if (defaultAccount == null && getForm == "") return;
       let access = await contract.grantAccess(getForm, defaultAccount);
       console.log("Access Granted");
-    } catch (err) {}
+      setIsLoading(false);
+      setGetForm("");
+      toast("Access Successfully Granted", { autoClose: 5000 });
+    } catch (err) {
+      setIsLoading(false);
+      setGetForm("");
+      toast(err, { autoClose: 5000 });
+    }
   };
 
   const revokeDoctorAccess = async (e) => {
+    setIsLoading2(true);
     try {
-      if (defaultAccount == null && getForm == "") return;
-      let access = await contract.revokeAccess(getForm, defaultAccount);
-      console.log("Access Granted");
-    } catch (err) {}
+      if (defaultAccount == null && getForm2 == "") return;
+      let access = await contract.revokeAccess(getForm2, defaultAccount);
+      console.log("Access Revoked");
+      setIsLoading2(false);
+      setGetForm2("");
+      toast("Access Successfully Revoked", { autoClose: 5000 });
+    } catch (err) {
+      setIsLoading2(false);
+      setGetForm2("");
+      toast(err, { autoClose: 5000 });
+    }
   };
 
   // console.log(defaultAccount);
@@ -595,28 +623,37 @@ export default function PatientDashboard() {
                 <input
                   className="grant_access_input"
                   type="text"
-                  onChange={(e) => setGetForm(e.target.value)}
+                  onChange={handleSetGetForm}
+                  value={getForm}
                   placeholder="Enter Doctor's Wallet Address to grant access"
                 />
                 <button
                   onClick={() => grantDoctorAccess()}
                   className="grant_access_btn"
+                  disabled={isLoading}
                 >
-                  Grant Access
+                  {isLoading ? <FaSpinner className="spin" /> : "Grant Access"}
                 </button>
+                <ToastContainer />
               </div>
               <div className="revoke_div">
                 <input
                   className="grant_access_input"
                   type="text"
-                  onChange={(e) => setGetForm(e.target.value)}
+                  onChange={handleSetGetForm2}
+                  value={getForm2}
                   placeholder="Enter Doctor's Wallet Address to revoke access"
                 />
                 <button
                   onClick={() => revokeDoctorAccess()}
                   className="revoke_access_btn"
+                  disabled={isLoading2}
                 >
-                  Revoke Access
+                  {isLoading2 ? (
+                    <FaSpinner className="spin" />
+                  ) : (
+                    "Revoke Access"
+                  )}
                 </button>
               </div>
             </div>

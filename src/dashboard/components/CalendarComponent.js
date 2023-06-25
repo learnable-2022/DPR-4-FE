@@ -58,10 +58,7 @@ function CalendarComponent() {
   const retrieveData = async () => {
     try {
       const userDocRef = doc(db, "Appointments", doctor_Email);
-      const userDataCollectionRef = collection(
-        userDocRef,
-        `${doctor_Name} Appointments`
-      );
+      const userDataCollectionRef = collection(userDocRef, `My Appointments`);
 
       const snapshot = await getDocs(userDataCollectionRef);
 

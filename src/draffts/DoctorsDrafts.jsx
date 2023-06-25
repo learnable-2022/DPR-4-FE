@@ -13,15 +13,19 @@ import { FiLogOut } from "react-icons/fi";
 import { AiOutlineSetting } from "react-icons/ai";
 import { RxDashboard } from "react-icons/rx";
 import { TfiWrite } from "react-icons/tfi";
+import { FaSpinner } from "react-icons/fa";
 import { BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
-import ourlogo from "../assets/newlogo1.png";
+import ourlogo from "../assets/Group 5.svg";
 
 import { AiOutlineClose } from "react-icons/ai";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function DoctorsDrafts() {
   const { tempContract } = contracts();
+  const [isLoading, setIsLoading] = useState(false);
   console.log(tempContract);
 
   const [{}, dispatch] = useServiceProviderValue();
@@ -75,6 +79,7 @@ export default function DoctorsDrafts() {
   // console.log(vaccineStatus);
 
   const saveRecords = async () => {
+    setIsLoading(true);
     try {
       const updateRecord = await tempContract.addPatientRecord(
         walletAddress,
@@ -100,8 +105,12 @@ export default function DoctorsDrafts() {
         [totalAmount]
       );
       console.log(updateRecord);
+      setIsLoading(false);
+      toast("Records Successfully Updated!", { autoClose: 3000 });
     } catch (error) {
       console.error("Error executing addPatientRecord:", error);
+      setIsLoading(false);
+      toast(error, { autoClose: 3000 });
     }
   };
 
@@ -249,9 +258,20 @@ export default function DoctorsDrafts() {
           }
         >
           {window.location.pathname === "/DocDraft/finish" && (
-            <button className="draft_update_btn" onClick={saveRecords}>
-              Update Patient Portal
-            </button>
+            <>
+              <button
+                className="draft_update_btn"
+                onClick={saveRecords}
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <FaSpinner className="spin" />
+                ) : (
+                  "Update Patient Portal"
+                )}
+              </button>
+              <ToastContainer />
+            </>
           )}
           <img
             src={doctors_Image ? doctors_Image : emptyProfile}
