@@ -9,12 +9,16 @@
 
   overflow-y: scroll;
 }
-.doctorseditprofile .back_arrow {
+
+.doctorseditprofile .warning_msg {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 .doctorseditprofile .topleft .profile_btn {
   border: none;
   background-color: #55aa55;
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 1.5rem;
   border-radius: 10px;
   color: white;
 }
@@ -35,18 +39,18 @@
   color: #444444;
 }
 .doctorseditprofile .topleft .email {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 0.4rem;
+  margin-bottom: 0.5rem;
   color: #77bbff;
   font-size: 13px;
   font-weight: 600;
 }
+
 .doctorseditprofile .topleft img,
 .empty_profile {
-  height: 160px;
-  width: 160px;
+  height: 140px;
+  width: 140px;
   border-radius: 50%;
-  border: 1px solid rgb(133, 133, 133);
   object-fit: fill;
 }
 #inputTag {
@@ -236,6 +240,11 @@
   .doctorseditprofile {
     padding: 0.4rem;
   }
+  .doctorseditprofile .warning_msg {
+    font-size: 12px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
   .doctorseditprofile ._bottom_profile_details_ {
     flex-direction: column;
     gap: 0;
@@ -276,6 +285,10 @@
   .doctorseditprofile ._bottom_left {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+  .doctorseditprofile .topleft img {
+    height: 120px;
+    width: 120px;
   }
   .doctorseditprofile ._right_side {
     padding-left: 1rem;

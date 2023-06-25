@@ -8,30 +8,35 @@ import "./dashboard.css";
 import Calendar from "react-calendar";
 import NavComponent from "./components/navComponent";
 import { Link, useNavigate } from "react-router-dom";
-
+import { db } from "../firebase";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  doc,
+  query,
+  orderBy,
+  deleteDoc,
+  serverTimestamp,
+} from "firebase/firestore";
 import axios from "axios";
 import { useServiceProviderValue } from "../ServiceProvider";
 import abi from "../abi.json";
 import { ethers } from "ethers";
+import { RiArrowDropDownFill } from "react-icons/ri";
 
 //rescue kenneth
 export default function DoctorsDashboard() {
   const navigator = useNavigate();
-
-  // const {auth} = useContext(StateContext);
-  // const navigator = useNavigate();
-
-  // console.log(auth.token);
-
-  // if (auth.doctorToken) {
-  //   return  navigator("./docdashboard");
-
-  // }else if(!auth.doctorToken){
-
-  //   return navigator("./landing");
-  // }
-
-  const [{ allpatients }, dispatch] = useServiceProviderValue();
+  const [isDropOpen, setIsDropOpen] = useState(false);
+  const [retrievedData, setRetrievedData] = useState(null);
+  const [snapshot, setSnapshot] = useState("");
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+  const day = currentDate.getDate();
+  let concatCurrentDate = `${year}-${month}-${day}`;
+  const [{ allpatients, not_title }, dispatch] = useServiceProviderValue();
   let token = localStorage.getItem("doctorToken");
   let doctorID = localStorage.getItem("doctor_id");
   const [date, setDate] = useState(new Date());
@@ -48,11 +53,23 @@ export default function DoctorsDashboard() {
   const [errorMessage, setErrorMessage] = useState(null);
   let contractAddress = "0xB8f1ed9Adca8c6863B3da364B1b332B51462BA06";
   const [defaultAccount, setDefaultAccount] = useState(null);
-
   const [provider, setProvider] = useState(null);
   const [signer, setSigner] = useState(null);
   const [contract, setContract] = useState(null);
   const [getForm, setGetForm] = useState("");
+  const [doctor_Name, setDoctorName] = useState("");
+  const [doctor_Image, setDoctorImage] = useState("");
+  const [doctor_Email, setDoctorEmail] = useState("");
+  const [doctor_gender, setDoctorGender] = useState("");
+  const [doctor_Age, setDoctorAge] = useState("");
+  const [doctor_ID, setDoctorID] = useState("");
+  const [doctor_License, setDoctorrLicense] = useState("");
+  const [doctor_First_Name, setDoctorFirstName] = useState("");
+  const [doctor_Last_Name, setDoctorLastName] = useState("");
+  const [getPatientsList, setPatientList] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredNames, setFilteredNames] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
 
   const connectWalletHandler = () => {
     if (window.ethereum && window.ethereum.isMetaMask) {
@@ -62,7 +79,10 @@ export default function DoctorsDashboard() {
           accountChangedHandler(result[0]);
           setConnectedWallet(true);
           console.log(defaultAccount);
-          localStorage.setItem('defaultAccount', JSON.stringify(defaultAccount));
+          localStorage.setItem(
+            "defaultAccount",
+            JSON.stringify(defaultAccount)
+          );
           updateEthers();
           // setConnButtonText('Wallet Connected');
         })
@@ -74,7 +94,12 @@ export default function DoctorsDashboard() {
       setErrorMessage("Please install MetaMask browser extension to interact");
     }
   };
+  const selectedyear = date.getFullYear();
+  const selectedmonth = (date.getMonth() + 1).toString().padStart(2, "0");
+  const selectedday = date.getDate().toString().padStart(2, "0");
 
+  let formattedDate = `${selectedyear}-${selectedmonth}-${selectedday}`;
+  console.log(formattedDate);
   const updateEthers = async () => {
     try {
       if (window.ethereum && window.ethereum.isMetaMask) {
@@ -122,20 +147,6 @@ export default function DoctorsDashboard() {
   }, []);
 
   localStorage.setItem("contract", contract);
-  const [doctor_Name, setDoctorName] = useState("");
-  const [doctor_Image, setDoctorImage] = useState("");
-  const [doctor_Email, setDoctorEmail] = useState("");
-  const [doctor_gender, setDoctorGender] = useState("");
-  const [doctor_Age, setDoctorAge] = useState("");
-  const [doctor_ID, setDoctorID] = useState("");
-  const [doctor_License, setDoctorrLicense] = useState("");
-  const [doctor_First_Name, setDoctorFirstName] = useState("");
-  const [doctor_Last_Name, setDoctorLastName] = useState("");
-  const [getPatientsList, setPatientList] = useState([]);
-
-  // const [doctor_Height, setDoctorHeight] = useState("");
-  // const [doctor_Weight, setDoctorWeight] = useState("");
-  // const [doctor_Alle, setDoctorAlle] = useState("");
 
   let checkEffectDOB = localStorage.getItem("doctor_DOB");
 
@@ -148,14 +159,11 @@ export default function DoctorsDashboard() {
   let checkEffectImage = localStorage.getItem("doctor_image");
 
   let checkEffectName = localStorage.getItem("doctor_name");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filteredNames, setFilteredNames] = useState([]);
 
   useEffect(() => {
-    localStorage.setItem('defaultAccount', JSON.stringify(defaultAccount));
+    localStorage.setItem("defaultAccount", JSON.stringify(defaultAccount));
   }, [defaultAccount]);
 
-  
   // let checkEffectwallet = localStorage.getItem("doctor_walletId");
   // const closeOpenMenus = useCallback(
   //   (e) => {
@@ -187,30 +195,18 @@ export default function DoctorsDashboard() {
       .then((res) => {
         const patientsData = res.data;
         localStorage.setItem("patient_list", JSON.stringify(patientsData));
-        //setPatientList(patientsData);
 
         setPatients(res.data);
-        // dispatch({ type: "SET_ALL_PATIENTS", allpatients: res.data });
-        // console.log(allpatients);
       })
       .catch((error) => {});
   };
-  // useEffect(() => {
-  //   // setPatientList(filtered);
-  //   if (searchTerm === "") {
-  //     const storedPatientList = localStorage.getItem("patient_list");
-  //     const parsedPatientList = JSON.parse(storedPatientList);
-  //     setPatientList(parsedPatientList);
-  //   } else {
-  //     const filtered = getPatientsList.filter((name) =>
-  //       name?.name.toLowerCase().includes(searchTerm.toLowerCase())
-  //     );
-  //     setPatientList(filtered);
-  //   }
-  //   //
-  // }, [searchTerm, getPatientsList]);
+
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
+    const filtered = getPatientsList.filter((item) =>
+      item.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredItems(filtered);
   };
   useEffect(() => {
     getAllPatients();
@@ -295,9 +291,7 @@ export default function DoctorsDashboard() {
     checkEffectLicense,
     checkEffectName,
   ]);
-  {
-    console.log(getPatientsList);
-  }
+
   const handleButtonClick = (index) => {
     const updatedOpenStates = [...open];
     updatedOpenStates[index] = !updatedOpenStates[index];
@@ -307,14 +301,57 @@ export default function DoctorsDashboard() {
     setOpen2(!open2);
   };
 
+  const retrieveData = async () => {
+    let doctor_Name = localStorage.getItem("doctor_name");
+    let doctor_Email = localStorage.getItem("doctor_email");
+    try {
+      const userDocRef = doc(db, "Appointments", doctor_Email);
+      const userDataCollectionRef = collection(userDocRef, `My Appointments`);
+
+      const snapshot = await getDocs(userDataCollectionRef);
+
+      const userData = [];
+
+      snapshot.forEach((doc) => {
+        userData.push({ id: doc.id, ...doc.data() });
+      });
+
+      setRetrievedData(userData);
+      console.log("Retrieved data:", userData);
+    } catch (error) {
+      console.error("Error retrieving data:", error);
+    }
+  };
+  useEffect(() => {
+    retrieveData();
+  }, [date, retrievedData]);
+  function formatTimeRange(timeRange) {
+    const [startTime, endTime] = timeRange.split("-");
+    const formattedStartTime = formatTime(startTime);
+    const formattedEndTime = formatTime(endTime);
+    return `${formattedStartTime}-${formattedEndTime}`;
+  }
+
+  function formatTime(time) {
+    const [hours, minutes] = time.split(":");
+    const parsedHours = parseInt(hours, 10);
+    const formattedHours = parsedHours % 12 === 0 ? 12 : parsedHours % 12;
+    const period = parsedHours >= 12 ? "pm" : "am";
+    return `${formattedHours}:${minutes}${period}`;
+  }
+
+  let CurrentAppointment = retrievedData?.filter(
+    (item) => item?.selectedDate == formattedDate
+  );
+  console.log(CurrentAppointment);
+  console.log(formattedDate);
   const handleAddCargo = (e) => {};
   console.log(patients);
   return (
     <div className="doctorsdashboard">
       <NavComponent
-        name={
-          doctor_First_Name ? doctor_First_Name : doctor_Name?.split(" ")[0]
-        }
+        name={doctor_Name}
+        firstName={doctor_First_Name}
         image={doctor_Image}
       />
 
@@ -346,7 +383,10 @@ export default function DoctorsDashboard() {
                   return (
                     <div className="patients_info" key={index}>
                       <p>#{index}</p>
-                      <p>{patient?.name}</p>
+                      <p>
+                        {patient?.name ||
+                          patients?.firstName + " " + patients?.lastName}
+                      </p>
                       <CiCircleMore
                         className="circle_more"
                         onClick={() => handleButtonClick(index)}
@@ -387,59 +427,33 @@ export default function DoctorsDashboard() {
                 <div className="middle">
                   <p>{date.toLocaleDateString("en-us", options2)}</p>
                 </div>
-                <div className="appointment_brief">
-                  <p>Appointment with #2589 </p>
-                  <p>12pm - 2pm</p>
+                <div>
+                  {CurrentAppointment?.length !== 0 ? (
+                    CurrentAppointment?.map((item) => {
+                      return (
+                        <div className="appointment_brief">
+                          <p>{item.title}</p>
+                          <p>
+                            {formatTimeRange(
+                              `${item.startTime}-${item.endTime}`
+                            )}
+                          </p>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div className="appointment_brief">
+                      <p>No Appointment for today!!</p>
+                    </div>
+                  )}
                 </div>
-                {/* <div className="appointment_brief">
-          </div>
-          <div className="right-side">
-            <div className="calendar-container">
-              <Calendar
-                onClickDay={handleAddCargo}
-                onChange={setDate}
-                value={date}
-              />
-            </div>
-            <div className="schedule_div">
-              <div className="schedule_wrapper">
-                <div className="top">
-                  <Link to="/DocSchedule" className="link">
-                    <button>Schedule</button>
-                  </Link>
-
-                  <p>{date.toLocaleDateString("en-us", options)}</p>
-                </div>
-                <div className="middle">
-                  <p>{date.toLocaleDateString("en-us", options2)}</p>
-                </div>
-                <div className="appointment_brief">
-                  <p>Appointment with #2589 </p>
-                  <p>12pm - 2pm</p>
-                </div>
-                {/* <div className="appointment_brief">
-                <p>Appointment with #2589 </p>
-                <p>12pm - 2pm</p>
-              </div>
-              <div className="appointment_brief">
-                <p>Appointment with #2589 </p>
-                <p>12pm - 2pm</p>
-              </div>
-              <div className="appointment_brief">
-                <p>Appointment with #2589 </p>
-                <p>12pm - 2pm</p>
-              </div>
-              <div className="appointment_brief">
-                <p>Appointment with #2589 </p>
-                <p>12pm - 2pm</p>
-              </div> */}
               </div>
             </div>
           </div>
         </main>
       ) : (
         <div className="doc_connect_div">
-          <p>You are not yet connected, Please click to the button connect</p>
+          <p>You are not yet connected, Please click the button to connect</p>
           <button className="doc_connect_btn" onClick={connectWalletHandler}>
             {connButtonText}
           </button>
