@@ -131,7 +131,7 @@ const { globalFilter } = state;
                 return(
             <div className='table-2-vaccine'>
                   <ul>
-                  <h4>Hospital/ Laboratory</h4>
+                  <h4>Hospital/ healthprovider</h4>
                     <li>{items.hosiptalName} <br/>{items.name}</li>
                     <h4>Vaccines</h4>
                     <li>{items.vaccine}</li>

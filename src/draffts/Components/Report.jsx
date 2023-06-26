@@ -179,6 +179,9 @@ function Report() {
               onChange={handleSetVaccineStatus}
               value={vaccineStatus}
             >
+              <option disabled selected value="">
+                Select Vaccine Status
+              </option>
               <option>Completed</option>
               <option>Not Completed</option>
             </select>
@@ -190,40 +193,8 @@ function Report() {
             <p className="light">Medication</p>
             <p className="light">Duration</p>
             <p className="light">Dosage</p>
-            <p></p>
           </div>
-          {/* <div className="prescription_input_div">
-            <input
-              className="prescription_input"
-              type="text"
-              name="med"
-              onChange={handleSetMedication} //(e) => handleChange(e, i)}
-              value={medication}
-              placeholder="Enter Medication"
-            />
-            <input
-              className="prescription_input"
-              name="dur"
-              type="text"
-              onChange={handleSetDuration} //(e) => handleChange(e, i)}
-              value={duration}
-              placeholder="Enter Duration"
-            />
-            <input
-              className="prescription_input"
-              type="text"
-              name="dos"
-              value={dosage}
-              onChange={handleSetDosage} //(e) => handleChange(e, i)}
-              placeholder="Enter Dosage"
-            />
-            <button
-                  className="presc_delete_btn"
-                  onClick={() => handleDelete(i)}
-                >
-                  x
-                </button> 
-          </div> */}
+
           {val.map((data, i) => {
             return (
               <div className="prescription_input_div">

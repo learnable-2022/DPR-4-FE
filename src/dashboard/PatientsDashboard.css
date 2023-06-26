@@ -14,6 +14,21 @@
   display: flex;
   flex-direction: column;
 }
+.spin {
+  color: white;
+}
+.spin {
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .patients_dashboard_main {
   margin-top: 3rem;
 }
@@ -80,6 +95,7 @@
   align-items: center;
   border-bottom: solid 1px #d6ebff;
   padding: 0 2rem 0.6rem 2rem;
+  padding-top: 0.6rem;
   padding-bottom: 0.6rem;
 }
 .patientdashboard .right_side_header {
@@ -315,6 +331,7 @@
 }
 
 .patientdashboard .vitals_readings_cards .card1 {
+  position: relative;
   padding: 1rem 3rem 2rem 1rem;
   border-radius: 10px;
   margin: 0 1rem;
@@ -626,7 +643,7 @@
     display: block;
     position: absolute;
     left: 10px;
-    top: 5px;
+    top: 0.6rem;
     width: 20px;
     height: 20px;
   }
@@ -739,7 +756,7 @@
   }
   .patientdashboard .vitals_readings_cards .card1 .top .right_div {
     position: absolute;
-    top: 9rem;
+    top: 30%;
   }
   .patientdashboard .middle1 .middle1_left,
   .middle1 .middle1_right,
