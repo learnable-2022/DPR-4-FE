@@ -95,6 +95,7 @@
       justify-content: space-between;
       margin-left: 20px;
       margin-top: 40px;
+     
     }
   
     .hamburger {
@@ -116,6 +117,10 @@
       border-radius: 8px;
       margin-top: 10px;
     }
+
+  .smallScreenInvoicePics{
+    margin-left: 60px;
+  }
   
     .smallScreenBIllingNavHistory {
       display: flex;

@@ -8,11 +8,21 @@ import printer from "../assets/images/printer.png";
 import Heart from "../assets/images/Heart.png";
 import Syring from "../assets/images/Syring.png";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import RadioButton from "../assets/images/RadioButton.png";
 import pay from "../assets/images/pay.png";
 import PayPal from "../assets/images/PayPal.png";
 import VISA from "../assets/images/VISA.png";
 import { GiHamburgerMenu } from "react-icons/gi";
+import ResponsivenessSidebar from "./ResponsivenessSidebar";
+
+import ourlogo from "../assets/Frame 8.png";
+import Dashboard from "../assets/Category.png";
+import record from "../assets/Document.png";
+import billinglogo from "../assets/streamline_money-cash-coins-stack-accounting-billing-payment-stack-cash-coins-currency-money-finance.png";
+import logOut from "../assets/Logout.png";
+import {AiOutlineClose} from "react-icons/ai";
+import { Link } from 'react-router-dom';
 
 function PatientInvoice() {
   const navigate = useNavigate();
@@ -25,15 +35,62 @@ function PatientInvoice() {
     navigate("/PatientInvoiceConfirmation");
   }
 
+  const [navOpen, setIsNavOpen] = useState(false);
+
+    const toggleNav = () => {
+        setIsNavOpen(!navOpen);
+      };
+
   return (
     <>
-      <div className="Right">
+      <div className="Right">   
+          {/* start*/}
+          <div
+        className={navOpen ? "patient_dashboard_nav" : "closeNav"}>
+        <div className="_sideBar">
+          <AiOutlineClose className="close_btn" onClick={toggleNav}  />
+          <div className="_center-div">
+            <img src={ourlogo} alt="app-logo" style={{width:"100px", height:"70px"}} />
+          </div>
+
+          <div className="_mid-section">
+            <Link to="/Dashboard" className="link">
+            <img src={Dashboard} alt="dash-logo"/>
+            <p style={{fontFamily:"poppins"}}>Dashboard</p>
+            </Link>
+            <Link to="/Records" className="link">
+            <img src={record} alt="record-logo" />
+            <p style={{fontFamily:"poppins"}}>Records</p>
+            </Link>
+            <Link to="/Billing" className="link">
+            <img src={billinglogo} alt="billing-logo"/>
+            <p style={{fontFamily:"poppins"}}>Billings</p>
+            </Link>
+          </div>
+          <div className="_lower-section">
+            <div
+              onClick={() => {
+                localStorage.removeItem("patientToken");
+                localStorage.removeItem("patientEmail");
+              }}
+            >
+              <Link to="/" className="link">
+              <img src={logOut} alt="logout" />
+              <p style={{fontFamily:"poppins"}}>logout</p>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+          {/* stop */}
+      
               {/* =========================== */}
               <div className="smallScreenInvoiceIconsContainer">
-          <GiHamburgerMenu  className="hamburger" />
+              {/* <ResponsivenessSidebar/> */}
+          <GiHamburgerMenu  className="hamburger"  onClick={toggleNav}/>
           <div className="smallScreenInvoiceIcons">
-            <img src={Notification} alt="pics" />
-            <img src={PatientPics} alt="pics" />
+            {/* <img src={Notification} alt="pics" /> */}
+            <img src={PatientPics} className="smallScreenInvoicePics" alt="pics" />
           </div>
           </div>
 
@@ -55,7 +112,7 @@ function PatientInvoice() {
             </div>
 
             <div className="invoiceIcons">
-              <img src={Notification} alt="pics" />
+              {/* <img src={Notification} alt="pics" /> */}
               <img src={PatientPics} alt="pics" />
             </div>
           </div>
