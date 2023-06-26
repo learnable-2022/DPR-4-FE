@@ -72,7 +72,7 @@ export default function PatientDashboard() {
 
   const [data, setData] = useState(true);
   const drugs = [drug1, drug2, drug3, drug4];
-  const [connectedWallet, setConnectedWallet] = useState(true);
+  const [connectedWallet, setConnectedWallet] = useState(false);
   const diseases = [disease1, disease2, disease3];
   const mobileMenuRef = useRef();
   const mobileNavRef = useRef();
@@ -341,7 +341,7 @@ export default function PatientDashboard() {
         localStorage.setItem("patient_address", res1?.address);
         localStorage.setItem("patient_city", res1?.city);
         localStorage.setItem("patient_country", res1?.country);
-        localStorage.setItem("patient_number", res1?.number);
+        localStorage.setItem("patient_number", res1?.phoneNumber);
         localStorage.setItem("patient_state", res1?.state);
         localStorage.setItem("patient_firstName", res1?.firstName);
         localStorage.setItem("patient_lastName", res1?.lastName);
@@ -603,18 +603,6 @@ export default function PatientDashboard() {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="right_patient_vitals">
-            <button className="right_patient_vitals_btn">Patient</button>
-            <p className="key">
-              Primary site: <strong className="value">Nil</strong>
-            </p>
-            <p className="key">
-              Stage: <strong className="value">Nil</strong>
-            </p>
-            <p className="key">
-              Medical Condition: <strong className="value">Nil</strong>
-            </p>
           </div>
         </div>
         {connectedWallet ? (

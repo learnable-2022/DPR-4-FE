@@ -192,7 +192,7 @@ function DoctorsRecords() {
     const storedPatientList = localStorage.getItem("patient_list");
     const parsedPatientList = JSON.parse(storedPatientList);
     setPatientList(parsedPatientList);
-    navigate("./")
+    navigate("./");
   }, []);
 
   return (
@@ -234,7 +234,7 @@ function DoctorsRecords() {
           <div className="second-image">
             <img
               src={patientImage}
-              style={{ borderRadius: "50%", border: "1px solid black" }}
+              style={{ borderRadius: "50%" }}
               alt="bigpics"
             />
           </div>
