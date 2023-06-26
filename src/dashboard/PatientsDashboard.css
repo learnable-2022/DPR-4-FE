@@ -331,6 +331,7 @@
 }
 
 .patientdashboard .vitals_readings_cards .card1 {
+  position: relative;
   padding: 1rem 3rem 2rem 1rem;
   border-radius: 10px;
   margin: 0 1rem;
@@ -755,7 +756,7 @@
   }
   .patientdashboard .vitals_readings_cards .card1 .top .right_div {
     position: absolute;
-    top: 9rem;
+    top: 30%;
   }
   .patientdashboard .middle1 .middle1_left,
   .middle1 .middle1_right,
