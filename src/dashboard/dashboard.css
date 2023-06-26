@@ -83,6 +83,7 @@
 .doctorsdashboard main .search_icon {
   width: 1.5rem;
   height: 1.5rem;
+  margin-right: 0.3rem;
 }
 .doctorsdashboard main .left-side .title_div {
   background-color: #e0f5e0;
@@ -103,6 +104,9 @@
 }
 .doctorsdashboard .left-side .patients_div {
   margin-top: 0.4rem;
+}
+.doctorsdashboard main .search_div input::placeholder {
+  padding-left: 0.3rem;
 }
 .doctorsdashboard .dropdown {
   position: absolute;
@@ -140,8 +144,14 @@
   position: relative;
 }
 .calendar-container {
+  display: flex;
   position: relative;
   padding-top: 1rem;
+}
+
+.patientdashboard .drop_content_item:hover {
+  cursor: pointer;
+  background-color: rgb(242, 242, 242);
 }
 .ken_class {
   position: absolute;
@@ -166,6 +176,7 @@
 }
 .doctorsdashboard main .right-side {
   height: 100%;
+
   margin-right: 2rem;
   overflow-y: scroll;
 }
@@ -251,6 +262,7 @@
 .react-calendar {
   width: 270px;
   max-width: 100%;
+  flex-grow: 1;
   background: #ecf5fe;
   border-radius: 10px;
   font-family: Arial, Helvetica, sans-serif;
@@ -408,6 +420,8 @@ abbr {
     margin-left: 0.4rem;
     padding-left: 1rem;
     margin-right: 0.4rem;
+    overflow-y: scroll;
+    height: 550px;
   }
   .doctorsdashboard .header_text_part p {
     width: 100%;
@@ -454,6 +468,7 @@ abbr {
     display: block;
 
     margin-left: 40%;
+    width: 100px;
   }
 }
 @media (max-width: 926px) {
@@ -465,6 +480,7 @@ abbr {
   .doctorsdashboard .doc_med_logo {
     display: block;
     margin-left: 0;
+    width: 100px;
   }
 }
 
@@ -507,6 +523,8 @@ abbr {
   .doctorsdashboard main .header_div {
     flex-direction: column;
     gap: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
   .doctorsdashboard main .search_div {
     width: 100%;

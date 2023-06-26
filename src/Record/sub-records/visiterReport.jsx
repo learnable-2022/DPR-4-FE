@@ -79,14 +79,13 @@ export default function VisiterReport() {
                 <p className='bold'>Doctors Name:</p>
                 <p className='bold'>Patients Complaint:</p>
                 <p className='bold'>Doctors comment:</p>
-                <p  className=' bolder'>Remarks/Treatments</p>
+                <p  className=' bolder'>Remarks/Treatments:</p>
               </div>
               <div className='third-lab-report-second'>
               <p>{record.billing[3]}</p>
               <p>{record.billing[2]}</p>
               <p>{record.treatmentDetails[0]}</p>
               <p>{record.treatmentDetails[1]}</p>
-           
               <p>{record.treatmentDetails[2]}</p>
               </div>
               <div className='third-lab-report-third'>

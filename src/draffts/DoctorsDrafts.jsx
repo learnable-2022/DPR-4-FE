@@ -7,23 +7,27 @@ import { RiNumber1 } from "react-icons/ri";
 import { RiNumber2 } from "react-icons/ri";
 import { RiNumber3 } from "react-icons/ri";
 import { useServiceProviderValue } from "../ServiceProvider";
-import {contracts} from '../hooks/UseContract';
+import { contracts } from "../hooks/UseContract";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FiLogOut } from "react-icons/fi";
 import { AiOutlineSetting } from "react-icons/ai";
 import { RxDashboard } from "react-icons/rx";
 import { TfiWrite } from "react-icons/tfi";
+import { FaSpinner } from "react-icons/fa";
 import { BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
-import ourlogo from "../assets/ourlogo.png";
+import ourlogo from "../assets/Group 5.svg";
 
 import { AiOutlineClose } from "react-icons/ai";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function DoctorsDrafts() {
-  const {tempContract} = contracts();
-  console.log(tempContract)
-  
+  const { tempContract } = contracts();
+  const [isLoading, setIsLoading] = useState(false);
+  console.log(tempContract);
+
   const [{}, dispatch] = useServiceProviderValue();
   const mobileNavRef = useRef();
   const [navOpen, setIsNavOpen] = useState(false);
@@ -35,14 +39,13 @@ export default function DoctorsDrafts() {
   const shouldApplyStyle = location.pathname.includes("/finish");
   const report = location.pathname.includes("/report");
   const vitals = location.pathname.includes("/");
-  
 
   const handle = (e) => {
     navigate(+1);
   };
-   
+
   const [
-    { 
+    {
       walletAddress,
       temperature,
       bloodCount,
@@ -67,34 +70,49 @@ export default function DoctorsDrafts() {
       billingLocation,
       billings,
       totalAmount,
-    }
+    },
   ] = useServiceProviderValue();
-  console.log(walletAddress)
-  const handleWalletAddress = (e) =>{
-   
-     dispatch({type:"SET_PATIENT_ADDRESS", walletAddress:e.target.value})
-  }
-// console.log(vaccineStatus);
-  
+  console.log(walletAddress);
+  const handleWalletAddress = (e) => {
+    dispatch({ type: "SET_PATIENT_ADDRESS", walletAddress: e.target.value });
+  };
+  // console.log(vaccineStatus);
+
   const saveRecords = async () => {
+    setIsLoading(true);
     try {
       const updateRecord = await tempContract.addPatientRecord(
         walletAddress,
-        [temperature, heartRate, respRate, oxygen, bloodPressure, bloodCount, glucoseLevel],
+        [
+          temperature,
+          heartRate,
+          respRate,
+          oxygen,
+          bloodPressure,
+          bloodCount,
+          glucoseLevel,
+        ],
         [complaints, comments, treatments],
         [vaccineName, vaccineDate, vaccineStatus],
         [prescriptions[0].med, prescriptions[0].dur, prescriptions[0].dos],
         [billingDate, billingPatientName, billingProvider, billingLocation],
-        [billings[0].serviceType, billings[0].serviceCharge, billings[0].subTotal, billings[0].tax],
+        [
+          billings[0].serviceType,
+          billings[0].serviceCharge,
+          billings[0].subTotal,
+          billings[0].tax,
+        ],
         [totalAmount]
       );
       console.log(updateRecord);
+      setIsLoading(false);
+      toast("Records Successfully Updated!", { autoClose: 3000 });
     } catch (error) {
-      console.error('Error executing addPatientRecord:', error);
+      console.error("Error executing addPatientRecord:", error);
+      setIsLoading(false);
+      toast(error, { autoClose: 3000 });
     }
   };
-  
-
 
   const closeOpenNav = useCallback(
     (e) => {
@@ -191,10 +209,11 @@ export default function DoctorsDrafts() {
         <div className="_side_Bar">
           <AiOutlineClose className="close__btn" onClick={toggleNav} />
           <div className="_center__div">
-            <img src={ourlogo} alt="app-logo" />
-            <p>
-              Med<span>bloc</span>
-            </p>
+            <img
+              src={ourlogo}
+              style={{ width: "70px", height: "70px" }}
+              alt="app-logo"
+            />
           </div>
 
           <div className="_mid__section">
@@ -239,7 +258,20 @@ export default function DoctorsDrafts() {
           }
         >
           {window.location.pathname === "/DocDraft/finish" && (
-            <button className="draft_update_btn" onClick={saveRecords}>Update Patient Portal</button>
+            <>
+              <button
+                className="draft_update_btn"
+                onClick={saveRecords}
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <FaSpinner className="spin" />
+                ) : (
+                  "Update Patient Portal"
+                )}
+              </button>
+              <ToastContainer />
+            </>
           )}
           <img
             src={doctors_Image ? doctors_Image : emptyProfile}
@@ -288,7 +320,7 @@ export default function DoctorsDrafts() {
         <div className="grant_access_div_wrapper">
           <div className="grant_access_div">
             <input
-             onChange={handleWalletAddress}
+              onChange={handleWalletAddress}
               className="access_input"
               type="text"
               value={walletAddress}
@@ -302,7 +334,6 @@ export default function DoctorsDrafts() {
       <Outlet className="draft_outlet" />
 
       <div className="report_btn_style">
-        
         <button
           onClick={handleNext}
           className={shouldApplyStyle ? "no_btn" : "draft_next"}

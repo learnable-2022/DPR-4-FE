@@ -30,7 +30,7 @@ export default function Lab() {
         complaint:item.treatmentDetails[0],
         index: index
       }));
-
+      console.log("labs-test", dummyData.complaint);
       const COLA =[
         {
             Headers: "Hospital/healthprovider",
@@ -144,8 +144,8 @@ const { globalFilter } = state;
                 return(
             <div className='table-2-vaccine'>
                   <ul>
-                  <h4>Hospital/ Laboratory</h4>
-                    <li>{items.hosiptalName} <br/>{items.name}</li>
+                  <h4>Hospital/ healthprovider</h4>
+                    <li>{items.hosiptalName} <br/>{items. OwnerName}</li>
                     <h4>Test-type</h4>
                     <li>{items.testResult}</li>
                     <h4>complaint</h4> 

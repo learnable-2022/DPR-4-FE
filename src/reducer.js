@@ -12,10 +12,10 @@ export const initialState = {
   bloodPressure: null,
   glucoseLevel: null,
   heartRate: null,
-  walletAddress:null,
+  walletAddress: null,
   oxygen: null,
   respRate: null,
-  totalAmount:null,
+  totalAmount: null,
   billingDate: null,
   billingPatientName: null,
   billingProvider: null,
@@ -24,21 +24,33 @@ export const initialState = {
   billings: [],
   user_details: null,
   screenshot: null,
+  not_id: null,
+  not_title: null,
   allpatients: null,
   index: null,
 };
 const reducer = (state, action) => {
   switch (action.type) {
+    case "SET_NOTIFI_ID":
+      return {
+        ...state,
+        not_id: action.not_id,
+      };
+    case "SET_NOTIFI_TITLE":
+      return {
+        ...state,
+        not_title: action.not_title,
+      };
     case "SET_TOKEN":
       return {
         ...state,
         token: action.token,
       };
-      case "SET_TOTAL_AMOUNT":
-        return{
-          ...state,
-          totalAmount:action.totalAmount
-        }
+    case "SET_TOTAL_AMOUNT":
+      return {
+        ...state,
+        totalAmount: action.totalAmount,
+      };
     case "SET_USER_DETAILS":
       return {
         ...state,
@@ -163,12 +175,12 @@ const reducer = (state, action) => {
         ...state,
         billingLocation: action.billingLocation,
       };
-      
-      case "SET_PATIENT_ADDRESS":
-        return {
-          ...state,
-          walletAddress : action.walletAddress
-        }
+
+    case "SET_PATIENT_ADDRESS":
+      return {
+        ...state,
+        walletAddress: action.walletAddress,
+      };
     default:
       return state;
   }

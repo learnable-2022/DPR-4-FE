@@ -10,7 +10,6 @@
 .billing_name_wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   margin-bottom: 2rem;
 }
@@ -26,7 +25,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 .draft_billing_header {
   margin-bottom: 1rem;
@@ -56,7 +54,6 @@
 .service_charge_header_wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   margin-top: 2rem;
 }
@@ -74,7 +71,7 @@
 .service_charge_values_wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
+
   justify-content: center;
 }
 .service_charge_values {
@@ -106,7 +103,7 @@
 .add_total_div_wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
+
   justify-content: center;
 }
 .add_total_div {
