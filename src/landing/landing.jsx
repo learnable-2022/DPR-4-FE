@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, { useRef, useState } from "react";
 import femaleDoc from "../landing/Images/femalemama.jpg";
 import logo from "../landing/Images/logo.png";
 import male from "../landing/Images/maleDoc.png";
@@ -6,26 +6,24 @@ import heart from "../landing/Images/heartbeat.png";
 import pill from "../landing/Images/pill.png";
 import "../landing/landing.css";
 import { Link } from "react-router-dom";
-import newlogo from "../assets/newlogo3.png"
-
+import newlogo from "../assets/newlogo3.png";
 
 export default function Landing() {
-  const [isNavOpen, setIsNavOpen] = useState(false)
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
-
-  function navOpen(){
-    setIsNavOpen(true)
+  function navOpen() {
+    setIsNavOpen(true);
   }
 
-  console.log(isNavOpen)
+  console.log(isNavOpen);
   const supportRef = useRef(null);
   const manRef = useRef(null);
 
-const moveToSupport =(ref)=>{
-  if(ref.current  ){
-      ref.current.scrollIntoView()
-  } 
-}
+  const moveToSupport = (ref) => {
+    if (ref.current) {
+      ref.current.scrollIntoView();
+    }
+  };
   return (
     <div className="">
       {/* nav section */}
@@ -37,42 +35,68 @@ const moveToSupport =(ref)=>{
         {/* {isNavOpen ? <div className="nav2bg"></div> : ""} */}
         {isNavOpen && <div className="nav2bg"></div>}
         {/* <div className={isNavOpen ? `nav2BgOpen`:`nav2Bg`} > */}
-          <div className={isNavOpen ? `nav2Open`:`nav2`}>
-            <i class="ri-close-circle-fill" onClick={()=> setIsNavOpen(!isNavOpen)}></i>
-            <Link className="link" id="nav-link" to="" style={{fontWeight:"600"}}>
+        <div className={isNavOpen ? `nav2Open` : `nav2`}>
+          <i
+            class="ri-close-circle-fill"
+            onClick={() => setIsNavOpen(!isNavOpen)}
+          ></i>
+          <Link
+            className="link"
+            id="nav-link"
+            to=""
+            style={{ fontWeight: "600" }}
+          >
             <li>Home</li>
-            </Link>
-            <Link className="link" id="nav-link" to="" onClick={()=>moveToSupport(manRef)} style={{fontWeight:"600"}}>
-              <li>Features</li>
-            </Link>
-            {/* <Link className="link" id="nav-link" to=""  style={{t:"600"}}>
+          </Link>
+          <Link
+            className="link"
+            id="nav-link"
+            to=""
+            onClick={() => moveToSupport(manRef)}
+            style={{ fontWeight: "600" }}
+          >
+            <li>Features</li>
+          </Link>
+          {/* <Link className="link" id="nav-link" to=""  style={{t:"600"}}>
               <li>Pricing</li>
             </Link> */}
-            <Link className="link" id="nav-link" to="" onClick={()=> moveToSupport(supportRef)} style={{fontWeight:"600"}}>
+          <Link
+            className="link"
+            id="nav-link"
+            to=""
+            onClick={() => moveToSupport(supportRef)}
+            style={{ fontWeight: "600" }}
+          >
             <li>Support</li>
-            </Link>
-            <Link className="link" id="get-link" to="/confirmation">
-              {/* <button className="btn">sign in</button> */}
-              <span>sign in</span>
-            </Link>
-          </div>
+          </Link>
+          <Link className="link" id="get-link" to="/confirmation">
+            {/* <button className="btn">sign in</button> */}
+            <span>sign in</span>
+          </Link>
         </div>
+      </div>
       {/* </div> */}
 
       {/* hero section */}
       <div className="hero-section">
         <div className="hero-1">
           <div>
-              <h1 className="hero-bg-text">
-                Simplify Medical Record Keeping with <span style={{fontWeight:"bolder",fontFamily:"poppins"}}className="hero-bg-bold">Medbloc</span>
-              </h1>
-              <p className="hero-text-2" style={{fontFamily:"poppins"}}>
-                Keep all your patient data organized & secure in one easy-to-use
-                desktop application.
-              </p>
-              <Link className="link" to="/confirmation">
-                <button className="hero-btn">Join now</button>
-              </Link>
+            <h1 className="hero-bg-text">
+              Simplify Medical Record Keeping with{" "}
+              <span
+                style={{ fontWeight: "bolder", fontFamily: "poppins" }}
+                className="hero-bg-bold"
+              >
+                Medbloc
+              </span>
+            </h1>
+            <p className="hero-text-2" style={{ fontFamily: "poppins" }}>
+              Keep all your patient data organized & secure in one easy-to-use
+              desktop application.
+            </p>
+            <Link className="link" to="/confirmation">
+              <button className="hero-btn">Join now</button>
+            </Link>
           </div>
         </div>
 
@@ -97,13 +121,15 @@ const moveToSupport =(ref)=>{
         <div className="hr"></div>
 
         <div className="section-one-c">
-          <Link className="link" to="">
-            <button className="section-one-btn" id="section-one-btn">Try now</button>
+          <Link className="link" to="/confirmation">
+            <button className="section-one-btn" id="section-one-btn">
+              Try now
+            </button>
           </Link>
         </div>
       </div>
 
-{/* section-1-part-b */}
+      {/* section-1-part-b */}
       <div className="section-one-part-b">
         <div>
           <img src={pill} alt="pill" id="pill-part-img" />
@@ -112,17 +138,22 @@ const moveToSupport =(ref)=>{
           <div className="section-one-part-B">
             <h2 className="sec-one-part-text">Enhanced Collaboration</h2>
             <p className="section-one-part-text">
-            Our system makes it easy for healthcare professionals to share
-            information and collaborate on patient care.
+              Our system makes it easy for healthcare professionals to share
+              information and collaborate on patient care.
             </p>
           </div>
 
-        <div className="">
-          <Link className="link" to="/confirmation">
-            <button className="section-one-part-btn" id="section-one-part-btn">Try now</button>
-          </Link>
+          <div className="">
+            <Link className="link" to="/confirmation">
+              <button
+                className="section-one-part-btn"
+                id="section-one-part-btn"
+              >
+                Try now
+              </button>
+            </Link>
+          </div>
         </div>
-      </div>
       </div>
 
       {/* section-two*/}
@@ -138,19 +169,25 @@ const moveToSupport =(ref)=>{
           <ul className="list">
             <li className="section-2-list">
               <i className="ri-checkbox-line"></i>
-              <p style={{fontFamily:"poppins"}}>State of the Art Doctor Services</p>
+              <p style={{ fontFamily: "poppins" }}>
+                State of the Art Doctor Services
+              </p>
             </li>
             <li className="section-2-list">
               <i className="ri-checkbox-line"></i>
-              <p  style={{fontFamily:"poppins"}}>Enrollment is Quick and Easy</p>
+              <p style={{ fontFamily: "poppins" }}>
+                Enrollment is Quick and Easy
+              </p>
             </li>
             <li className="section-2-list">
               <i className="ri-checkbox-line"></i>
-              <p  style={{fontFamily:"poppins"}}>Access to Top Specialist Doctors</p>
+              <p style={{ fontFamily: "poppins" }}>
+                Access to Top Specialist Doctors
+              </p>
             </li>
             <li className="section-2-list">
               <i className="ri-checkbox-line"></i>
-              <p  style={{fontFamily:"poppins"}}>Low Gas Fee</p>
+              <p style={{ fontFamily: "poppins" }}>Low Gas Fee</p>
             </li>
             <Link className="link" to="/confirmation">
               <button className="hero-btn">Join now</button>
@@ -194,18 +231,21 @@ const moveToSupport =(ref)=>{
           </p>
         </div>
         <div className="section-four-b">
-          <input type="email" name="Email" id="subscribeMail" placeholder="Enter your E-mail Address" required></input>
+          <input
+            type="email"
+            name="Email"
+            id="subscribeMail"
+            placeholder="Enter your E-mail Address"
+            required
+          ></input>
           <Link className="section-four-link" to="/confirmation">
             <button className="subscribe-btn">Subscribe</button>
           </Link>
         </div>
         <div className="nobody">
-          <button>
-            stay connected
-          </button>
+          <button>stay connected</button>
         </div>
       </div>
-
 
       {/* footer-section */}
       <div className="footer-section" ref={supportRef}>
@@ -226,44 +266,43 @@ const moveToSupport =(ref)=>{
               <p>Sign Up</p>
             </Link>
             <Link className="footer-link" to="">
-            <p>Join Community</p>
+              <p>Join Community</p>
             </Link>
             <Link className="footer-link" to="">
-            <p>Learning</p>
+              <p>Learning</p>
             </Link>
             <Link className="footer-link" to="">
-            <p>Newsletter</p>
+              <p>Newsletter</p>
             </Link>
           </div>
           <div className="footer-section-c">
             <h5>Platform</h5>
             <Link className="footer-link" to="">
-            <p>Terms of Use</p>
+              <p>Terms of Use</p>
             </Link>
             <Link className="footer-link" to="">
-            <p>About</p>
+              <p>About</p>
             </Link>
             <Link className="footer-link" to="">
-            <p>Contact</p>
+              <p>Contact</p>
             </Link>
             <Link className="footer-link" to="">
-            <p>Partnership</p>
+              <p>Partnership</p>
             </Link>
           </div>
           <div className="footer-section-d">
             <h5>Support</h5>
             <Link className="footer-link" to="">
-            <p>Help Centre</p>
+              <p>Help Centre</p>
             </Link>
             <Link className="footer-link" to="">
-            <p>Video Tutorial</p>
+              <p>Video Tutorial</p>
             </Link>
             <Link className="footer-link" to="">
-            <p>Cookie Settings</p>
+              <p>Cookie Settings</p>
             </Link>
           </div>
         </div>
-        
       </div>
     </div>
   );

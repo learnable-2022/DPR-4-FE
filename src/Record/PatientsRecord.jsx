@@ -6,12 +6,12 @@ import smallLogo from "../assets/small.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import html2canvas from "html2canvas";
 import "./Record.css";
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useRequestProcessor } from "../api/requestProcessor";
 import Dashboard from "../assets/Category.png";
 import { Link } from "react-router-dom";
-import record from "../assets/Document.png"
+import record from "../assets/Document.png";
 import billinglogo from "../assets/streamline_money-cash-coins-stack-accounting-billing-payment-stack-cash-coins-currency-money-finance.png";
 import notification from "../assets/Notification.svg";
 import logOut from "../assets/Logout.png";
@@ -38,6 +38,7 @@ export default function PatientsRecord() {
   let patient_Alle = localStorage.getItem("patient_allergies");
 
   let patient_wallet = localStorage.getItem("patient_walletId");
+  const location = useLocation();
   const screenshotRef = useRef(null);
   const { makeRequest } = useRequestProcessor();
   const { response, error } = makeRequest({ url: "/patient/", method: "GET" });
@@ -106,23 +107,27 @@ export default function PatientsRecord() {
         // ref={mobileNavRef}
       >
         <div className="_sideBar">
-          <AiOutlineClose className="close_btn" onClick={toggleNav}  />
+          <AiOutlineClose className="close_btn" onClick={toggleNav} />
           <div className="_center-div">
-            <img src={ourlogo} alt="app-logo" style={{width:"100px", height:"70px"}} />
+            <img
+              src={ourlogo}
+              alt="app-logo"
+              style={{ width: "100px", height: "70px" }}
+            />
           </div>
 
           <div className="_mid-section">
             <Link to="/Dashboard" className="link">
-            <img src={Dashboard} alt="dash-logo"/>
-            <p style={{fontFamily:"poppins"}}>Dashboard</p>
+              <img src={Dashboard} alt="dash-logo" />
+              <p style={{ fontFamily: "poppins" }}>Dashboard</p>
             </Link>
             <Link to="/Records" className="link">
-            <img src={record} alt="record-logo" />
-            <p style={{fontFamily:"poppins"}}>Records</p>
+              <img src={record} alt="record-logo" />
+              <p style={{ fontFamily: "poppins" }}>Records</p>
             </Link>
             <Link to="/Billing" className="link">
-            <img src={billinglogo} alt="billing-logo"/>
-            <p style={{fontFamily:"poppins"}}>Billings</p>
+              <img src={billinglogo} alt="billing-logo" />
+              <p style={{ fontFamily: "poppins" }}>Billings</p>
             </Link>
           </div>
           <div className="_lower-section">
@@ -133,8 +138,8 @@ export default function PatientsRecord() {
               }}
             >
               <Link to="/" className="link">
-              <img src={logOut} alt="logout" />
-              <p style={{fontFamily:"poppins"}}>logout</p>
+                <img src={logOut} alt="logout" />
+                <p style={{ fontFamily: "poppins" }}>logout</p>
               </Link>
             </div>
           </div>
@@ -222,30 +227,17 @@ export default function PatientsRecord() {
             </div>
           </div>
         </div>
-        <div className="second-section-second">
-          <div>
-            <span className="patient">patient</span>
-            <p>
-              Cancer type: <span> Adenocarcinoma</span>
-            </p>
-            <p>
-              {" "}
-              Primary site: <span> Lungs</span>
-            </p>
-            <p>
-              Stage:<span> Stage III</span>
-            </p>
-            <p>
-              Medical Condition:<span> Asthma</span>
-            </p>
-          </div>
-        </div>
+        <div className="second-section-second"></div>
       </div>
       <div className="third-section-link">
         <li>
-          <NavLink exact activeClassName="active" to="">
+          <Link
+            exact
+            className={location.pathname === "/Records" ? "active" : ""}
+            to=""
+          >
             <p>Overview</p>
-          </NavLink>
+          </Link>
         </li>
         <li>
           {" "}

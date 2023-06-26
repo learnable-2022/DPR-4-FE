@@ -7,6 +7,9 @@
   font-size: 14px;
 }
 .topleft .profile_btn:hover {
+  background-color: #6fc16f;
+}
+.topleft .profile_btn:hover {
   cursor: pointer;
 }
 .topleft {

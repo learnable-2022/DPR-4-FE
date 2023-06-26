@@ -39,6 +39,9 @@
   color: white;
 }
 .patientseditprofile .topleft- .profile_btn-:hover {
+  background-color: #6fc16f;
+}
+.patientseditprofile .topleft- .profile_btn-:hover {
   cursor: pointer;
 }
 .patientseditprofile .topleft- {
