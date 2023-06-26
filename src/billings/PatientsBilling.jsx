@@ -3,6 +3,7 @@ import SideBar from "../utilities/SideBar";
 import "./billing.css";
 import "./Responsiveness.css";
 import "../App.css";
+import { Link } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import Notification from "../assets/images/Notification.png";
 import PatientPics from "../assets/images/PatientPics.png";
@@ -15,11 +16,21 @@ import ArrowUp from "../assets/images/ArrowUp.png";
 import ArrowSlant from "../assets/images/ArrowSlant.png";
 import Calendar from "../assets/images/Calendar.png";
 import BlockIconResize from "../assets/images/BlockIconResize.png";
+import {AiOutlineClose} from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import Dashboard from "../assets/Category.png";
 import url from "../api/BillingApi.jsx";
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
+import ResponsivenessSidebar from "../billings/ResponsivenessSidebar";
+import logOut from "../assets/Logout.png";
+import ourlogo from "../assets/Frame 8.png";
+import record from "../assets/Document.png"
+import billinglogo from "../assets/streamline_money-cash-coins-stack-accounting-billing-payment-stack-cash-coins-currency-money-finance.png";
+
+
+
 
 export default function PatientsBilling() {
   const [transactionArray, setTransactionArray] = useState([]);
@@ -55,10 +66,60 @@ export default function PatientsBilling() {
     navigate("/PatientInvoice");
   }
 
+
+  const [navOpen, setIsNavOpen] = useState(false);
+
+  const toggleNav = () => {
+    setIsNavOpen(!navOpen);
+  };
+
   return (
     <>
       <div className="Right">
         <div className="billingBoardDashboard">
+
+          {/* start*/}
+          <div
+        className={navOpen ? "patient_dashboard_nav" : "closeNav"}>
+        <div className="_sideBar">
+          <AiOutlineClose className="close_btn" onClick={toggleNav}  />
+          <div className="_center-div">
+            <img src={ourlogo} alt="app-logo" style={{width:"100px", height:"70px"}} />
+          </div>
+
+          <div className="_mid-section">
+            <Link to="/Dashboard" className="link">
+            <img src={Dashboard} alt="dash-logo"/>
+            <p style={{fontFamily:"poppins"}}>Dashboard</p>
+            </Link>
+            <Link to="/Records" className="link">
+            <img src={record} alt="record-logo" />
+            <p style={{fontFamily:"poppins"}}>Records</p>
+            </Link>
+            <Link to="/Billing" className="link">
+            <img src={billinglogo} alt="billing-logo"/>
+            <p style={{fontFamily:"poppins"}}>Billings</p>
+            </Link>
+          </div>
+          <div className="_lower-section">
+            <div
+              onClick={() => {
+                localStorage.removeItem("patientToken");
+                localStorage.removeItem("patientEmail");
+              }}
+            >
+              <Link to="/" className="link">
+              <img src={logOut} alt="logout" />
+              <p style={{fontFamily:"poppins"}}>logout</p>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+          {/* stop */}
+
+
+
           <div className="billingNav">
             <div className="patientName">
               <h2>
@@ -74,7 +135,6 @@ export default function PatientsBilling() {
               </div>
 
               <div className="searchIcons">
-                {/* <img src={Notification} alt="pics" /> */}
                 <img src={PatientPics} alt="pics" />
               </div>
             </div>
@@ -84,7 +144,7 @@ export default function PatientsBilling() {
         <div className="smallScreenNav">
           <div className="searchParent">
             <div>
-              <GiHamburgerMenu />
+              <GiHamburgerMenu className="hamburger" onClick={toggleNav} />
             </div>
             <div className="searchBox">
               <CiSearch />
@@ -92,14 +152,10 @@ export default function PatientsBilling() {
             </div>
 
             <div className="searchIcons">
-              {/* <img src={Notification} alt="pics" /> */}
               <img src={PatientPics} alt="pics" />
             </div>
           </div>
 
-          <div className="smallScreenNavName">
-            <p>Hello,{patient_Name}!</p>
-          </div>
         </div>
 
         {/* ============================================= */}
